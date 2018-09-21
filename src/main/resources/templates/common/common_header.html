@@ -1,0 +1,13 @@
+<head th:fragment="base_header(title)" xmlns:th="http://www.w3.org/1999/xhtml">
+    <meta charset="utf-8" />
+    <link href="/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
+    <script src="/jquery/jquery-3.3.1.min.js" th:src="@{/jquery/jquery-3.3.1.min.js}"></script>
+    <script src="/bootstrap/js/bootstrap.js" th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <!--自作CSS -->
+    <style type="text/css">
+        .jumbotron { background:url(/image/main.jpg) center no-repeat; background-size: cover;}
+    </style>
+
+    <title th:replace="${title}">The awesome application</title>
+</head>

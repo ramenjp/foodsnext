@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="common/common_header::base_header(~{::title})">
+        <title>トップ</title>
+    </head>
+    <body>
+        <p th:text="${msg}" />
+    </body>
+    <footer th:replace="common/common_footer::base_footer"/>
+</html>
