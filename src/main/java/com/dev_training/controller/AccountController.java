@@ -28,16 +28,16 @@ public class AccountController {
     }
 
     @RequestMapping(value = "account", method = RequestMethod.POST)
-    String create(@Validated AccountForm form, BindingResult bindingResult) {
+    String create(@Validated AccountForm accountForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "account/accountForm";
         }
         Account account = new Account();
-        account.setAccountId(form.getAccountId());
-        account.setName(form.getName());
-        account.setSelfIntroduction(form.getSelfIntroduction());
-        account.setEmail(form.getEmail());
-        accountService.create(account, form.getPassword());
+        account.setAccountId(accountForm.getAccountId());
+        account.setName(accountForm.getName());
+        account.setSelfIntroduction(accountForm.getSelfIntroduction());
+        account.setEmail(accountForm.getEmail());
+        accountService.create(account, accountForm.getPassword());
         return "redirect:/acount/complete";
     }
 
