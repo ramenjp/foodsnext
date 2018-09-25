@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class AccountForm implements Serializable {
+public class AccountRegisterForm implements Serializable {
     private String accountId;
     private String password;
     private String name;

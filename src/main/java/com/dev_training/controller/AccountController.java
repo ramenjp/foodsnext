@@ -1,7 +1,7 @@
 package com.dev_training.controller;
 
 import com.dev_training.entity.Account;
-import com.dev_training.form.AccountForm;
+import com.dev_training.form.AccountRegisterForm;
 import com.dev_training.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,41 +12,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping(value = "/account")
 public class AccountController {
 
-    private final
-    AccountService accountService;
+    /** ユーザ登録サービス */
+    private final AccountService accountService;
 
     @Autowired
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
 
-    @ModelAttribute
-    public AccountForm setupForm() {
-        return new AccountForm();
-    }
-
-    @RequestMapping(value = "account")
-    String accountForm() {
+    @RequestMapping(value = "/register/init")
+    String accountForm(@ModelAttribute AccountRegisterForm accountRegisterForm) {
         return "accountForm";
     }
 
-    @RequestMapping(value = "account", method = RequestMethod.POST)
-    String create(@Validated AccountForm accountForm, BindingResult bindingResult) {
+    @RequestMapping(value = "/register/do", method = RequestMethod.POST)
+    String register(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "account/accountForm";
         }
         Account account = new Account();
-        account.setAccountId(accountForm.getAccountId());
-        account.setName(accountForm.getName());
-        account.setSelfIntroduction(accountForm.getSelfIntroduction());
-        account.setEmail(accountForm.getEmail());
-        accountService.create(account, accountForm.getPassword());
-        return "redirect:/acount/complete";
+        account.setAccountId(accountRegisterForm.getAccountId());
+        account.setName(accountRegisterForm.getName());
+        account.setSelfIntroduction(accountRegisterForm.getSelfIntroduction());
+        account.setEmail(accountRegisterForm.getEmail());
+        accountService.create(account, accountRegisterForm.getPassword());
+        return "redirect:/login";
     }
 
-    @RequestMapping(value = "account/complete", method = RequestMethod.GET)
+    @RequestMapping(value = "/complete", method = RequestMethod.GET)
     String createFinish() {
         return "account/accountComplete";
     }
