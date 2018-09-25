@@ -10,14 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class AccountService {
-    @Autowired
-    AccountRepository accountRepository;
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    private final AccountRepository accountRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public Account create(Account account, String rawPassword) {
+    @Autowired
+    public AccountService(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
+        this.accountRepository = accountRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public void create(Account account, String rawPassword) {
         String encodedPassword = passwordEncoder.encode(rawPassword);
         account.setPassword(encodedPassword);
-        return accountRepository.save(account);
+        accountRepository.save(account);
     }
 }

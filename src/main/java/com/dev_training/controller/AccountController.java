@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AccountController {
 
-    @Autowired
+    private final
     AccountService accountService;
+
+    @Autowired
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @ModelAttribute
     public AccountForm setupForm() {

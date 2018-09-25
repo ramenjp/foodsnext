@@ -11,8 +11,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class JpaUserDetailsServiceImpl implements UserDetailsService {
 
+    private final AccountRepository accountRepository;
+
     @Autowired
-    private AccountRepository accountRepository;
+    public JpaUserDetailsServiceImpl(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String accounrId) throws UsernameNotFoundException {

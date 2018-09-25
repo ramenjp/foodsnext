@@ -49,8 +49,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Configuration
     protected static class AuthenticationConfiguration
             extends GlobalAuthenticationConfigurerAdapter {
+
+        final JpaUserDetailsServiceImpl userDetailsService;
+
         @Autowired
-        JpaUserDetailsServiceImpl userDetailsService;
+        public AuthenticationConfiguration(JpaUserDetailsServiceImpl userDetailsService) {
+            this.userDetailsService = userDetailsService;
+        }
 
         @Override
         public void init(AuthenticationManagerBuilder auth) throws Exception {

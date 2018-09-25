@@ -5,7 +5,7 @@
 <body>
 <div class="container">
     <div class="row">
-        <p><h1 id="title">ログイン</h1></p>
+        <p><h1 id="title">ログイン</h1>
     </div>
     <div class="row">
         <div class="col-md-6 col-lg-3"></div>
@@ -13,9 +13,6 @@
             <div th:if="${param.error}" class="alert alert-danger">
                 アカウントID、またはパスワードが誤っています。
             </div>
-            <!--<div th:if="${iserror}" style="color:red;">-->
-                <!--<p>ログインできませんでした。やりなおしてください。</p>-->
-            <!--</div>-->
             <div class="well well-sm">
                 <form id="login_form" method="post" th:action="@{'/login'}">
                     <fieldset id="login_field">
