@@ -25,9 +25,12 @@
                             <input type="password" class="form-control" id="login_password" name="login_password" placeholder="パスワードを入力してください" required="" />
                         </div>
                         <div class="form-group">
-                            <input id="login_button" type="submit" value="ログイン" class="btn btn-primary btn-lg" />
+                            <input id="login" type="submit" value="ログイン" class="btn btn-block btn-primary btn-lg center-block" />
                         </div>
                     </fieldset>
+                </form>
+                <form id="hoge" method="post" th:action="@{'/account/register/init'}">
+                    <input id="accountRegister" type="submit" value="ユーザー登録" class="btn btn-block btn-primary btn-lg center-block" />
                 </form>
             </div>
         </div>

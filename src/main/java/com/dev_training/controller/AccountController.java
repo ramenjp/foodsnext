@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/account")
 public class AccountController {
 
-    /** ユーザ登録サービス */
+    /**
+     * ユーザ登録サービス
+     */
     private final AccountService accountService;
 
     @Autowired
@@ -25,11 +27,20 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/register/init")
-    String accountForm(@ModelAttribute AccountRegisterForm accountRegisterForm) {
+    String init(@ModelAttribute AccountRegisterForm accountRegisterForm) {
         return "account/accountRegisterForm";
     }
 
-    @RequestMapping(value = "/register/do", method = RequestMethod.POST)
+    @RequestMapping(value = "/register/confirm")
+    String confirm(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "account/accountRegisterForm";
+        }
+        model.addAttribute("accountRegisterForm", accountRegisterForm);
+        return "account/accountRegisterConfirmForm";
+    }
+
+    @RequestMapping(value = "/register/do", params = "register", method = RequestMethod.POST)
     String doRegister(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "account/accountRegisterForm";
@@ -40,7 +51,12 @@ public class AccountController {
         account.setSelfIntroduction(accountRegisterForm.getSelfIntroduction());
         account.setEmail(accountRegisterForm.getEmail());
         accountService.create(account, accountRegisterForm.getPassword());
-        return "redirect:/login";
+        return "account/accountRegisterCompleteForm";
+    }
+
+    @RequestMapping(value = "/register/do", params = "back", method = RequestMethod.POST)
+    String back(AccountRegisterForm accountRegisterForm) {
+        return "account/accountRegisterForm";
     }
 //
 //    @RequestMapping("/input/back")
