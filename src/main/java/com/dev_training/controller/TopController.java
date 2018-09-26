@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TopController {
     @RequestMapping(value = "")
     public String loginForm() {
-        return "topForm";
+        return "top/topForm";
     }
 }

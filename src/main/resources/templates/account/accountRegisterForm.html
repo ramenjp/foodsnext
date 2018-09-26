@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group" th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
                             <label for="name">自己紹介</label><br/>
-                            <textarea class="form-control selfIntroduction" id="selfIntroduction" rows="3" cols="80" maxlength="255" th:field="*{selfIntroduction}" name="name" required="" placeholder="自己紹介を入力してください"/>
+                            <textarea class="form-control selfIntroduction" id="selfIntroduction" rows="3" cols="80" maxlength="255" th:field="*{selfIntroduction}" name="name" required="" placeholder="自己紹介を入力してください"></textarea>
                             <span class="text-danger" th:if="${#fields.hasErrors('accountId')}" th:errors="*{selfIntroduction}">error!</span>
                         </div>
                         <input type="submit" value="新規登録" class="btn btn-primary btn-lg" />

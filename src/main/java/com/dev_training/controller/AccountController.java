@@ -26,13 +26,13 @@ public class AccountController {
 
     @RequestMapping(value = "/register/init")
     String accountForm(@ModelAttribute AccountRegisterForm accountRegisterForm) {
-        return "accountRegisterForm";
+        return "account/accountRegisterForm";
     }
 
     @RequestMapping(value = "/register/do", method = RequestMethod.POST)
     String doRegister(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "accountRegisterForm";
+            return "account/accountRegisterForm";
         }
         Account account = new Account();
         account.setAccountId(accountRegisterForm.getAccountId());

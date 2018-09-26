@@ -20,29 +20,29 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/favicon.ico", "/css/**","/bootstrap/css/**", "/bootstrap/js/**", "/jquery/**", "/images/**", "/fonts/**");
+        // 認証状態によらず許可する。
+        web.ignoring().antMatchers("/favicon.ico", "/css/**", "/bootstrap/css/**", "/bootstrap/js/**", "/jquery/**", "/images/**", "/fonts/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                // 認証状態によらず許可する。
                 .antMatchers("/login/**").permitAll()
                 .antMatchers("/account/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin() // ログインページに遷移
-                .loginProcessingUrl("/login") // ログイン処理をするURL
-                .loginPage("/login"); // ログインページのURL
+                .anyRequest().authenticated();
 
         http.formLogin()
+                .loginPage("/login") // ログインページのパス
                 .loginProcessingUrl("/login") // 認証処理を起動させるパス
-                .loginPage("/login") // ログインフォームのパス
                 .failureUrl("/login/?error") // ログイン処理失敗時の遷移先
                 .defaultSuccessUrl("/top") // 認証成功時の遷移先
-                .usernameParameter("login_id").passwordParameter("login_password"); // ユーザid
+                .usernameParameter("login_id")// ユーザid
+                .passwordParameter("login_password"); // パスワード
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout**")) // ログアウト処理を起動させるパス
+                .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/"); // ログアウト完了時のパス
     }
 
