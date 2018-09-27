@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common_header::base_header(~{::title})">
+    <title>ユーザー登録</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <p><h1 id="title">ユーザー登録</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-3"></div>
+        <div class="col-md-6 col-lg-6">
+            <div class="well well-sm">
+                <div class="h3 text-center">
+                    ユーザー登録が完了しました。
+                </div>
+
+
+                <form id = "accountForm" th:action="@{/login}" method="get">
+                    <div class="text-center">
+                        <input type="submit" value="ログイン画面へ" class="btn btn-primary btn-lg" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

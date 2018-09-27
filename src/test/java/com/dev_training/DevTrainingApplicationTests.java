@@ -1,4 +1,4 @@
-package com.dev_training.dev_training;
+package com.dev_training;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
