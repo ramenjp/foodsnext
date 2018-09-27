@@ -12,7 +12,7 @@ public class MessageConfig implements  WebMvcConfigurer {
     public Validator getValidator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:ValidationMessages");
+        messageSource.setBasenames("messages", "ValidationMessages");
         messageSource.setDefaultEncoding("UTF-8");
         validator.setValidationMessageSource(messageSource);
         return validator;

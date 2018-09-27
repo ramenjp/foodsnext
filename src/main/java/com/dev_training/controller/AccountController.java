@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * アカウントコントローラ。
+ */
 @Controller
 @RequestMapping(value = "/account")
 public class AccountController {
 
-    /**
-     * ユーザ登録サービス
-     */
+    /** ユーザ登録サービス */
     private final AccountService accountService;
 
     @Autowired
@@ -26,20 +27,46 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+    /**
+     * 初期表示。
+     *
+     * @param accountRegisterForm AttributeForm
+     * @return Path
+     */
     @RequestMapping(value = "/register/init")
     String init(@ModelAttribute AccountRegisterForm accountRegisterForm) {
         return "account/accountRegisterForm";
     }
 
+    /**
+     * 確認画面表示。
+     *
+     * @param accountRegisterForm 精査済みフォーム
+     * @param bindingResult 精査結果
+     * @param model モデル
+     * @return Path
+     */
     @RequestMapping(value = "/register/confirm")
     String confirm(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult, Model model) {
+
         if (bindingResult.hasErrors()) {
+            return "account/accountRegisterForm";
+        }
+        if (accountService.isExistsAccountId(accountRegisterForm.getAccountId())){
+            bindingResult.rejectValue("accountId", "validation.duplicate", new String[]{"アカウントID"}, "default message!!!!!!");
             return "account/accountRegisterForm";
         }
         model.addAttribute("accountRegisterForm", accountRegisterForm);
         return "account/accountRegisterConfirmForm";
     }
 
+    /**
+     * 完了画面表示。
+     *
+     * @param accountRegisterForm 精査済みフォーム
+     * @param bindingResult 精査結果
+     * @return Path
+     */
     @RequestMapping(value = "/register/do", params = "register", method = RequestMethod.POST)
     String doRegister(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -54,34 +81,14 @@ public class AccountController {
         return "account/accountRegisterCompleteForm";
     }
 
+    /**
+     * 入力画面に戻る。
+     *
+     * @param accountRegisterForm フォーム。
+     * @return Path
+     */
     @RequestMapping(value = "/register/do", params = "back", method = RequestMethod.POST)
     String back(AccountRegisterForm accountRegisterForm) {
         return "account/accountRegisterForm";
-    }
-//
-//    @RequestMapping("/input/back")
-//    public String inputBack(CountryForm countryForm
-//            , RedirectAttributes redirectAttributes) {
-//
-//        redirectAttributes.addFlashAttribute("countryForm", countryForm);
-//        return "redirect:/country/input";
-//    }
-//
-//    @RequestMapping("/register/confirm")
-//    public String registerConfirm(@Validated AccountRegisterForm countryForm
-//            , BindingResult bindingResult
-//            , Model model) {
-//
-//        if (bindingResult.hasErrors()) {
-//            model.addAttribute("validationError", "不正な値が入力されました。");
-//            return accountForm();
-//        }
-//
-//        return "country/confirm";
-//    }
-
-    @RequestMapping(value = "/complete", method = RequestMethod.GET)
-    String createFinish() {
-        return "account/accountComplete";
     }
 }
