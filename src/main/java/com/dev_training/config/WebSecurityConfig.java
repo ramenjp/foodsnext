@@ -28,7 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 // 認証状態によらず許可する。
-                .antMatchers("/login/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/account/**").permitAll()
                 .anyRequest().authenticated();
 
@@ -36,14 +37,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login") // ログインページのパス
                 .loginProcessingUrl("/login") // 認証処理を起動させるパス
                 .failureUrl("/login/?error") // ログイン処理失敗時の遷移先
-                .defaultSuccessUrl("/top") // 認証成功時の遷移先
+                .successForwardUrl("/top")
                 .usernameParameter("login_id")// ユーザid
-                .passwordParameter("login_password"); // パスワード
+                .passwordParameter("login_password").permitAll(); // パスワード
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout**")) // ログアウト処理を起動させるパス
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/"); // ログアウト完了時のパス
+                .logoutSuccessUrl("/") // ログアウト完了時のパス
+                .invalidateHttpSession(true).permitAll();
     }
 
     @Configuration

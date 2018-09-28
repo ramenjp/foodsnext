@@ -1,10 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="common/common_header::base_header(~{::title})">
-        <title>トップ</title>
-    </head>
-    <body>
-        <p th:text="${msg}"></p>
-    </body>
-    <footer th:replace="common/common_footer::base_footer"></footer>
+<head th:replace="common/common_header::base_header(~{::title})">
+    <title>トップ</title>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">TODO管理システム</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navigation">
+            <p class="navbar-text navbar-right" th:if="${accountName} != null" th:text="${accountName} + ' さんでログイン中'">
+                hoge</p>
+            <!--<p class="navbar-text navbar-right">Thike さんでログイン中</p>-->
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <!-- 4列をサイドメニューに割り当て -->
+        <div class="col-xs-4">
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="#">ユーザー情報変更</a></li>
+                <li><a href="#">ユーザー検索</a></li>
+                <li><a href="#">TODO登録</a></li>
+                <li><a href="#">TODO検索</a></li>
+            </ul>
+        </div>
+
+        <!-- 残り8列はコンテンツ表示部分として使う -->
+        <div class="col-xs-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">ユーザー機能の使い方</div>
+                </div>
+                <div class="panel-body">
+                    <p>自身のユーザ情報を変更したい場合は、サイドメニューからユーザー情報更新画面に遷移してください。</p>
+                    <p>他のユーザ情報を検索したい場合は、サイドメニューからユーザー検索画面に遷移してください。</p>
+                    <p>退会したい場合は、サイドメニューから退会画面に遷移してください。</p>
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">TODO管理機能の使い方</div>
+                </div>
+                <div class="panel-body">
+                    <p>TODOの登録を行いたい場合、サイドメニューからTODO登録画面に遷移してください。</p>
+                    <p>TODOの検索、更新、削除を行いたい場合、サイドメニューからTODO検索画面に遷移してください。</p>
+                    <p>TODOの更新、削除は、検索画面から実施することが出来ます。</p>
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">情報エリア２</div>
+                </div>
+                <div class="panel-body">ＸＸＸのお知らせ</div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">情報エリア３</div>
+                </div>
+                <div class="panel-body">ＸＸＸのお知らせ</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>
