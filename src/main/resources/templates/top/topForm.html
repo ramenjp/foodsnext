@@ -4,7 +4,7 @@
     <title>トップ</title>
 </head>
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
@@ -14,10 +14,11 @@
             </button>
             <a class="navbar-brand" href="#">TODO管理システム</a>
         </div>
-        <div class="collapse navbar-collapse" id="navigation">
-            <p class="navbar-text navbar-right" th:if="${accountName} != null" th:text="${accountName} + ' さんでログイン中'">
-                hoge</p>
-            <!--<p class="navbar-text navbar-right">Thike さんでログイン中</p>-->
+        <div class="collapse navbar-collapse" id="navbarEexample4">
+            <form id = "logout" th:action="@{/logout}" method="post" class="navbar-right">
+                <input type="submit" class="btn btn-primary navbar-btn" value="Sign out"/>
+            </form>
+            <span class="navbar-text navbar-right" th:if="${accountName} != null" th:text="'ようこそ ' + ${accountName} + ' さん。'"></span>
         </div>
     </div>
 </nav>
@@ -35,7 +36,7 @@
 
         <!-- 残り8列はコンテンツ表示部分として使う -->
         <div class="col-xs-8">
-            <div class="panel panel-info">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="panel-title">ユーザー機能の使い方</div>
                 </div>
@@ -46,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="panel panel-info">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="panel-title">TODO管理機能の使い方</div>
                 </div>

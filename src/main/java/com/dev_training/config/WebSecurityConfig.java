@@ -28,6 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 // 認証状態によらず許可する。
+                // TODO あとで消す
+                .antMatchers("/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/account/**").permitAll()
@@ -42,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("login_password").permitAll(); // パスワード
 
         http.logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout**")) // ログアウト処理を起動させるパス
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // ログアウト処理を起動させるパス
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/") // ログアウト完了時のパス
                 .invalidateHttpSession(true).permitAll();

@@ -1,52 +1,68 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/common_header::base_header(~{::title})">
-    <title>ユーザー登録</title>
+    <title>ユーザー登録確認</title>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <p><h1 id="title">ユーザー登録</h1>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">TODO管理システム</a>
+        </div>
     </div>
+</nav>
+
+<div class="container">
     <div class="row">
         <div class="col-md-6 col-lg-3"></div>
         <div class="col-md-6 col-lg-6">
-            <div class="well well-sm">
-                <form id = "accountForm" th:action="@{/account/register/do}" th:object="${accountRegisterForm}" method="post">
-                    <fieldset id="account_field">
-                        <div class="form-group">
-                            <label>アカウントID</label><br/>
-                            <span class="form-control-static" th:text="*{accountId}">
-                        </div>
-                        <div class="form-group">
-                            <label>氏名</label><br/>
-                            <span class="form-control-static" th:text="*{name}">
-                        </div>
-                        <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
-                            <label>E-mail</label><br/>
-                            <span class="form-control-static" th:text="*{email}">
-                        </div>
-                        <div class="form-group" th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
-                            <label>自己紹介</label><br/>
-                            <span class="form-control-static" th:utext="*{selfIntroduction} ? ${#strings.replace(#strings.escapeXml(accountRegisterForm.selfIntroduction), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')} : ''"></span>
-                        </div>
-
-                        <input type="hidden" name="accountId" id="accountId" th:value="*{accountId}"/>
-                        <input type="hidden" name="name" id="name" th:value="*{name}"/>
-                        <input type="hidden" name="email" id="email" th:value="*{email}"/>
-                        <input type="hidden" name="password" id="password" th:value="*{password}"/>
-                        <input type="hidden" name="confirmPassword" id="confirmPassword" th:value="*{confirmPassword}"/>
-                        <input type="hidden" name="selfIntroduction" id="selfIntroduction" th:value="*{selfIntroduction}"/>
-
-                        <div class="text-center">
-                            <div class="btn-group">
-                                <input type="submit" name="back" value="戻る" class="btn btn-primary btn-lg "/>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">ユーザー登録確認</h3>
+                </div>
+                <div class="panel-body">
+                    <form id = "accountForm" th:action="@{/account/register/do}" th:object="${accountRegisterForm}" method="post">
+                        <fieldset id="account_field">
+                            <div class="form-group">
+                                <label>アカウントID</label><br/>
+                                <span class="form-control-static" th:text="*{accountId}">
                             </div>
-                            <div class="btn-group">
-                                <input type="submit" name="register" value="登録" class="btn btn-primary btn-lg "/>
+                            <div class="form-group">
+                                <label>氏名</label><br/>
+                                <span class="form-control-static" th:text="*{name}">
                             </div>
-                        </div>
-                    </fieldset>
-                </form>
+                            <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+                                <label>E-mail</label><br/>
+                                <span class="form-control-static" th:text="*{email}">
+                            </div>
+                            <div class="form-group" th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
+                                <label>自己紹介</label><br/>
+                                <span class="form-control-static" th:utext="*{selfIntroduction} ? ${#strings.replace(#strings.escapeXml(accountRegisterForm.selfIntroduction), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')} : ''"></span>
+                            </div>
+
+                            <input type="hidden" name="accountId" id="accountId" th:value="*{accountId}"/>
+                            <input type="hidden" name="name" id="name" th:value="*{name}"/>
+                            <input type="hidden" name="email" id="email" th:value="*{email}"/>
+                            <input type="hidden" name="password" id="password" th:value="*{password}"/>
+                            <input type="hidden" name="confirmPassword" id="confirmPassword" th:value="*{confirmPassword}"/>
+                            <input type="hidden" name="selfIntroduction" id="selfIntroduction" th:value="*{selfIntroduction}"/>
+
+                            <div class="text-center">
+                                <div class="btn-group">
+                                    <input type="submit" name="back" value="戻る" class="btn btn-primary btn-lg "/>
+                                </div>
+                                <div class="btn-group">
+                                    <input type="submit" name="register" value="登録" class="btn btn-primary btn-lg "/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -3,3 +3,5 @@
     overflow: auto;
     height: 100px;
 }
+
+body { padding-top: 70px; }

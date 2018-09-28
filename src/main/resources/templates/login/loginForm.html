@@ -3,35 +3,51 @@
     <title>ログイン</title>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <p><h1 id="title">ログイン</h1>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">TODO管理システム</a>
+        </div>
     </div>
+</nav>
+
+<div class="container">
     <div class="row">
         <div class="col-md-6 col-lg-3"></div>
         <div class="col-md-6 col-lg-6`">
             <div th:if="${param.error}" class="alert alert-danger">
                 アカウントID、またはパスワードが誤っています。
             </div>
-            <div class="well well-sm">
-                <form id="login_form" method="post" th:action="@{'/login'}">
-                    <fieldset id="login_field">
-                        <div class="form-group">
-                            <label>アカウントID</label>
-                            <input type="text" class="form-control" id="login_id" name="login_id" placeholder="アカウントIDを入力してください" autofocus="" required="" />
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">ログイン</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="login_form" method="post" th:action="@{'/login'}">
+                        <fieldset id="login_field">
+                            <div class="form-group">
+                                <label>アカウントID</label>
+                              <input type="text" class="form-control" id="login_id" name="login_id" placeholder="アカウントIDを入力してください" autofocus="" required="" />
+                            </div>
+                            <div class="form-group">
+                                <label>パスワード</label>
+                                <input type="password" class="form-control" id="login_password" name="login_password" placeholder="パスワードを入力してください" required="" />
                         </div>
-                        <div class="form-group">
-                            <label>パスワード</label>
-                            <input type="password" class="form-control" id="login_password" name="login_password" placeholder="パスワードを入力してください" required="" />
-                        </div>
-                        <div class="form-group">
-                            <input id="login" type="submit" value="ログイン" class="btn btn-block btn-primary btn-lg center-block" />
-                        </div>
-                    </fieldset>
-                </form>
-                <form id="hoge" method="post" th:action="@{'/account/register/init'}">
-                    <input id="accountRegister" type="submit" value="ユーザー登録" class="btn btn-block btn-primary btn-lg center-block" />
-                </form>
+                            <div class="form-group">
+                                <input id="login" type="submit" value="ログイン" class="btn btn-block btn-primary btn-lg center-block" />
+                            </div>
+                        </fieldset>
+                    </form>
+                    <form id="hoge" method="post" th:action="@{'/account/register/init'}">
+                        <input id="accountRegister" type="submit" value="ユーザー登録" class="btn btn-block btn-primary btn-lg center-block" />
+                    </form>
+                </div>
             </div>
         </div>
         <div class="col-md-3 col-lg-3"></div>
