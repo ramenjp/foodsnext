@@ -1,10 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="common/common_header::base_header(~{::title})">
-        <title>トップ</title>
-    </head>
-    <body>
-        <p th:text="${msg}"></p>
-    </body>
-    <footer th:replace="common/common_footer::base_footer"></footer>
+<head th:replace="common/common_header::base_header(~{::title})">
+    <title>トップ</title>
+</head>
+<body>
+
+<nav th:substituteby="common/loggedinNav::navi(${accountName})"></nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 bg-faded sidebar">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ユーザー情報変更<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ユーザー検索</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">TODO登録</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">TODO検索</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="card rounded-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">ユーザー機能の使い方</h3>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>自身のユーザ情報を変更したい場合は、サイドメニューからユーザー情報更新画面に遷移してください。</li>
+                        <li>他のユーザ情報を検索したい場合は、サイドメニューからユーザー検索画面に遷移してください。</li>
+                        <li>退会したい場合は、サイドメニューから退会画面に遷移してください。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card rounded-0  ">
+                <div class="card-header bg-info text-white">
+                    <h3 class="mb-0">お知らせ通知欄１</h3>
+                </div>
+                <div class="card-body">
+                    ＸＸＸのお知らせ
+                </div>
+            </div>
+
+            <div class="card rounded-0">
+                <div class="card-header bg-info text-white">
+                    <h3 class="mb-0">お知らせ通知欄２</h3>
+                </div>
+                <div class="card-body">
+                    ＸＸＸのお知らせ
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
 </html>

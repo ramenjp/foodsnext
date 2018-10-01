@@ -2,39 +2,48 @@
 <head th:replace="common/common_header::base_header(~{::title})">
     <title>ログイン</title>
 </head>
+
 <body>
-<div class="container">
+
+<nav th:substituteby="common/noLoginNav"></nav>
+
+<div class="container py-3">
     <div class="row">
-        <p><h1 id="title">ログイン</h1>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-lg-3"></div>
-        <div class="col-md-6 col-lg-6`">
-            <div th:if="${param.error}" class="alert alert-danger">
-                アカウントID、またはパスワードが誤っています。
-            </div>
-            <div class="well well-sm">
-                <form id="login_form" method="post" th:action="@{'/login'}">
-                    <fieldset id="login_field">
-                        <div class="form-group">
-                            <label>アカウントID</label>
-                            <input type="text" class="form-control" id="login_id" name="login_id" placeholder="アカウントIDを入力してください" autofocus="" required="" />
+        <div class="col-md-12">
+            <h2 class="text-center pb-4">Welcome to TODO Management System!</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card rounded-0">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="mb-0">Login</h3>
                         </div>
-                        <div class="form-group">
-                            <label>パスワード</label>
-                            <input type="password" class="form-control" id="login_password" name="login_password" placeholder="パスワードを入力してください" required="" />
+                        <div th:if="${param.error}" class="alert alert-danger">
+                            アカウントID、またはパスワードが誤っています。
                         </div>
-                        <div class="form-group">
-                            <input id="login" type="submit" value="ログイン" class="btn btn-block btn-primary btn-lg center-block" />
+                        <div class="card-body">
+                            <form id="login_form" method="post" th:action="@{'/login'}">
+                                <div class="form-group">
+                                    <label for="login_id">アカウントID</label>
+                                    <input type="text" class="form-control  form-control-lg rounded" id="login_id" name="login_id" placeholder="アカウントIDを入力してください" autofocus="" required="" />
+                                    <div class="invalid-feedback">Oops, you missed this one.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>パスワード</label>
+                                    <input type="password" class="form-control form-control-lg rounded" id="login_password" name="login_password" placeholder="パスワードを入力してください" required="" />
+                                    <div class="invalid-feedback">Enter your password too!</div>
+                                </div>
+                                <div class="form-group">
+                                    <input id="login" type="submit" value="ログイン" class="btn btn-block btn-primary btn-lg center-block" />
+                                </div>
+                            </form>
+                            <form id="account_form" method="post" th:action="@{'/account/register/init'}">
+                                <input id="accountRegister" type="submit" value="ユーザー登録" class="btn btn-block btn-primary btn-lg center-block" />
+                            </form>
                         </div>
-                    </fieldset>
-                </form>
-                <form id="hoge" method="post" th:action="@{'/account/register/init'}">
-                    <input id="accountRegister" type="submit" value="ユーザー登録" class="btn btn-block btn-primary btn-lg center-block" />
-                </form>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-3 col-lg-3"></div>
     </div>
 </div>
 </body>

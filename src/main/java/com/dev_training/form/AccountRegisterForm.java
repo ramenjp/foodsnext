@@ -40,9 +40,6 @@ public class AccountRegisterForm implements Serializable {
 
     @AssertTrue(message = "パスワードが一致しません。")
     public boolean isPasswordValid() {
-        if (password != null && password.equals(confirmPassword)) {
-            return true;
-        }
-        return false;
+        return password != null && password.equals(confirmPassword);
     }
 }
