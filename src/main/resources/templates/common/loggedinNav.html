@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="navi(accountName)">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded sticky-top">
-        <ul class="navbar-nav mr-auto">
-            <a class="navbar-brand h2" href="#">TODO管理システム</a>
-        </ul>
-        <span class="navbar-text pr-3" th:text="'ようこそ ' + ${accountName} + ' さん。'"></span>
-        <form id="logout" th:action="@{/logout}" method="post" class="form-inline">
-            <input type="submit" class="btn btn-primary navbar-btn" value="Sign out"/>
-        </form>
-    </nav>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light rounded sticky-top" th:fragment="navi(accountName)" xmlns:th="">
+    <ul class="navbar-nav mr-auto">
+        <a class="navbar-brand h2" href="#">TODO管理システム</a>
+    </ul>
+    <span class="navbar-text pr-3" th:text="'ようこそ ' + ${accountName} + ' さん。'"></span>
+    <form id="logout" th:action="@{/logout}" method="post" class="form-inline">
+        <input type="submit" class="btn btn-primary navbar-btn" value="Sign out"/>
+    </form>
+</nav>

@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<div th:include="common/loggedinNav::navi(${accountName})"></div>
+<nav th:substituteby="common/loggedinNav::navi(${accountName})"></nav>
 
 <div class="container-fluid">
     <div class="row">
@@ -61,29 +61,4 @@
     </div>
 </div>
 </body>
-
-<!--<div class="panel panel-primary">-->
-<!--<div class="panel-heading">-->
-<!--<div class="panel-title">TODO管理機能の使い方</div>-->
-<!--</div>-->
-<!--<div class="panel-body">-->
-<!--<p>TODOの登録を行いたい場合、サイドメニューからTODO登録画面に遷移してください。</p>-->
-<!--<p>TODOの検索、更新、削除を行いたい場合、サイドメニューからTODO検索画面に遷移してください。</p>-->
-<!--<p>TODOの更新、削除は、検索画面から実施することが出来ます。</p>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="panel panel-info">-->
-<!--<div class="panel-heading">-->
-<!--<div class="panel-title">情報エリア２</div>-->
-<!--</div>-->
-<!--<div class="panel-body">ＸＸＸのお知らせ</div>-->
-<!--</div>-->
-
-<!--<div class="panel panel-info">-->
-<!--<div class="panel-heading">-->
-<!--<div class="panel-title">情報エリア３</div>-->
-<!--</div>-->
-<!--<div class="panel-body">ＸＸＸのお知らせ</div>-->
-<!--</div>-->
 </html>
