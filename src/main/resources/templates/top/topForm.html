@@ -4,75 +4,86 @@
     <title>トップ</title>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">TODO管理システム</a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbarEexample4">
-            <form id = "logout" th:action="@{/logout}" method="post" class="navbar-right">
-                <input type="submit" class="btn btn-primary navbar-btn" value="Sign out"/>
-            </form>
-            <span class="navbar-text navbar-right" th:if="${accountName} != null" th:text="'ようこそ ' + ${accountName} + ' さん。'"></span>
-        </div>
-    </div>
-</nav>
-<div class="container">
+
+<div th:include="common/loggedinNav::navi(${accountName})"></div>
+
+<div class="container-fluid">
     <div class="row">
-        <!-- 4列をサイドメニューに割り当て -->
-        <div class="col-xs-4">
-            <ul class="nav nav-pills nav-stacked">
-                <li><a href="#">ユーザー情報変更</a></li>
-                <li><a href="#">ユーザー検索</a></li>
-                <li><a href="#">TODO登録</a></li>
-                <li><a href="#">TODO検索</a></li>
+        <div class="col-sm-3 col-md-2 bg-faded sidebar">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ユーザー情報変更<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ユーザー検索</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">TODO登録</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">TODO検索</a>
+                </li>
             </ul>
         </div>
-
-        <!-- 残り8列はコンテンツ表示部分として使う -->
-        <div class="col-xs-8">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="panel-title">ユーザー機能の使い方</div>
+        <div class="col-md-9">
+            <div class="card rounded-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">ユーザー機能の使い方</h3>
                 </div>
-                <div class="panel-body">
-                    <p>自身のユーザ情報を変更したい場合は、サイドメニューからユーザー情報更新画面に遷移してください。</p>
-                    <p>他のユーザ情報を検索したい場合は、サイドメニューからユーザー検索画面に遷移してください。</p>
-                    <p>退会したい場合は、サイドメニューから退会画面に遷移してください。</p>
-                </div>
-            </div>
-
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="panel-title">TODO管理機能の使い方</div>
-                </div>
-                <div class="panel-body">
-                    <p>TODOの登録を行いたい場合、サイドメニューからTODO登録画面に遷移してください。</p>
-                    <p>TODOの検索、更新、削除を行いたい場合、サイドメニューからTODO検索画面に遷移してください。</p>
-                    <p>TODOの更新、削除は、検索画面から実施することが出来ます。</p>
+                <div class="card-body">
+                    <ul>
+                        <li>自身のユーザ情報を変更したい場合は、サイドメニューからユーザー情報更新画面に遷移してください。</li>
+                        <li>他のユーザ情報を検索したい場合は、サイドメニューからユーザー検索画面に遷移してください。</li>
+                        <li>退会したい場合は、サイドメニューから退会画面に遷移してください。</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div class="panel-title">情報エリア２</div>
+            <div class="card rounded-0  ">
+                <div class="card-header bg-info text-white">
+                    <h3 class="mb-0">お知らせ通知欄１</h3>
                 </div>
-                <div class="panel-body">ＸＸＸのお知らせ</div>
+                <div class="card-body">
+                    ＸＸＸのお知らせ
+                </div>
             </div>
 
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div class="panel-title">情報エリア３</div>
+            <div class="card rounded-0">
+                <div class="card-header bg-info text-white">
+                    <h3 class="mb-0">お知らせ通知欄２</h3>
                 </div>
-                <div class="panel-body">ＸＸＸのお知らせ</div>
+                <div class="card-body">
+                    ＸＸＸのお知らせ
+                </div>
             </div>
+
         </div>
     </div>
 </div>
 </body>
+
+<!--<div class="panel panel-primary">-->
+<!--<div class="panel-heading">-->
+<!--<div class="panel-title">TODO管理機能の使い方</div>-->
+<!--</div>-->
+<!--<div class="panel-body">-->
+<!--<p>TODOの登録を行いたい場合、サイドメニューからTODO登録画面に遷移してください。</p>-->
+<!--<p>TODOの検索、更新、削除を行いたい場合、サイドメニューからTODO検索画面に遷移してください。</p>-->
+<!--<p>TODOの更新、削除は、検索画面から実施することが出来ます。</p>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="panel panel-info">-->
+<!--<div class="panel-heading">-->
+<!--<div class="panel-title">情報エリア２</div>-->
+<!--</div>-->
+<!--<div class="panel-body">ＸＸＸのお知らせ</div>-->
+<!--</div>-->
+
+<!--<div class="panel panel-info">-->
+<!--<div class="panel-heading">-->
+<!--<div class="panel-title">情報エリア３</div>-->
+<!--</div>-->
+<!--<div class="panel-body">ＸＸＸのお知らせ</div>-->
+<!--</div>-->
 </html>

@@ -4,4 +4,4 @@
     height: 100px;
 }
 
-body { padding-top: 70px; }
+body.loggedin { padding-top: 70px; }
