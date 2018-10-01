@@ -12,7 +12,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Documented
 @Constraint(validatedBy = {})
-@Pattern(regexp = "^([a-zA-Z0-9])([!\\x22\\#$%&@'()*+,-./_])*$", message = "{error.hankaku}")
+@Pattern(regexp = "^([a-zA-Z0-9])([!\\x22#$%&@'()*+,-./_])*$", message = "{error.hankaku}")
 public @interface HalfAlphamericSymbol {
     String message() default "";
 

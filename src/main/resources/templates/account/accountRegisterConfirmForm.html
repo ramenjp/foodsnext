@@ -22,15 +22,15 @@
                                 <fieldset id="account_field">
                                     <div class="form-group">
                                         <label>アカウントID</label><br/>
-                                        <span class="form-control-static" th:text="*{accountId}">
+                                        <span class="form-control-static" th:text="*{accountId}"></span>
                                     </div>
                                     <div class="form-group">
                                         <label>氏名</label><br/>
-                                        <span class="form-control-static" th:text="*{name}">
+                                        <span class="form-control-static" th:text="*{name}"></span>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
                                         <label>E-mail</label><br/>
-                                        <span class="form-control-static" th:text="*{email}">
+                                        <span class="form-control-static" th:text="*{email}"></span>
                                     </div>
                                     <div class="form-group"
                                          th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
@@ -66,7 +66,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>
