@@ -13,6 +13,6 @@ public class LoginController {
 
     @RequestMapping(value="", params = "accountRegister")
     public String goAccountRegister() {
-        return "redirect:/account/register/init";
+        return "redirect:/account/register/registerInit";
     }
 }

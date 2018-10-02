@@ -19,8 +19,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/account")
 public class AccountController {
 
-    /** ユーザ登録サービス */
+    /** アカウント登録サービス */
     private final AccountService accountService;
+
+    /**
+     * ページングサイズ。 */
+    private static final int DEFAULT_PAGEABLE_SIZE = 5;
 
     @Autowired
     public AccountController(AccountService accountService) {
@@ -28,18 +32,18 @@ public class AccountController {
     }
 
     /**
-     * 初期表示。
+     * アカウント登録-初期表示。
      *
      * @param accountRegisterForm AttributeForm
      * @return Path
      */
     @RequestMapping(value = "/register/init")
-    String init(@ModelAttribute AccountRegisterForm accountRegisterForm) {
+    String registerInit(@ModelAttribute AccountRegisterForm accountRegisterForm) {
         return "account/accountRegisterForm";
     }
 
     /**
-     * 確認画面表示。
+     * アカウント登録-確認画面表示。
      *
      * @param accountRegisterForm 精査済みフォーム
      * @param bindingResult 精査結果
@@ -47,7 +51,7 @@ public class AccountController {
      * @return Path
      */
     @RequestMapping(value = "/register/confirm")
-    String confirm(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult, Model model) {
+    String registerConfirm(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "account/accountRegisterForm";
@@ -61,14 +65,14 @@ public class AccountController {
     }
 
     /**
-     * 完了画面表示。
+     * アカウント登録-完了画面表示。
      *
      * @param accountRegisterForm 精査済みフォーム
      * @param bindingResult 精査結果
      * @return Path
      */
     @RequestMapping(value = "/register/do", params = "register", method = RequestMethod.POST)
-    String doRegister(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
+    String registerComplete(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "account/accountRegisterForm";
         }
@@ -82,13 +86,37 @@ public class AccountController {
     }
 
     /**
-     * 入力画面に戻る。
+     * アカウント登録-入力画面に戻る。
      *
      * @param accountRegisterForm フォーム。
      * @return Path
      */
-    @RequestMapping(value = "/register/do", params = "back", method = RequestMethod.POST)
-    String back(AccountRegisterForm accountRegisterForm) {
+    @RequestMapping(value = "/register/do", params = "registerBack", method = RequestMethod.POST)
+    String registerBack(AccountRegisterForm accountRegisterForm) {
         return "account/accountRegisterForm";
     }
+
+//    /**
+//     * アカウント検索-検索。
+//     *
+//     * @return Path
+//     */
+//    @RequestMapping(value = "/find")
+//    public String find(@Validated Account accountForm
+//            , BindingResult bindingResult
+//            , @PageableDefault(size = DEFAULT_PAGEABLE_SIZE, page = 0) Pageable pageable
+//            , Model model) {
+//
+//        if (bindingResult.hasErrors()) {
+//            return "countryListJpa";
+//        }
+//
+//        Page<Account> page = accountService.findAccount(accountForm, pageable);
+//        PagenationHelper ph = new PagenationHelper(page);
+//
+//        model.addAttribute("page", page);
+//        model.addAttribute("ph", ph);
+//
+//        return "countryListJpa";
+//    }
 }
