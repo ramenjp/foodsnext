@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -38,9 +39,13 @@ public class AccountController {
     private static final int DEFAULT_PAGEABLE_SIZE = 10;
 
     @Autowired
-    public AccountController(AccountService accountService) {
+    public AccountController(AccountService accountService, HttpSession session) {
         this.accountService = accountService;
+        this.session = session;
     }
+
+    private final HttpSession session;
+    private static final String SESSION_FORM_ID="accountSearchForm";
 
     /**
      * アカウント登録-初期表示。
@@ -146,6 +151,7 @@ public class AccountController {
      */
     @RequestMapping(value = "/search/paging/init")
     public String pagingSearchInit(@ModelAttribute AccountSearchForm accountSearchForm) {
+        session.getAttribute(SESSION_FORM_ID);
         return "account/accountPagingSearchForm";
     }
 
@@ -164,6 +170,9 @@ public class AccountController {
                                )}) Pageable pageable,
                        Model model) {
 
+        session.setAttribute(SESSION_FORM_ID,accountSearchForm);
+        model.addAttribute(accountSearchForm);
+
         if (bindingResult.hasErrors()) {
             return "account/accountPagingSearchForm";
         }
@@ -178,5 +187,19 @@ public class AccountController {
         model.addAttribute("list", list);
         model.addAttribute("url", "/account/find");
         return "account/accountPagingSearchForm";
+    }
+
+    @RequestMapping(value = "/search/paging/pagenation")
+    public String pagenation(@Validated AccountSearchForm accountSearchForm, BindingResult bindingResult,
+                               @PageableDefault(size = DEFAULT_PAGEABLE_SIZE)
+                               @SortDefault.SortDefaults(
+                                       {@SortDefault(
+                                               sort = "accountId",
+                                               direction = Sort.Direction.ASC
+                                       )}) Pageable pageable,
+                               Model model) {
+
+        AccountSearchForm storedCondition = (AccountSearchForm) session.getAttribute(SESSION_FORM_ID);
+        return this.pagingSearch(storedCondition, bindingResult, pageable, model);
     }
 }

@@ -73,24 +73,29 @@
                         <div th:with="s = ${(page.number + 3 > page.totalPages - 1) ? (page.totalPages - 1 - 6) : (page.number - 3)}">
                             <ul class="pagination pagination-lg justify-content-center">
                                 <li th:class="|page-item ${page.first ? 'disabled' : ''}|">
-                                    <a class="page-link" aria-label="Previous" th:href="@{''(page=${page.number - 1})}">
+                                    <a class="page-link" aria-label="Previous" th:href="@{'pagenation'(page=${page.number - 1})}">
                                         <span>&laquo;</span>
                                     </a>
                                 </li>
 
                                 <li th:each='i : ${#numbers.sequence((s < 0 ? 0 : s), ((s < 0 ? 0 : s) + 6) > (page.totalPages - 1) ? (page.totalPages - 1) : ((s < 0 ? 0 : s) + 6))}'
                                     th:class="|page-item ${(page.number == i) ? 'active' : ''}|">
-                                    <a class="page-link" th:href="@{''(page=${i})}">
+                                    <a class="page-link" th:href="@{'pagenation'(page=${i})}">
                                         <span th:text='${i + 1}'>1</span>
                                     </a>
                                 </li>
                                 <li th:class="|page-item ${page.last ? 'disabled' : ''}|">
-                                    <a class="page-link" aria-label="Next" th:href="@{''(page=${page.number + 1})}">
+                                    <a class="page-link" aria-label="Next" th:href="@{'pagenation'(page=${page.number + 1})}">
                                         <span>&raquo;</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
+                        <form id="pagenationForm" method="post" action="#" th:action="@{/account/search/paging/do}" th:object="${accountSearchForm}">
+                            <input type="hidden" name="code" id="accountId" th:value="*{accountId}"/>
+                            <input type="hidden" name="name" id="name" th:value="*{name}"/>
+                            <input type="hidden" name="email" id="email" th:value="*{email}"/>
+                        </form>
                     </div>
                 </div>
             </div>
