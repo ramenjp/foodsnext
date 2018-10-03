@@ -10,9 +10,4 @@ public class LoginController {
     public String loginForm() {
         return "login/loginForm";
     }
-
-    @RequestMapping(value="", params = "accountRegister")
-    public String goAccountRegister() {
-        return "redirect:/account/register/registerInit";
-    }
 }

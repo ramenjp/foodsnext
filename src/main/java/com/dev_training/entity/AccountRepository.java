@@ -1,11 +1,12 @@
 package com.dev_training.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  * アカウントリポジトリ。
  */
-public interface AccountRepository extends JpaRepository<Account, String> {
+public interface AccountRepository extends JpaRepository<Account, String>, JpaSpecificationExecutor<Account> {
 
     /**
      * アカウントIDに紐づくアカウントを検索する。
