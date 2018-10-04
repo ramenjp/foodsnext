@@ -1,7 +1,27 @@
 <nav class="navbar navbar-expand-lg rounded sticky-top navbar-dark bg-dark" th:fragment="navi(accountName)" xmlns:th="">
     <ul class="navbar-nav mr-auto">
-        <a class="navbar-brand h2" href="#">TODO管理システム</a>
+        <a class="navbar-brand h2" href="#">TODO Management System</a>
+        <li class="nav-item">
+            <a class="nav-link active" href="/top">トップ画面</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" id="accountMenuLink" aria-haspopup="true" aria-expanded="false">アカウント機能</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/account/search/init">アカウント一覧検索</a>
+                <a class="dropdown-item" href="/account/search/paging/init">アカウント一覧検索(参考：ページング)</a>
+                <a class="dropdown-item" href="#">アカウント情報更新</a>
+                <a class="dropdown-item" href="#">退会</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" id="todoMenuLink" aria-haspopup="true" aria-expanded="false">TODO機能</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">TODO登録</a>
+                <a class="dropdown-item" href="#">TODO一覧検索</a>
+            </div>
+        </li>
     </ul>
+
     <span class="navbar-text pr-3" th:text="'ようこそ ' + ${session.accountName} + ' さん。'"></span>
     <form id="logout" th:action="@{/logout}" method="post" class="form-inline">
         <input type="submit" class="btn btn-primary navbar-btn" value="Sign out"/>
