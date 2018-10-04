@@ -3,6 +3,7 @@
 <head th:replace="common/common_header::base_header(~{::title})">
     <title>アカウント検索</title>
 </head>
+
 <body>
 
 <nav th:substituteby="common/loggedinNav::navi(${accountName})"></nav>
@@ -74,9 +75,10 @@
                         <td class="overflow-wrap-break width=80%" th:text="${account.email}"></td>
                         <td>
                             <div class="text-center">
-                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-selfIntroduction">Open</button>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-selfIntroduction" th:attr="data-intro=${account.selfIntroduction}, data-name=${account.name}">Open</button>
                             </div>
                         </td>
+
                         <!-- 2.モーダルの配置 -->
                         <div class="modal" id="modal-selfIntroduction" tabindex="-1">
                             <div class="modal-dialog modal-lg">
@@ -86,12 +88,12 @@
                                     <!-- 4.モーダルのヘッダ -->
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="modal-label">
-                                            <span th:text="|${account.name} さんの自己紹介|"></span>
+                                            <!--<span th:text="|${account.name} さんの自己紹介|"></span>-->
                                         </h4>
                                     </div>
                                     <!-- 5.モーダルのボディ -->
-                                    <div class="modal-body">
-                                        <span class="form-control-static"
+                                    <div class="modal-body" id="modal-body">
+                                        <span class="form-control-static" id="modalSelfIntroduction"
                                               th:utext="${account.selfIntroduction} ? ${#strings.replace(#strings.escapeXml(account.selfIntroduction), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')} : ''"></span>
                                     </div>
                                     <!-- 6.モーダルのフッタ -->
@@ -101,10 +103,10 @@
                                 </div>
                             </div>
                         </div>
+
                     </tr>
                     </tbody>
                 </table>
-
                 <!--ページングバー-->
                 <div th:with="s = ${(page.number + 3 > page.totalPages - 1) ? (page.totalPages - 1 - 6) : (page.number - 3)}">
                     <ul class="pagination pagination-lg justify-content-center">
@@ -133,5 +135,18 @@
         </div>
     </div>
 </div>
+
 </body>
+<script type="text/javascript">
+    $('#modal-selfIntroduction').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var accountname = button.data('name')
+        var selfIntroduction = button.data('intro')
+        selfIntroduction = selfIntroduction.replace(/\r?\n/g, '<br>')
+
+        var modal = $(this)  //モーダルを取得
+        modal.find('.modal-title').text(accountname+' さんの自己紹介')
+        modal.find('.modal-body').html(selfIntroduction)
+    })
+</script>
 </html>
