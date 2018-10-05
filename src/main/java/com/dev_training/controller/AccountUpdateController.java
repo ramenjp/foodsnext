@@ -12,9 +12,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 /**
  * アカウント情報変更コントローラ。
  */
@@ -33,8 +30,8 @@ public class AccountUpdateController {
     /**
      * アカウント情報変更-初期表示。
      *
-     * @param account 更新対象のアカウント
-     * @param model モデル
+     * @param account
+     * @param model
      * @return Path
      */
     @RequestMapping(value = "/init")
@@ -61,12 +58,13 @@ public class AccountUpdateController {
         if (bindingResult.hasErrors()) {
             return "account/accountUpdateForm";
         }
-        String accountId = accountUpdateForm.getAccountId();
-        if (!accountId.equals(account.getAccountId()) ) {
-            if (service.isExistsAccountId(accountId)){
-                bindingResult.rejectValue("accountId", "validation.duplicate", new String[]{"アカウントID"}, "default message!!!!!!");
-                return "account/accountUpdateForm";
-            }
+        if (accountUpdateForm.getAccountId().equals(account.getAccountId()) ) {
+            model.addAttribute("accountUpdateForm", accountUpdateForm);
+            return "account/accountUpdateConfirmForm";
+        }
+        else if(service.isExistsAccountId(accountUpdateForm.getAccountId())){
+            bindingResult.rejectValue("accountId", "validation.duplicate", new String[]{"アカウントID"}, "default message!!!!!!");
+            return "account/accountUpdateForm";
         }
         model.addAttribute("accountUpdateForm", accountUpdateForm);
         return "account/accountUpdateConfirmForm";
