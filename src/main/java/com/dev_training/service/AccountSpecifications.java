@@ -12,8 +12,8 @@ import javax.persistence.criteria.Root;
 /**
  * アカウント検索条件。
  */
-public class AccountSpecifications {
-    public static Specification<Account> accountIdContains(String accountId) {
+class AccountSpecifications {
+    static Specification<Account> accountIdContains(String accountId) {
         return StringUtils.isEmpty(accountId) ? null : new Specification<Account>() {
             @Override
             public Predicate toPredicate(Root<Account> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -22,7 +22,7 @@ public class AccountSpecifications {
         };
     }
 
-    public static Specification<Account> nameContains(String name) {
+    static Specification<Account> nameContains(String name) {
         return StringUtils.isEmpty(name) ? null : new Specification<Account>() {
             @Override
             public Predicate toPredicate(Root<Account> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -31,7 +31,7 @@ public class AccountSpecifications {
         };
     }
 
-    public static Specification<Account> emailContains(String email) {
+    static Specification<Account> emailContains(String email) {
         return StringUtils.isEmpty(email) ? null : new Specification<Account>() {
             @Override
             public Predicate toPredicate(Root<Account> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
