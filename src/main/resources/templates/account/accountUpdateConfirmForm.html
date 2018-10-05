@@ -5,12 +5,12 @@
     </head>
 <body>
 
-<nav th:substituteby="common/noLoginNav"></nav>
+<nav th:substituteby="common/loggedinNav::navi(${accountName})"></nav>
 
 <div class="container py-3">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="text-center pb-6">アカウント情報</h2>
+            <h2 class="text-center pb-6">アカウント情報変更</h2>
             <div class="row">
                 <div class="col-md-12 mx-auto">
                     <div class="card rounded-0">
