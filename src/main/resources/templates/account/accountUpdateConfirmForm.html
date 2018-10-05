@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common_header::base_header(~{::title})">
+    <head>
+        <title>アカウント情報変更確認</title>
+    </head>
+<body>
+
+<nav th:substituteby="common/noLoginNav"></nav>
+
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center pb-6">アカウント情報</h2>
+            <div class="row">
+                <div class="col-md-12 mx-auto">
+                    <div class="card rounded-0">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="mb-0">変更内容確認</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="accountForm" th:action="@{/account/update/do}"
+                                  th:object="${accountUpdateForm}" method="post">
+                                <fieldset id="account_field">
+                                    <div class="form-group">
+                                        <label>アカウントID</label><br/>
+                                        <span class="form-control-static" th:text="*{accountId}"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>氏名</label><br/>
+                                        <span class="form-control-static" th:text="*{name}"></span>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+                                        <label>E-mail</label><br/>
+                                        <span class="form-control-static" th:text="*{email}"></span>
+                                    </div>
+                                    <div class="form-group"
+                                         th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
+                                        <label>自己紹介</label><br/>
+                                        <span class="form-control-static"
+                                              th:utext="*{selfIntroduction} ? ${#strings.replace(#strings.escapeXml(accountUpdateForm.selfIntroduction), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')} : ''"></span>
+                                    </div>
+                                    <input type="hidden" name="accountId" id="accountId" th:value="*{accountId}"/>
+                                    <input type="hidden" name="name" id="name" th:value="*{name}"/>
+                                    <input type="hidden" name="email" id="email" th:value="*{email}"/>
+                                    <input type="hidden" name="selfIntroduction" id="selfIntroduction"
+                                           th:value="*{selfIntroduction}"/>
+                                    <div class="col text-center">
+                                        <div class="btn-group">
+                                            <input type="submit" name="back" value="戻る"
+                                                   class="btn btn-primary btn-lg "/>
+                                        </div>
+                                        <div class="btn-group">
+                                            <input type="submit" name="update" value="登録"
+                                                   class="btn btn-primary btn-lg "/>
+                                        </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
