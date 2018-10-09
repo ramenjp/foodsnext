@@ -1,16 +1,20 @@
 package com.dev_training.controller;
 
 import com.dev_training.entity.Account;
+import com.dev_training.entity.AccountRepository;
 import com.dev_training.form.AccountRegisterForm;
-import com.dev_training.service.AccountRegisterService;
+import com.dev_training.form.TodoRegisterForm;
+import com.dev_training.form.TodoRegisterParentForm;
+import com.dev_training.service.TodoRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * TODO登録コントローラ。
@@ -20,26 +24,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class TodoRegisterController {
 
     /** TODO登録サービス */
-    private final AccountRegisterService service;
+    private final TodoRegisterService service;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public TodoRegisterController(AccountRegisterService accountRegisterService) {
-        this.service = accountRegisterService;
+    public TodoRegisterController(TodoRegisterService todoRegisterService, AccountRepository accountRepository) {
+        this.service = todoRegisterService;
+        this.accountRepository = accountRepository;
     }
 
     /**
-     * アカウント登録-初期表示。
+     * TODO登録-初期表示。
      *
-     * @param accountRegisterForm アカウント登録フォーム
+     * @param model モデル
      * @return Path
      */
     @RequestMapping(value = "/init")
-    String registerInit(@ModelAttribute AccountRegisterForm accountRegisterForm) {
-        return "account/accountRegisterForm";
+    String registerInit(Model model) {
+
+        // フォームの初期化
+        TodoRegisterParentForm parentForm = new TodoRegisterParentForm();
+        parentForm.setTodoRegisterForm(new TodoRegisterForm());
+
+        // 担当者選択用のプルダウンリスト
+        List<Account> accounts = accountRepository.findAll();
+        parentForm.setAccountList(accounts);
+        model.addAttribute("accounts", accounts);
+        model.addAttribute("parentForm", parentForm);
+        return "todo/todoRegisterForm";
     }
 
     /**
-     * アカウント登録-確認画面表示。
+     * TODO登録-確認画面表示。
      *
      * @param accountRegisterForm 精査済みフォーム
      * @param bindingResult       精査結果
@@ -50,18 +66,18 @@ public class TodoRegisterController {
     String registerConfirm(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "account/accountRegisterForm";
+            return "todo/todoRegisterForm";
         }
         if (service.isExistsAccountId(accountRegisterForm.getAccountId())) {
             bindingResult.rejectValue("accountId", "validation.duplicate", new String[]{"アカウントID"}, "default message");
-            return "account/accountRegisterForm";
+            return "todo/todoRegisterForm";
         }
         model.addAttribute("accountRegisterForm", accountRegisterForm);
-        return "account/accountRegisterConfirmForm";
+        return "todo/todoRegisterConfirmForm";
     }
 
     /**
-     * アカウント登録-完了画面表示。
+     * TODO登録-完了画面表示。
      *
      * @param accountRegisterForm 精査済みフォーム
      * @param bindingResult       精査結果
@@ -70,7 +86,7 @@ public class TodoRegisterController {
     @RequestMapping(value = "/do", params = "register", method = RequestMethod.POST)
     String registerComplete(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "account/accountRegisterForm";
+            return "todo/todoRegisterForm";
         }
         Account account = new Account();
         account.setAccountId(accountRegisterForm.getAccountId());
@@ -78,18 +94,18 @@ public class TodoRegisterController {
         account.setSelfIntroduction(accountRegisterForm.getSelfIntroduction());
         account.setEmail(accountRegisterForm.getEmail());
         service.register(account, accountRegisterForm.getPassword());
-        return "account/accountRegisterCompleteForm";
+        return "todo/todoRegisterCompleteForm";
     }
 
     /**
-     * アカウント登録-入力画面に戻る。
+     * TODO登録-入力画面に戻る。
      *
      * @param accountRegisterForm アカウント登録フォーム。
      * @return Path
      */
     @RequestMapping(value = "/do", params = "registerBack", method = RequestMethod.POST)
     String registerBack(AccountRegisterForm accountRegisterForm) {
-        return "account/accountRegisterForm";
+        return "todo/todoRegisterForm";
     }
 
 }

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common_header::base_header(~{::title})">
+    <title>TODO登録</title>
+</head>
+
+<body>
+
+
+
+<nav th:substituteby="common/loggedinNav::navi(${accountName})"></nav>
+
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center pb-6">TODO登録</h2>
+            <div class="row">
+                <div class="col-md-12 mx-auto">
+                    <div class="card rounded-0">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="mb-0">TODO情報入力</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="todoForm" th:action="@{/todo/register/confirm}" th:object="${parentForm}" method="post">
+                                <fieldset id="todo_field">
+                                    <div class="form-group " th:classappend="${#fields.hasErrors('todoRegisterForm.title')}? 'has-error'">
+                                        <label for="title">タイトル</label><br/>
+                                        <input class="form-control" id="title" type="text" maxlength="45" th:field="*{todoRegisterForm.title}" name="name" required="" placeholder="TODOタイトルを入力してください"/>
+                                        <small id="titlehelp" class="form-text text-muted">45文字以内で入力してください。</small>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('todoRegisterForm.title')}" th:errors="*{todoRegisterForm.title}">error!</span>
+                                    </div>
+
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('todoRegisterForm.detail')}? 'has-error'">
+                                        <label for="detail">詳細</label><br/>
+                                        <textarea class="form-control selfIntroduction" id="detail" rows="10" cols="80" maxlength="2000" th:field="*{todoRegisterForm.detail}" name="name" required="" placeholder="TODO詳細を入力してください。"></textarea>
+                                        <small id="detailhelp" class="form-text text-muted">2000文字以内で入力してください。</small>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('todoRegisterForm.detail')}" th:errors="*{todoRegisterForm.detail}">error!</span>
+                                    </div>
+
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('todoRegisterForm.remarks')}? 'has-error'">
+                                        <label for="remarks">備考</label><br/>
+                                        <textarea class="form-control selfIntroduction" id="remarks" rows="4" cols="80" maxlength="2000" th:field="*{todoRegisterForm.remarks}" name="name" placeholder="備考を入力してください。"></textarea>
+                                        <small id="remarkshelp" class="form-text text-muted">2000文字以内で入力してください。</small>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('todoRegisterForm.remarks')}" th:errors="*{todoRegisterForm.remarks}">error!</span>
+                                    </div>
+
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('todoRegisterForm.startDate')}? 'has-error'">
+                                        <label for="startDate">開始日</label><br/>
+                                        <div class="input-group date" id="startDate" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input"
+                                                   data-target="#startDate"/>
+                                            <div class="input-group-append" data-target="#startDate" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('todoRegisterForm.endDate')}? 'has-error'">
+                                        <label for="endDate">終了日</label><br/>
+                                        <div class="input-group date" id="endDate" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input"
+                                                   data-target="#endDate"/>
+                                            <div class="input-group-append" data-target="#endDate" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('todoRegisterForm.issuePersonId')}? 'has-error'">
+                                        <label for="issuePersonId">起票者</label><br/>
+                                        <select class="form-control" id="issuePersonId" th:field="*{todoRegisterForm.issuePersonId}">
+                                            <option th:each="account : *{accountList}" th:value="${account.id}" th:text="${account.name}"></option>
+                                        </select>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('todoRegisterForm.issuePersonId')}" th:errors="*{todoRegisterForm.issuePersonId}">error!</span>
+                                    </div>
+
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('todoRegisterForm.personInChargeId')}? 'has-error'">
+                                        <label for="personInChargeId">担当者</label><br/>
+                                        <select class="form-control" id="personInChargeId" th:field="*{todoRegisterForm.personInChargeId}">
+                                            <option th:each="account : *{accountList}" th:value="${account.id}" th:text="${account.name}"></option>
+                                        </select>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('todoRegisterForm.personInChargeId')}" th:errors="*{todoRegisterForm.issuePersonId}">error!</span>
+                                    </div>
+                                    
+                                    
+                                    <!--<div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">-->
+                                        <!--<label for="name">氏名</label><br/>-->
+                                        <!--<input class="form-control" id="name" type="text" maxlength="45" th:field="*{name}" name="name" required="" placeholder="氏名を入力してください"/>-->
+                                        <!--<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error!</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">-->
+                                        <!--<label for="email">E-mail</label><br/>-->
+                                        <!--<input class="form-control" id="email" type="text" maxlength="50" th:field="*{email}" name="email" required="" placeholder="メールアドレスを入力してください"/>-->
+                                        <!--<span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group" th:classappend="${#fields.hasErrors('password')||#fields.hasErrors('passwordValid')}? 'has-error'">-->
+                                        <!--<label for="password">パスワード</label><br/>-->
+                                        <!--<input class="form-control" id="password" type="password" maxlength="50" th:field="*{password}" name="password" required="" placeholder="パスワードを入力してください"/>-->
+                                        <!--<small id="passwordhelp" class="form-text text-muted">パスワードは5文字以上、15文字以下かつ、半角の英小文字、英大文字、数字を1種類ずつ含めて入力してください。</small>-->
+                                        <!--<span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error!</span>-->
+                                        <!--<p class="text-danger" th:if="${#fields.hasErrors('passwordValid')}" th:errors="*{passwordValid}">error!</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group" th:classappend="${#fields.hasErrors('passwordValid')}? 'has-error'">-->
+                                        <!--<label for="confirmPassword">パスワード（確認）</label><br/>-->
+                                        <!--<input class="form-control" id="confirmPassword" type="password" maxlength="50" th:field="*{confirmPassword}" name="password" required="" placeholder="確認のため、もう一度パスワードを入力してください"/>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group" th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">-->
+                                        <!--<label for="name">自己紹介</label><br/>-->
+                                        <!--<textarea class="form-control selfIntroduction" id="selfIntroduction" rows="3" cols="80" maxlength="255" th:field="*{selfIntroduction}" name="name" required="" placeholder="自己紹介を入力してください"></textarea>-->
+                                        <!--<span class="text-danger" th:if="${#fields.hasErrors('accountId')}" th:errors="*{selfIntroduction}">error!</span>-->
+                                    <!--</div>-->
+                                    <div class="col text-center">
+                                        <input type="submit" value="確認画面へ" class="btn btn-primary btn-lg" />
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#startDate').datetimepicker({
+            format: 'L',
+            locale: 'ru'
+        });
+        $('#endDate').datetimepicker({
+            format: 'L',
+            locale: 'ru'
+        });
+    });
+</script>
+
+</body>
+</html>
