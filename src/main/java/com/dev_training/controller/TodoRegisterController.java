@@ -1,10 +1,10 @@
 package com.dev_training.controller;
 
+import com.dev_training.common.CodeValue;
 import com.dev_training.entity.Account;
 import com.dev_training.entity.AccountRepository;
 import com.dev_training.form.AccountRegisterForm;
 import com.dev_training.form.TodoRegisterForm;
-import com.dev_training.form.TodoRegisterParentForm;
 import com.dev_training.service.TodoRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,11 +26,13 @@ public class TodoRegisterController {
     /** TODO登録サービス */
     private final TodoRegisterService service;
     private final AccountRepository accountRepository;
+    private final CodeValue codeValue;
 
     @Autowired
-    public TodoRegisterController(TodoRegisterService todoRegisterService, AccountRepository accountRepository) {
+    public TodoRegisterController(TodoRegisterService todoRegisterService, AccountRepository accountRepository, CodeValue codeValue) {
         this.service = todoRegisterService;
         this.accountRepository = accountRepository;
+        this.codeValue = codeValue;
     }
 
     /**
@@ -41,16 +43,16 @@ public class TodoRegisterController {
      */
     @RequestMapping(value = "/init")
     String registerInit(Model model) {
-
         // フォームの初期化
-        TodoRegisterParentForm parentForm = new TodoRegisterParentForm();
-        parentForm.setTodoRegisterForm(new TodoRegisterForm());
-
+        model.addAttribute("todoRegisterForm", new TodoRegisterForm());
         // 担当者選択用のプルダウンリスト
         List<Account> accounts = accountRepository.findAll();
-        parentForm.setAccountList(accounts);
         model.addAttribute("accounts", accounts);
-        model.addAttribute("parentForm", parentForm);
+        // ステータスプルダウンの初期化
+        model.addAttribute("allStatus", codeValue.getStatus());
+        // 優先度プルダウンの初期化
+        model.addAttribute("allPriority", codeValue.getPriority());
+
         return "todo/todoRegisterForm";
     }
 
