@@ -3,6 +3,7 @@ package com.dev_training.controller;
 import com.dev_training.common.CodeValue;
 import com.dev_training.entity.Account;
 import com.dev_training.entity.AccountRepository;
+import com.dev_training.entity.Todo;
 import com.dev_training.form.TodoRegisterForm;
 import com.dev_training.service.TodoRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,12 +104,11 @@ public class TodoRegisterController {
         if (bindingResult.hasErrors()) {
             return "todo/todoRegisterForm";
         }
-//        Account account = new Account();
-//        account.setAccountId(accountRegisterForm.getAccountId());
-//        account.setName(accountRegisterForm.getName());
-//        account.setSelfIntroduction(accountRegisterForm.getSelfIntroduction());
-//        account.setEmail(accountRegisterForm.getEmail());
-//        service.register(account, accountRegisterForm.getPassword());
+
+        Todo todo = new Todo();
+        todo.setTitle(todoRegisterForm.getTitle());
+        todo.setDetail(todoRegisterForm.getDetail());
+
         return "todo/todoRegisterCompleteForm";
     }
 
