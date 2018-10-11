@@ -56,7 +56,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--<input class="form-control" id="title" type="text" maxlength="45" th:field="*{title}" name="name" required="" placeholder="TODOタイトルを入力してください"/>-->
                                         </div>
 
                                         <div class="col-md-6 mx-auto">
@@ -131,18 +130,16 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#startDate').datetimepicker({
-            format: 'L',
-            locale: 'ru'
-        });
-        $('#datetimepicker4').datetimepicker({
-            format: 'L',
-            locale: 'ru'
-        });
-        $('#endDate').datetimepicker({
-            format: 'L',
-            locale: 'ru'
-        });
+        var dateFormat = 'YYYY/MM/DD';
+        var startDatePicker = $('#startDate');
+        var endDatePicker = $('#endDate');
+
+        var startDate = moment(startDatePicker.val(), dateFormat).toDate();
+        var endDate = moment(endDatePicker.val(), dateFormat).toDate();
+        startDatePicker.datetimepicker({format: dateFormat, date: null});
+        startDatePicker.datetimepicker('date', startDate);
+        endDatePicker.datetimepicker({format: dateFormat, date: null});
+        endDatePicker.datetimepicker('date', endDate);
     });
 </script>
 
