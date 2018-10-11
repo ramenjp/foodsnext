@@ -45,4 +45,18 @@ public class TodoRegisterService {
         int result = accountRepository.countByAccountId(accountId);
         return result != 0;
     }
+
+
+    /**
+     * 日付の前後有効性チェック
+     * @param startDate 開始日
+     * @param endDate 終了日
+     * @return
+     */
+    public boolean isValidDate(String startDate, String endDate) {
+        if (startDate == null) return false;
+        if (endDate == null) return false;
+        if (startDate.compareTo(endDate) >= 0) return true;
+        return false;
+    }
 }

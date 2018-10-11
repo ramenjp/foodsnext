@@ -3,7 +3,6 @@ package com.dev_training.form;
 import com.dev_training.validator.Date;
 import lombok.Data;
 
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -32,24 +31,16 @@ public class TodoRegisterForm implements Serializable {
     private String endDate;
 
     @NotBlank
-    private int issuePersonId;
+    private String issuePersonId;
 
     @NotBlank
-    private int personInChargeId;
+    private String personInChargeId;
 
     @NotBlank
-    private String status;
+    private String selectedStatus;
 
     @NotBlank
-    private String priority;
-
-    @AssertTrue(message = "validation.invalidDate")
-    public boolean isValidDate() {
-        if (startDate == null) return true;
-        if (endDate == null) return true;
-        if (startDate.compareTo(endDate) <= 0) return true;
-        return false;
-    }
+    private String selectedPriority;
 
     public String getTitle() {
         return title;
@@ -91,35 +82,35 @@ public class TodoRegisterForm implements Serializable {
         this.endDate = endDate;
     }
 
-    public int getIssuePersonId() {
+    public String getIssuePersonId() {
         return issuePersonId;
     }
 
-    public void setIssuePersonId(int issuePersonId) {
+    public void setIssuePersonId(String issuePersonId) {
         this.issuePersonId = issuePersonId;
     }
 
-    public int getPersonInChargeId() {
+    public String getPersonInChargeId() {
         return personInChargeId;
     }
 
-    public void setPersonInChargeId(int personInChargeId) {
+    public void setPersonInChargeId(String personInChargeId) {
         this.personInChargeId = personInChargeId;
     }
 
-    public String getStatus() {
-        return status;
+    public String getSelectedStatus() {
+        return selectedStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSelectedStatus(String selectedStatus) {
+        this.selectedStatus = selectedStatus;
     }
 
-    public String getPriority() {
-        return priority;
+    public String getSelectedPriority() {
+        return selectedPriority;
     }
 
-    public void setPriority(String priority) {
-        this.priority = priority;
+    public void setSelectedPriority(String selectedPriority) {
+        this.selectedPriority = selectedPriority;
     }
 }

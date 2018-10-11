@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common_header::base_header(~{::title})">
+    <title>TODO登録</title>
+</head>
+
+<body>
+
+<nav th:substituteby="common/loggedinNav::navi(${accountName})"></nav>
+
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center pb-6">TODO登録</h2>
+            <div class="row">
+                <div class="col-md-12 mx-auto">
+                    <div class="card rounded-0">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="mb-0">TODO情報入力</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="todoForm" th:action="@{/todo/register/do}" th:object="${todoRegisterForm}" method="post">
+                                <fieldset id="todo_field">
+                                    <div class="form-group">
+                                        <label>タイトル</label><br/>
+                                        <span class="form-control-static" th:text="*{title}"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>詳細</label><br/>
+                                        <span class="form-control-static" th:text="*{detail}"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>備考</label><br/>
+                                        <span class="form-control-static" th:text="*{remarks}"></span>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mx-auto">
+                                            <div class="form-group">
+                                                <label>開始日</label><br/>
+                                                <span class="form-control-static" th:text="*{startDate}"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mx-auto">
+                                            <div class="form-group">
+                                                <label>終了日</label><br/>
+                                                <span class="form-control-static" th:text="*{endDate}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="title" id="title" th:value="*{title}"/>
+                                    <input type="hidden" name="detail" id="detail" th:value="*{detail}"/>
+                                    <input type="hidden" name="remarks" id="remarks" th:value="*{remarks}"/>
+                                    <input type="hidden" name="startDate" id="startDate" th:value="*{startDate}"/>
+                                    <input type="hidden" name="endDate" id="endDate" th:value="*{endDate}"/>
+                                    <input type="hidden" name="issuePersonId" id="issuePersonId" th:value="*{issuePersonId}"/>
+                                    <input type="hidden" name="personInChargeId" id="personInChargeId" th:value="*{personInChargeId}"/>
+                                    <input type="hidden" name="selectedStatus" id="selectedStatus" th:value="*{selectedStatus}"/>
+                                    <input type="hidden" name="selectedPriority" id="selectedPriority" th:value="*{selectedPriority}"/>
+
+
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-md-6 mx-auto">-->
+                                            <!--<div class="form-group" th:classappend="${#fields.hasErrors('issuePersonId')}? 'has-error'">-->
+                                                <!--<label for="issuePersonId">起票者</label><br/>-->
+                                                <!--<select class="form-control" id="issuePersonId" th:field="*{issuePersonId}">-->
+                                                    <!--<option th:each="account : ${accountList}" th:value="${account.id}" th:text="${account.name}"></option>-->
+                                                <!--</select>-->
+                                                <!--<span class="text-danger" th:if="${#fields.hasErrors('issuePersonId')}" th:errors="*{issuePersonId}">error!</span>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+
+                                        <!--<div class="col-md-6 mx-auto">-->
+                                            <!--<div class="form-group" th:classappend="${#fields.hasErrors('personInChargeId')}? 'has-error'">-->
+                                                <!--<label for="personInChargeId">担当者</label><br/>-->
+                                                <!--<select class="form-control" id="personInChargeId" th:field="*{personInChargeId}">-->
+                                                    <!--<option th:each="account : ${accountList}" th:value="${account.id}" th:text="${account.name}"></option>-->
+                                                <!--</select>-->
+                                                <!--<span class="text-danger" th:if="${#fields.hasErrors('personInChargeId')}" th:errors="*{issuePersonId}">error!</span>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-md-6 mx-auto">-->
+                                            <!--<div class="form-group" th:classappend="${#fields.hasErrors('selectedStatus')}? 'has-error'">-->
+                                                <!--<label for="selectedStatus">ステータス</label><br/>-->
+                                                <!--<select class="form-control" id="selectedStatus" th:field="*{selectedStatus}">-->
+                                                    <!--<option th:each="entry : ${allStatus.status.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>-->
+                                                <!--</select>-->
+                                                <!--<span class="text-danger" th:if="${#fields.hasErrors('selectedStatus')}" th:errors="*{selectedStatus}">error!</span>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<div class="col-md-6 mx-auto">-->
+                                            <!--<div class="form-group" th:classappend="${#fields.hasErrors('selectedPriority')}? 'has-error'">-->
+                                                <!--<label for="selectedStatus">優先度</label><br/>-->
+                                                <!--<select class="form-control" id="selectedPriority" th:field="*{selectedStatus}">-->
+                                                    <!--<option th:each="entry : ${allPriority.priority.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>-->
+                                                <!--</select>-->
+                                                <!--<span class="text-danger" th:if="${#fields.hasErrors('selectedPriority')}" th:errors="*{selectedPriority}">error!</span>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                    <div class="col text-center">
+                                        <div class="btn-group">
+                                            <input type="submit" name="registerBack" value="戻る"
+                                                   class="btn btn-primary btn-lg "/>
+                                        </div>
+                                        <div class="btn-group">
+                                            <input type="submit" name="register" value="登録"
+                                                   class="btn btn-primary btn-lg "/>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#startDate').datetimepicker({
+            format: 'L',
+            locale: 'ru'
+        });
+        $('#endDate').datetimepicker({
+            format: 'L',
+            locale: 'ru'
+        });
+    });
+</script>
+
+</body>
+</html>

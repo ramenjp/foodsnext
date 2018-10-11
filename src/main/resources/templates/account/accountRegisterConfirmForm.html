@@ -17,8 +17,7 @@
                             <h3 class="mb-0">アカウント情報確認</h3>
                         </div>
                         <div class="card-body">
-                            <form id="accountForm" th:action="@{/account/register/do}"
-                                  th:object="${accountRegisterForm}" method="post">
+                            <form id="accountForm" th:action="@{/account/register/do}" th:object="${accountRegisterForm}" method="post">
                                 <fieldset id="account_field">
                                     <div class="form-group">
                                         <label>アカウントID</label><br/>
@@ -43,10 +42,8 @@
                                     <input type="hidden" name="name" id="name" th:value="*{name}"/>
                                     <input type="hidden" name="email" id="email" th:value="*{email}"/>
                                     <input type="hidden" name="password" id="password" th:value="*{password}"/>
-                                    <input type="hidden" name="confirmPassword" id="confirmPassword"
-                                           th:value="*{confirmPassword}"/>
-                                    <input type="hidden" name="selfIntroduction" id="selfIntroduction"
-                                           th:value="*{selfIntroduction}"/>
+                                    <input type="hidden" name="confirmPassword" id="confirmPassword" th:value="*{confirmPassword}"/>
+                                    <input type="hidden" name="selfIntroduction" id="selfIntroduction" th:value="*{selfIntroduction}"/>
 
                                     <div class="col text-center">
                                         <div class="btn-group">
