@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * アカウントリポジトリ。
  */
-public interface AccountRepository extends JpaRepository<Account, String>, JpaSpecificationExecutor<Account> {
+public interface AccountRepository extends JpaRepository<Account, Integer>, JpaSpecificationExecutor<Account> {
 
     /**
      * アカウントIDに紐づくアカウントを検索する。

@@ -77,6 +77,16 @@ public class TodoRegisterController {
             return "todo/todoRegisterForm";
         }
 
+        // 選択されたIDに紐づくAccountを取得する。
+        Account issuePersonAccount = accountRepository.findById(Integer.parseInt(todoRegisterForm.getIssuePersonId())).get();
+        Account inChargeAccount = accountRepository.findById(Integer.parseInt(todoRegisterForm.getPersonInChargeId())).get();
+        // 確認画面に表示する氏名をセットする。
+        model.addAttribute("issuePersonName",issuePersonAccount.getName());
+        model.addAttribute("personInChargeName",inChargeAccount.getName());
+        // 確認画面に表示するステータス、優先度をセットする。
+        model.addAttribute("statusName", codeValue.getStatus().getStatus().get(todoRegisterForm.getSelectedStatus()));
+        model.addAttribute("priorityName", codeValue.getPriority().getPriority().get(todoRegisterForm.getSelectedPriority()));
+
         model.addAttribute("todoRegisterForm", todoRegisterForm);
         return "todo/todoRegisterConfirmForm";
     }
