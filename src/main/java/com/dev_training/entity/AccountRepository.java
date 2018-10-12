@@ -23,4 +23,11 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
      * @return 件数
      */
     int countByAccountId(String accountId);
+
+    /**
+     * IDに紐づくアカウントを削除する。
+     * @param id ID
+     * @return 削除件数
+     */
+    int deleteById(int id);
 }
