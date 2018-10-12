@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * アカウントリポジトリ。
  */
-public interface AccountRepository extends JpaRepository<Account, String>, JpaSpecificationExecutor<Account> {
+public interface AccountRepository extends JpaRepository<Account, Integer>, JpaSpecificationExecutor<Account> {
 
     /**
      * アカウントIDに紐づくアカウントを検索する。
@@ -23,4 +23,11 @@ public interface AccountRepository extends JpaRepository<Account, String>, JpaSp
      * @return 件数
      */
     int countByAccountId(String accountId);
+
+    /**
+     * IDに紐づくアカウントを削除する。
+     * @param id ID
+     * @return 削除件数
+     */
+    int deleteById(int id);
 }
