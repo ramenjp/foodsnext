@@ -28,7 +28,10 @@ public class AccountSearchController {
 
     /** アカウント検索サービス */
     private final AccountSearchService service;
-
+    /** HTTPセッション */
+    private final HttpSession session;
+    /** ログインユーザーのアカウントエンティティのセッションキー */
+    private static final String SESSION_FORM_ID="accountSearchForm";
     /**  ページングサイズ */
     private static final int DEFAULT_PAGEABLE_SIZE = 10;
 
@@ -37,9 +40,6 @@ public class AccountSearchController {
         this.service = accountService;
         this.session = session;
     }
-
-    private final HttpSession session;
-    private static final String SESSION_FORM_ID="accountSearchForm";
 
     /**
      * アカウント検索-初期表示。

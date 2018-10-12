@@ -34,6 +34,7 @@ public class AccountSearchService {
      * @param form 検索条件
      * @return 検索結果
      */
+    @Transactional(readOnly = true)
     public List<Account> findAccount(AccountSearchForm form) {
         return accountRepository.findAll(
                 Specification
@@ -49,6 +50,7 @@ public class AccountSearchService {
      * @param pageable ページャブル
      * @return 検索結果
      */
+    @Transactional(readOnly = true)
     public Page<Account> findAccount(AccountSearchForm form, Pageable pageable) {
         return accountRepository.findAll(
                 Specification
