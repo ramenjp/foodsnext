@@ -109,6 +109,8 @@ public class TodoRegisterController {
         todo.setTitle(todoRegisterForm.getTitle());
         todo.setDetail(todoRegisterForm.getDetail());
 
+        service.register(todo);
+
         return "todo/todoRegisterCompleteForm";
     }
 
