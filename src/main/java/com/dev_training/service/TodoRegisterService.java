@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class TodoRegisterService {
+
+    /** TODOリポジトリ */
     TodoRepository todoRepository;
 
     @Autowired
@@ -20,14 +22,15 @@ public class TodoRegisterService {
     }
 
     /**
-     * 登録処理。
+     * TODO登録処理。
      */
     public void register(Todo todo) {
         todoRepository.save(todo);
     }
 
     /**
-     * 日付の前後有効性チェック
+     * 日付の前後有効性チェック。
+     *
      * @param startDate 開始日
      * @param endDate 終了日
      * @return
@@ -35,7 +38,7 @@ public class TodoRegisterService {
     public boolean isValidDate(String startDate, String endDate) {
         if (startDate == null) return false;
         if (endDate == null) return false;
-        if (startDate.compareTo(endDate) >= 0) return true;
+        if (startDate.compareTo(endDate) > 0) return true;
         return false;
     }
 }
