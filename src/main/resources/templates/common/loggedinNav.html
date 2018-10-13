@@ -22,7 +22,7 @@
         </li>
     </ul>
 
-    <span class="navbar-text pr-3" th:text="'ようこそ ' + ${session.accountName} + ' さん。'"></span>
+    <span class="navbar-text pr-3" th:text="'ようこそ ' + ${session.account.name} + ' さん。'"></span>
     <form id="logout" th:action="@{/logout}" method="post" class="form-inline">
         <input type="submit" class="btn btn-primary navbar-btn" value="Sign out"/>
     </form>

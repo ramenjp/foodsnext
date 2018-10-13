@@ -15,7 +15,6 @@ import javax.persistence.Query;
  * アカウント登録サービス。
  */
 @Service
-@Transactional
 public class AccountRegisterService {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;

@@ -19,7 +19,6 @@ import static com.dev_training.service.AccountSpecifications.*;
  * アカウント検索サービス。
  */
 @Service
-@Transactional
 public class AccountSearchService {
     private final AccountRepository accountRepository;
 
