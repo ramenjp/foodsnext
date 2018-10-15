@@ -16,7 +16,7 @@
                 <div class="col-md-12 mx-auto">
                     <div class="card rounded-0">
                         <div class="card-header bg-primary text-white">
-                            <h3 class="mb-0">検索条件入力</h3>
+                            <h3 class="mb-0">検索条件</h3>
                         </div>
                         <div class="card-body">
                             <form id="todoForm" th:action="@{/todo/search/do}" th:object="${todoSearchForm}" method="post">
@@ -55,7 +55,7 @@
                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                     </div>
                                                 </div>
-                                                <small id="startdatehelp" class="form-text text-muted">この開始日以上のTODOを検索する場合、入力してください。</small>
+                                                <small id="startdatehelp" class="form-text text-muted">この開始日以降のTODOを検索する場合、入力してください。</small>
                                             </div>
                                         </div>
 
@@ -68,7 +68,7 @@
                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                     </div>
                                                 </div>
-                                                <small id="enddatehelp" class="form-text text-muted">この終了日以下のTODOを検索する場合、入力してください。</small>
+                                                <small id="enddatehelp" class="form-text text-muted">この終了日以前のTODOを検索する場合、入力してください。</small>
                                             </div>
                                         </div>
                                     </div>
@@ -81,7 +81,7 @@
                                                     <option value=""></option>
                                                     <option th:each="entry : ${accountList.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                                 </select>
-                                                <small id="issuepersonidheip" class="form-text text-muted">この起票者のTODOを検索する場合、入力してください。</small>
+                                                <small id="issuepersonidheip" class="form-text text-muted">この起票者のTODOを検索する場合、選択してください。</small>
                                                 <span class="text-danger" th:if="${#fields.hasErrors('issuePersonId')}" th:errors="*{issuePersonId}">error!</span>
                                             </div>
                                         </div>
@@ -93,7 +93,7 @@
                                                     <option value=""></option>
                                                     <option th:each="entry : ${accountList.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                                 </select>
-                                                <small id="personinchargeidhelp" class="form-text text-muted">この担当者のTODOを検索する場合、入力してください。</small>
+                                                <small id="personinchargeidhelp" class="form-text text-muted">この担当者のTODOを検索する場合、選択してください。</small>
                                                 <span class="text-danger" th:if="${#fields.hasErrors('personInChargeId')}" th:errors="*{issuePersonId}">error!</span>
                                             </div>
                                         </div>
@@ -107,7 +107,7 @@
                                                     <!--<option value=""></option>-->
                                                     <option th:each="entry : ${allStatus.status.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                                 </select>
-                                                <small id="statushelp" class="form-text text-muted">このステータスのTODOを検索する場合、入力してください。</small>
+                                                <small id="statushelp" class="form-text text-muted">このステータスのTODOを検索する場合、選択してください。</small>
                                                 <span class="text-danger" th:if="${#fields.hasErrors('selectedStatus')}" th:errors="*{selectedStatus}">error!</span>
                                             </div>
                                         </div>
@@ -118,7 +118,7 @@
                                                     <!--<option value=""></option>-->
                                                     <option th:each="entry : ${allPriority.priority.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                                 </select>
-                                                <small id="priorityshelp" class="form-text text-muted">この優先度のTODOを検索する場合、入力してください。</small>
+                                                <small id="priorityshelp" class="form-text text-muted">この優先度のTODOを検索する場合、選択してください。</small>
                                                 <span class="text-danger" th:if="${#fields.hasErrors('selectedPriority')}" th:errors="*{selectedPriority}">error!</span>
                                             </div>
                                         </div>
