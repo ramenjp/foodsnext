@@ -1,7 +1,6 @@
 package com.dev_training.form;
 
 import com.dev_training.validator.Date;
-import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -10,7 +9,6 @@ import java.io.Serializable;
 /**
  * Todo登録フォーム。
  */
-@Data
 public class TodoRegisterForm implements Serializable {
 
     @NotBlank
