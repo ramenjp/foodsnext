@@ -25,7 +25,7 @@ public class AccountUpdateController {
     private final AccountUpdateService service;
     /** HTTPセッション */
     private final HttpSession session;
-    /** ログインユーザーのアカウントエンティティのセッションキー */
+    /** セッションキー(ログインユーザのアカウント) */
     private static final String SESSION_FORM_ID = "account";
 
     @Autowired

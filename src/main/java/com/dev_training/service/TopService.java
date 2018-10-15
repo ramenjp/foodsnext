@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class TopService {
+
+    /** アカウントリポジトリ */
     private final AccountRepository accountRepository;
 
     @Autowired
@@ -22,7 +24,7 @@ public class TopService {
     /**
      * アカウント最新データ取得処理。
      *
-     * @param accountId 　更新対象のアカウントID
+     * @param accountId アカウントID
      * @return アカウント
      */
     public Account getAccountByAccountId(String accountId) {

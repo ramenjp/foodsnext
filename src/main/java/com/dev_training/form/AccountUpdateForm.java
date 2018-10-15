@@ -7,7 +7,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+/**
+ * アカウント更新フォーム。
+ */
 public class AccountUpdateForm implements Serializable {
+
     @NotBlank
     @Size(min = 3, max = 15, message = "{error.size.min.max}")
     @HalfAlphameric

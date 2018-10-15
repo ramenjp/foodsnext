@@ -16,9 +16,12 @@ import javax.persistence.Query;
  */
 @Service
 public class AccountRegisterService {
-    private final AccountRepository accountRepository;
-    private final PasswordEncoder passwordEncoder;
 
+    /** アカウントリポジトリ */
+    private final AccountRepository accountRepository;
+    /** パスワードエンコーダー */
+    private final PasswordEncoder passwordEncoder;
+    /** エンティティマネージャ */
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -55,9 +58,8 @@ public class AccountRegisterService {
      * @param accountId 精査対象のアカウントID
      * @return true:未存在 false:存在
      */
-    @Transactional
+    @Transactional(readOnly = true)
     public boolean isExistsAccountId(String accountId) {
-        // アカウントIDの重複精査
         int result = accountRepository.countByAccountId(accountId);
         return result != 0;
     }

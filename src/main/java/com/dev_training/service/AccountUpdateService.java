@@ -12,18 +12,23 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-/*** アカウント情報更新サービス。*/
+/**
+ * アカウント情報更新サービス。
+ */
 @Service
 public class AccountUpdateService {
+
+    /** アカウントリポジトリ */
     private final AccountRepository accountRepository;
+
+    /** エンティティマネージャ */
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     public AccountUpdateService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     /**
      * アカウント最新データ取得処理。

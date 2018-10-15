@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
 
+/**
+ * トップコントローラ。
+ */
 @Controller
 @RequestMapping("/top")
 public class TopController {
@@ -18,7 +21,7 @@ public class TopController {
     private final TopService service;
     /** HTTPセッション */
     private final HttpSession session;
-    /** ログインユーザーのアカウントエンティティのセッションキー */
+    /** セッションキー(ログインユーザのアカウント) */
     private static final String SESSION_FORM_ID = "account";
 
     @Autowired

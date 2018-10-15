@@ -49,7 +49,7 @@ public class TodoRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/init")
-    String registerInit(@ModelAttribute("todoRegisterForm") TodoRegisterForm todoRegisterForm, Model model) {
+    public String registerInit(@ModelAttribute("todoRegisterForm") TodoRegisterForm todoRegisterForm, Model model) {
         // フォームの初期化
         model.addAttribute("todoRegisterForm", todoRegisterForm);
         // 担当者選択用のプルダウンリスト
@@ -79,7 +79,7 @@ public class TodoRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/confirm")
-    String registerConfirm(@Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+    public String registerConfirm(@Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         // 単項目精査
         if (bindingResult.hasErrors()) {
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
@@ -125,7 +125,7 @@ public class TodoRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/do", params = "register", method = RequestMethod.POST)
-    String registerComplete(@Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String registerComplete(@Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         // 単項目精査
         if (bindingResult.hasErrors()) {
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
@@ -173,7 +173,7 @@ public class TodoRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/do", params = "registerBack", method = RequestMethod.POST)
-    String registerBack(TodoRegisterForm todoRegisterForm, RedirectAttributes redirectAttributes) {
+    public String registerBack(TodoRegisterForm todoRegisterForm, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("todoRegisterForm", todoRegisterForm);
         return "redirect:/todo/register/init";
     }

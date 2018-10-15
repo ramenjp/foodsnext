@@ -33,7 +33,7 @@ public class AccountUnsubscribeController {
      * @return Path
      */
     @RequestMapping(value = "/init")
-    String unsubscribeInit() {
+    public String unsubscribeInit() {
         return "account/accountUnsubscribeForm";
     }
 
@@ -43,7 +43,7 @@ public class AccountUnsubscribeController {
      * @return Path
      */
     @RequestMapping(value = "/confirm",  method = RequestMethod.POST)
-    String unsubscribeConfirm() {
+    public String unsubscribeConfirm() {
         return "account/accountUnsubscribeConfirmForm";
     }
 
@@ -54,7 +54,7 @@ public class AccountUnsubscribeController {
      * @return Path
      */
     @RequestMapping(value = "/do", method = RequestMethod.POST)
-    String unsubscribeComplete(@AuthenticationPrincipal Account account) {
+    public String unsubscribeComplete(@AuthenticationPrincipal Account account) {
         service.delete(account.getId());
         session.invalidate();
         return "account/accountUnsubscribeCompleteForm";

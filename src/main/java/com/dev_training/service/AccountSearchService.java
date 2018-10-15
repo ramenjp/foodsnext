@@ -20,6 +20,8 @@ import static com.dev_training.service.AccountSpecifications.*;
  */
 @Service
 public class AccountSearchService {
+
+    /** アカウントリポジトリ */
     private final AccountRepository accountRepository;
 
     @Autowired

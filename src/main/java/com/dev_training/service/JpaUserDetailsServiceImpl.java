@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class JpaUserDetailsServiceImpl implements UserDetailsService {
 
+    /** アカウントリポジトリ */
     private final AccountRepository accountRepository;
 
     @Autowired
@@ -21,8 +22,8 @@ public class JpaUserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String accounrId) throws UsernameNotFoundException {
-        Account account = accountRepository.findByAccountId(accounrId);
+    public UserDetails loadUserByUsername(String accountId) throws UsernameNotFoundException {
+        Account account = accountRepository.findByAccountId(accountId);
         if (account == null) {
             return new Account();
         }

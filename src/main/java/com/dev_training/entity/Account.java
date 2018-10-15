@@ -6,6 +6,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 
+/**
+ * アカウントエンティティ。
+ */
 @Entity
 @Table(name = "accounts")
 public class Account implements UserDetails {
