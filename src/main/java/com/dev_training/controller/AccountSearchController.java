@@ -28,7 +28,10 @@ public class AccountSearchController {
 
     /** アカウント検索サービス */
     private final AccountSearchService service;
-
+    /** HTTPセッション */
+    private final HttpSession session;
+    /** セッションキー(検索フォーム) */
+    private static final String SESSION_SEARCH_FORM_ID ="accountSearchForm";
     /**  ページングサイズ */
     private static final int DEFAULT_PAGEABLE_SIZE = 10;
 
@@ -37,9 +40,6 @@ public class AccountSearchController {
         this.service = accountService;
         this.session = session;
     }
-
-    private final HttpSession session;
-    private static final String SESSION_FORM_ID="accountSearchForm";
 
     /**
      * アカウント検索-初期表示。
@@ -64,7 +64,7 @@ public class AccountSearchController {
         }
 
         List<Account> list = service.findAccount(accountSearchForm);
-        if (list.isEmpty()){
+        if (list == null || list.isEmpty()) {
             bindingResult.reject("validation.noSearchResult", "default message");
             return "account/accountSearchForm";
         }
@@ -80,7 +80,7 @@ public class AccountSearchController {
      */
     @RequestMapping(value = "/paging/init")
     public String pagingSearchInit(@ModelAttribute AccountSearchForm accountSearchForm) {
-        session.getAttribute(SESSION_FORM_ID);
+        session.getAttribute(SESSION_SEARCH_FORM_ID);
         return "account/accountPagingSearchForm";
     }
 
@@ -99,7 +99,7 @@ public class AccountSearchController {
                                )}) Pageable pageable,
                        Model model) {
 
-        session.setAttribute(SESSION_FORM_ID,accountSearchForm);
+        session.setAttribute(SESSION_SEARCH_FORM_ID,accountSearchForm);
         model.addAttribute(accountSearchForm);
 
         if (bindingResult.hasErrors()) {
@@ -108,7 +108,7 @@ public class AccountSearchController {
 
         Page<Account> page = service.findAccount(accountSearchForm, pageable);
         List<Account> list = page.getContent();
-        if (list.isEmpty()) {
+        if (list == null || list.isEmpty()) {
             bindingResult.reject("validation.noSearchResult", "default message");
             return "account/accountPagingSearchForm";
         }
@@ -137,7 +137,7 @@ public class AccountSearchController {
                                        )}) Pageable pageable,
                                Model model) {
 
-        AccountSearchForm storedCondition = (AccountSearchForm) session.getAttribute(SESSION_FORM_ID);
+        AccountSearchForm storedCondition = (AccountSearchForm) session.getAttribute(SESSION_SEARCH_FORM_ID);
         return this.pagingSearch(storedCondition, bindingResult, pageable, model);
     }
 }

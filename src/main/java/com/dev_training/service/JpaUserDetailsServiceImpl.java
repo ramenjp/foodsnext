@@ -7,10 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class JpaUserDetailsServiceImpl implements UserDetailsService {
 
+    /** アカウントリポジトリ */
     private final AccountRepository accountRepository;
 
     @Autowired
@@ -19,8 +22,8 @@ public class JpaUserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String accounrId) throws UsernameNotFoundException {
-        Account account = accountRepository.findByAccountId(accounrId);
+    public UserDetails loadUserByUsername(String accountId) throws UsernameNotFoundException {
+        Account account = accountRepository.findByAccountId(accountId);
         if (account == null) {
             return new Account();
         }

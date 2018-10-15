@@ -7,9 +7,9 @@
         <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" id="accountMenuLink" aria-haspopup="true" aria-expanded="false">アカウント機能</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/account/update/init">アカウント情報更新</a>
                 <a class="dropdown-item" href="/account/search/init">アカウント一覧検索</a>
                 <a class="dropdown-item" href="/account/search/paging/init">アカウント一覧検索(参考：ページング)</a>
-                <a class="dropdown-item" href="#">アカウント情報更新</a>
                 <a class="dropdown-item" href="/account/unsubscribe/init">退会</a>
             </div>
         </li>
@@ -22,7 +22,7 @@
         </li>
     </ul>
 
-    <span class="navbar-text pr-3" th:text="'ようこそ ' + ${session.accountName} + ' さん。'"></span>
+    <span class="navbar-text pr-3" th:text="'ようこそ ' + ${session.account.name} + ' さん。'"></span>
     <form id="logout" th:action="@{/logout}" method="post" class="form-inline">
         <input type="submit" class="btn btn-primary navbar-btn" value="Sign out"/>
     </form>

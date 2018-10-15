@@ -10,7 +10,7 @@ CREATE TABLE `accounts` (
   `email` varchar(255) NOT NULL,
   `self_introduction` text NOT NULL,
   `created_tms` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_tms` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_tms` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
@@ -26,6 +26,6 @@ CREATE TABLE `todo` (
   `status` varchar(20) NOT NULL,
   `priority` varchar(20) NOT NULL,
   `created_tms` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_tms` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_tms` timestamp NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
