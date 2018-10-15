@@ -103,8 +103,8 @@
                                         <div class="col-md-6 mx-auto">
                                             <div class="form-group" th:classappend="${#fields.hasErrors('selectedStatus')}? 'has-error'">
                                                 <label for="selectedStatus">ステータス</label><br/>
-                                                <select class="form-control" id="selectedStatus" th:field="*{selectedStatus}">
-                                                    <option value=""></option>
+                                                <select class="form-control" id="selectedStatus" th:field="*{selectedStatus}" multiple>
+                                                    <!--<option value=""></option>-->
                                                     <option th:each="entry : ${allStatus.status.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                                 </select>
                                                 <small id="statushelp" class="form-text text-muted">このステータスのTODOを検索する場合、入力してください。</small>
@@ -114,8 +114,8 @@
                                         <div class="col-md-6 mx-auto">
                                             <div class="form-group" th:classappend="${#fields.hasErrors('selectedPriority')}? 'has-error'">
                                                 <label for="selectedPriority">優先度</label><br/>
-                                                <select class="form-control" id="selectedPriority" th:field="*{selectedPriority}">
-                                                    <option value=""></option>
+                                                <select class="form-control" id="selectedPriority" th:field="*{selectedPriority}" multiple>
+                                                    <!--<option value=""></option>-->
                                                     <option th:each="entry : ${allPriority.priority.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                                 </select>
                                                 <small id="priorityshelp" class="form-text text-muted">この優先度のTODOを検索する場合、入力してください。</small>

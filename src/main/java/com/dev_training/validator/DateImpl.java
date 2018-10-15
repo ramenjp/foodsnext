@@ -16,7 +16,7 @@ public class DateImpl implements ConstraintValidator<Date, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if(value == null){
+        if (value == null || value.isEmpty()) {
             return true;
         }
         Pattern ptn = Pattern.compile("^(\\d{4})[-/]?(\\d{2})[-/]?(\\d{2})$");

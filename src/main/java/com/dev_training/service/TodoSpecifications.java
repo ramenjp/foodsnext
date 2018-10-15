@@ -8,6 +8,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * TODO検索条件。
@@ -89,7 +91,8 @@ class TodoSpecifications {
         return StringUtils.isEmpty(status) ? null : new Specification<Todo>() {
             @Override
             public Predicate toPredicate(Root<Todo> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.equal(root.get("status"), status);
+                List<String> condition = Arrays.asList(status.split(","));
+                return root.get("status").in(condition);
             }
         };
     }
@@ -99,7 +102,8 @@ class TodoSpecifications {
         return StringUtils.isEmpty(priority) ? null : new Specification<Todo>() {
             @Override
             public Predicate toPredicate(Root<Todo> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.equal(root.get("priority"), priority);
+                List<String> condition = Arrays.asList(priority.split(","));
+                return root.get("priority").in(condition);
             }
         };
     }

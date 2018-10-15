@@ -55,6 +55,7 @@
                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                     </div>
                                                 </div>
+                                                <span class="text-danger" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">error!</span>
                                             </div>
                                         </div>
 
@@ -67,6 +68,7 @@
                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                     </div>
                                                 </div>
+                                                <span class="text-danger" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">error!</span>
                                             </div>
                                         </div>
                                     </div>

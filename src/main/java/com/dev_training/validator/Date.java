@@ -19,7 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Date形式チェックマーカーインターフェース。
  */
 public @interface Date {
-    String message() default "{0}は日付として許可された形式ではありません。";
+    String message() default "日付の形式で入力されていません。";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 
