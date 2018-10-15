@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * TODOリポジトリ。
  */
-public interface TodoRepository extends JpaRepository<Todo, String>, JpaSpecificationExecutor<Todo> {
+public interface TodoRepository extends JpaRepository<Todo, Integer>, JpaSpecificationExecutor<Todo> {
 }
