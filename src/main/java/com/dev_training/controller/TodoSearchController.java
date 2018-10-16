@@ -7,17 +7,18 @@ import com.dev_training.entity.Todo;
 import com.dev_training.form.TodoSearchForm;
 import com.dev_training.service.TodoSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * TODO検索コントローラ。
@@ -34,12 +35,15 @@ public class TodoSearchController {
     private final CodeValue codeValue;
     /** フォーム名 */
     private static final String FORM_NAME = "todoSearchForm";
+    /** メッセージソース */
+    private final MessageSource messageSource;
 
     @Autowired
-    public TodoSearchController(TodoSearchService todoSearchService, AccountRepository accountRepository, CodeValue codeValue) {
+    public TodoSearchController(TodoSearchService todoSearchService, AccountRepository accountRepository, CodeValue codeValue, MessageSource messageSource) {
         this.service = todoSearchService;
         this.accountRepository = accountRepository;
         this.codeValue = codeValue;
+        this.messageSource = messageSource;
     }
 
     /**
@@ -99,6 +103,49 @@ public class TodoSearchController {
     }
 
     /**
+     * TODO検索-詳細表示。
+     *
+     * @return Path
+     */
+    @RequestMapping(value = "/detail")
+    public String detail(@RequestParam(defaultValue = "") String todoId, Model model) {
+        // 元画面からidが渡ってこなければ、エラー表示。
+        if (StringUtils.isEmpty(todoId)) {
+            model.addAttribute("errorMsg", messageSource.getMessage("validation.incorrect.specification.todo", null, Locale.JAPAN));
+            return "todo/todoSearchDetailForm";
+        }
+
+        // idに紐づくTODOが取得できなければ、エラー表示。
+        Todo result = service.findById(Integer.parseInt(todoId));
+        if (result == null) {
+            model.addAttribute("errorMsg", messageSource.getMessage("validation.incorrect.specification.todo", null, Locale.JAPAN));
+            return "todo/todoSearchDetailForm";
+        }
+
+        // TODOに紐づくアカウントを取得する。
+        Optional<Account> issuePersonAccount = accountRepository.findById(result.getIssuePersonId());
+        Optional<Account> inChargeAccount = accountRepository.findById(result.getPersonInChargeId());
+        // 画面に表示する起票者名、担当者名をセットする。存在しないユーザとなっている場合、退会済ユーザと表示する。
+        if (issuePersonAccount.isPresent()) {
+            model.addAttribute("issuePersonName", issuePersonAccount.get().getName());
+        } else {
+            model.addAttribute("issuePersonName", "退会済ユーザ");
+        }
+        if (inChargeAccount.isPresent()) {
+            model.addAttribute("personInChargeName", inChargeAccount.get().getName());
+        } else {
+            model.addAttribute("personInChargeName", "退会済ユーザ");
+        }
+
+        // 詳細画面に表示するステータス、優先度をセットする。
+        model.addAttribute("statusName", codeValue.getStatus().getStatus().get(result.getStatus()));
+        model.addAttribute("priorityName", codeValue.getPriority().getPriority().get(result.getPriority()));
+        model.addAttribute("todo", result);
+        return "todo/todoSearchDetailForm";
+    }
+
+
+    /**
      * リダイレクト処理。
      *
      * @param todoSearchForm フォーム
@@ -111,5 +158,4 @@ public class TodoSearchController {
         redirectAttributes.addFlashAttribute("errors", bindingResult);
         return "redirect:/todo/search/init";
     }
-
 }

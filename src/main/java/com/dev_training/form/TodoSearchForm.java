@@ -1,7 +1,6 @@
 package com.dev_training.form;
 
 import com.dev_training.validator.Date;
-import com.dev_training.validator.HalfDigit;
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -28,10 +27,8 @@ public class TodoSearchForm implements Serializable {
     @Size(max = 10, message = "{error.size.max}")
     private String endDate;
 
-    @HalfDigit
     private String issuePersonId;
 
-    @HalfDigit
     private String personInChargeId;
 
     private String selectedStatus;

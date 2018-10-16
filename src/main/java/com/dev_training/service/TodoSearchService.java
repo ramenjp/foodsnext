@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.dev_training.service.TodoSpecifications.*;
 
@@ -22,7 +23,7 @@ import static com.dev_training.service.TodoSpecifications.*;
 public class TodoSearchService {
 
     /** TODOリポジトリ */
-    TodoRepository todoRepository;
+    private TodoRepository todoRepository;
 
     @Autowired
     public TodoSearchService(TodoRepository todoRepository) {
@@ -71,5 +72,16 @@ public class TodoSearchService {
                         .and(statusContains(form.getSelectedStatus()))
                         .and(priorityContains(form.getSelectedPriority()))
                 , pageable);
+    }
+
+    /**
+     * 主キー検索。
+     *
+     * @param id ID
+     * @return TODOエンティティ
+     */
+    public Todo findById(int id) {
+        Optional<Todo> result = this.todoRepository.findById(id);
+        return result.orElse(null);
     }
 }

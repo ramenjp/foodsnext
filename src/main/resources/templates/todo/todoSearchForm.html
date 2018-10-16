@@ -77,8 +77,7 @@
                                         <div class="col-md-6 mx-auto">
                                             <div class="form-group" th:classappend="${#fields.hasErrors('issuePersonId')}? 'has-error'">
                                                 <label for="issuePersonId">起票者</label><br/>
-                                                <select class="form-control" id="issuePersonId" th:field="*{issuePersonId}">
-                                                    <option value=""></option>
+                                                <select class="form-control selectpicker" multiple="multiple" id="issuePersonId" th:field="*{issuePersonId}">
                                                     <option th:each="entry : ${accountList.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                                 </select>
                                                 <small id="issuepersonidheip" class="form-text text-muted">この起票者のTODOを検索する場合、選択してください。</small>
@@ -89,8 +88,7 @@
                                         <div class="col-md-6 mx-auto">
                                             <div class="form-group" th:classappend="${#fields.hasErrors('personInChargeId')}? 'has-error'">
                                                 <label for="personInChargeId">担当者</label><br/>
-                                                <select class="form-control" id="personInChargeId" th:field="*{personInChargeId}">
-                                                    <option value=""></option>
+                                                <select class="form-control selectpicker" multiple="multiple" id="personInChargeId" th:field="*{personInChargeId}">
                                                     <option th:each="entry : ${accountList.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                                 </select>
                                                 <small id="personinchargeidhelp" class="form-text text-muted">この担当者のTODOを検索する場合、選択してください。</small>
@@ -103,8 +101,7 @@
                                         <div class="col-md-6 mx-auto">
                                             <div class="form-group" th:classappend="${#fields.hasErrors('selectedStatus')}? 'has-error'">
                                                 <label for="selectedStatus">ステータス</label><br/>
-                                                <select class="form-control" id="selectedStatus" th:field="*{selectedStatus}" multiple>
-                                                    <!--<option value=""></option>-->
+                                                <select class="form-control selectpicker" multiple="multiple" id="selectedStatus" th:field="*{selectedStatus}">
                                                     <option th:each="entry : ${allStatus.status.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                                 </select>
                                                 <small id="statushelp" class="form-text text-muted">このステータスのTODOを検索する場合、選択してください。</small>
@@ -114,8 +111,7 @@
                                         <div class="col-md-6 mx-auto">
                                             <div class="form-group" th:classappend="${#fields.hasErrors('selectedPriority')}? 'has-error'">
                                                 <label for="selectedPriority">優先度</label><br/>
-                                                <select class="form-control" id="selectedPriority" th:field="*{selectedPriority}" multiple>
-                                                    <!--<option value=""></option>-->
+                                                <select class="form-control selectpicker" multiple="multiple" id="selectedPriority" name="selectedPriority" th:field="*{selectedPriority}" data-target="#selectedPriority">
                                                     <option th:each="entry : ${allPriority.priority.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                                 </select>
                                                 <small id="priorityshelp" class="form-text text-muted">この優先度のTODOを検索する場合、選択してください。</small>
@@ -151,47 +147,17 @@
                         <th width=15% >担当者</th>
                         <th width=9% >ステータス</th>
                         <th width=6% >優先度</th>
-                        <!--<th class="text-center" width=10%>自己紹介</th>-->
                     </tr>
                     </thead>
                     <tbody>
                         <tr th:each="todo : ${list}">
-                            <td class="overflow-wrap-break" th:text="${todo.title}"></td>
+                            <td class="overflow-wrap-break"> <a th:href="@{/todo/search/detail(todoId=${todo.id})}" th:text="${todo.title}" target="newtab"></a></td>
                             <td class="overflow-wrap-break" th:text="${todo.startDate}"></td>
                             <td class="overflow-wrap-break" th:text="${todo.endDate}"></td>
-                            <td class="overflow-wrap-break" th:text="${accountList.get(todo.issuePersonId)}"></td>
-                            <td class="overflow-wrap-break" th:text="${accountList.get(todo.personInChargeId)}"></td>
+                            <td class="overflow-wrap-break" th:text="${accountList.containsKey(todo.issuePersonId)} ? ${accountList.get(todo.issuePersonId)} : '退会済ユーザ'"></td>
+                            <td class="overflow-wrap-break" th:text="${accountList.containsKey(todo.personInChargeId)} ? ${accountList.get(todo.personInChargeId)} : '退会済ユーザ'"></td>
                             <td class="overflow-wrap-break" th:text="${allStatus.status.get(todo.status)}"></td>
                             <td class="overflow-wrap-break" th:text="${allPriority.priority.get(todo.priority)}"></td>
-                            <!--<td>-->
-                                <!--<div class="text-center">-->
-                                    <!--<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-selfIntroduction" th:attr="data-intro=${account.selfIntroduction}, data-name=${account.name}">Open</button>-->
-                                <!--</div>-->
-                            <!--</td>-->
-
-                            <!--&lt;!&ndash; 2.モーダルの配置 &ndash;&gt;-->
-                            <!--<div class="modal" id="modal-selfIntroduction" tabindex="-1">-->
-                                <!--<div class="modal-dialog modal-lg">-->
-
-                                    <!--&lt;!&ndash; 3.モーダルのコンテンツ &ndash;&gt;-->
-                                    <!--<div class="modal-content">-->
-                                        <!--&lt;!&ndash; 4.モーダルのヘッダ &ndash;&gt;-->
-                                        <!--<div class="modal-header">-->
-                                            <!--<h4 class="modal-title" id="modal-label">-->
-                                                <!--&lt;!&ndash;<span th:text="|${account.name} さんの自己紹介|"></span>&ndash;&gt;-->
-                                            <!--</h4>-->
-                                        <!--</div>-->
-                                        <!--&lt;!&ndash; 5.モーダルのボディ &ndash;&gt;-->
-                                        <!--<div class="modal-body" id="modal-body">-->
-                                            <!--<span class="form-control-static" id="modalSelfIntroduction" th:utext="${account.selfIntroduction} ? ${#strings.replace(#strings.escapeXml(account.selfIntroduction), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')} : ''"></span>-->
-                                        <!--</div>-->
-                                        <!--&lt;!&ndash; 6.モーダルのフッタ &ndash;&gt;-->
-                                        <!--<div class="modal-footer">-->
-                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
                         </tr>
                     </tbody>
                 </table>

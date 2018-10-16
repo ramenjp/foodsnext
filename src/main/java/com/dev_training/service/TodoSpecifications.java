@@ -66,27 +66,29 @@ class TodoSpecifications {
         };
     }
 
-    /** issuePersonId:equal */
+    /** issuePersonId:in */
     static Specification<Todo> issuePersonIdContains(String issuePersonId) {
         return StringUtils.isEmpty(issuePersonId) ? null : new Specification<Todo>() {
             @Override
             public Predicate toPredicate(Root<Todo> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.equal(root.get("issuePersonId"), issuePersonId);
+                List<String> condition = Arrays.asList(issuePersonId.split(","));
+                return root.get("issuePersonId").in(condition);
             }
         };
     }
 
-    /** personInChargeId:equal */
+    /** personInChargeId:in */
     static Specification<Todo> personInChargeIdContains(String personInChargeId) {
         return StringUtils.isEmpty(personInChargeId) ? null : new Specification<Todo>() {
             @Override
             public Predicate toPredicate(Root<Todo> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.equal(root.get("personInChargeId"), Integer.valueOf(personInChargeId));
+                List<String> condition = Arrays.asList(personInChargeId.split(","));
+                return root.get("personInChargeId").in(condition);
             }
         };
     }
 
-    /** status:equal */
+    /** status:in */
     static Specification<Todo> statusContains(String status) {
         return StringUtils.isEmpty(status) ? null : new Specification<Todo>() {
             @Override
@@ -97,7 +99,7 @@ class TodoSpecifications {
         };
     }
 
-    /** priority:equal */
+    /** priority:in */
     static Specification<Todo> priorityContains(String priority) {
         return StringUtils.isEmpty(priority) ? null : new Specification<Todo>() {
             @Override
