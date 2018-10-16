@@ -33,7 +33,7 @@ public class TodoRegisterService {
      *
      * @param startDate 開始日
      * @param endDate 終了日
-     * @return
+     * @return true:無効 false:有効
      */
     public boolean isValidDate(String startDate, String endDate) {
         if (startDate == null) return false;
