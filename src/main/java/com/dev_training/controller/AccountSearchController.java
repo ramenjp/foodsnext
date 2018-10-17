@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * アカウント検索コントローラ。
@@ -64,7 +65,7 @@ public class AccountSearchController {
         }
 
         List<Account> list = service.findAccount(accountSearchForm);
-        if (list == null || list.isEmpty()) {
+        if (Objects.isNull(list) || list.isEmpty()) {
             bindingResult.reject("validation.noSearchResult", "default message");
             return "account/accountSearchForm";
         }
@@ -108,7 +109,7 @@ public class AccountSearchController {
 
         Page<Account> page = service.findAccount(accountSearchForm, pageable);
         List<Account> list = page.getContent();
-        if (list == null || list.isEmpty()) {
+        if (Objects.isNull(list) || list.isEmpty()) {
             bindingResult.reject("validation.noSearchResult", "default message");
             return "account/accountPagingSearchForm";
         }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 /**
  * TODO登録サービス。
  */
@@ -14,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TodoRegisterService {
 
     /** TODOリポジトリ */
-    TodoRepository todoRepository;
+    private TodoRepository todoRepository;
 
     @Autowired
     public TodoRegisterService(TodoRepository todoRepository) {
@@ -36,9 +38,7 @@ public class TodoRegisterService {
      * @return true:無効 false:有効
      */
     public boolean isValidDate(String startDate, String endDate) {
-        if (startDate == null) return false;
-        if (endDate == null) return false;
-        if (startDate.compareTo(endDate) > 0) return true;
-        return false;
+        if (Objects.isNull(startDate) || Objects.isNull(endDate)) return false;
+        return startDate.compareTo(endDate) > 0;
     }
 }

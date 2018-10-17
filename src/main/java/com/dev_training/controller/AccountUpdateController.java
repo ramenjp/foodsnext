@@ -56,7 +56,7 @@ public class AccountUpdateController {
      * @param model             モデル
      * @return Path
      */
-    @RequestMapping(value = "/confirm")
+    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public String confirm(@Validated AccountUpdateForm accountUpdateForm, BindingResult bindingResult, Model model) {
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
         Account targetAccount = service.getAccountById(account.getId());

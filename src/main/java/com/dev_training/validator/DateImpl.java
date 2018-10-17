@@ -3,6 +3,7 @@ package com.dev_training.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +17,7 @@ public class DateImpl implements ConstraintValidator<Date, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (value == null || value.isEmpty()) {
+        if (Objects.isNull(value) || value.isEmpty()) {
             return true;
         }
         Pattern ptn = Pattern.compile("^(\\d{4})[-/]?(\\d{2})[-/]?(\\d{2})$");
