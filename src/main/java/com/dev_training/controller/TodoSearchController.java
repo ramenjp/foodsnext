@@ -86,7 +86,7 @@ public class TodoSearchController {
 
         // 検索処理
         List<Todo> list = service.findTodo(todoSearchForm);
-        if (list == null || list.isEmpty()) {
+        if (Objects.isNull(list) || list.isEmpty()) {
             bindingResult.reject("validation.noSearchResult", "default message");
             return this.searchInit(todoSearchForm, model);
         }
@@ -113,7 +113,7 @@ public class TodoSearchController {
 
         // idに紐づくTODOが取得できなければ、エラー表示。
         Todo result = service.findById(Integer.parseInt(todoId));
-        if (result == null) {
+        if (Objects.isNull(result)) {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.incorrect.specification.todo", null, Locale.JAPAN));
             return "common/commonError";
         }

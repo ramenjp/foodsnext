@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Component
 @Transactional
 public class JpaUserDetailsServiceImpl implements UserDetailsService {
@@ -24,7 +26,7 @@ public class JpaUserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String accountId) throws UsernameNotFoundException {
         Account account = accountRepository.findByAccountId(accountId);
-        if (account == null) {
+        if (Objects.isNull(account)) {
             return new Account();
         }
         return account;

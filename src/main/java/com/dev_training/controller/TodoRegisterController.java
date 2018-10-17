@@ -76,7 +76,7 @@ public class TodoRegisterController {
      * @param redirectAttributes redirectAttributes
      * @return Path
      */
-    @RequestMapping(value = "/confirm")
+    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public String registerConfirm(@Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         // 単項目精査
         if (bindingResult.hasErrors()) {

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * TODO削除コントローラ。
@@ -37,10 +38,10 @@ public class TodoDeleteController {
      * @param model モデル
      * @return Path
      */
-    @RequestMapping(value = "/confirm",  method = RequestMethod.POST)
+    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public String deleteConfirm(@RequestParam String todoId, Model model) {
         // IDが正しく渡ってこなければ、エラー表示。
-        if (todoId == null || StringUtils.isEmpty(todoId)) {
+        if (Objects.isNull(todoId) || StringUtils.isEmpty(todoId)) {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen,transition", null, Locale.JAPAN));
             return "common/commonError";
         }
@@ -64,7 +65,7 @@ public class TodoDeleteController {
     @RequestMapping(value = "/do", method = RequestMethod.POST)
     public String unsubscribeComplete(@RequestParam String todoId, Model model) {
         // IDが正しく渡ってこなければ、エラー表示。
-        if (todoId == null || StringUtils.isEmpty(todoId)) {
+        if (Objects.isNull(todoId) || StringUtils.isEmpty(todoId)) {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen,transition", null, Locale.JAPAN));
             return "common/commonError";
         }

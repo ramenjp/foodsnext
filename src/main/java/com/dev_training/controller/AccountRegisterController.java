@@ -46,7 +46,7 @@ public class AccountRegisterController {
      * @param model               モデル
      * @return Path
      */
-    @RequestMapping(value = "/confirm")
+    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     String registerConfirm(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {

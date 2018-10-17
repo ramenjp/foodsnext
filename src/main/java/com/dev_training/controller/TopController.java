@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 
 /**
@@ -38,7 +39,7 @@ public class TopController {
      */
     @RequestMapping(value = "")
     public String init(@AuthenticationPrincipal Account account) {
-        if (session.getAttribute(SESSION_FORM_ID) == null) {
+        if (Objects.isNull(session.getAttribute(SESSION_FORM_ID))) {
             Account sessionAccount = service.getAccountByAccountId(account.getAccountId());
             session.setAttribute(SESSION_FORM_ID, sessionAccount);
         }

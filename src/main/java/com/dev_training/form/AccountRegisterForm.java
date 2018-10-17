@@ -8,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class AccountRegisterForm implements Serializable {
 
@@ -38,7 +39,7 @@ public class AccountRegisterForm implements Serializable {
 
     @AssertTrue(message = "パスワードが一致しません。")
     public boolean isPasswordValid() {
-        return password != null && password.equals(confirmPassword);
+        return Objects.nonNull(password) && password.equals(confirmPassword);
     }
 
 
