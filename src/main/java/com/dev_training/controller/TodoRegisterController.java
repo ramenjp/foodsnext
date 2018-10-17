@@ -50,8 +50,6 @@ public class TodoRegisterController {
      */
     @RequestMapping(value = "/init")
     public String registerInit(@ModelAttribute("todoRegisterForm") TodoRegisterForm todoRegisterForm, Model model) {
-        // フォームの初期化
-        model.addAttribute("todoRegisterForm", todoRegisterForm);
         // 担当者選択用のプルダウンリスト
         List<Account> accounts = accountRepository.findAll();
         model.addAttribute("accountList", accounts);
