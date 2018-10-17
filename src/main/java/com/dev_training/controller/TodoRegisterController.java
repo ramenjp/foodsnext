@@ -49,7 +49,7 @@ public class TodoRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/init")
-    public String registerInit(@ModelAttribute("todoRegisterForm") TodoRegisterForm todoRegisterForm, Model model) {
+    public String registerInit(@ModelAttribute TodoRegisterForm todoRegisterForm, Model model) {
         // 担当者選択用のプルダウンリスト
         List<Account> accounts = accountRepository.findAll();
         model.addAttribute("accountList", accounts);
@@ -77,7 +77,7 @@ public class TodoRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
-    public String registerConfirm(@Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+    public String registerConfirm(@ModelAttribute @Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         // 単項目精査
         if (bindingResult.hasErrors()) {
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
@@ -106,10 +106,8 @@ public class TodoRegisterController {
         model.addAttribute("issuePersonName",issuePersonAccount.get().getName());
         model.addAttribute("personInChargeName",inChargeAccount.get().getName());
         // 確認画面に表示するステータス、優先度をセットする。
-        model.addAttribute("statusName", codeValue.getStatus().getStatus().get(todoRegisterForm.getSelectedStatus()));
-        model.addAttribute("priorityName", codeValue.getPriority().getPriority().get(todoRegisterForm.getSelectedPriority()));
-        // フォームを引き継ぐ
-        model.addAttribute("todoRegisterForm", todoRegisterForm);
+        model.addAttribute("statusName", codeValue.getStatus().getStatus().get(todoRegisterForm.getStatus()));
+        model.addAttribute("priorityName", codeValue.getPriority().getPriority().get(todoRegisterForm.getPriority()));
 
         return "todo/todoRegisterConfirmForm";
     }
@@ -157,8 +155,8 @@ public class TodoRegisterController {
         todo.setEndDate(todoRegisterForm.getEndDate());
         todo.setIssuePersonId(Integer.parseInt(todoRegisterForm.getIssuePersonId()));
         todo.setPersonInChargeId(Integer.parseInt(todoRegisterForm.getPersonInChargeId()));
-        todo.setStatus(todoRegisterForm.getSelectedStatus());
-        todo.setPriority(todoRegisterForm.getSelectedPriority());
+        todo.setStatus(todoRegisterForm.getStatus());
+        todo.setPriority(todoRegisterForm.getPriority());
         service.register(todo);
 
         return "todo/todoRegisterCompleteForm";

@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/common_header::base_header(~{::title})">
-    <title>TODO登録確認</title>
+    <title>TODO更新確認</title>
 </head>
 
 <body>
 
-<nav th:substituteby="common/loggedinNav::navi(${accountName})"></nav>
-
 <div class="container py-3">
     <div class="row">
         <div class="col-md-12 mx-auto">
-            <h2 class="text-center pb-4">TODO登録</h2>
+            <h2 class="text-center pb-4">TODO更新</h2>
             <div class="row">
                 <div class="col-md-12 mx-auto">
                     <div class="card rounded-0">
@@ -19,7 +17,7 @@
                             <h3 class="mb-0">TODO情報入力確認</h3>
                         </div>
                         <div class="card-body">
-                            <form id="todoForm" th:action="@{/todo/register/do}" th:object="${todoRegisterForm}" method="post">
+                            <form id="todoForm" th:action="@{/todo/update/do}" th:object="${todoUpdateForm}" method="post">
                                 <fieldset id="todo_field">
                                     <div class="form-group">
                                         <label class="lead">タイトル</label><br/>
@@ -28,12 +26,12 @@
 
                                     <div class="form-group">
                                         <label class="lead">詳細</label><br/>
-                                        <span class="form-control-static" th:utext="*{detail} ? ${#strings.replace(#strings.escapeXml(todoRegisterForm.detail), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')} : ''"></span>
+                                        <span class="form-control-static" id="detailPreview" th:utext="*{detail}"></span>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="lead">備考</label><br/>
-                                        <span class="form-control-static" th:utext="*{remarks} ? ${#strings.replace(#strings.escapeXml(todoRegisterForm.remarks), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')} : ''"></span>
+                                        <span class="form-control-static" id="remarksPreview" th:utext="*{remarks}"></span>
                                     </div>
 
                                     <div class="row">
@@ -84,6 +82,7 @@
                                         </div>
                                     </div>
 
+                                    <input type="hidden" name="id" id="id" th:value="*{id}"/>
                                     <input type="hidden" name="title" id="title" th:value="*{title}"/>
                                     <input type="hidden" name="detail" id="detail" th:value="*{detail}"/>
                                     <input type="hidden" name="remarks" id="remarks" th:value="*{remarks}"/>
@@ -100,7 +99,7 @@
                                             <input type="submit" name="registerBack" value="戻る" class="btn btn-primary btn-lg "/>
                                         </div>
                                         <div class="btn-group">
-                                            <input type="submit" name="register" value="登録" class="btn btn-primary btn-lg "/>
+                                            <input type="submit" name="update" value="更新" class="btn btn-primary btn-lg "/>
                                         </div>
                                     </div>
 
@@ -124,6 +123,10 @@
             format: 'L',
             locale: 'ru'
         });
+        var detailStr = $('#detailPreview').text();
+        var remarksStr = $('#remarksPreview').text();
+        $('#detailPreview').html(detailStr.replace(/[\n\r]/g, '<br>'));
+        $('#remarksPreview').html(remarksStr.replace(/[\n\r]/g, '<br>'));
     });
 </script>
 
