@@ -111,15 +111,15 @@ public class TodoSearchController {
     public String detail(@RequestParam(defaultValue = "") String todoId, Model model) {
         // 元画面からidが渡ってこなければ、エラー表示。
         if (StringUtils.isEmpty(todoId)) {
-            model.addAttribute("errorMsg", messageSource.getMessage("validation.incorrect.specification.todo", null, Locale.JAPAN));
-            return "todo/todoSearchDetailForm";
+            model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen,transition", null, Locale.JAPAN));
+            return "common/commonError";
         }
 
         // idに紐づくTODOが取得できなければ、エラー表示。
         Todo result = service.findById(Integer.parseInt(todoId));
         if (result == null) {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.incorrect.specification.todo", null, Locale.JAPAN));
-            return "todo/todoSearchDetailForm";
+            return "common/commonError";
         }
 
         // TODOに紐づくアカウントを取得する。
@@ -144,9 +144,21 @@ public class TodoSearchController {
         return "todo/todoSearchDetailForm";
     }
 
+    /**
+     * リダイレクト処理(TODO削除)。
+     *
+     * @param todoId 削除対象のTODOのID
+     * @param model モデル
+     * @param redirectAttributes redirectAttributes
+     * @return リダイレクトURL
+     */
+    @RequestMapping(value = "/update", params = "delete")
+    public String redirect(@RequestParam String todoId, Model model, RedirectAttributes redirectAttributes) {
+        return "forward:/todo/delete/confirm";
+    }
 
     /**
-     * リダイレクト処理。
+     * リダイレクト処理(検索)。
      *
      * @param todoSearchForm フォーム
      * @param bindingResult 精査結果
