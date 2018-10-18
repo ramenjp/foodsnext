@@ -2,7 +2,6 @@ package com.dev_training.controller;
 
 import com.dev_training.common.CodeValue;
 import com.dev_training.entity.Account;
-import com.dev_training.entity.AccountRepository;
 import com.dev_training.entity.Todo;
 import com.dev_training.form.TodoUpdateForm;
 import com.dev_training.service.TodoUpdateService;
@@ -33,8 +32,6 @@ public class TodoUpdateController {
 
     /** TODO更新サービス */
     private final TodoUpdateService service;
-    /** アカウントリポジトリ */
-    private final AccountRepository accountRepository;
     /** コード値 */
     private final CodeValue codeValue;
     /** フォーム名 */
@@ -43,9 +40,8 @@ public class TodoUpdateController {
     private final MessageSource messageSource;
 
     @Autowired
-    public TodoUpdateController(TodoUpdateService todoUpdateService, AccountRepository accountRepository, CodeValue codeValue, MessageSource messageSource) {
+    public TodoUpdateController(TodoUpdateService todoUpdateService, CodeValue codeValue, MessageSource messageSource) {
         this.service = todoUpdateService;
-        this.accountRepository = accountRepository;
         this.codeValue = codeValue;
         this.messageSource = messageSource;
     }
@@ -76,7 +72,7 @@ public class TodoUpdateController {
         model.addAttribute("todoUpdateForm", todo);
 
         // 担当者選択用のプルダウンリスト
-        List<Account> accounts = accountRepository.findAll();
+        List<Account> accounts = service.findAllAccount();
         model.addAttribute("accountList", accounts);
         // ステータスプルダウンの初期化
         model.addAttribute("allStatus", codeValue.getStatus());
@@ -97,7 +93,7 @@ public class TodoUpdateController {
     @RequestMapping(value = "/back")
     public String updateBack(@ModelAttribute TodoUpdateForm todoUpdateForm, Model model) {
         // 担当者選択用のプルダウンリスト
-        List<Account> accounts = accountRepository.findAll();
+        List<Account> accounts = service.findAllAccount();
         model.addAttribute("accountList", accounts);
         // ステータスプルダウンの初期化
         model.addAttribute("allStatus", codeValue.getStatus());
@@ -142,8 +138,8 @@ public class TodoUpdateController {
         }
 
         // 選択されたIDに紐づくAccountを取得する。
-        Optional<Account> issuePersonAccount = accountRepository.findById(Integer.parseInt(todoUpdateForm.getIssuePersonId()));
-        Optional<Account> inChargeAccount = accountRepository.findById(Integer.parseInt(todoUpdateForm.getPersonInChargeId()));
+        Optional<Account> issuePersonAccount = service.findAccountById(Integer.parseInt(todoUpdateForm.getIssuePersonId()));
+        Optional<Account> inChargeAccount = service.findAccountById(Integer.parseInt(todoUpdateForm.getPersonInChargeId()));
         // バックグラウンドで削除されていたら、エラーとする。
         if (!issuePersonAccount.isPresent()){
             bindingResult.reject("validation.invalidAccount", new String[]{"起票者"}, "default message");
@@ -186,8 +182,8 @@ public class TodoUpdateController {
         }
 
         // 選択されたIDに紐づくAccountを取得する。
-        Optional<Account> issuePersonAccount = accountRepository.findById(Integer.parseInt(todoUpdateForm.getIssuePersonId()));
-        Optional<Account> inChargeAccount = accountRepository.findById(Integer.parseInt(todoUpdateForm.getPersonInChargeId()));
+        Optional<Account> issuePersonAccount = service.findAccountById(Integer.parseInt(todoUpdateForm.getIssuePersonId()));
+        Optional<Account> inChargeAccount = service.findAccountById(Integer.parseInt(todoUpdateForm.getPersonInChargeId()));
         // バックグラウンドで削除されていたら、エラーとする。
         if (!issuePersonAccount.isPresent()){
             bindingResult.reject("validation.invalidAccount", new String[]{"起票者"}, "default message");

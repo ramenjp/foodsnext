@@ -2,7 +2,6 @@ package com.dev_training.controller;
 
 import com.dev_training.common.CodeValue;
 import com.dev_training.entity.Account;
-import com.dev_training.entity.AccountRepository;
 import com.dev_training.entity.Todo;
 import com.dev_training.form.TodoSearchForm;
 import com.dev_training.service.TodoSearchService;
@@ -28,17 +27,14 @@ public class TodoSearchController {
 
     /** TODO検索サービス */
     private final TodoSearchService service;
-    /** アカウントサービス */
-    private final AccountRepository accountRepository;
     /** コード値 */
     private final CodeValue codeValue;
     /** メッセージソース */
     private final MessageSource messageSource;
 
     @Autowired
-    public TodoSearchController(TodoSearchService todoSearchService, AccountRepository accountRepository, CodeValue codeValue, MessageSource messageSource) {
+    public TodoSearchController(TodoSearchService todoSearchService, CodeValue codeValue, MessageSource messageSource) {
         this.service = todoSearchService;
-        this.accountRepository = accountRepository;
         this.codeValue = codeValue;
         this.messageSource = messageSource;
     }
@@ -53,7 +49,7 @@ public class TodoSearchController {
     @RequestMapping(value = "/init")
     public String searchInit(@ModelAttribute("todoSearchForm") TodoSearchForm todoSearchForm, Model model) {
         // 担当者選択用のプルダウンリストの初期化
-        List<Account> accounts = accountRepository.findAll();
+        List<Account> accounts = service.findAllAccount();
         Map<Integer, String> accountMap = new HashMap<>();
         for (Account account :accounts) {
             accountMap.put(account.getId(), account.getName());
@@ -112,15 +108,15 @@ public class TodoSearchController {
         }
 
         // idに紐づくTODOが取得できなければ、エラー表示。
-        Todo result = service.findById(Integer.parseInt(todoId));
+        Todo result = service.findTodoById(Integer.parseInt(todoId));
         if (Objects.isNull(result)) {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.incorrect.specification.todo", null, Locale.JAPAN));
             return "common/commonError";
         }
 
         // TODOに紐づくアカウントを取得する。
-        Optional<Account> issuePersonAccount = accountRepository.findById(result.getIssuePersonId());
-        Optional<Account> inChargeAccount = accountRepository.findById(result.getPersonInChargeId());
+        Optional<Account> issuePersonAccount = service.findAccountById(result.getIssuePersonId());
+        Optional<Account> inChargeAccount = service.findAccountById(result.getPersonInChargeId());
         // 画面に表示する起票者名、担当者名をセットする。存在しないユーザとなっている場合、退会済ユーザと表示する。
         if (issuePersonAccount.isPresent()) {
             model.addAttribute("issuePersonName", issuePersonAccount.get().getName());

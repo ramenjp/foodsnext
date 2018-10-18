@@ -3,7 +3,6 @@
 <head th:replace="common/common_header::base_header(~{::title})">
     <title>TODO登録確認</title>
 </head>
-
 <body>
 
 <nav th:substituteby="common/loggedinNav::navi(${accountName})"></nav>
@@ -28,12 +27,12 @@
 
                                     <div class="form-group">
                                         <label class="lead">詳細</label><br/>
-                                        <span class="form-control-static" th:utext="*{detail} ? ${#strings.replace(#strings.escapeXml(todoRegisterForm.detail), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')} : ''"></span>
+                                        <span class="form-control-static" id="detailPreview" th:utext="*{detail}"></span>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="lead">備考</label><br/>
-                                        <span class="form-control-static" th:utext="*{remarks} ? ${#strings.replace(#strings.escapeXml(todoRegisterForm.remarks), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')} : ''"></span>
+                                        <span class="form-control-static" id="remarksPreview" th:utext="*{remarks}"></span>
                                     </div>
 
                                     <div class="row">
@@ -124,6 +123,10 @@
             format: 'L',
             locale: 'ru'
         });
+        var detailStr = $('#detailPreview').text();
+        var remarksStr = $('#remarksPreview').text();
+        $('#detailPreview').html(detailStr.replace(/[\n\r]/g, '<br>'));
+        $('#remarksPreview').html(remarksStr.replace(/[\n\r]/g, '<br>'));
     });
 </script>
 

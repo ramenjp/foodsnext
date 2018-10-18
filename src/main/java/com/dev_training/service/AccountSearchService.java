@@ -14,7 +14,6 @@ import java.util.List;
 
 import static com.dev_training.service.AccountSpecifications.*;
 
-
 /**
  * アカウント検索サービス。
  */

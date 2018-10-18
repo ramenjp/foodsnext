@@ -20,7 +20,7 @@ import java.util.Objects;
 @RequestMapping(value = "/todo/delete")
 public class TodoDeleteController {
 
-    /** TODO検索サービス */
+    /** TODO削除サービス */
     private final TodoDeleteService service;
     /** メッセージソース */
     private final MessageSource messageSource;

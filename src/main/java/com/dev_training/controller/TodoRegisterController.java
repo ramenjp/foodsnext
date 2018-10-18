@@ -2,7 +2,6 @@ package com.dev_training.controller;
 
 import com.dev_training.common.CodeValue;
 import com.dev_training.entity.Account;
-import com.dev_training.entity.AccountRepository;
 import com.dev_training.entity.Todo;
 import com.dev_training.form.TodoRegisterForm;
 import com.dev_training.service.TodoRegisterService;
@@ -28,17 +27,14 @@ public class TodoRegisterController {
 
     /** TODO登録サービス */
     private final TodoRegisterService service;
-    /** アカウントサービス */
-    private final AccountRepository accountRepository;
     /** コード値 */
     private final CodeValue codeValue;
     /** フォーム名 */
     private static final String FORM_NAME = "todoRegisterForm";
 
     @Autowired
-    public TodoRegisterController(TodoRegisterService todoRegisterService, AccountRepository accountRepository, CodeValue codeValue) {
+    public TodoRegisterController(TodoRegisterService todoRegisterService, CodeValue codeValue) {
         this.service = todoRegisterService;
-        this.accountRepository = accountRepository;
         this.codeValue = codeValue;
     }
 
@@ -51,7 +47,7 @@ public class TodoRegisterController {
     @RequestMapping(value = "/init")
     public String registerInit(@ModelAttribute TodoRegisterForm todoRegisterForm, Model model) {
         // 担当者選択用のプルダウンリスト
-        List<Account> accounts = accountRepository.findAll();
+        List<Account> accounts = service.findAllAccount();
         model.addAttribute("accountList", accounts);
         // ステータスプルダウンの初期化
         model.addAttribute("allStatus", codeValue.getStatus());
@@ -90,8 +86,8 @@ public class TodoRegisterController {
         }
 
         // 選択されたIDに紐づくAccountを取得する。
-        Optional<Account> issuePersonAccount = accountRepository.findById(Integer.parseInt(todoRegisterForm.getIssuePersonId()));
-        Optional<Account> inChargeAccount = accountRepository.findById(Integer.parseInt(todoRegisterForm.getPersonInChargeId()));
+        Optional<Account> issuePersonAccount = service.findAccountById(Integer.parseInt(todoRegisterForm.getIssuePersonId()));
+        Optional<Account> inChargeAccount = service.findAccountById(Integer.parseInt(todoRegisterForm.getPersonInChargeId()));
         // バックグラウンドで削除されていたら、エラーとする。
         if (!issuePersonAccount.isPresent()){
             bindingResult.reject("validation.invalidAccount", new String[]{"起票者"}, "default message");
@@ -134,8 +130,8 @@ public class TodoRegisterController {
         }
 
         // 選択されたIDに紐づくAccountを取得する。
-        Optional<Account> issuePersonAccount = accountRepository.findById(Integer.parseInt(todoRegisterForm.getIssuePersonId()));
-        Optional<Account> inChargeAccount = accountRepository.findById(Integer.parseInt(todoRegisterForm.getPersonInChargeId()));
+        Optional<Account> issuePersonAccount = service.findAccountById(Integer.parseInt(todoRegisterForm.getIssuePersonId()));
+        Optional<Account> inChargeAccount = service.findAccountById(Integer.parseInt(todoRegisterForm.getPersonInChargeId()));
         // バックグラウンドで削除されていたら、エラーとする。
         if (!issuePersonAccount.isPresent()){
             bindingResult.reject("validation.invalidAccount", new String[]{"起票者"}, "default message");
