@@ -3,10 +3,9 @@
 <head th:replace="common/common_header::base_header(~{::title})">
     <title>退会受付</title>
 </head>
-
 <body>
 
-<nav th:substituteby="common/loggedinNav::navi(${accountName})"></nav>
+<nav th:replace="common/loggedinNav::navi(${accountName})"></nav>
 
 <div class="container py-3">
     <div class="row">

@@ -3,103 +3,74 @@
 <head th:replace="common/common_header::base_header(~{::title})">
     <title>TODO詳細</title>
 </head>
-
 <body>
 
 <div class="container py-3">
     <div class="row">
         <div class="col-md-12 mx-auto">
             <h2 class="text-center pb-4">TODO詳細</h2>
-            <div class="row">
-                <div class="col-md-12 mx-auto">
-                    <div class="card rounded-0">
-                        <div class="card-header bg-primary text-white">
-                            <h3 class="mb-0">TODO情報</h3>
+            <div class="card rounded-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">TODO情報</h3>
+                </div>
+                <div class="alert alert-danger" th:if="!${#strings.isEmpty(errorMsg)}">
+                    <p th:text="${errorMsg}">共通エラーメッセージ表示エリア</p>
+                </div>
+                <div class="card-body" th:if="${#strings.isEmpty(errorMsg)}">
+                    <form id="todoForm" th:action="@{/todo/search/update}" th:object="${todo}" method="post">
+                        <table class="table table-lg table-bordered" style="table-layout:fixed;">
+                            <tbody>
+                            <tr>
+                                <td class="overflow-wrap-break table-info font-weight-bold" width=20% th:text="タイトル"></td>
+                                <td class="overflow-wrap-break" th:text="*{title}"></td>
+                            </tr>
+                            <tr>
+                                <td class="overflow-wrap-break table-info font-weight-bold" th:text="詳細"></td>
+                                <td class="overflow-wrap-break" id="detailPreview" th:utext="*{detail}"></td>
+                            </tr>
+                            <tr>
+                                <td class="overflow-wrap-break table-info font-weight-bold" th:text="備考"></td>
+                                <td class="overflow-wrap-break" id="remarksPreview" th:utext="*{remarks}"></td>
+                            </tr>
+                            <tr>
+                                <td class="overflow-wrap-break table-info font-weight-bold" th:text="開始日"></td>
+                                <td class="overflow-wrap-break" th:text="*{startDate}"></td>
+                            </tr>
+                            <tr>
+                                <td class="overflow-wrap-break table-info font-weight-bold" th:text="終了日"></td>
+                                <td class="overflow-wrap-break" th:text="*{endDate}"></td>
+                            </tr>
+                            <tr>
+                                <td class="overflow-wrap-break table-info font-weight-bold" th:text="起票者"></td>
+                                <td class="overflow-wrap-break" th:text="${issuePersonName}"></td>
+                            </tr>
+                            <tr>
+                                <td class="overflow-wrap-break table-info font-weight-bold" th:text="担当者"></td>
+                                <td class="overflow-wrap-break" th:text="${personInChargeName}"></td>
+                            </tr>
+                            <tr>
+                                <td class="overflow-wrap-break table-info font-weight-bold" th:text="ステータス"></td>
+                                <td class="overflow-wrap-break" th:text="${statusName}"></td>
+                            </tr>
+                            <tr>
+                                <td class="overflow-wrap-break table-info font-weight-bold" th:text="優先度"></td>
+                                <td class="overflow-wrap-break" th:text="${priorityName}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <input type="hidden" name="todoId" id="todoId" th:value="*{id}"/>
+
+                        <div class="col text-center">
+                            <div class="btn-group">
+                                <input type="submit" name="update" value="更新" class="btn btn-primary btn-lg "/>
+                            </div>
+                            <div class="btn-group">
+                                <input type="submit" name="delete" value="削除" class="btn btn-primary btn-lg "/>
+                            </div>
                         </div>
-                        <div class="alert alert-danger" th:if="!${#strings.isEmpty(errorMsg)}">
-                            <p th:text="${errorMsg}">共通エラーメッセージ表示エリア</p>
-                        </div>
-                        <div class="card-body" th:if="${#strings.isEmpty(errorMsg)}">
-                            <form id="todoForm" th:action="@{/todo/search/update}" th:object="${todo}" method="post">
-                                <fieldset id="todo_field">
-                                    <div class="form-group">
-                                        <label class="lead">タイトル</label><br/>
-                                        <span class="form-control-static" th:text="*{title}"></span>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label class="lead">詳細</label><br/>
-                                        <span class="form-control-static" id="detail" th:utext="*{detail}"></span>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="lead">備考</label><br/>
-                                        <span class="form-control-static" id="remarks" th:utext="*{remarks}"></span>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 mx-auto">
-                                            <div class="form-group">
-                                                <label class="lead">開始日</label><br/>
-                                                <span class="form-control-static" th:text="*{startDate}"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 mx-auto">
-                                            <div class="form-group">
-                                                <label class="lead">終了日</label><br/>
-                                                <span class="form-control-static" th:text="*{endDate}"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-md-6 mx-auto">
-                                            <div class="form-group">
-                                                <label class="lead">起票者</label><br/>
-                                                <span class="form-control-static" th:text="${issuePersonName}"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 mx-auto">
-                                            <div class="form-group">
-                                                <label class="lead">担当者</label><br/>
-                                                <span class="form-control-static" th:text="${personInChargeName}"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 mx-auto">
-                                            <div class="form-group">
-                                                <label class="lead">ステータス</label><br/>
-                                                <span class="form-control-static" th:text="${statusName}"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mx-auto">
-                                            <div class="form-group">
-                                                <label class="lead">優先度</label><br/>
-                                                <span class="form-control-static" th:text="${priorityName}"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <input type="hidden" name="todoId" id="todoId" th:value="*{id}"/>
-
-                                    <div class="col text-center">
-                                        <div class="btn-group">
-                                            <input type="submit" name="update" value="更新" class="btn btn-primary btn-lg "/>
-                                        </div>
-                                        <div class="btn-group">
-                                            <input type="submit" name="delete" value="削除" class="btn btn-primary btn-lg "/>
-                                        </div>
-                                    </div>
-
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -108,10 +79,10 @@
 
 <script type="text/javascript">
     $(function () {
-        var detailStr = $('#detail').text();
-        var remarksStr = $('#remarks').text();
-        $('#detail').html(detailStr.replace(/[\n\r]/g, '<br>'));
-        $('#remarks').html(remarksStr.replace(/[\n\r]/g, '<br>'));
+        var detailStr = $('#detailPreview').text();
+        var remarksStr = $('#remarksPreview').text();
+        $('#detailPreview').html(detailStr.replace(/[\n\r]/g, '<br>'));
+        $('#remarksPreview').html(remarksStr.replace(/[\n\r]/g, '<br>'));
     });
 </script>
 

@@ -1,5 +1,7 @@
 package com.dev_training.service;
 
+import com.dev_training.entity.Account;
+import com.dev_training.entity.AccountRepository;
 import com.dev_training.entity.Todo;
 import com.dev_training.entity.TodoRepository;
 import com.dev_training.form.TodoSearchForm;
@@ -23,11 +25,14 @@ import static com.dev_training.service.TodoSpecifications.*;
 public class TodoSearchService {
 
     /** TODOリポジトリ */
-    private TodoRepository todoRepository;
+    private final TodoRepository todoRepository;
+    /** アカウントリポジトリ */
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public TodoSearchService(TodoRepository todoRepository) {
+    public TodoSearchService(TodoRepository todoRepository, AccountRepository accountRepository) {
         this.todoRepository = todoRepository;
+        this.accountRepository = accountRepository;
     }
 
     /**
@@ -75,13 +80,32 @@ public class TodoSearchService {
     }
 
     /**
-     * 主キー検索。
+     * TODOの主キー検索。
      *
      * @param id ID
      * @return TODOエンティティ
      */
-    public Todo findById(int id) {
+    public Todo findTodoById(int id) {
         Optional<Todo> result = this.todoRepository.findById(id);
         return result.orElse(null);
+    }
+
+    /**
+     * 全アカウントを検索する。
+     *
+     * @return 全アカウントのリスト
+     */
+    public List<Account> findAllAccount() {
+        return accountRepository.findAll();
+    }
+
+    /**
+     * アカウントの主キー検索。
+     *
+     * @param id ID
+     * @return アカウントエンティティ
+     */
+    public Optional<Account> findAccountById(int id) {
+        return accountRepository.findById(id);
     }
 }

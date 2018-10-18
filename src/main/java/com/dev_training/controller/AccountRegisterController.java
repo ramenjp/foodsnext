@@ -47,7 +47,7 @@ public class AccountRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
-    String registerConfirm(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult, Model model) {
+    String registerConfirm(@ModelAttribute @Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "account/accountRegisterForm";
@@ -56,7 +56,6 @@ public class AccountRegisterController {
             bindingResult.rejectValue("accountId", "validation.duplicate", new String[]{"アカウントID"}, "default message");
             return "account/accountRegisterForm";
         }
-        model.addAttribute("accountRegisterForm", accountRegisterForm);
         return "account/accountRegisterConfirmForm";
     }
 
@@ -68,7 +67,7 @@ public class AccountRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/do", params = "register", method = RequestMethod.POST)
-    String registerComplete(@Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
+    String registerComplete(@ModelAttribute @Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "account/accountRegisterForm";
         }
@@ -88,7 +87,7 @@ public class AccountRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/do", params = "registerBack", method = RequestMethod.POST)
-    String registerBack(AccountRegisterForm accountRegisterForm) {
+    String registerBack(@ModelAttribute AccountRegisterForm accountRegisterForm) {
         return "account/accountRegisterForm";
     }
 
