@@ -148,7 +148,19 @@ public class TodoSearchController {
      * @return フォワードURL
      */
     @RequestMapping(value = "/update", params = "delete")
-    public String forward(@RequestParam String todoId, Model model) {
+    public String forwardDelete(@RequestParam String todoId, Model model) {
         return "forward:/todo/delete/confirm";
+    }
+
+    /**
+     * フォワード。(TODO更新)。
+     *
+     * @param todoId 更新対象のTODOのID
+     * @param model モデル
+     * @return フォワードURL
+     */
+    @RequestMapping(value = "/update", params = "update")
+    public String forwardUpdate(@RequestParam String todoId, Model model) {
+        return "forward:/todo/update/init";
     }
 }

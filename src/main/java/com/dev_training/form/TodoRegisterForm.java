@@ -35,10 +35,10 @@ public class TodoRegisterForm implements Serializable {
     private String personInChargeId;
 
     @NotBlank
-    private String selectedStatus;
+    private String status;
 
     @NotBlank
-    private String selectedPriority;
+    private String priority;
 
     public String getTitle() {
         return title;
@@ -96,19 +96,19 @@ public class TodoRegisterForm implements Serializable {
         this.personInChargeId = personInChargeId;
     }
 
-    public String getSelectedStatus() {
-        return selectedStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSelectedStatus(String selectedStatus) {
-        this.selectedStatus = selectedStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getSelectedPriority() {
-        return selectedPriority;
+    public String getPriority() {
+        return priority;
     }
 
-    public void setSelectedPriority(String selectedPriority) {
-        this.selectedPriority = selectedPriority;
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 }
