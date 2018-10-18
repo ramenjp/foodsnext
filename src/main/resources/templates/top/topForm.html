@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<nav th:substituteby="common/loggedinNav::navi(${accountName})"></nav>
+<nav th:replace="common/loggedinNav::navi(${accountName})"></nav>
 
 <div class="container-fluid">
     <div class="row">
