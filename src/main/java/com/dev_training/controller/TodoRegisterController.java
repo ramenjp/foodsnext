@@ -117,7 +117,7 @@ public class TodoRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/do", params = "register", method = RequestMethod.POST)
-    public String registerComplete(@Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String registerComplete(@ModelAttribute @Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         // 単項目精査
         if (bindingResult.hasErrors()) {
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);

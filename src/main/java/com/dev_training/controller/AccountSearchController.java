@@ -58,7 +58,7 @@ public class AccountSearchController {
      * @return Path
      */
     @RequestMapping(value = "/do")
-    public String search(@Validated AccountSearchForm accountSearchForm, BindingResult bindingResult, Model model) {
+    public String search(@ModelAttribute @Validated AccountSearchForm accountSearchForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "account/accountSearchForm";
@@ -91,7 +91,7 @@ public class AccountSearchController {
      * @return Path
      */
     @RequestMapping(value = "/paging/do")
-    public String pagingSearch(@Validated AccountSearchForm accountSearchForm, BindingResult bindingResult,
+    public String pagingSearch(@ModelAttribute @Validated AccountSearchForm accountSearchForm, BindingResult bindingResult,
                        @PageableDefault(size = DEFAULT_PAGEABLE_SIZE)
                        @SortDefault.SortDefaults(
                                {@SortDefault(
@@ -129,14 +129,14 @@ public class AccountSearchController {
      * @return path
      */
     @RequestMapping(value = "/paging/pagenation")
-    public String pagenation(@Validated AccountSearchForm accountSearchForm, BindingResult bindingResult,
-                               @PageableDefault(size = DEFAULT_PAGEABLE_SIZE)
+    public String pagination(@ModelAttribute @Validated AccountSearchForm accountSearchForm, BindingResult bindingResult,
+                             @PageableDefault(size = DEFAULT_PAGEABLE_SIZE)
                                @SortDefault.SortDefaults(
                                        {@SortDefault(
                                                sort = "accountId",
                                                direction = Sort.Direction.ASC
                                        )}) Pageable pageable,
-                               Model model) {
+                             Model model) {
 
         AccountSearchForm storedCondition = (AccountSearchForm) session.getAttribute(SESSION_SEARCH_FORM_ID);
         return this.pagingSearch(storedCondition, bindingResult, pageable, model);

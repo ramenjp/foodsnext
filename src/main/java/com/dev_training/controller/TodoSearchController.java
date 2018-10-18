@@ -73,7 +73,7 @@ public class TodoSearchController {
      * @return Path
      */
     @RequestMapping(value = "/do")
-    public String search(@Validated TodoSearchForm todoSearchForm, BindingResult bindingResult, Model model) {
+    public String search(@ModelAttribute @Validated TodoSearchForm todoSearchForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             // forwardさせるとエラー情報が消えるので、メソッド呼び出しで処理する。
             // TodoRegisterと同様に、RedirectAttributesに情報を詰めてリダイレクトし、先で取り出してModel.addattributeさせるのでもOK。
