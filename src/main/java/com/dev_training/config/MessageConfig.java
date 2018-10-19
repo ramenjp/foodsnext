@@ -6,8 +6,12 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * メッセージコンフィグ。
+ */
 @Configuration
 public class MessageConfig implements  WebMvcConfigurer {
+
     @Override
     public Validator getValidator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();

@@ -3,8 +3,12 @@ package com.dev_training.form;
 import com.dev_training.validator.HalfAlphameric;
 
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
-public class AccountSearchForm {
+/**
+ * アカウント検索フォーム。
+ */
+public class AccountSearchForm implements Serializable {
 
     @Size(max = 15, message = "{error.size.max}")
     @HalfAlphameric

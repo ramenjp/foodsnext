@@ -3,13 +3,22 @@ package com.dev_training.common;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * コード管理クラス。
+ */
 @Component
 public class CodeValue {
 
-    @Autowired
+    /** ステータス */
     private Status status;
-    @Autowired
+    /** 優先度 */
     private Priority priority;
+
+    @Autowired
+    public CodeValue(Status status, Priority priority) {
+        this.status = status;
+        this.priority = priority;
+    }
 
     public Status getStatus() {
         return status;

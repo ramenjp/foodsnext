@@ -24,10 +24,11 @@ public class TopService {
     /**
      * アカウント最新データ取得処理。
      *
-     * @param accountId アカウントID
+     * @param id アカウントの主キー
      * @return アカウント
      */
-    public Account getAccountByAccountId(String accountId) {
-        return accountRepository.findByAccountId(accountId);
+    public Account getAccountById(int id) {
+        // 取れないことは考慮しない。
+        return accountRepository.findById(id).get();
     }
 }

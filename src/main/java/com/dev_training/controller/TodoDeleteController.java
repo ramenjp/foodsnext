@@ -40,7 +40,7 @@ public class TodoDeleteController {
      */
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public String deleteConfirm(@RequestParam String todoId, Model model) {
-        // IDが正しく渡ってこなければ、エラー表示。
+        // 遷移元の画面から、削除対象のTODOのIDが渡ってこなければ、エラーとする
         if (Objects.isNull(todoId) || StringUtils.isEmpty(todoId)) {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen,transition", null, Locale.JAPAN));
             return "common/commonError";
@@ -51,6 +51,7 @@ public class TodoDeleteController {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.incorrect.specification.todo", null, Locale.JAPAN));
             return "common/commonError";
         }
+        // TODOのIDを引き継ぐ
         model.addAttribute("todoId", todoId);
         return "todo/todoDeleteConfirmForm";
     }
@@ -64,7 +65,7 @@ public class TodoDeleteController {
      */
     @RequestMapping(value = "/do", method = RequestMethod.POST)
     public String unsubscribeComplete(@RequestParam String todoId, Model model) {
-        // IDが正しく渡ってこなければ、エラー表示。
+        // 遷移元の画面から、削除対象のTODOのIDが渡ってこなければ、エラーとする
         if (Objects.isNull(todoId) || StringUtils.isEmpty(todoId)) {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen,transition", null, Locale.JAPAN));
             return "common/commonError";
@@ -75,6 +76,7 @@ public class TodoDeleteController {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.incorrect.specification.todo", null, Locale.JAPAN));
             return "common/commonError";
         }
+        // 削除処理
         service.delete(Integer.parseInt(todoId));
         return "todo/todoDeleteCompleteForm";
     }

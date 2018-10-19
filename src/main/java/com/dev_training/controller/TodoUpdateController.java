@@ -56,7 +56,7 @@ public class TodoUpdateController {
      */
     @RequestMapping(value = "/init")
     public String updateInit(@RequestParam String todoId, Model model) {
-        // IDが正しく渡ってこなければ、エラー表示。
+        // 遷移元から更新対象のTODOIDが正しく渡ってこなければ、エラー表示。
         if (Objects.isNull(todoId) || StringUtils.isEmpty(todoId)) {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen,transition", null, Locale.JAPAN));
             return "common/commonError";
@@ -120,7 +120,7 @@ public class TodoUpdateController {
      */
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public String updateConfirm(@ModelAttribute @Validated TodoUpdateForm todoUpdateForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-        // 単項目精査
+        // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return redirectToInit(todoUpdateForm, bindingResult, redirectAttributes);
         }
@@ -170,7 +170,7 @@ public class TodoUpdateController {
      */
     @RequestMapping(value = "/do", params = "update", method = RequestMethod.POST)
     public String updateComplete(@Validated TodoUpdateForm todoUpdateForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        // 単項目精査
+        // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return redirectToInit(todoUpdateForm, bindingResult, redirectAttributes);
         }
@@ -194,7 +194,7 @@ public class TodoUpdateController {
             return redirectToInit(todoUpdateForm, bindingResult, redirectAttributes);
         }
 
-        // 更新処理
+        // 更新するTODOの作成
         Todo todo = new Todo();
         todo.setId(todoUpdateForm.getId());
         todo.setTitle(todoUpdateForm.getTitle());
@@ -206,6 +206,7 @@ public class TodoUpdateController {
         todo.setPersonInChargeId(Integer.parseInt(todoUpdateForm.getPersonInChargeId()));
         todo.setStatus(todoUpdateForm.getStatus());
         todo.setPriority(todoUpdateForm.getPriority());
+        // 更新処理
         service.update(todo);
 
         return "todo/todoUpdateCompleteForm";

@@ -23,24 +23,24 @@
                                     <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">共通エラーメッセージ表示エリア</p>
                                 </div>
                                 <fieldset id="account_field">
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('accountId')}? 'has-error'">
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('accountId')}? 'has-error'">
                                         <label for="accountId">アカウントID</label><br/>
-                                        <input class="form-control" id="accountId" type="text" maxlength="15" name="accountId" th:field="*{accountId}" required=""/>
+                                        <input class="form-control" id="accountId" type="text" maxlength="15" name="accountId" th:field="*{accountId}" required/>
                                         <span class="text-danger" th:if="${#fields.hasErrors('accountId')}" th:errors="*{accountId}">error!</span>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
                                         <label for="name">氏名</label><br/>
-                                        <input class="form-control" id="name" type="text" maxlength="45" name="name" th:field="*{name}" required=""/>
+                                        <input class="form-control" id="name" type="text" maxlength="45" name="name" th:field="*{name}" required/>
                                         <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error!</span>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
                                         <label for="email">E-mail</label><br/>
-                                        <input class="form-control" id="email" type="text" maxlength="50" name="email" th:field="*{email}" required=""/>
+                                        <input class="form-control" id="email" type="text" maxlength="50" name="email" th:field="*{email}" required/>
                                         <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
                                         <label for="selfIntroduction">自己紹介</label><br/>
-                                        <textarea class="form-control selfIntroduction" id="selfIntroduction" rows="3" cols="80" maxlength="255" name="selfIntroduction" th:field="*{selfIntroduction}" required=""></textarea>
+                                        <textarea class="form-control selfIntroduction" id="selfIntroduction" rows="3" cols="80" maxlength="255" name="selfIntroduction" th:field="*{selfIntroduction}" required></textarea>
                                         <span class="text-danger" th:if="${#fields.hasErrors('selfIntroduction')}" th:errors="*{selfIntroduction}">error!</span>
                                     </div>
                                     <div class="col text-center">

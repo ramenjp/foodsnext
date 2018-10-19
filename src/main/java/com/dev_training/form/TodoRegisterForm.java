@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * Todo登録フォーム。
+ * TODO登録フォーム。
  */
 public class TodoRegisterForm implements Serializable {
 

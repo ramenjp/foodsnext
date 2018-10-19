@@ -15,19 +15,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * Webセキュリティコンフィグ。
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Override
     public void configure(WebSecurity web) {
-        // 認証状態によらず許可する。
+        // 認証状態によらず許可するパス
         web.ignoring().antMatchers("/favicon.ico", "/css/**", "/js/**", "/bootstrap/css/**", "/bootstrap/js/**", "/jquery/**", "/images/**", "/fonts/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                // 認証状態によらず許可する。
+                // 認証状態によらず許可するURL
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/account/register/**").permitAll()
@@ -37,13 +41,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login") // ログインページのパス
                 .loginProcessingUrl("/login") // 認証処理を起動させるパス
                 .failureUrl("/login/?error") // ログイン処理失敗時の遷移先
-                .successForwardUrl("/top")
+                .successForwardUrl("/top") // ログイン成功時の繊維先
                 .usernameParameter("login_id")// ユーザid
                 .passwordParameter("login_password").permitAll(); // パスワード
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // ログアウト処理を起動させるパス
-                .deleteCookies("JSESSIONID")
+                .deleteCookies("JSESSIONID") // JsessionIdを削除
                 .logoutSuccessUrl("/") // ログアウト完了時のパス
                 .invalidateHttpSession(true).permitAll();
     }

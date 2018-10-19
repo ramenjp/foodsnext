@@ -1,10 +1,12 @@
 package com.dev_training.form;
 
 
+import java.io.Serializable;
+
 /**
- * Todo更新フォーム。
+ * TODO更新フォーム。
  */
-public class TodoUpdateForm extends TodoRegisterForm {
+public class TodoUpdateForm extends TodoRegisterForm implements Serializable {
 
     private int id;
 

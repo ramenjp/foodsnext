@@ -36,7 +36,7 @@ public class TodoSearchService {
     }
 
     /**
-     * 検索。
+     * 検索条件からTODOを検索する。
      *
      * @param form 検索条件
      * @return 検索結果
@@ -57,7 +57,7 @@ public class TodoSearchService {
     }
 
     /**
-     * 検索（ページング）。
+     * 検索条件からTODOを検索する（ページング）。
      *
      * @param form     検索条件
      * @param pageable ページャブル
