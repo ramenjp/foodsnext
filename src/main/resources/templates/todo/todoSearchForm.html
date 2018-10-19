@@ -100,7 +100,7 @@
                                 <div class="col-md-6 mx-auto">
                                     <div class="form-group" th:classappend="${#fields.hasErrors('selectedStatus')}? 'has-error'">
                                         <label for="selectedStatus">ステータス</label><br/>
-                                        <select class="form-control selectpicker" multiple="multiple" id="selectedStatus" th:field="*{selectedStatus}">
+                                        <select class="form-control selectpicker" multiple="multiple" name="selectedStatus" id="selectedStatus" th:field="*{selectedStatus}">
                                             <option th:each="entry : ${allStatus.status.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                         </select>
                                         <small id="statushelp" class="form-text text-muted">このステータスのTODOを検索する場合、選択してください。</small>
@@ -164,7 +164,8 @@
 
 </div>
 
-<script type="text/javascript">
+<script th:inline="javascript">
+    /*<![CDATA[>*/
     $(function () {
         var dateFormat = 'YYYY/MM/DD';
         var startDatePicker = $('#startDate');
@@ -176,7 +177,30 @@
         startDatePicker.datetimepicker('date', startDate);
         endDatePicker.datetimepicker({format: dateFormat, date: null});
         endDatePicker.datetimepicker('date', endDate);
+
+        var issuePersonIdVar = /*[[(${todoSearchForm.issuePersonId})]]*/ null;
+        if (issuePersonIdVar !== null) {
+            $('select[name=issuePersonId]').val(issuePersonIdVar.split(","));
+        }
+
+        var personInChargeIdVar = /*[[(${todoSearchForm.personInChargeId})]]*/ null;
+        if (personInChargeIdVar !== null) {
+            $('select[name=personInChargeId]').val(personInChargeIdVar.split(","));
+        }
+
+        var selectedPriorityVar = /*[[(${todoSearchForm.selectedPriority})]]*/ null;
+        if (selectedPriorityVar !== null) {
+            $('select[name=selectedPriority]').val(selectedPriorityVar.split(","));
+        }
+
+        var selectedStatusVar = /*[[(${todoSearchForm.selectedStatus})]]*/ null;
+        if (selectedStatusVar !== null) {
+            $('select[name=selectedStatus]').val(selectedStatusVar.split(","));
+        }
+
+        $('.selectpicker').selectpicker('refresh');
     });
+    /*]]>*/
 </script>
 
 </body>
