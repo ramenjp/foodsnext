@@ -123,6 +123,9 @@
                             <div class="btn-group">
                                 <input type="submit" name="search" value="検索" class="btn btn-primary btn-lg "/>
                             </div>
+                            <div class="btn-group">
+                                <input class="btn btn-success btn-lg clearForm" type="button" value="条件クリア">
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -200,6 +203,12 @@
 
         $('.selectpicker').selectpicker('refresh');
     });
+    $(".clearForm").bind("click", function(){
+        $(this.form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
+        $(".selectpicker").val('default');
+        $(".selectpicker").selectpicker("refresh");
+    });
+
     /*]]>*/
 </script>
 
