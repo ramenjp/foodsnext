@@ -53,6 +53,7 @@
                                             </div>
                                         </div>
                                         <small id="startdatehelp" class="form-text text-muted">この開始日以降のTODOを検索する場合、入力してください。</small>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">error!</span>
                                     </div>
                                 </div>
 
@@ -66,6 +67,7 @@
                                             </div>
                                         </div>
                                         <small id="enddatehelp" class="form-text text-muted">この終了日以前のTODOを検索する場合、入力してください。</small>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">error!</span>
                                     </div>
                                 </div>
                             </div>

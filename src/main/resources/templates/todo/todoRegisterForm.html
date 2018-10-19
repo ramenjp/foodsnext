@@ -21,16 +21,16 @@
                             <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">共通エラーメッセージ表示エリア</p>
                         </div>
                         <fieldset id="todo_field">
-                            <div class="form-group " th:classappend="${#fields.hasErrors('title')}? 'has-error'">
+                            <div class="form-group required" th:classappend="${#fields.hasErrors('title')}? 'has-error'">
                                 <label for="title">タイトル</label><br/>
-                                <input class="form-control" id="title" type="text" maxlength="45" th:field="*{title}" name="title" required="" placeholder="TODOタイトルを入力してください"/>
+                                <input class="form-control" id="title" type="text" maxlength="45" th:field="*{title}" name="title" required placeholder="TODOタイトルを入力してください"/>
                                 <small id="titlehelp" class="form-text text-muted">45文字以内で入力してください。</small>
                                 <span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">error!</span>
                             </div>
 
-                            <div class="form-group" th:classappend="${#fields.hasErrors('detail')}? 'has-error'">
+                            <div class="form-group required" th:classappend="${#fields.hasErrors('detail')}? 'has-error'">
                                 <label for="detail">詳細</label><br/>
-                                <textarea class="form-control" id="detail" rows="10" cols="80" maxlength="2000" th:field="*{detail}" name="detail" required="" placeholder="TODO詳細を入力してください。"></textarea>
+                                <textarea class="form-control" id="detail" rows="10" cols="80" maxlength="2000" th:field="*{detail}" name="detail" required placeholder="TODO詳細を入力してください。"></textarea>
                                 <small id="detailhelp" class="form-text text-muted">2000文字以内で入力してください。</small>
                                 <span class="text-danger" th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}">error!</span>
                             </div>
@@ -72,7 +72,7 @@
 
                             <div class="row">
                                 <div class="col-md-6 mx-auto">
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('issuePersonId')}? 'has-error'">
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('issuePersonId')}? 'has-error'">
                                         <label for="issuePersonId">起票者</label><br/>
                                         <select class="form-control" id="issuePersonId" th:field="*{issuePersonId}">
                                             <option th:each="entry : ${accountList.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
@@ -82,7 +82,7 @@
                                 </div>
 
                                 <div class="col-md-6 mx-auto">
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('personInChargeId')}? 'has-error'">
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('personInChargeId')}? 'has-error'">
                                         <label for="personInChargeId">担当者</label><br/>
                                         <select class="form-control" id="personInChargeId" th:field="*{personInChargeId}">
                                             <option th:each="entry : ${accountList.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
@@ -94,7 +94,7 @@
 
                             <div class="row">
                                 <div class="col-md-6 mx-auto">
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('status')}? 'has-error'">
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('status')}? 'has-error'">
                                         <label for="status">ステータス</label><br/>
                                         <select class="form-control" id="status" th:field="*{status}">
                                             <option th:each="entry : ${allStatus.status.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mx-auto">
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('priority')}? 'has-error'">
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('priority')}? 'has-error'">
                                         <label for="priority">優先度</label><br/>
                                         <select class="form-control" id="priority" th:field="*{priority}">
                                             <option th:each="entry : ${allPriority.priority.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
