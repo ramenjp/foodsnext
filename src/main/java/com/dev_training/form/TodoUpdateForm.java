@@ -2,7 +2,7 @@ package com.dev_training.form;
 
 
 /**
- * Todo更新フォーム。
+ * TODO更新フォーム。
  */
 public class TodoUpdateForm extends TodoRegisterForm {
 

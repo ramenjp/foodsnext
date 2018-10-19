@@ -39,8 +39,9 @@ public class TopController {
      */
     @RequestMapping(value = "")
     public String init(@AuthenticationPrincipal Account account) {
+        // 初回のアクセスなら、アカウントを検索してセッションに格納する
         if (Objects.isNull(session.getAttribute(SESSION_FORM_ID))) {
-            Account sessionAccount = service.getAccountByAccountId(account.getAccountId());
+            Account sessionAccount = service.getAccountById(account.getId());
             session.setAttribute(SESSION_FORM_ID, sessionAccount);
         }
         return "top/topForm";

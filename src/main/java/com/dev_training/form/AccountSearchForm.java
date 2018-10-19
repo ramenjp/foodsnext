@@ -4,6 +4,9 @@ import com.dev_training.validator.HalfAlphameric;
 
 import javax.validation.constraints.Size;
 
+/**
+ * アカウント検索フォーム。
+ */
 public class AccountSearchForm {
 
     @Size(max = 15, message = "{error.size.max}")

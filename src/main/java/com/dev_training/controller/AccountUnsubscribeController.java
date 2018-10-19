@@ -55,7 +55,9 @@ public class AccountUnsubscribeController {
      */
     @RequestMapping(value = "/do", method = RequestMethod.POST)
     public String unsubscribeComplete(@AuthenticationPrincipal Account account) {
+        // 削除処理
         service.delete(account.getId());
+        // セッション破棄
         session.invalidate();
         return "account/accountUnsubscribeCompleteForm";
     }

@@ -10,6 +10,9 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * アカウント登録フォーム。
+ */
 public class AccountRegisterForm implements Serializable {
 
     @NotBlank

@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * TODO登録サービス。
+ * TODO更新サービス。
  */
 @Service
 @Transactional
@@ -51,7 +51,7 @@ public class TodoUpdateService {
     }
 
     /**
-     * 主キー検索。
+     * TODOの主キー検索。
      *
      * @param id ID
      * @return TODOエンティティ

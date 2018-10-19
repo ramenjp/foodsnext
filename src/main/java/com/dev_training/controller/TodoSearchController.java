@@ -48,14 +48,13 @@ public class TodoSearchController {
      */
     @RequestMapping(value = "/init")
     public String searchInit(@ModelAttribute("todoSearchForm") TodoSearchForm todoSearchForm, Model model) {
-        // 担当者選択用のプルダウンリストの初期化
+        // 全アカウントを取得し、担当者選択用のプルダウンリストを作成し、格納
         List<Account> accounts = service.findAllAccount();
         Map<Integer, String> accountMap = new HashMap<>();
         for (Account account :accounts) {
             accountMap.put(account.getId(), account.getName());
         }
         model.addAttribute("accountList", accountMap);
-
         // ステータスプルダウンの初期化
         model.addAttribute("allStatus", codeValue.getStatus());
         // 優先度プルダウンの初期化
@@ -74,6 +73,7 @@ public class TodoSearchController {
      */
     @RequestMapping(value = "/do")
     public String search(@ModelAttribute @Validated TodoSearchForm todoSearchForm, BindingResult bindingResult, Model model) {
+        // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             // forwardさせるとエラー情報が消えるので、メソッド呼び出しで処理する。
             // TodoRegisterと同様に、RedirectAttributesに情報を詰めてリダイレクトし、先で取り出してModel.addattributeさせるのでもOK。
@@ -83,6 +83,7 @@ public class TodoSearchController {
         // 検索処理
         List<Todo> list = service.findTodo(todoSearchForm);
         if (Objects.isNull(list) || list.isEmpty()) {
+            // 結果０件ならエラー表示
             bindingResult.reject("validation.noSearchResult", "default message");
             return this.searchInit(todoSearchForm, model);
         }
@@ -101,13 +102,13 @@ public class TodoSearchController {
      */
     @RequestMapping(value = "/detail")
     public String detail(@RequestParam(defaultValue = "") String todoId, Model model) {
-        // 元画面からidが渡ってこなければ、エラー表示。
+        // 遷移元画面からTODOのIDが渡ってこなければ、エラー表示。
         if (StringUtils.isEmpty(todoId)) {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen,transition", null, Locale.JAPAN));
             return "common/commonError";
         }
 
-        // idに紐づくTODOが取得できなければ、エラー表示。
+        // IDに紐づくTODOが取得できなければ、エラー表示。
         Todo result = service.findTodoById(Integer.parseInt(todoId));
         if (Objects.isNull(result)) {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.incorrect.specification.todo", null, Locale.JAPAN));

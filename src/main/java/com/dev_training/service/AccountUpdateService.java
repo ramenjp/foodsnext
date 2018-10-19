@@ -33,7 +33,7 @@ public class AccountUpdateService {
     /**
      * アカウント最新データ取得処理。
      *
-     * @param id 　更新対象のアカウントID
+     * @param id ID
      * @return アカウント
      */
     @Transactional(readOnly = true)

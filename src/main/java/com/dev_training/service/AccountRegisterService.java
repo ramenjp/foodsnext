@@ -39,6 +39,7 @@ public class AccountRegisterService {
      */
     @Transactional
     public void register(Account account, String rawPassword) {
+        // パスワードの暗号化
         String encodedPassword = passwordEncoder.encode(rawPassword);
         account.setPassword(encodedPassword);
 

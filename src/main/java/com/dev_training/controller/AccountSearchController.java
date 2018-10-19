@@ -59,16 +59,19 @@ public class AccountSearchController {
      */
     @RequestMapping(value = "/do")
     public String search(@ModelAttribute @Validated AccountSearchForm accountSearchForm, BindingResult bindingResult, Model model) {
-
+        // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return "account/accountSearchForm";
         }
 
+        // 検索条件からアカウントを検索する
         List<Account> list = service.findAccount(accountSearchForm);
         if (Objects.isNull(list) || list.isEmpty()) {
+            // 検索結果が０件ならエラー表示
             bindingResult.reject("validation.noSearchResult", "default message");
             return "account/accountSearchForm";
         }
+        // 検索結果を画面に表示する
         model.addAttribute("list", list);
         return "account/accountSearchForm";
     }
@@ -81,6 +84,7 @@ public class AccountSearchController {
      */
     @RequestMapping(value = "/paging/init")
     public String pagingSearchInit(@ModelAttribute AccountSearchForm accountSearchForm) {
+        // セッション内に残っている検索条件を削除
         session.getAttribute(SESSION_SEARCH_FORM_ID);
         return "account/accountPagingSearchForm";
     }
@@ -100,19 +104,23 @@ public class AccountSearchController {
                                )}) Pageable pageable,
                        Model model) {
 
-        session.setAttribute(SESSION_SEARCH_FORM_ID,accountSearchForm);
+        // 検索条件を持ち回るためにセッションに格納し、画面表示する。
+        session.setAttribute(SESSION_SEARCH_FORM_ID, accountSearchForm);
         model.addAttribute(accountSearchForm);
-
+        // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return "account/accountPagingSearchForm";
         }
 
+        // 検索条件からアカウントを検索する
         Page<Account> page = service.findAccount(accountSearchForm, pageable);
         List<Account> list = page.getContent();
         if (Objects.isNull(list) || list.isEmpty()) {
+            // 検索結果が０件ならエラー表示
             bindingResult.reject("validation.noSearchResult", "default message");
             return "account/accountPagingSearchForm";
         }
+        // 検索結果、ページング情報を格納する
         model.addAttribute("page", page);
         model.addAttribute("list", list);
         model.addAttribute("url", "/account/find");
@@ -137,7 +145,7 @@ public class AccountSearchController {
                                                direction = Sort.Direction.ASC
                                        )}) Pageable pageable,
                              Model model) {
-
+        // セッションに格納されている検索条件からページング検索
         AccountSearchForm storedCondition = (AccountSearchForm) session.getAttribute(SESSION_SEARCH_FORM_ID);
         return this.pagingSearch(storedCondition, bindingResult, pageable, model);
     }

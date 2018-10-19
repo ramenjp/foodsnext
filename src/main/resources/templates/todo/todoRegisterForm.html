@@ -75,7 +75,7 @@
                                     <div class="form-group" th:classappend="${#fields.hasErrors('issuePersonId')}? 'has-error'">
                                         <label for="issuePersonId">起票者</label><br/>
                                         <select class="form-control" id="issuePersonId" th:field="*{issuePersonId}">
-                                            <option th:each="account : ${accountList}" th:value="${account.id}" th:text="${account.name}"></option>
+                                            <option th:each="entry : ${accountList.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                         </select>
                                         <span class="text-danger" th:if="${#fields.hasErrors('issuePersonId')}" th:errors="*{issuePersonId}">error!</span>
                                     </div>
@@ -85,9 +85,9 @@
                                     <div class="form-group" th:classappend="${#fields.hasErrors('personInChargeId')}? 'has-error'">
                                         <label for="personInChargeId">担当者</label><br/>
                                         <select class="form-control" id="personInChargeId" th:field="*{personInChargeId}">
-                                            <option th:each="account : ${accountList}" th:value="${account.id}" th:text="${account.name}"></option>
+                                            <option th:each="entry : ${accountList.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"></option>
                                         </select>
-                                        <span class="text-danger" th:if="${#fields.hasErrors('personInChargeId')}" th:errors="*{issuePersonId}">error!</span>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('personInChargeId')}" th:errors="*{personInChargeId}">error!</span>
                                     </div>
                                 </div>
                             </div>

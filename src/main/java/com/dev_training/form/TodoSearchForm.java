@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * Todo検索フォーム。
+ * TODO検索フォーム。
  */
 public class TodoSearchForm implements Serializable {
 

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -46,20 +48,23 @@ public class TodoRegisterController {
      */
     @RequestMapping(value = "/init")
     public String registerInit(@ModelAttribute TodoRegisterForm todoRegisterForm, Model model) {
-        // 担当者選択用のプルダウンリスト
+        // 全アカウントを取得し、担当者選択用のプルダウンリストを作成し、格納
         List<Account> accounts = service.findAllAccount();
-        model.addAttribute("accountList", accounts);
-        // ステータスプルダウンの初期化
+        Map<Integer, String> accountMap = new HashMap<>();
+        for (Account account :accounts) {
+            accountMap.put(account.getId(), account.getName());
+        }
+        model.addAttribute("accountList", accountMap);
+        // ステータスプルダウンを作成し、格納
         model.addAttribute("allStatus", codeValue.getStatus());
-        // 優先度プルダウンの初期化
+        // 優先度プルダウンの初期化を作成し、格納
         model.addAttribute("allPriority", codeValue.getPriority());
 
-        // リダイレクト元で設定されているエラーをモデルに格納して、画面に表示。
+        // リダイレクト元で設定されているエラーをモデルに格納して、画面に表示
         String key = BindingResult.MODEL_KEY_PREFIX + FORM_NAME;
         if (model.asMap().containsKey("errors")) {
             model.addAttribute(key, model.asMap().get("errors"));
         }
-
         return "todo/todoRegisterForm";
     }
 
@@ -74,7 +79,7 @@ public class TodoRegisterController {
      */
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public String registerConfirm(@ModelAttribute @Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-        // 単項目精査
+        // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
         }
@@ -85,10 +90,10 @@ public class TodoRegisterController {
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
         }
 
-        // 選択されたIDに紐づくAccountを取得する。
+        // 選択されたIDに紐づくAccountを取得する
         Optional<Account> issuePersonAccount = service.findAccountById(Integer.parseInt(todoRegisterForm.getIssuePersonId()));
         Optional<Account> inChargeAccount = service.findAccountById(Integer.parseInt(todoRegisterForm.getPersonInChargeId()));
-        // バックグラウンドで削除されていたら、エラーとする。
+        // バックグラウンドで削除されていたら、エラーとする
         if (!issuePersonAccount.isPresent()){
             bindingResult.reject("validation.invalidAccount", new String[]{"起票者"}, "default message");
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
@@ -98,10 +103,10 @@ public class TodoRegisterController {
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
         }
 
-        // 確認画面に表示する氏名をセットする。
+        // 確認画面に表示する氏名をセットする
         model.addAttribute("issuePersonName",issuePersonAccount.get().getName());
         model.addAttribute("personInChargeName",inChargeAccount.get().getName());
-        // 確認画面に表示するステータス、優先度をセットする。
+        // 確認画面に表示するステータス、優先度をセットする
         model.addAttribute("statusName", codeValue.getStatus().getStatus().get(todoRegisterForm.getStatus()));
         model.addAttribute("priorityName", codeValue.getPriority().getPriority().get(todoRegisterForm.getPriority()));
 
@@ -118,7 +123,7 @@ public class TodoRegisterController {
      */
     @RequestMapping(value = "/do", params = "register", method = RequestMethod.POST)
     public String registerComplete(@ModelAttribute @Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        // 単項目精査
+        // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
         }
@@ -129,10 +134,10 @@ public class TodoRegisterController {
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
         }
 
-        // 選択されたIDに紐づくAccountを取得する。
+        // 選択されたIDに紐づくAccountを取得する
         Optional<Account> issuePersonAccount = service.findAccountById(Integer.parseInt(todoRegisterForm.getIssuePersonId()));
         Optional<Account> inChargeAccount = service.findAccountById(Integer.parseInt(todoRegisterForm.getPersonInChargeId()));
-        // バックグラウンドで削除されていたら、エラーとする。
+        // バックグラウンドで削除されていたら、エラーとする
         if (!issuePersonAccount.isPresent()){
             bindingResult.reject("validation.invalidAccount", new String[]{"起票者"}, "default message");
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
@@ -142,7 +147,7 @@ public class TodoRegisterController {
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
         }
 
-        // 登録処理
+        // 登録するTODOの作成
         Todo todo = new Todo();
         todo.setTitle(todoRegisterForm.getTitle());
         todo.setDetail(todoRegisterForm.getDetail());
@@ -153,6 +158,7 @@ public class TodoRegisterController {
         todo.setPersonInChargeId(Integer.parseInt(todoRegisterForm.getPersonInChargeId()));
         todo.setStatus(todoRegisterForm.getStatus());
         todo.setPriority(todoRegisterForm.getPriority());
+        // 登録処理
         service.register(todo);
 
         return "todo/todoRegisterCompleteForm";
@@ -179,7 +185,9 @@ public class TodoRegisterController {
      * @return リダイレクトURL
      */
     private String redirectToInit(@Validated TodoRegisterForm todoRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        // TODOのフォームをリダイレクト先に引き継ぐ
         redirectAttributes.addFlashAttribute("todoRegisterForm", todoRegisterForm);
+        // エラー情報をリダイレクト先に引き継ぐ
         redirectAttributes.addFlashAttribute("errors", bindingResult);
         return "redirect:/todo/register/init";
     }
