@@ -7,44 +7,58 @@
 
 <nav th:replace="common/noLoginNav"></nav>
 
-<div class="container py-3">
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="text-center pb-4">Welcome to TODO Management System!</h2>
-            <div class="row">
-                <div class="col-md-6 mx-auto">
-                    <div class="card rounded-0">
-                        <div class="card-header bg-primary text-white">
-                            <h3 class="mb-0">Login</h3>
+<div class="jumbotron jumbotron-extend" style="margin-bottom: 0px;">
+
+<div class="container py-5">
+    <!--Grid row-->
+    <div class="row pt-3">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4 text-white text-center text-md-left site-name">
+            <h1 class="display-4 font-weight-bold">Let's Learn JavaApplication made with SpringBoot</h1>
+            <hr class="border-white">
+            <p>
+                <strong>The web design was created by Bootstrap4</strong>
+            </p>
+            <p class="mb-4 d-none d-md-block">
+                <strong>SpringBoot and Bootstrap are a framework for making web applications very easily.<br>
+                    SpringBoot is the application framework, Bootstrap is the CSS framework.</strong>
+            </p>
+        </div>
+        <!--Grid column-->
+
+        <div class="col-md-6 col-xl-5 mb-4">
+            <div class="card rounded-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Login</h3>
+                </div>
+                <div th:if="${param.error}" class="alert alert-danger">
+                    アカウントID、またはパスワードが誤っています。
+                </div>
+                <div class="card-body">
+                    <form id="login_form" method="post" th:action="@{'/login'}">
+                        <div class="form-group required">
+                            <label for="login_id">アカウントID</label>
+                            <input type="text" class="form-control  form-control-lg rounded" id="login_id" name="login_id" placeholder="アカウントID" autofocus required/>
+                            <div class="invalid-feedback">Oops, you missed this one.</div>
                         </div>
-                        <div th:if="${param.error}" class="alert alert-danger">
-                            アカウントID、またはパスワードが誤っています。
+                        <div class="form-group required">
+                            <label for="login_password">パスワード</label>
+                            <input type="password" class="form-control form-control-lg rounded" id="login_password" name="login_password" placeholder="パスワード" required />
+                            <div class="invalid-feedback">Enter your password too!</div>
                         </div>
-                        <div class="card-body">
-                            <form id="login_form" method="post" th:action="@{'/login'}">
-                                <div class="form-group required">
-                                    <label for="login_id">アカウントID</label>
-                                    <input type="text" class="form-control  form-control-lg rounded" id="login_id" name="login_id" placeholder="アカウントIDを入力してください" autofocus required/>
-                                    <div class="invalid-feedback">Oops, you missed this one.</div>
-                                </div>
-                                <div class="form-group required">
-                                    <label for="login_password">パスワード</label>
-                                    <input type="password" class="form-control form-control-lg rounded" id="login_password" name="login_password" placeholder="パスワードを入力してください" required />
-                                    <div class="invalid-feedback">Enter your password too!</div>
-                                </div>
-                                <div class="form-group">
-                                    <input id="login" type="submit" value="ログイン" class="btn btn-block btn-primary btn-lg center-block" />
-                                </div>
-                            </form>
-                            <form id="account_form" method="post" th:action="@{'/account/register/init'}">
-                                <input id="accountRegister" type="submit" value="ユーザー登録" class="btn btn-block btn-primary btn-lg center-block" />
-                            </form>
+                        <div class="form-group">
+                            <input id="login" type="submit" value="ログイン" class="btn btn-block btn-primary btn-lg center-block" />
                         </div>
-                    </div>
+                    </form>
+                    <form id="account_form" method="post" th:action="@{'/account/register/init'}">
+                        <input id="accountRegister" type="submit" value="ユーザー登録" class="btn btn-block btn-primary btn-lg center-block" />
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
