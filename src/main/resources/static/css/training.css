@@ -12,7 +12,7 @@ body.loggedin { padding-top: 70px; }
     word-break: break-all;
 }
 
-.form-group.required label:after {
+.form-group.requgit your browser did something unexpectedired label:after {
     content:"*";
     color:red;
 }
