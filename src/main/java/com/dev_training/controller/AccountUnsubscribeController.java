@@ -3,7 +3,6 @@ package com.dev_training.controller;
 import com.dev_training.entity.Account;
 import com.dev_training.service.AccountUnsubscribeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +20,8 @@ public class AccountUnsubscribeController {
     private final AccountUnsubscribeService service;
     /** HTTP SESSION */
     private final HttpSession session;
+    /** セッションキー(ログインユーザのアカウント) */
+    private static final String SESSION_FORM_ID = "account";
 
     @Autowired
     public AccountUnsubscribeController(AccountUnsubscribeService accountUnsubscribeService, HttpSession session) {
@@ -50,11 +51,11 @@ public class AccountUnsubscribeController {
     /**
      * 退会-完了画面表示。
      *
-     * @param account 認証済みのアカウントEntity。
      * @return Path
      */
     @RequestMapping(value = "/do", method = RequestMethod.POST)
-    public String unsubscribeComplete(@AuthenticationPrincipal Account account) {
+    public String unsubscribeComplete() {
+        Account account = (Account) session.getAttribute(SESSION_FORM_ID);
         // 削除処理
         service.delete(account.getId());
         // セッション破棄
