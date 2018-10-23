@@ -12,7 +12,7 @@ body.loggedin { padding-top: 70px; }
     word-break: break-all;
 }
 
-.form-group.requgit label:after {
+.form-group.required label:after {
     content:"*";
     color:red;
 }
