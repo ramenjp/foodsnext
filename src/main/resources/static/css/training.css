@@ -20,7 +20,7 @@ body.loggedin { padding-top: 70px; }
 .jumbotron-extend {
     position: relative;
     height: 100vh;
-    min-height: 300px;
+    min-height: 700px;
     background: url(/images/jumbo.jpg) no-repeat center center;
     background-size: cover;
 }
