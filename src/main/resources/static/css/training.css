@@ -12,7 +12,7 @@ body.loggedin { padding-top: 70px; }
     word-break: break-all;
 }
 
-.form-group.requgit your browser did something unexpectedired label:after {
+.form-group.requgit label:after {
     content:"*";
     color:red;
 }
