@@ -84,7 +84,7 @@ public class TodoRegisterController {
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
         }
 
-        // 日付の有効範囲精査
+        // 日付の前後関係精査
         if (service.isValidDate(todoRegisterForm.getStartDate(), todoRegisterForm.getEndDate())) {
             bindingResult.reject("validation.invalidDate", "default message");
             return redirectToInit(todoRegisterForm, bindingResult, redirectAttributes);
