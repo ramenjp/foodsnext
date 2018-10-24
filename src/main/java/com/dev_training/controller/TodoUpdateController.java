@@ -90,8 +90,8 @@ public class TodoUpdateController {
      * @param model モデル
      * @return Path
      */
-    @RequestMapping(value = "/back")
-    public String updateBack(@ModelAttribute TodoUpdateForm todoUpdateForm, Model model) {
+    @RequestMapping(value = "/backInit")
+    public String backInit(@ModelAttribute TodoUpdateForm todoUpdateForm, Model model) {
         // 担当者選択用のプルダウンリスト
         List<Account> accounts = service.findAllAccount();
         model.addAttribute("accountList", accounts);
@@ -218,10 +218,10 @@ public class TodoUpdateController {
      * @param todoUpdateForm フォーム
      * @return Path
      */
-    @RequestMapping(value = "/do", params = "registerBack", method = RequestMethod.POST)
-    public String registerBack(TodoUpdateForm todoUpdateForm, RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "/do", params = "back", method = RequestMethod.POST)
+    public String back(TodoUpdateForm todoUpdateForm, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("todoUpdateForm", todoUpdateForm);
-        return "redirect:/todo/update/back";
+        return "redirect:/todo/update/backInit";
     }
 
     /**
@@ -235,7 +235,7 @@ public class TodoUpdateController {
     private String redirectToInit(@Validated TodoUpdateForm todoUpdateForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("todoUpdateForm", todoUpdateForm);
         redirectAttributes.addFlashAttribute("errors", bindingResult);
-        return "redirect:/todo/update/back";
+        return "redirect:/todo/update/backInit";
     }
 
 }

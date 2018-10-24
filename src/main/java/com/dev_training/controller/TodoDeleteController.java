@@ -64,7 +64,7 @@ public class TodoDeleteController {
      * @return Path
      */
     @RequestMapping(value = "/do", method = RequestMethod.POST)
-    public String unsubscribeComplete(@RequestParam String todoId, Model model) {
+    public String deleteComplete(@RequestParam String todoId, Model model) {
         // 遷移元の画面から、削除対象のTODOのIDが渡ってこなければ、エラーとする
         if (Objects.isNull(todoId) || StringUtils.isEmpty(todoId)) {
             model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen,transition", null, Locale.JAPAN));

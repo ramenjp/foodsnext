@@ -47,7 +47,7 @@ public class TodoSearchController {
      * @return Path
      */
     @RequestMapping(value = "/init")
-    public String searchInit(@ModelAttribute("todoSearchForm") TodoSearchForm todoSearchForm, Model model) {
+    public String searchInit(@ModelAttribute TodoSearchForm todoSearchForm, Model model) {
         // 全アカウントを取得し、担当者選択用のプルダウンリストを作成し、格納
         List<Account> accounts = service.findAllAccount();
         Map<Integer, String> accountMap = new HashMap<>();
