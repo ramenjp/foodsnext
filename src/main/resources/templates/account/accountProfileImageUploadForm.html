@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<head th:replace="common/common_header::base_header(~{::title})">
+    <title>プロフィール画像アップロード</title>
+</head>
+<body>
+
+<nav th:replace="common/loggedinNav::navi(${accountName})"></nav>
+
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <h2 class="text-center pb-4">プロフィール画像アップロード</h2>
+            <div class="row">
+                <div class="col-md-12 mx-auto">
+
+                    <div class="card rounded-0">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="mb-0">プロフィール画像アップロード</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="data_upload_form" name="data_upload_form" enctype="multipart/form-data" method="post">
+                                <span>ファイルのサイズは1Mバイト以下にしてください。</span><br>
+                                <div class="imagePreview"></div>
+                                <div class="form-group">
+                                    <label>
+                                        <span class="btn btn-info">
+                                            ファイル選択
+                                            <input type="file" id="upload_file" name="upload_file" style="display:none" required="" />
+                                        </span>
+                                    </label>
+                                    <input type="text" class="form-control" readonly="">
+                                </div>
+
+                                <div class="form-group">
+                                    <input id="data_upload_button" type="submit" class="btn btn-info" value="アップロード" />
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+
+        // アップロードボタンを押下した
+        $("#data_upload_form").submit(function(event){
+            // 要素規定の動作をキャンセルする
+            event.preventDefault();
+
+            // CSRFトークンをリクエストヘッダに付加する
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
+
+            var ajaxUrl = "/account/upload/upload";
+
+            if(window.FormData){
+                var formData = new FormData($(this)[0]);
+
+                $.ajax({
+                    type : "POST",                  // HTTP通信の種類
+                    url  : ajaxUrl,                 // リクエストを送信する先のURL
+                    dataType : "text",              // サーバーから返されるデータの型
+                    data : formData,                // サーバーに送信するデータ
+                    processData : false,
+                    contentType: false,
+                }).done(function(data) {        // Ajax通信が成功した時の処理
+                    alert("アップロードが完了しました。");
+                }).fail(function(XMLHttpRequest, textStatus, errorThrown) { // Ajax通信が失敗した時の処理
+                    alert("アップロードが失敗しました。");
+                });
+            }else{
+                alert("アップロードに対応できていないブラウザです。");
+            }
+        });
+    });
+    $(document).on('change', ':file', function() {
+        var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.parent().parent().next(':text').val(label);
+
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+        if (/^image/.test( files[0].type)){ // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+            reader.onloadend = function(){ // set image data as background of div
+                input.parent().parent().parent().prev('.imagePreview').css("background-image", "url("+this.result+")");
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
