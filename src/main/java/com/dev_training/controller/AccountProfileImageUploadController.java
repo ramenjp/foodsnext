@@ -2,7 +2,6 @@ package com.dev_training.controller;
 
 import com.dev_training.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Objects;
 
 /**
  * アカウントプロフィール画像アップロードコントローラ。
@@ -26,13 +24,10 @@ public class AccountProfileImageUploadController {
     private final HttpSession session;
     /** セッションキー(ログインユーザのアカウント) */
     private static final String SESSION_FORM_ID = "account";
-    /** メッセージソース */
-    private final MessageSource messageSource;
 
     @Autowired
-    public AccountProfileImageUploadController(HttpSession session, MessageSource messageSource) {
+    public AccountProfileImageUploadController(HttpSession session) {
         this.session = session;
-        this.messageSource = messageSource;
     }
 
     @RequestMapping(path = "/init")
@@ -46,39 +41,34 @@ public class AccountProfileImageUploadController {
         // ファイルが空の場合は異常終了
         if (multipartFile.isEmpty()) {
             throw new RuntimeException("empty file.");
-//            model.addAttribute("errorMsg", messageSource.getMessage("validation.file.select", null, Locale.JAPAN));
-//            return "account/accountProfileImageUploadForm";
         }
 
         // 1Mを超えるファイルはエラー
-        long fileSize = multipartFile.getSize();
-        if (fileSize > 1048576) {
+        if (multipartFile.getSize() > 1048576) {
             throw new RuntimeException("file size over.");
-//            model.addAttribute("errorMsg", messageSource.getMessage("validation.file.invalid.size", null, Locale.JAPAN));
-//            return "account/accountProfileImageUploadForm";
         }
 
         // ファイル格納先ディレクトリの作成
-        StringBuffer filePath = new StringBuffer("C:\\/upload");
+        StringBuffer filePath = new StringBuffer("C:/upload");
         File uploadDir = mkdirs(filePath);
 
+        // アップロードファイルを置く
+        Account account = (Account) session.getAttribute(SESSION_FORM_ID);
+        File uploadFile = new File(uploadDir.getPath() + "/" + account.getId() + "_profile");
+        if (uploadFile.exists()){
+            uploadFile.delete();
+        }
+
         try {
-            // アップロードファイルを置く
-            String fileName = multipartFile.getOriginalFilename();
-            File uploadFile = new File(uploadDir.getPath() + "/" + fileName);
             byte[] bytes = multipartFile.getBytes();
             BufferedOutputStream uploadFileStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
             uploadFileStream.write(bytes);
             uploadFileStream.close();
-
-            return "account/accountProfileImageUploadForm";
-
-        } catch (Throwable t) {
-//            t.printStackTrace();
-            throw new RuntimeException(t);
-//            model.addAttribute("errorMsg", messageSource.getMessage("validation.file.invalid.upload ", null, Locale.JAPAN));
-//            return "account/accountProfileImageUploadForm";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+
+        return "account/accountProfileImageUploadForm";
     }
 
     /**
@@ -88,13 +78,8 @@ public class AccountProfileImageUploadController {
      * @return File
      */
     private File mkdirs(StringBuffer filePath) {
-        Account account = (Account) session.getAttribute(SESSION_FORM_ID);
-        File uploadDir = new File(filePath.toString(), String.valueOf(account.getId()));
-        if (uploadDir.exists()) {
-            for (File child : Objects.requireNonNull(uploadDir.listFiles())) {
-                child.delete();
-            }
-        } else {
+        File uploadDir = new File(filePath.toString());
+        if (!uploadDir.exists()) {
             uploadDir.mkdirs();
         }
         return uploadDir;
