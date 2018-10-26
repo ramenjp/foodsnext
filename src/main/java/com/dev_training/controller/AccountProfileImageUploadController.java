@@ -2,6 +2,7 @@ package com.dev_training.controller;
 
 import com.dev_training.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +25,13 @@ public class AccountProfileImageUploadController {
     private final HttpSession session;
     /** セッションキー(ログインユーザのアカウント) */
     private static final String SESSION_FORM_ID = "account";
+    /** アプリケーション環境設定 */
+    private Environment environment;
 
     @Autowired
-    public AccountProfileImageUploadController(HttpSession session) {
+    public AccountProfileImageUploadController(HttpSession session, Environment environment) {
         this.session = session;
+        this.environment = environment;
     }
 
     @RequestMapping(path = "/init")
@@ -49,7 +53,8 @@ public class AccountProfileImageUploadController {
         }
 
         // ファイル格納先ディレクトリの作成
-        StringBuffer filePath = new StringBuffer("C:/upload");
+        String dirPath = environment.getProperty("upload.dir.path");
+        StringBuffer filePath = new StringBuffer(dirPath);
         File uploadDir = mkdirs(filePath);
 
         // アップロードファイルを置く

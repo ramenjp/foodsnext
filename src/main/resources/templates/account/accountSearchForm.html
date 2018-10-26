@@ -131,6 +131,7 @@
             image.onload = function () {
                 URL.revokeObjectURL(oURL);
                 $("#images").append(image);
+                $("#images > img").css('width', '200px');
             };
             image.src = oURL;
         };

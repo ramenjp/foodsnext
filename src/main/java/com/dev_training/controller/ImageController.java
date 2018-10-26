@@ -2,6 +2,7 @@ package com.dev_training.controller;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpEntity;
@@ -20,10 +21,13 @@ public class ImageController {
 
     /** リソースローダー */
     private final ResourceLoader resourceLoader;
+    /** アプリケーション環境設定 */
+    private Environment environment;
 
     @Autowired
-    public ImageController(ResourceLoader resourceLoader) {
+    public ImageController(ResourceLoader resourceLoader, Environment environment) {
         this.resourceLoader = resourceLoader;
+        this.environment = environment;
     }
 
     /**
@@ -37,7 +41,8 @@ public class ImageController {
     @RequestMapping(value = "/image/profile", method = {RequestMethod.GET })
     public HttpEntity<byte[]> getImage(@RequestParam("id") String id) throws IOException {
         // リソースファイルを読み込み
-        Resource resource = resourceLoader.getResource("file:C:/upload/" + id + "_profile");
+        String dirPath = environment.getProperty("upload.dir.path");
+        Resource resource = resourceLoader.getResource("file:" + dirPath + "/" + id + "_profile");
         // 存在しなければ、後続処理を行わない。
         if (!resource.exists()) {
             return null;
@@ -50,6 +55,6 @@ public class ImageController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
         headers.setContentLength(b.length);
-        return new HttpEntity<byte[]>(b, headers);
+        return new HttpEntity<>(b, headers);
     }
 }
