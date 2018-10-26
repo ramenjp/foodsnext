@@ -133,14 +133,14 @@
 </body>
 <script type="text/javascript">
     $('#modal-selfIntroduction').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var accountname = button.data('name')
-        var selfIntroduction = button.data('intro')
-        selfIntroduction = selfIntroduction.replace(/\r?\n/g, '<br>')
+        var button = $(event.relatedTarget);
+        var accountname = button.data('name');
+        var selfIntroduction = button.data('intro');
+        selfIntroduction = selfIntroduction.replace(/\r?\n/g, '<br>');
 
-        var modal = $(this)  //モーダルを取得
-        modal.find('.modal-title').text(accountname+' さんの自己紹介')
-        modal.find('.modal-body').html(selfIntroduction)
+        var modal = $(this);  //モーダルを取得
+        modal.find('.modal-title').text(accountname + ' さんの自己紹介');
+        modal.find('.modal-body').html(selfIntroduction);
     })
     $(".clearForm").bind("click", function(){
         $(this.form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
