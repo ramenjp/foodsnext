@@ -47,23 +47,24 @@ public class AccountProfileImageUploadController {
             throw new RuntimeException("empty file.");
         }
 
-        // 1Mを超えるファイルはエラー
+        // サイズが1Mを超えるファイルはエラー
         if (multipartFile.getSize() > 1048576) {
             throw new RuntimeException("file size over.");
         }
 
-        // ファイル格納先ディレクトリの作成
+        // プロフィール画像を格納するディレクトリの作成
         String dirPath = environment.getProperty("upload.dir.path");
         StringBuffer filePath = new StringBuffer(dirPath);
         File uploadDir = mkdirs(filePath);
 
-        // アップロードファイルを置く
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
         File uploadFile = new File(uploadDir.getPath() + "/" + account.getId() + "_profile");
+        // アカウントに紐づくプロフィール画像が既に存在していたら、削除する。
         if (uploadFile.exists()){
             uploadFile.delete();
         }
 
+        // プロフィール画像を配置する。
         try {
             byte[] bytes = multipartFile.getBytes();
             BufferedOutputStream uploadFileStream = new BufferedOutputStream(new FileOutputStream(uploadFile));

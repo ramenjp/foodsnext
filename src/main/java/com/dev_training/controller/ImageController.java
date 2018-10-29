@@ -79,7 +79,7 @@ public class ImageController {
             return null;
         }
 
-        // 読み込み、byteへ変換
+        // 読み込み、バイナリ変換
         InputStream image = resource.getInputStream();
         byte[] b = IOUtils.toByteArray(image);
         // レスポンスデータとして返却
