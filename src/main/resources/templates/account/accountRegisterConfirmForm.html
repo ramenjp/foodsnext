@@ -28,11 +28,11 @@
                                         <label>氏名</label><br/>
                                         <span class="form-control-static" th:text="*{name}"></span>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+                                    <div class="form-group">
                                         <label>E-mail</label><br/>
                                         <span class="form-control-static" th:text="*{email}"></span>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
+                                    <div class="form-group">
                                         <label>自己紹介</label><br/>
                                         <span class="form-control-static" id="selfIntroductionPreview" th:utext="*{selfIntroduction}"></span>
                                     </div>
