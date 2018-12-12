@@ -55,7 +55,7 @@ public class AccountPasswordUpdateController {
      * @param model               モデル
      * @return Path
      */
-    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
+    @RequestMapping(value = "/complete", method = RequestMethod.POST)
     public String registerConfirm(@ModelAttribute @Validated AccountPasswordUpdateForm accountPasswordUpdateForm, BindingResult bindingResult, Model model) {
         // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
