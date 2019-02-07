@@ -20,8 +20,8 @@ public class WeatherGetController {
 
             ResponseEntity<String> response = rest.getForEntity(url, String.class);
             String json = response.getBody();
-            return decode(json);
-
+            json = json.replace("\\n","");
+            return(decode(json));
         }
             //日本語 2Byte対応
             private static String decode(String string) {
