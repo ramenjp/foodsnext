@@ -45,38 +45,20 @@
                         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
                         <script>
                             $.getJSON("/weather", function(json){
-                                var src = '本日の天気<div class="thumb"><span><img src="' + json["forecasts"][0]["image"]["url"] + '" alt=""></span></div>';
-                                //最低気温取得エラーの場合
-                                if( $.isEmptyObject(json["forecasts"][0]["temperature"]["min"])){
-                                    var tday_min = "none";
-                                }else{
-                                    var tday_min = json["forecasts"][0]["temperature"]["min"]["celsius"] + '℃';
-                                };
-                                //最高気温取得エラーの場合
-                                if( $.isEmptyObject(json["forecasts"][0]["temperature"]["max"])){
-                                    var tday_max = "none";
-                                }else{
-                                    var tday_max = json["forecasts"][0]["temperature"]["max"]["celsius"] + '℃';
-                                };
-                                src += '<p>' + json["forecasts"][0]["telop"] + '</p>';
+                                var t_data  = json.forecasts[0];
+                                var n_data = json.forecasts[1];
+                                var src = '本日の天気<div class="thumb"><span><img src="' + t_data.image.url + '" alt=""></span></div>';
+                                var tday_min = $.isEmptyObject(t_data.temperature.min) ? "none" : t_data.temperature.min.celsius;
+                                var tday_max = $.isEmptyObject(t_data.temperature.max) ? "none" : t_data.temperature.max.celsius;
+                                src += '<p>' + t_data.telop + '</p>';
                                 src += '<p>最高:' + tday_max + '最低:' + tday_min + '</p>';
-
-                                src += '明日の天気<div class="thumb"><span><img src="' + json["forecasts"][1]["image"]["url"] + '" alt=""></span></div>';
-                                //最低気温取得エラーの場合
-                                if( $.isEmptyObject(json["forecasts"][1]["temperature"]["min"])){
-                                    var nday_min = "none";
-                                }else{
-                                    var nday_min = json["forecasts"][1]["temperature"]["min"]["celsius"] + '℃';
-                                };
-                                //最高気温取得エラーの場合
-                                if( $.isEmptyObject(json["forecasts"][1]["temperature"]["max"])){
-                                    var nday_max = "none";
-                                }else{
-                                    var nday_max = json["forecasts"][1]["temperature"]["max"]["celsius"] + '℃';
-                                };
-                                src += '<p>' + json["forecasts"][1]["telop"] + '</p>';
+                                
+                                src += '明日の天気<div class="thumb"><span><img src="' + n_data.image.url + '" alt=""></span></div>';
+                                var nday_min = $.isEmptyObject(n_data.temperature.min) ? "none" : n_data.temperature.min.celsius;
+                                var nday_max = $.isEmptyObject(n_data.temperature.max) ? "none" : n_data.temperature.max.celsius;
+                                src += '<p>' + n_data.telop + '</p>';
                                 src += '<p>最高:' + nday_max + '最低:' + nday_min + '</p>';
-                                src += '<p>' + json['description']['text'] + '</p>';
+                                src += '<p>' + json.description.text + '</p>';
                                 $('#weather_contents').append(src);
                             });
                         </script>

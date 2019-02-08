@@ -23,9 +23,10 @@ public class WeatherGetController {
             json = json.replace("\\n","");
             return(decode(json));
         }
-            //日本語 2Byte対応
-            private static String decode(String string) {
+        //日本語 2Byte対応
+        private static String decode(String string) {
                 return StringEscapeUtils.unescapeJava(string);
             }
 
-        }
+
+}
