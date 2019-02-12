@@ -45,3 +45,23 @@ body.loggedin { padding-top: 70px; }
     display: inline-block;
 
 }
+.todo-list
+{
+    display: inline-block;
+    position: relative;
+    margin: 5px 5px 5px 5px;
+}
+
+.todo-list div.text
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: calc(20% - 5px);
+    text-align: center;
+    color: #000000;
+    font-weight: bold;
+    font-size: 2em;
+    /* line-height: 16px; */
+}
+

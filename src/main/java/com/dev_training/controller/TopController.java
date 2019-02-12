@@ -1,13 +1,19 @@
 package com.dev_training.controller;
 
+import com.dev_training.common.CodeValue;
 import com.dev_training.entity.Account;
+import com.dev_training.entity.Todo;
+import com.dev_training.form.TodoSearchForm;
+import com.dev_training.service.TodoSearchService;
 import com.dev_training.service.TopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -25,10 +31,17 @@ public class TopController {
     /** セッションキー(ログインユーザのアカウント) */
     private static final String SESSION_FORM_ID = "account";
 
+    /** TODO検索サービス */
+    private final TodoSearchService todoSearchService;
+    /** コード値 */
+    private final CodeValue codeValue;
+
     @Autowired
-    public TopController(TopService topService, HttpSession session) {
+    public TopController(TopService topService, HttpSession session, TodoSearchService todoSearchService, CodeValue codeValue) {
         this.service = topService;
         this.session = session;
+        this.todoSearchService = todoSearchService;
+        this.codeValue = codeValue;
     }
 
     /**
@@ -38,12 +51,23 @@ public class TopController {
      * @return Path
      */
     @RequestMapping(value = "")
-    public String init(@AuthenticationPrincipal Account account) {
+    public String init(@AuthenticationPrincipal Account account, Model model) {
         // 初回のアクセスなら、アカウントを検索してセッションに格納する
         if (Objects.isNull(session.getAttribute(SESSION_FORM_ID))) {
             Account sessionAccount = service.getAccountById(account.getId());
             session.setAttribute(SESSION_FORM_ID, sessionAccount);
         }
+
+        // 担当者にAccountIDをSetして検索
+        TodoSearchForm todoSearchForm = new TodoSearchForm();
+        todoSearchForm.setPersonInChargeId(Integer.toString(account.getId()));
+        List<Todo> list = todoSearchService.findTodo(todoSearchForm);
+        model.addAttribute("list", list);
+        // ステータスプルダウンの初期化
+        model.addAttribute("allStatus", codeValue.getStatus());
+        // 優先度プルダウンの初期化
+        model.addAttribute("allPriority", codeValue.getPriority());
+
         return "top/topForm";
     }
 }
