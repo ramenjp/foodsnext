@@ -45,3 +45,11 @@ body.loggedin { padding-top: 70px; }
     display: inline-block;
 
 }
+.account-list th {
+    white-space: nowrap;
+    text-align: center;
+}
+.profile-image {
+    text-align: center;
+    margin: 0 auto;
+}
