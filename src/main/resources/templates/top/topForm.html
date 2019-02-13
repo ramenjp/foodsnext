@@ -47,7 +47,7 @@
                 <div class="card-body">
                     <div class="todo">
                         <div th:each="todo : ${list}" class="todo-list">
-                            <img src="/images/memo.png" width="100%">
+                            <img src="/images/memo.png">
                             <div class="text">
                                 <p><a th:href="@{/todo/search/detail(todoId=${todo.id})}" th:text="${todo.title}" target="newtab"></a></p>
                                 <p th:text="'開始日:' + ${todo.startDate}"></p>

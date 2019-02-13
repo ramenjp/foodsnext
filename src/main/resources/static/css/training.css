@@ -46,7 +46,7 @@ body.loggedin { padding-top: 70px; }
 
 }
 .todo{
-    text-align: center;
+    margin: auto;
 }
 .todo-list{
     display: inline-block;
@@ -54,18 +54,20 @@ body.loggedin { padding-top: 70px; }
     margin: 5px 20px 15px 20px;
 }
 
+.todo-list img{
+    width: 325px;
+}
+
 .todo-list div.text{
     position: absolute;
     width: 100%;
     left: 0;
-    top: calc(20% - 5px);
-    text-align: center;
+    top: calc(15% - 5px);
     color: #000000;
-    font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 .todo-list p{
-    padding: 0px 30px 0px 45px;
+    padding: 0px 40px 0px 45px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
