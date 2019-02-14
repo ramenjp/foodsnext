@@ -141,6 +141,12 @@
                 alert(errMsg);
                 input.parent().parent().next(':text').val(errMsg);
             }
+        }else{
+            $("#data_upload_button").attr('disabled', true);
+            $("#imagePreview").css("background-image", "");
+            var errMsg ="画像ファイル以外が選択されました。";
+            alert(errMsg);
+            input.parent().parent().next(':text').val(errMsg);
         }
     });
 </script>
