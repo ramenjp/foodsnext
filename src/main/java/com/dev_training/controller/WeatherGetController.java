@@ -20,10 +20,13 @@ public class WeatherGetController {
 
             ResponseEntity<String> response = rest.getForEntity(url, String.class);
             String json = response.getBody();
+            // 2重改行コードが含まれている場合、改行タグに置換する
+            json = json.replace("\\n\\n","<br>");
+            // 改行コードが含まれている場合、除去する
             json = json.replace("\\n","");
             return(decode(json));
         }
-        //日本語 2Byte対応
+        // 日本語 2Byte対応
         private static String decode(String string) {
                 return StringEscapeUtils.unescapeJava(string);
             }
