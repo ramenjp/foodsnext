@@ -49,11 +49,14 @@
                         <div th:each="todo : ${list}" class="todo-list">
                             <img src="/images/memo.png">
                             <div class="text">
-                                <p><a th:href="@{/todo/search/detail(todoId=${todo.id})}" th:text="${todo.title}" target="newtab"></a></p>
+                                <p th:text="${todo.title}"></p>
                                 <p th:text="'開始日:' + ${todo.startDate}"></p>
                                 <p th:text="'終了日:' + ${todo.endDate}"></p>
                                 <p th:text="'優先度:' + ${allPriority.priority.get(todo.priority)}"></p>
                                 <p th:text="'ステータス:' + ${allStatus.status.get(todo.status)}"></p>
+                                <div class="btn">
+                                    <a class="btn btn-info" th:href="@{/todo/search/detail(todoId=${todo.id})}" target="newtab">詳細を見る</a>
+                                </div>
                             </div>
                         </div>
                     </div>
