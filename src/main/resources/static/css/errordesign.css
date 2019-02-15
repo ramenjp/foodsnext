@@ -8,12 +8,12 @@ body {
     margin: 0;
 }
 
-#notfound {
+#errstyle {
     position: relative;
     height: 100vh;
 }
 
-#notfound .notfound {
+#errstyle .errstyle {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -22,21 +22,21 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.notfound {
+.errstyle {
     max-width: 767px;
     width: 100%;
     line-height: 1.4;
     padding: 0px 15px;
 }
 
-.notfound .notfound-404 {
+.errstyle .errstyle-code {
     position: relative;
     height: 150px;
     line-height: 150px;
     margin-bottom: 25px;
 }
 
-.notfound .notfound-404 h1 {
+.errstyle .errstyle-code h1 {
     font-size: 186px;
     font-weight: 900;
     margin: 0px;
@@ -45,20 +45,20 @@ body {
     background-position: center;
 }
 
-.notfound h2 {
+.errstyle h2 {
     font-size: 26px;
     font-weight: 700;
     margin: 0;
 }
 
-.notfound p {
+.errstyle p {
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 0px;
     text-transform: uppercase;
 }
 
-.notfound a {
+.errstyle a {
     display: inline-block;
     text-transform: uppercase;
     color: #fff;
@@ -74,16 +74,16 @@ body {
     transition: 0.2s all;
 }
 
-.notfound a:hover {
+.errstyle a:hover {
     opacity: 0.8;
 }
 
 @media only screen and (max-width: 767px) {
-    .notfound .notfound-404 {
+    .errstyle .errstyle-code {
         height: 110px;
         line-height: 110px;
     }
-    .notfound .notfound-404 h1 {
+    .errstyle .errstyle-code h1 {
         font-size: 120px;
     }
 }
