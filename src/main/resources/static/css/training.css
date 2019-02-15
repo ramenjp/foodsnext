@@ -54,6 +54,38 @@ body.loggedin { padding-top: 70px; }
     margin: 0 auto;
 }
 
+.todo{
+    margin: auto;
+}
+.todo-list{
+    display: inline-block;
+    position: relative;
+    margin: 5px 0px 15px 10px;
+}
+
+.todo-list div.btn{
+    text-align: center;
+    width: 100%;
+}
+
+.todo-list img{
+    width: 325px;
+}
+
+.todo-list div.text{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: calc(15% - 5px);
+    color: #000000;
+    font-size: 1.2em;
+}
+.todo-list p{
+    padding: 0px 40px 0px 45px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 .todo{
     margin: auto;
