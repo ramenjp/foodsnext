@@ -21,7 +21,7 @@ body.loggedin { padding-top: 70px; }
     position: relative;
     height: 100vh;
     min-height: 700px;
-    background: url(/images/jumbo.jpg) no-repeat center center;
+    background: url('../images/jumbo.jpg') no-repeat center center;
     background-size: cover;
 }
 
