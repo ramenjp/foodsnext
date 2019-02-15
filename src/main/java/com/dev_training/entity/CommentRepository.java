@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * コメントリポジトリ。
  */
-public interface CommentRepository extends JpaRepository<Comment, Integer>, JpaSpecificationExecutor<Todo> {
+public interface CommentRepository extends JpaRepository<Comment, Integer>, JpaSpecificationExecutor<Comment> {
 }

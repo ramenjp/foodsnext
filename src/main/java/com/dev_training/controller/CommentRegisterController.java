@@ -1,35 +1,29 @@
 package com.dev_training.controller;
 
 import com.dev_training.entity.Account;
+import com.dev_training.entity.Comment;
 import com.dev_training.form.CommentRegisterForm;
 import com.dev_training.service.CommentRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 
 /**
  * コメント登録コントローラ。
  */
-@Controller
-@RequestMapping(value = "/comment/register")
+@RestController
+@RequestMapping(value = "/comment")
 public class CommentRegisterController {
 
     /** HTTPセッション */
     private final HttpSession session;
-    /** セッションキー(ログインユーザのアカウント) */
-    private static final String SESSION_FORM_ID = "account";
     /** アカウント登録サービス */
     private final CommentRegisterService service;
+    /** セッションキー(ログインユーザのアカウント) */
+    private static final String SESSION_FORM_ID = "account";
 
     @Autowired
     public CommentRegisterController(HttpSession session, CommentRegisterService commentRegisterService) {
@@ -37,17 +31,21 @@ public class CommentRegisterController {
         this.service = commentRegisterService;
     }
 
-    @RequestMapping(path = "/init")
-    String init(Model model) {
-        return "top/topForm";
+    @RequestMapping(path = "/register", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public CommentRegisterForm register(@Validated @RequestBody CommentRegisterForm commentRegisterForm) {
+        Account account = (Account) session.getAttribute(SESSION_FORM_ID);
+        //登録するコメントの作成
+
+        Comment comment = new Comment();
+        comment.setAccountId(account.getId());
+        comment.setComment(commentRegisterForm.getComment());
+
+        // 登録処理
+        service.register(comment);
+        return commentRegisterForm;
+
+
     }
-
-
-    @RequestMapping(path = "/register")
-    String register(@RequestBody CommentRegisterForm commentRegisterForm) {
-
-
-        return "account/accountProfileImageUploadForm";
-    }
-
 }
+

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 <head th:replace="common/common_header::base_header(~{::title})">
     <title>トップ</title>
 </head>
@@ -85,28 +87,39 @@
 </div>
 
 <script type="text/javascript">
-    $("#commentForm").submit(function(){
-        var data = $("#commentForm").serializeArray();
-        data = parseJson(data);
 
-        var ajaxUrl = "/comment/register/register";
+    $("#commentForm").submit(function(event) {
+        // 要素規定の動作をキャンセルする
+        event.preventDefault();
+        //データをJSONに加工
+        var JSONdata = {
+            "comment": $("#comment").val()
+        };
+
+        // CSRFトークンをリクエストヘッダに付加する
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+
+        console.log(JSONdata);
+
+        var ajaxUrl = "/comment/register";
 
         $.ajax({
-            type:          'post',
-            url:          'ajaxUrl',
-            dataType:      'json',
-            contentType:   'application/json',
-            data:          JSON.stringify(data)
-        })
-    }
+            type: 'post',
+            url: ajaxUrl,
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(JSONdata),
+        }).done(function(data) {        // Ajax通信が成功した時の処理
+            alert("投稿が完了しました。");
+        }).fail(function(data) { // Ajax通信が失敗した時の処理
+            alert("投稿が失敗しました。");
+        });
 
-    var parseJson = function(data) {
-        var returnJson = {};
-        for (idx = 0; idx < data.length; idx++) {
-            returnJson[data[idx].name] = data[idx].value
-        }
-        return returnJson;
-    }
+    });
 
 </script>
 
