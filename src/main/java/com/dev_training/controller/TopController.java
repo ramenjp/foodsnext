@@ -59,9 +59,11 @@ public class TopController {
             session.setAttribute(SESSION_FORM_ID, sessionAccount);
         }
 
-        // 担当者にAccountIDをSetして検索
         TodoSearchForm todoSearchForm = new TodoSearchForm();
+        // 担当者にAccountIDをSetして検索
         todoSearchForm.setPersonInChargeId(Integer.toString(account.getId()));
+        // ステータスが「新規」か「着手中」を格納
+        todoSearchForm.setSelectedStatus("4,5");
         List<Todo> list = todoSearchService.findTodo(todoSearchForm);
         model.addAttribute("list", list);
         // ステータスプルダウンの初期化

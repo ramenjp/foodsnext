@@ -55,9 +55,8 @@ body.loggedin { padding-top: 70px; }
 }
 
 .todo-list div.btn{
-    text-align:right;
-    width:100%;
-    margin-right: 5px;
+    text-align: center;
+    width: 100%;
 }
 
 .todo-list img{
