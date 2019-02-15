@@ -52,6 +52,11 @@ public class AccountProfileImageUploadController {
             throw new RuntimeException("file size over.");
         }
 
+        // ContentTypeを取得し「images/」以外をエラー
+        if( !multipartFile.getContentType().contains("image/")){
+            throw new RuntimeException("file type is error.");
+        }
+
         // プロフィール画像を格納するディレクトリの作成
         String dirPath = environment.getProperty("upload.dir.path");
         StringBuffer filePath = new StringBuffer(dirPath);

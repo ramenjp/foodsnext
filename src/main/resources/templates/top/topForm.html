@@ -2,11 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/common_header::base_header(~{::title})">
     <title>トップ</title>
-    <style>
-        <!--
-
-        -->
-    </style>
 </head>
 <body>
 
@@ -40,28 +35,63 @@
                 </div>
             </div>
 
-            <div class="card rounded-0" th:if="!${#lists.isEmpty(list)}">
+            <div class="card rounded-0">
                 <div class="card-header bg-info text-white">
-                    <h3 class="mb-0">現在担当しているTODO</h3>
+                    <h3 class="mb-0">天気予報</h3>
                 </div>
                 <div class="card-body">
-                    <div class="todo">
-                        <div th:each="todo : ${list}" class="todo-list">
-                            <img src="/images/memo.png">
-                            <div class="text">
-                                <p th:text="${todo.title}"></p>
-                                <p th:text="'開始日:' + ${todo.startDate}"></p>
-                                <p th:text="'終了日:' + ${todo.endDate}"></p>
-                                <p th:text="'優先度:' + ${allPriority.priority.get(todo.priority)}"></p>
-                                <p th:text="'ステータス:' + ${allStatus.status.get(todo.status)}"></p>
-                                <div class="btn">
-                                    <a class="btn btn-info" th:href="@{/todo/search/detail(todoId=${todo.id})}" target="newtab">詳細を見る</a>
+                    <div id="weather_contents" class="weather_contents">
+                        <!-- 天気予報取得  -->
+                        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                        <script>
+                            $.getJSON("/weather", function(json){
+                                var t_data  = json.forecasts[0];
+                                var n_data = json.forecasts[1];
+                                var src = '本日の天気<div class="thumb"><span><img src="' + t_data.image.url + '" alt=""></span></div>';
+                                var tday_min = $.isEmptyObject(t_data.temperature.min) ? "none" : t_data.temperature.min.celsius;
+                                var tday_max = $.isEmptyObject(t_data.temperature.max) ? "none" : t_data.temperature.max.celsius;
+                                src += '<p>' + t_data.telop + '</p>';
+                                src += '<p>最高:' + tday_max + '最低:' + tday_min + '</p>';
+                                
+                                src += '明日の天気<div class="thumb"><span><img src="' + n_data.image.url + '" alt=""></span></div>';
+                                var nday_min = $.isEmptyObject(n_data.temperature.min) ? "none" : n_data.temperature.min.celsius;
+                                var nday_max = $.isEmptyObject(n_data.temperature.max) ? "none" : n_data.temperature.max.celsius;
+                                src += '<p>' + n_data.telop + '</p>';
+                                src += '<p>最高:' + nday_max + '最低:' + nday_min + '</p>';
+                                src += '<p>' + json.description.text + '</p>';
+                                $('#weather_contents').append(src);
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="card rounded-0" th:if="!${#lists.isEmpty(list)}">
+                    <div class="card-header bg-info text-white">
+                        <h3 class="mb-0">現在担当しているTODO</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="todo">
+                            <div th:each="todo : ${list}" class="todo-list">
+                                <img src="/images/memo.png">
+                                <div class="text">
+                                    <p th:text="${todo.title}"></p>
+                                    <p th:text="'開始日:' + ${todo.startDate}"></p>
+                                    <p th:text="'終了日:' + ${todo.endDate}"></p>
+                                    <p th:text="'優先度:' + ${allPriority.priority.get(todo.priority)}"></p>
+                                    <p th:text="'ステータス:' + ${allStatus.status.get(todo.status)}"></p>
+                                    <div class="btn">
+                                        <a class="btn btn-info" th:href="@{/todo/search/detail(todoId=${todo.id})}" target="newtab">詳細を見る</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
+
+
+
         </div>
     </div>
 </div>
