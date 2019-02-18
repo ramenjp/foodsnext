@@ -24,7 +24,7 @@ public class AccountPasswordUpdateService {
     }
 
     /**
-     * 現在のパスワード一致精査
+     * 現在のパスワード一致精査。
      *
      * @param id アカウントの主キー
      * @param rawCuurentPassword 入力された現在のパスワード

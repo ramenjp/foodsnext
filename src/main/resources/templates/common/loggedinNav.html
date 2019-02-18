@@ -20,11 +20,10 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="/todo/register/init">TODO登録</a>
                 <a class="dropdown-item" href="/todo/search/init">TODO一覧検索</a>
-                <img th:src="${gravatorURL}">
             </div>
         </li>
     </ul>
-    <img th:src="${session.gravatorURL}">
+
     <span class="navbar-text pr-3" th:text="'ようこそ ' + ${session.account.name} + ' さん。'"></span>
     <form id="logout" th:action="@{/logout}" method="post" class="form-inline">
         <input type="submit" class="btn btn-primary navbar-btn" value="Sign out"/>
