@@ -98,13 +98,14 @@
                 <div class="card-body">
                     <form id="commentForm" method="post">
                         <fieldset id="comment_field">
-                            <textarea class="" id="comment" rows="3" cols="80" maxlength="255" name="comment" required placeholder="メンバーとお話してみよう"></textarea>
+                            <textarea id="comment" rows="3" cols="80" maxlength="255" name="comment" required placeholder="メンバーとお話してみよう"></textarea>
                         </fieldset>
                         <div class="col text-center">
                             <input type="submit" value="投稿" class="btn btn-primary btn-lg" />
                         </div>
                     </form>
                     <div id="commentSearchResult"></div>
+
                 </div>
             </div>
         </div>
@@ -140,8 +141,8 @@
             contentType: 'application/json',　　// 送信するデータの型
             data: JSON.stringify(JSONdata),　　// 送信するデータ
         }).done(function(data) {        　　　// Ajax通信が成功した時の処理
-            alert("投稿が完了しました。");
             commentGet();
+            $("#comment").val("");           //textareaの中身を空にする
         }).fail(function(data) { 　　　　　　// Ajax通信が失敗した時の処理
             alert("投稿が失敗しました。");
         });
@@ -156,10 +157,18 @@
                 var name = json[i].name;
                 var comment = json[i].comment;
                 var createdTms = json[i].createdTms;
-                src += '<img src="/image/profile?id=' + id + '">';
+
+                src += '<div class="container">';
+                src += '<div class="row" style="margin-bottom: 10px;">';
+                src += '<div class="col-2 align-items-center">';
+                src += '<img src="/image/profile?id=' + id + '" width="90">';
+                src += '</div>';
+                src += '<div class="col-10">';
                 src += '<p>' + name + '</p>';
-                src += '<p>' + comment + '</p>';
-                src += '<p>' + createdTms + '</p>';
+                src += '<p style="font-size:0.9em;">' + comment + '<small>( ' + createdTms + ')</small></p>';
+                src += '</div>';
+                src += '</div>';
+                src += '</div>';
             }
             $('#commentSearchResult').append(src);
         });
