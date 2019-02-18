@@ -36,7 +36,6 @@ public class CommentRegisterController {
     public CommentRegisterForm register(@Validated @RequestBody CommentRegisterForm commentRegisterForm) {
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
         //登録するコメントの作成
-
         Comment comment = new Comment();
         comment.setAccountId(account.getId());
         comment.setComment(commentRegisterForm.getComment());
@@ -44,8 +43,6 @@ public class CommentRegisterController {
         // 登録処理
         service.register(comment);
         return commentRegisterForm;
-
-
     }
 }
 

@@ -16,8 +16,9 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
      * @param id アカウントのID
      * @return アカウント
      */
-    @Query(value = "select account_name  from going where id = :id ", nativeQuery = true)
-    Account findAccountById(@Param("id") int id);
+    @Query(value = "SELECT name FROM accounts WHERE id = :id ", nativeQuery = true)
+    String findAccountNameById(@Param("id") int id);
+
     /**
      * アカウントIDに紐づくアカウントを検索する。
      *

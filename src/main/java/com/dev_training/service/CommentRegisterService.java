@@ -6,21 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * アカウント登録サービス。
+ * コメント登録サービス。
  */
 @Service
 public class CommentRegisterService {
 
-    /** アカウントリポジトリ */
+    /*** コメントリポジトリ*/
     private final CommentRepository commentRepository;
 
     @Autowired
     public CommentRegisterService(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
-    /**
-     * コメント登録処理。
-     */
+
+    /*** コメント登録処理。*/
     public void register(Comment comment) {
         commentRepository.save(comment);
     }

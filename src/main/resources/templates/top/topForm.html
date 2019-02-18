@@ -20,6 +20,7 @@
                 <a href="/account/unsubscribe/init" class="list-group-item list-group-item-action">退会</a>
                 <a href="/todo/register/init" class="list-group-item list-group-item-action">TODO登録</a>
                 <a href="/todo/search/init" class="list-group-item list-group-item-action">TODO一覧検索</a>
+                <a href="/comment/search" class="list-group-item list-group-item-action">test</a>
             </div>
         </div>
 
@@ -54,7 +55,7 @@
                                 var tday_max = $.isEmptyObject(t_data.temperature.max) ? "none" : t_data.temperature.max.celsius;
                                 src += '<p>' + t_data.telop + '</p>';
                                 src += '<p>最高:' + tday_max + '最低:' + tday_min + '</p>';
-                                
+
                                 src += '明日の天気<div class="thumb"><span><img src="' + n_data.image.url + '" alt=""></span></div>';
                                 var nday_min = $.isEmptyObject(n_data.temperature.min) ? "none" : n_data.temperature.min.celsius;
                                 var nday_max = $.isEmptyObject(n_data.temperature.max) ? "none" : n_data.temperature.max.celsius;
@@ -80,6 +81,7 @@
                             <input type="submit" value="投稿" class="btn btn-primary btn-lg" />
                         </div>
                     </form>
+                    <div id="commentSearchResult"></div>
                 </div>
             </div>
         </div>
@@ -87,6 +89,9 @@
 </div>
 
 <script type="text/javascript">
+    window.onload = function () {
+        commentGet();
+    };
 
     $("#commentForm").submit(function(event) {
         // 要素規定の動作をキャンセルする
@@ -103,24 +108,39 @@
             xhr.setRequestHeader(header, token);
         });
 
-        console.log(JSONdata);
-
         var ajaxUrl = "/comment/register";
 
         $.ajax({
-            type: 'post',
-            url: ajaxUrl,
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify(JSONdata),
-        }).done(function(data) {        // Ajax通信が成功した時の処理
+            type: 'post',　　　　　　　　　　　// HTTP通信の種類
+            url: ajaxUrl,　　　　　　　　　　　// リクエストを送信する先のURL
+            dataType: 'json',　　　　　　　　　// サーバーから返されるデータの型
+            contentType: 'application/json',　　// 送信するデータの型
+            data: JSON.stringify(JSONdata),　　// 送信するデータ
+        }).done(function(data) {        　　　// Ajax通信が成功した時の処理
             alert("投稿が完了しました。");
-        }).fail(function(data) { // Ajax通信が失敗した時の処理
+            commentGet();
+        }).fail(function(data) { 　　　　　　// Ajax通信が失敗した時の処理
             alert("投稿が失敗しました。");
         });
-
     });
 
+     function commentGet(){
+        $.getJSON("/comment/search", function(json){
+            var src = "";
+            $('#commentSearchResult').html(src);
+            for(var i=0; i<json.length; i++){
+                var id = json[i].id;
+                var name = json[i].name;
+                var comment = json[i].comment;
+                var createdTms = json[i].createdTms;
+                src += '<img src="/image/profile?id=' + id + '">';
+                src += '<p>' + name + '</p>';
+                src += '<p>' + comment + '</p>';
+                src += '<p>' + createdTms + '</p>';
+            }
+            $('#commentSearchResult').append(src);
+        });
+    }
 </script>
 
 </body>
