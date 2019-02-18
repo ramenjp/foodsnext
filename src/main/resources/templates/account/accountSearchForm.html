@@ -66,28 +66,45 @@
                             <span class="badge badge-info">E-mail</span>
                             <p th:text="${account.email}"></p>
                             <p>
-                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-selfIntroduction" th:attr="data-intro=${account.selfIntroduction}, data-name=${account.name}, data-id=${account.id}">Open</button>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-selfIntroduction"
+                                        th:attr="data-accountid=${account.accountId},data-intro=${account.selfIntroduction},data-name=${account.name},data-id=${account.id},data-email=${account.email}">
+                                    Open</button>
                             </p>
                         </div>
 
                         <!-- 2.モーダルの配置 -->
-                        <div class="modal" id="modal-selfIntroduction" tabindex="-1">
+                        <div class="modal fade" id="modal-selfIntroduction" role="dialog" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
-
                                 <!-- 3.モーダルのコンテンツ -->
                                 <div class="modal-content">
                                     <!-- 4.モーダルのヘッダ -->
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="modal-label">埋め込み</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
                                     <!-- 5.モーダルのボディ -->
                                     <div class="modal-body" id="modal-body">
-                                        <span class="form-control-static" id="modalSelfIntroduction" th:utext="${account.selfIntroduction}"></span>
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div id="images" class="img-fluid"></div>
+                                            </div>
+                                            <div class="col-7">
+                                                <span class="badge badge-info">氏名</span>
+                                                <p class="account-name"></p>
+                                                <span class="badge badge-info">アカウントID</span>
+                                                <p class="account-id"></p>
+                                                <span class="badge badge-info">E-mail</span>
+                                                <p class="account-email"></p>
+                                                <span class="badge badge-info">自己紹介</span>
+                                                <pre class="selfIntroduction"></pre>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div id="images"></div>
                                     <!-- 6.モーダルのフッタ -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
                                     </div>
                                 </div>
                             </div>
@@ -105,11 +122,17 @@
     $('#modal-selfIntroduction').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var accountname = button.data('name');
+        var accountid = button.data('accountid');
         var selfIntroduction = button.data('intro');
+        var email= button.data('email');
+        selfIntroduction = selfIntroduction.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
         selfIntroduction = selfIntroduction.replace(/\r?\n/g, '<br>');
         var modal = $(this);//モーダルを取得
         modal.find('.modal-title').text(accountname + ' さんの自己紹介');
-        modal.find('.modal-body').html(selfIntroduction);
+        modal.find('.selfIntroduction').html(selfIntroduction);
+        modal.find('.account-id').text(accountid);
+        modal.find('.account-name').text(accountname);
+        modal.find('.account-email').text(email);
 
         $("#images").empty();
         var id = button.data('id');
@@ -126,7 +149,8 @@
             image.onload = function () {
                 URL.revokeObjectURL(oURL);
                 $("#images").append(image);
-                $("#images > img").css('width', '200px');
+                $("#images > img").css('max-width', '240px','max-height','240px','object-fit','contain');
+
             };
             image.src = oURL;
         };
