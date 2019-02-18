@@ -139,14 +139,42 @@
             url: ajaxUrl,　　　　　　　　　　　// リクエストを送信する先のURL
             dataType: 'json',　　　　　　　　　// サーバーから返されるデータの型
             contentType: 'application/json',　　// 送信するデータの型
-            data: JSON.stringify(JSONdata),　　// 送信するデータ
+            data: JSON.stringify(JSONdata)    　// 送信するデータ
         }).done(function(data) {        　　　// Ajax通信が成功した時の処理
             commentGet();
-            $("#comment").val("");           //textareaの中身を空にする
+            $("#comment").val("");             //textareaの中身を空にする
         }).fail(function(data) { 　　　　　　// Ajax通信が失敗した時の処理
             alert("投稿が失敗しました。");
         });
     });
+
+     function Delete(id){
+         // 要素規定の動作をキャンセルする
+         event.preventDefault();
+         console.log(id);
+         // CSRFトークンをリクエストヘッダに付加する
+         var token = $("meta[name='_csrf']").attr("content");
+         var header = $("meta[name='_csrf_header']").attr("content");
+         $(document).ajaxSend(function(e, xhr, options) {
+             xhr.setRequestHeader(header, token);
+         });
+         //データをJSONに加工
+         var JSONdata = {
+             "id":id
+         };
+         var ajaxUrl = "/comment/delete/"+ id;
+         $.ajax({
+             type: 'delete',　　　　　　　　　　// HTTP通信の種類
+             url: ajaxUrl,　　　　　　　　　　　// リクエストを送信する先のURL
+             contentType: 'application/json',　　// 送信するデータの型
+             data: JSON.stringify(JSONdata)    　// 送信するデータ
+         }).done(function(data) {        　　　// Ajax通信が成功した時の処理
+             commentGet();
+         }).fail(function(data) { 　　　　　　// Ajax通信が失敗した時の処理
+             alert("削除に失敗しました。");
+         });
+
+     }
 
      function commentGet(){
         $.getJSON("/comment/search", function(json){
@@ -154,6 +182,7 @@
             $('#commentSearchResult').html(src);
             for(var i=0; i<json.length; i++){
                 var id = json[i].id;
+                var accountId = json[i].accountId;
                 var name = json[i].name;
                 var comment = json[i].comment;
                 var createdTms = json[i].createdTms;
@@ -161,11 +190,13 @@
                 src += '<div class="container">';
                 src += '<div class="row" style="margin-bottom: 10px;">';
                 src += '<div class="col-2 align-items-center">';
-                src += '<img src="/image/profile?id=' + id + '" width="90">';
+                src += '<img src="/image/profile?id=' + accountId + '" width="90">';
                 src += '</div>';
                 src += '<div class="col-10">';
                 src += '<p>' + name + '</p>';
-                src += '<p style="font-size:0.9em;">' + comment + '<small>( ' + createdTms + ')</small></p>';
+                src += '<p style="font-size:0.9em;">' + comment + '<small>( ' + createdTms + ')</small>';
+                src += '<a id="commentDelete" onclick="Delete(' + id + ');" href="#">削除</a>';
+                src += '</p>';
                 src += '</div>';
                 src += '</div>';
                 src += '</div>';

@@ -13,7 +13,7 @@ import java.util.List;
 
 
 /**
- * コメント登録サービス。
+ * コメント検索サービス。
  */
 @Service
 public class CommentSearchService {
@@ -66,7 +66,8 @@ public class CommentSearchService {
             String createdTms = modifyTms(comment.getCreatedTms());
             //コメント検索フォーム作成
             CommentSearchForm form = new CommentSearchForm();
-            form.setId(comment.getAccountId());
+            form.setId(comment.getId());
+            form.setAccountId(comment.getAccountId());
             form.setName(accountName);
             form.setComment(comment.getComment());
             form.setCreatedTms(createdTms);

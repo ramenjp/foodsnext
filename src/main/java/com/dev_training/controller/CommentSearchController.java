@@ -18,15 +18,19 @@ import java.util.List;
 @RequestMapping(value = "/comment")
 public class CommentSearchController {
 
-    /*** HTTPセッション */
+    /*** コメント検索サービス */
     private final CommentSearchService service;
 
     @Autowired
     public CommentSearchController(CommentSearchService commentSearchService) {
         this.service = commentSearchService;
-
     }
 
+    /**
+     * コメント検索フォーム。
+     *
+     * @return コメント検索結果
+     */
     @RequestMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
     public List<CommentSearchForm> search() {

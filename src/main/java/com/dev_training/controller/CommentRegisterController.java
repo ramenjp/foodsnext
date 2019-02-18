@@ -31,6 +31,12 @@ public class CommentRegisterController {
         this.service = commentRegisterService;
     }
 
+    /**
+     * コメント登録処理。
+     *
+     * @param commentRegisterForm　コメント登録フォーム
+     * @return コメント登録フォーム
+     */
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public CommentRegisterForm register(@Validated @RequestBody CommentRegisterForm commentRegisterForm) {

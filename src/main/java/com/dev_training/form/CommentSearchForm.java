@@ -4,12 +4,14 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * コメント登録フォーム。
+ * コメント検索フォーム。
  */
 public class CommentSearchForm implements Serializable {
 
     @Size(max = 45, message = "{error.size.max}")
     private int id;
+
+    private int accountId;
 
     private String name;
 
@@ -20,6 +22,10 @@ public class CommentSearchForm implements Serializable {
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }
+
+    public int getAccountId() { return accountId; }
+
+    public void setAccountId(int accountId) { this.accountId = accountId; }
 
     public String getName() { return name; }
 
