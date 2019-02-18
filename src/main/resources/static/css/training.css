@@ -131,7 +131,6 @@ body.loggedin { padding-top: 70px; }
     width: 100%;
     height: 240px;
     object-fit: contain;
-    background-color: #eeeeee;
 }
 
 .img-thumbnail h4 {
