@@ -74,9 +74,9 @@ public class ImageController {
         // リソースファイルを読み込み
         String dirPath = environment.getProperty("upload.dir.path");
         Resource resource = resourceLoader.getResource("file:" + dirPath + "/" + id + "_profile");
-        // 存在しなければ、後続処理を行わない。
+        // 存在しなければ、noimageを格納する
         if (!resource.exists()) {
-            return null;
+            resource = resourceLoader.getResource("classpath:" + "/static/images/noimage");
         }
 
         // 読み込み、バイナリ変換
