@@ -15,7 +15,7 @@ public class Comment {
     private int id;
 
     @Column(name = "account_id", nullable = false, unique = true)
-    private String accountId;
+    private int accountId;
 
     @Column(name = "comment", nullable = false, length = 200)
     private String comment;
@@ -31,9 +31,9 @@ public class Comment {
         this.id = id;
     }
 
-    public String getAccountId() { return accountId; }
+    public int getAccountId() { return accountId; }
 
-    public void setAccountId(String accountId) { this.accountId = accountId; }
+    public void setAccountId(int accountId) { this.accountId = accountId; }
 
     public String getComment() { return comment; }
 

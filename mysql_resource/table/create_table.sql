@@ -32,7 +32,7 @@ CREATE TABLE `todo` (
 
 CREATE TABLE `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `account_id` int(11) NOT NULL ,
   `comment` text NOT NULL,
   `created_tms` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
