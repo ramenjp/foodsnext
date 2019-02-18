@@ -55,12 +55,15 @@
         <div class="col-md-12 mx-auto">
             <!--結果の表示-->
             <div th:if="!${#lists.isEmpty(list)}">
-                <div class="col-xs-6 col-md-3" th:each="account : ${list}" style="display: inline-block;margin-left: -5px;margin-bottom: 5px;">
+                <div class="col-xs-6 col-md-3 account-profile" th:each="account : ${list}">
                     <div class="img-thumbnail">
-                        <img th:src="@{/image/profile(id=${account.id})}" width="100%">
+                        <img th:src="@{/image/profile(id=${account.id})}" class="rounded">
                         <div class="figure-caption">
+                            <span class="badge badge-info">氏名</span>
                             <h4 th:text="${account.name}"></h4>
+                            <span class="badge badge-info">アカウントID</span>
                             <p th:text="${account.accountId}"></p>
+                            <span class="badge badge-info">E-mail</span>
                             <p th:text="${account.email}"></p>
                             <p>
                                 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-selfIntroduction" th:attr="data-intro=${account.selfIntroduction}, data-name=${account.name}, data-id=${account.id}">Open</button>
@@ -89,7 +92,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
