@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <meta name="_csrf" th:content="${_csrf.token}"/>
 <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<meta name="_account_id" th:content="${session.account.id}"/>
 <head th:replace="common/common_header::base_header(~{::title})">
     <title>トップ</title>
 </head>
@@ -104,7 +105,6 @@
                         </div>
                     </form>
                     <div id="commentSearchResult"></div>
-
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@
         });
     });
 
-     function Delete(id){
+     function commentDelete(id){
          // 要素規定の動作をキャンセルする
          event.preventDefault();
          // CSRFトークンをリクエストヘッダに付加する
@@ -193,7 +193,9 @@
                 src += '<div class="col-10">';
                 src += '<p>' + name + '</p>';
                 src += '<p style="font-size:0.9em;">' + comment + '<small>( ' + createdTms + ')</small>';
-                src += '<a id="commentDelete" onclick="Delete(' + id + ');" href="#">削除</a>';
+                if(accountId == $("meta[name='_account_id']").attr("content")) {
+                    src += '<a id="commentDelete" onclick="commentDelete(' + id + ');" href="#">削除</a>';
+                }
                 src += '</p>';
                 src += '</div>';
                 src += '</div>';
