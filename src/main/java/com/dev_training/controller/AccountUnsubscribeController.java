@@ -57,7 +57,8 @@ public class AccountUnsubscribeController {
     public String unsubscribeComplete() {
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
         // 削除処理
-        service.delete(account.getId());
+        account.setDeleteFlag(1);
+        service.delete(account);
         // セッション破棄
         session.invalidate();
         return "account/accountUnsubscribeCompleteForm";

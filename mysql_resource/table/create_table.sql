@@ -11,6 +11,7 @@ CREATE TABLE `accounts` (
   `self_introduction` text NOT NULL,
   `created_tms` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_tms` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `delete_flag` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

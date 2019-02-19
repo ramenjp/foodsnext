@@ -33,6 +33,9 @@ public class Account implements UserDetails {
     @Column(name = "self_introduction", nullable = false, length = 200)
     private String selfIntroduction;
 
+    @Column(name = "delete_flag")
+    private int deleteFlag;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -111,4 +114,8 @@ public class Account implements UserDetails {
     public void setSelfIntroduction(String selfIntroduction) {
         this.selfIntroduction = selfIntroduction;
     }
+
+    public int getDeleteFlag() { return deleteFlag; }
+
+    public void setDeleteFlag(int deleteFlag) { this.deleteFlag = deleteFlag; }
 }
