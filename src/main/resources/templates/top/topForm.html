@@ -20,7 +20,6 @@
                 <a href="/account/unsubscribe/init" class="list-group-item list-group-item-action">退会</a>
                 <a href="/todo/register/init" class="list-group-item list-group-item-action">TODO登録</a>
                 <a href="/todo/search/init" class="list-group-item list-group-item-action">TODO一覧検索</a>
-                <a href="/comment/search" class="list-group-item list-group-item-action">test</a>
             </div>
         </div>
 
@@ -151,7 +150,6 @@
      function Delete(id){
          // 要素規定の動作をキャンセルする
          event.preventDefault();
-         console.log(id);
          // CSRFトークンをリクエストヘッダに付加する
          var token = $("meta[name='_csrf']").attr("content");
          var header = $("meta[name='_csrf_header']").attr("content");
