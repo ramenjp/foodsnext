@@ -70,6 +70,7 @@ body.loggedin { padding-top: 70px; }
 
 .todo-list img{
     width: 325px;
+    box-shadow: 2px 2px 4px gray;
 }
 
 .todo-list div.text{
