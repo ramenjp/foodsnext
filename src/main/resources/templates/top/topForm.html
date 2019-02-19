@@ -12,45 +12,89 @@
         <nav class="col-sm-2 col-md-2 bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span><i class="far fa-address-card"></i>&nbsp;アカウント情報</span>
+                    <h6 class="sidebar-heading d-flex align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>アカウント機能</span>
                         <a class="d-flex align-items-center text-muted" href="#">
                         </a>
                     </h6>
 
                     <li class="nav-item">
-                        <a href="/account/update/init" class="nav-link">アカウント情報更新</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/account/search/init" class="nav-link">アカウント一覧検索</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/account/search/paging/init" class="nav-link">
-                            アカウント一覧検索<br /><small>(参考：ページング)</small>
+                        <a href="/account/update/init" class="nav-link">
+                            <i class="far fa-address-card"></i>
+                            アカウント情報更新
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/account/upload/init" class="nav-link">プロフィール画像<br />
-                            アップロード</a>
+                        <a href="/account/search/init" class="nav-link">
+                            <i class="far fa-address-card"></i>
+                            アカウント一覧検索
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/account/unsubscribe/init" class="nav-link">退会</a>
+                        <a href="/account/search/paging/init" class="nav-link">
+                            <i class="far fa-address-card"></i>
+                            アカウント一覧検索<small>(参考：ページング)</small>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/account/upload/init" class="nav-link">
+                            <i class="far fa-address-card"></i>
+                            プロフィール画像アップロード</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/account/unsubscribe/init" class="nav-link">
+                            <i class="far fa-address-card"></i>
+                            退会
+                        </a>
                     </li>
                 </ul>
 
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span><i class="fas fa-tasks"></i>&nbsp;TODO</span>
+                <h6 class="sidebar-heading d-flex align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>TODO機能</span>
                     <a class="d-flex align-items-center text-muted" href="#">
                     </a>
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a href="/todo/register/init" class="nav-link">TODO登録</a>
+                        <a href="/todo/register/init" class="nav-link">
+                            <i class="fas fa-tasks"></i>
+                            TODO登録
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/todo/search/init" class="nav-link">TODO一覧検索</a>
+                        <a href="/todo/search/init" class="nav-link">
+                            <i class="fas fa-tasks"></i>
+                            TODO一覧検索
+                        </a>
                     </li>
                 </ul>
+
+                <h6 class="sidebar-heading d-flex align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>天気予報</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
+                    </a>
+                </h6>
+                <div class="weather-contents">
+                    <table class="table-light">
+                        <tr>
+                            <th>本日</th>
+                            <th>明日</th>
+                        </tr>
+                        <tr>
+                            <td class="tday-img"></td>
+                            <td class="nday-img"></td>
+                        </tr>
+                        <tr>
+                            <td class="tday-text"></td>
+                            <td class="nday-text"></td>
+                        </tr>
+                        <tr>
+                            <td class="tday-temp"></td>
+                            <td class="nday-temp"></td>
+                        </tr>
+                    </table>
+                </div>
+
             </div>
         </nav>
 
@@ -60,47 +104,39 @@
                     <h3 class="mb-0">アカウント機能の使い方</h3>
                 </div>
                 <div class="card-body">
+
                     <ul>
                         <li>自身のユーザ情報を変更したい場合は、サイドメニューからアカウント情報更新画面に遷移してください。</li>
                         <li>他のユーザ情報を検索したい場合は、サイドメニューからアカウント検索画面に遷移してください。</li>
                         <li>退会したい場合は、メニューから退会画面に遷移してください。</li>
                     </ul>
                 </div>
-            </div>
 
-            <div class="card rounded-0">
+            </div>
+            <!-- TODOリスト -->
+            <div class="card rounded-0" th:if="!${#lists.isEmpty(list)}">
                 <div class="card-header bg-info text-white">
-                    <h3 class="mb-0">天気予報</h3>
+                    <h3 class="mb-0">現在担当しているTODO</h3>
                 </div>
                 <div class="card-body">
-                    <!-- 天気予報  -->
-                    <div id="weather_contents" class="weather_contents"></div>
-                </div>
-
-                <div class="card rounded-0" th:if="!${#lists.isEmpty(list)}">
-                    <div class="card-header bg-info text-white">
-                        <h3 class="mb-0">現在担当しているTODO</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="todo">
-                            <div th:each="todo : ${list}" class="todo-list">
-                                <img src="/images/memo.png">
-                                <div class="text">
-                                    <p th:text="${todo.title}"></p>
-                                    <p th:text="'開始日:' + ${todo.startDate}"></p>
-                                    <p th:text="'終了日:' + ${todo.endDate}"></p>
-                                    <p th:text="'優先度:' + ${allPriority.priority.get(todo.priority)}"></p>
-                                    <p th:text="'ステータス:' + ${allStatus.status.get(todo.status)}"></p>
-                                    <div class="btn">
-                                        <a class="btn btn-info" th:href="@{/todo/search/detail(todoId=${todo.id})}" target="newtab">詳細を見る</a>
-                                    </div>
+                    <div class="todo">
+                        <div th:each="todo : ${list}" class="todo-list">
+                            <img src="/images/memo.png">
+                            <div class="text">
+                                <p th:text="${todo.title}"></p>
+                                <p th:text="'開始日:' + ${todo.startDate}"></p>
+                                <p th:text="'終了日:' + ${todo.endDate}"></p>
+                                <p th:text="'優先度:' + ${allPriority.priority.get(todo.priority)}"></p>
+                                <p th:text="'ステータス:' + ${allStatus.status.get(todo.status)}"></p>
+                                <div class="btn">
+                                    <a class="btn btn-info" th:href="@{/todo/search/detail(todoId=${todo.id})}" target="newtab">詳細を見る</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 </div>
 
@@ -109,19 +145,16 @@
     $.getJSON("/weather", function(json){
         var t_data  = json.forecasts[0];
         var n_data = json.forecasts[1];
-        var src = '本日の天気<div class="thumb"><span><img src="' + t_data.image.url + '" alt=""></span></div>';
-        var tday_min = $.isEmptyObject(t_data.temperature.min) ? "none" : t_data.temperature.min.celsius;
-        var tday_max = $.isEmptyObject(t_data.temperature.max) ? "none" : t_data.temperature.max.celsius;
-        src += '<p>' + t_data.telop + '</p>';
-        src += '<p>最高:' + tday_max + '最低:' + tday_min + '</p>';
-
-        src += '明日の天気<div class="thumb"><span><img src="' + n_data.image.url + '" alt=""></span></div>';
-        var nday_min = $.isEmptyObject(n_data.temperature.min) ? "none" : n_data.temperature.min.celsius;
-        var nday_max = $.isEmptyObject(n_data.temperature.max) ? "none" : n_data.temperature.max.celsius;
-        src += '<p>' + n_data.telop + '</p>';
-        src += '<p>最高:' + nday_max + '最低:' + nday_min + '</p>';
-        src += '<p>' + json.description.text + '</p>';
-        $('#weather_contents').append(src);
+        var tday_min = $.isEmptyObject(t_data.temperature.min) ? "-" : t_data.temperature.min.celsius;
+        var tday_max = $.isEmptyObject(t_data.temperature.max) ? "-" : t_data.temperature.max.celsius;
+        var nday_min = $.isEmptyObject(n_data.temperature.min) ? "-" : n_data.temperature.min.celsius;
+        var nday_max = $.isEmptyObject(n_data.temperature.max) ? "-" : n_data.temperature.max.celsius;
+        $('.tday-img').append('<img src="' + t_data.image.url + '" >');
+        $('.nday-img').append('<img src="' + n_data.image.url + '" >');
+        $('.tday-text').append(t_data.telop);
+        $('.nday-text').append(n_data.telop);
+        $('.tday-temp').append(tday_max + '/' +  tday_min + '℃');
+        $('.nday-temp').append(nday_max + '/' +  nday_min + '℃');
     });
 </script>
 </body>
