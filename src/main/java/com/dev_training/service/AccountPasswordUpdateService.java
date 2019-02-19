@@ -26,19 +26,19 @@ public class AccountPasswordUpdateService {
     /**
      * 現在のパスワード一致精査。
      *
-     * @param id アカウントの主キー
-     * @param rawCuurentPassword 入力された現在のパスワード
+     * @param id                 アカウントの主キー
+     * @param rawCurrentPassword 入力された現在のパスワード
      * @return 精査結果
      */
-    public boolean validCurrentPassword(int id, String rawCuurentPassword) {
+    public boolean validCurrentPassword(int id, String rawCurrentPassword) {
         Account account = accountRepository.findById(id).orElseThrow(RuntimeException::new);
-        return passwordEncoder.matches(rawCuurentPassword, account.getPassword());
+        return passwordEncoder.matches(rawCurrentPassword, account.getPassword());
     }
 
     /**
      * パスワード更新処理。
      *
-     * @param id アカウントの主キー
+     * @param id             アカウントの主キー
      * @param rawNewPassword 入力された新しいパスワード
      */
     public void updatePassword(int id, String rawNewPassword) {

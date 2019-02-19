@@ -6,7 +6,6 @@ import com.dev_training.form.AccountPasswordUpdateForm;
 import com.dev_training.service.AccountPasswordUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
-/**password
+/**
  * パスワード更新コントローラ。
  */
 @Controller
@@ -35,10 +34,9 @@ public class AccountPasswordUpdateController {
         this.session = session;
     }
 
-
     /**
      * パスワード更新-初期表示。
-     *accountPasswordUpdateForm
+     *
      * @param accountPasswordUpdateForm パスワード更新フォーム
      * @return Path
      */
@@ -51,12 +49,11 @@ public class AccountPasswordUpdateController {
      * パスワード更新-確認画面表示。
      *
      * @param accountPasswordUpdateForm 精査済みフォーム
-     * @param bindingResult       精査結果
-     * @param model               モデル
+     * @param bindingResult             精査結果
      * @return Path
      */
     @RequestMapping(value = "/complete", method = RequestMethod.POST)
-    public String registerConfirm(@ModelAttribute @Validated AccountPasswordUpdateForm accountPasswordUpdateForm, BindingResult bindingResult, Model model) {
+    public String registerConfirm(@ModelAttribute @Validated AccountPasswordUpdateForm accountPasswordUpdateForm, BindingResult bindingResult) {
         // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return "account/accountPasswordUpdateForm";
@@ -64,11 +61,10 @@ public class AccountPasswordUpdateController {
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
         boolean isValid = service.validCurrentPassword(account.getId(), accountPasswordUpdateForm.getCurrentPassword());
         if (!isValid) {
-            bindingResult.reject("validation.current.password","default message");
+            bindingResult.reject("validation.current.password", "default message");
             return "account/accountPasswordUpdateForm";
         }
         service.updatePassword(account.getId(), accountPasswordUpdateForm.getNewPassword());
         return "account/accountPasswordUpdateCompleteForm";
     }
-
 }
