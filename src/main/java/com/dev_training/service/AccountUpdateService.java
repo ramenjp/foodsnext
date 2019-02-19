@@ -79,15 +79,16 @@ public class AccountUpdateService {
      * @return 更新件数
      */
     @Transactional
-    public int updateAccountById(Account account) {
-        String jpql = "UPDATE Account a SET a.accountId = :accountId, a.name = :name, a.email = :email, a.selfIntroduction = :selfIntroduction WHERE a.id = :id";
-        Query query = entityManager.createQuery(jpql);
-        query.setParameter("accountId", account.getAccountId());
-        query.setParameter("name", account.getName());
-        query.setParameter("email", account.getEmail());
-        query.setParameter("selfIntroduction", account.getSelfIntroduction());
-        query.setParameter("id", account.getId());
-        return query.executeUpdate();
+    public void updateAccountById(Account account) {
+        accountRepository.save(account);
+//        String jpql = "UPDATE Account a SET a.accountId = :accountId, a.name = :name, a.email = :email, a.selfIntroduction = :selfIntroduction WHERE a.id = :id";
+//        Query query = entityManager.createQuery(jpql);
+//        query.setParameter("accountId", account.getAccountId());
+//        query.setParameter("name", account.getName());
+//        query.setParameter("email", account.getEmail());
+//        query.setParameter("selfIntroduction", account.getSelfIntroduction());
+//        query.setParameter("id", account.getId());
+//        return query.executeUpdate();
     }
 
 }
