@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping(value = "/comment")
 public class CommentSearchController {
 
-    /*** コメント検索サービス */
+    /** コメント検索サービス */
     private final CommentSearchService service;
 
     @Autowired
@@ -34,7 +34,6 @@ public class CommentSearchController {
     @RequestMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
     public List<CommentSearchForm> search() {
-        List<CommentSearchForm> list = service.findComment();
-        return list;
+        return  service.findComment();
     }
 }

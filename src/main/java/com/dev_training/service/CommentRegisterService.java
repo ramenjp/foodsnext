@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommentRegisterService {
 
-    /*** コメントリポジトリ*/
+    /** コメントリポジトリ */
     private final CommentRepository commentRepository;
 
     @Autowired

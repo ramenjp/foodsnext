@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/comment")
 public class CommentDeleteController {
 
-    /*** コメント削除サービス */
+    /** コメント削除サービス */
     private final CommentDeleteService service;
 
     @Autowired

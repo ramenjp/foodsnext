@@ -18,9 +18,9 @@ import java.util.List;
 @Service
 public class CommentSearchService {
 
-    /*** コメントリポジトリ*/
+    /** コメントリポジトリ */
     private final CommentRepository commentRepository;
-    /*** アカウントリポジトリ*/
+    /** アカウントリポジトリ */
     private final AccountRepository accountRepository;
 
     @Autowired
