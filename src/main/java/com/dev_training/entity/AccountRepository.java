@@ -15,7 +15,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
      * @param accountId アカウントID
      * @return アカウント
      */
-    @Query(value = "SELECT * FROM accounts WHERE account_id = :accountId AND deleted_flag = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM accounts WHERE account_id = :accountId AND delete_flag = 0", nativeQuery = true)
     Account findByAccountId(@Param("accountId") String accountId);
 
     /**
@@ -24,6 +24,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
      * @param accountId アカウントID
      * @return 件数
      */
-    @Query(value = "SELECT COUNT(*) FROM accounts WHERE account_id = :accountId", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM accounts WHERE account_id = :accountId AND delete_flag = 0", nativeQuery = true)
     int countByAccountId(@Param("accountId") String accountId);
 }
