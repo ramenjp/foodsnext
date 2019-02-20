@@ -1,13 +1,13 @@
 package com.dev_training.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
- * コメントエンティティ。
+ * コメントテーブル結合用エンティティ。
  */
 @Entity
-@Table(name = "comment")
-public class Comment {
+public class ExtendedComment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,10 @@ public class Comment {
     @Column(name = "account_id", nullable = false, unique = true)
     private int accountId;
 
-    @Column(name = "comment", nullable = false, length = 255)
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "comment", nullable = false, length = 200)
     private String comment;
 
     @Column(name = "created_tms", nullable = false)
@@ -34,6 +37,10 @@ public class Comment {
     public int getAccountId() { return accountId; }
 
     public void setAccountId(int accountId) { this.accountId = accountId; }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 
     public String getComment() { return comment; }
 

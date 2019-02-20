@@ -1,6 +1,6 @@
 package com.dev_training.controller;
 
-import com.dev_training.form.CommentSearchForm;
+import com.dev_training.entity.ExtendedComment;
 import com.dev_training.service.CommentSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,13 +27,13 @@ public class CommentSearchController {
     }
 
     /**
-     * コメント検索フォーム。
+     * コメント検索。
      *
      * @return コメント検索結果
      */
     @RequestMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
-    public List<CommentSearchForm> search() {
+    public List<ExtendedComment> search() {
         return  service.findComment();
     }
 }

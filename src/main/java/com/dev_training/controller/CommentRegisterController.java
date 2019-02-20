@@ -20,7 +20,7 @@ public class CommentRegisterController {
 
     /** HTTPセッション */
     private final HttpSession session;
-    /** アカウント登録サービス */
+    /** コメント登録サービス */
     private final CommentRegisterService service;
     /** セッションキー(ログインユーザのアカウント) */
     private static final String SESSION_FORM_ID = "account";

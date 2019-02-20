@@ -134,15 +134,18 @@
         var ajaxUrl = "/comment/register";
 
         $.ajax({
-            type: 'post',　　　　　　　　　　　// HTTP通信の種類
-            url: ajaxUrl,　　　　　　　　　　　// リクエストを送信する先のURL
-            dataType: 'json',　　　　　　　　　// サーバーから返されるデータの型
-            contentType: 'application/json',　　// 送信するデータの型
-            data: JSON.stringify(JSONdata)    　// 送信するデータ
-        }).done(function(data) {        　　　// Ajax通信が成功した時の処理
+            type: 'post',                       // HTTP通信の種類
+            url: ajaxUrl,                       // リクエストを送信する先のURL
+            dataType: 'json',                   // サーバーから返されるデータの型
+            contentType: 'application/json',    // 送信するデータの型
+            data: JSON.stringify(JSONdata)      // 送信するデータ
+        // Ajax通信が成功した時の処理
+        }).done(function(data) {
             commentGet();
-            $("#comment").val("");             //textareaの中身を空にする
-        }).fail(function(data) { 　　　　　　// Ajax通信が失敗した時の処理
+            //textareaの中身を空にする
+            $("#comment").val("");
+        // Ajax通信が失敗した時の処理
+        }).fail(function(data) {
             alert("投稿が失敗しました。");
         });
     });
@@ -162,13 +165,15 @@
          };
          var ajaxUrl = "/comment/delete/"+ id;
          $.ajax({
-             type: 'delete',　　　　　　　　　　// HTTP通信の種類
-             url: ajaxUrl,　　　　　　　　　　　// リクエストを送信する先のURL
-             contentType: 'application/json',　　// 送信するデータの型
-             data: JSON.stringify(JSONdata)    　// 送信するデータ
-         }).done(function(data) {        　　　// Ajax通信が成功した時の処理
+             type: 'delete',                    // HTTP通信の種類
+             url: ajaxUrl,                      // リクエストを送信する先のURL
+             contentType: 'application/json',   // 送信するデータの型
+             data: JSON.stringify(JSONdata)     // 送信するデータ
+         // Ajax通信が成功した時の処理
+         }).done(function(data) {
              commentGet();
-         }).fail(function(data) { 　　　　　　// Ajax通信が失敗した時の処理
+         // Ajax通信が失敗した時の処理
+         }).fail(function(data) {
              alert("削除に失敗しました。");
          });
 
@@ -187,7 +192,7 @@
 
                 src += '<div class="container">';
                 src += '<div class="row" style="margin-bottom: 10px;">';
-                src += '<div class="col-2 align-items-center">';
+                src += '<div class="col-2">';
                 src += '<img src="/image/profile?id=' + accountId + '" width="90">';
                 src += '</div>';
                 src += '<div class="col-10">';
