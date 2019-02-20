@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/account/password")
 public class AccountPasswordUpdateController {
 
-    /** パスワード更新フォーム */
+    /** パスワード更新サービス */
     private AccountPasswordUpdateService service;
     /** HTTPセッション */
     private final HttpSession session;
