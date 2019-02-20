@@ -10,6 +10,7 @@ import java.util.List;
  * コメントリポジトリ。
  */
 public interface CommentRepository extends JpaRepository<Comment, Integer>, JpaSpecificationExecutor<Comment> {
+
     /**
      * コメントを作成日時の降順で検索する。
      *

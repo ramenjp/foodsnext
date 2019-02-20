@@ -8,7 +8,6 @@ import java.io.Serializable;
  */
 public class CommentSearchForm implements Serializable {
 
-    @Size(max = 45, message = "{error.size.max}")
     private int id;
 
     private int accountId;
