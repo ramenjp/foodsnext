@@ -57,6 +57,7 @@
         </div>
     </div>
 </div>
+<footer th:replace="common/common_footer"></footer>
 
 <script type="text/javascript">
 
@@ -108,7 +109,7 @@
                     data : formData,                // サーバーに送信するデータ
                     processData : false,
                     contentType: false,
-                }).done(function(data) {        // Ajax通信が成功した時の処理
+                }).done(function(data) {            // Ajax通信が成功した時の処理
                     alert("アップロードが完了しました。");
                 }).fail(function(XMLHttpRequest, textStatus, errorThrown) { // Ajax通信が失敗した時の処理
                     alert("アップロードが失敗しました。");

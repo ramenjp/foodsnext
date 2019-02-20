@@ -206,6 +206,16 @@ body.loggedin { padding-top: 70px; }
     text-transform: uppercase;
 }
 
+footer{
+    margin-left: -15px;
+    margin-right: -15px;
+    height: 30px;
+    text-align: center;
+    color: #fff;
+    display: table-cell;
+    vertical-align: middle;
+}
+
 
 
 
