@@ -100,23 +100,24 @@
         </nav>
 
         <div class="col-md-10">
-            <div class="card rounded-0">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">アカウント機能の使い方</h3>
-                </div>
-                <div class="card-body">
-                    <ul>
-                        <li>自身のユーザ情報を変更したい場合は、サイドメニューからアカウント情報更新画面に遷移してください。</li>
-                        <li>他のユーザ情報を検索したい場合は、サイドメニューからアカウント検索画面に遷移してください。</li>
-                        <li>退会したい場合は、メニューから退会画面に遷移してください。</li>
-                    </ul>
-                </div>
+            <!--<div class="card rounded-0" style="margin-bottom: 10px;">-->
+                <!--<div class="card-header bg-orange1 text-white">-->
+                    <!--<h4 class="mb-0">アカウント機能の使い方</h4>-->
+                <!--</div>-->
+                <!--<div class="card-body">-->
+                    <!--<ul>-->
+                        <!--<li>自身のユーザ情報を変更したい場合は、サイドメニューからアカウント情報更新画面に遷移してください。</li>-->
+                        <!--<li>他のユーザ情報を検索したい場合は、サイドメニューからアカウント検索画面に遷移してください。</li>-->
+                        <!--<li>退会したい場合は、メニューから退会画面に遷移してください。</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
 
-            </div>
+            <!--</div>-->
+
             <!-- TODOリスト -->
             <div class="card rounded-0" th:if="!${#lists.isEmpty(list)}">
-                <div class="card-header bg-info text-white">
-                    <h3 class="mb-0">現在担当しているTODO</h3>
+                <div class="card-header bg-orange1 text-white">
+                    <h4 class="mb-0">現在担当しているTODO</h4>
                 </div>
                 <div class="card-body">
                     <div class="todo">
@@ -129,7 +130,7 @@
                                 <p th:text="'優先度:' + ${allPriority.priority.get(todo.priority)}"></p>
                                 <p th:text="'ステータス:' + ${allStatus.status.get(todo.status)}"></p>
                                 <div class="btn">
-                                    <a class="btn btn-info" th:href="@{/todo/search/detail(todoId=${todo.id})}" target="newtab">詳細を見る</a>
+                                    <a class="btn btn-warning" th:href="@{/todo/search/detail(todoId=${todo.id})}" target="newtab">詳細を見る</a>
                                 </div>
                             </div>
                         </div>
@@ -140,6 +141,7 @@
     </div>
 </div>
 <footer th:replace="common/common_footer"></footer>
+
 
 <!-- 天気予報取得処理  -->
 <script>

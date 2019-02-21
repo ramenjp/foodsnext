@@ -29,7 +29,7 @@
 
         <div class="col-md-6 col-xl-5 mb-4">
             <div class="card rounded-0">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-orange1 text-white">
                     <h3 class="mb-0">Login</h3>
                 </div>
                 <div th:if="${param.error}" class="alert alert-danger">
@@ -48,11 +48,11 @@
                             <div class="invalid-feedback">Enter your password too!</div>
                         </div>
                         <div class="form-group">
-                            <input id="login" type="submit" value="ログイン" class="btn btn-block btn-primary btn-lg center-block" />
+                            <input id="login" type="submit" value="ログイン" class="btn btn-block btn-lg center-block bg-orange1 text-white" />
                         </div>
                     </form>
                     <form id="account_form" method="post" th:action="@{'/account/register/init'}">
-                        <input id="accountRegister" type="submit" value="アカウント登録" class="btn btn-block btn-primary btn-lg center-block" />
+                        <input id="accountRegister" type="submit" value="アカウント登録" class="btn btn-block btn-lg bg-orange1 center-block text-white" />
                     </form>
                 </div>
             </div>
