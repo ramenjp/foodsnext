@@ -19,8 +19,8 @@ body.loggedin { padding-top: 70px; }
 
 .jumbotron-extend {
     position: relative;
-    height: 100vh;
-    min-height: 700px;
+    height: 90vh;
+    min-height: 600px;
     background: url('../images/jumbo.JPG');
     background-size: cover;
 }
@@ -173,26 +173,69 @@ body.loggedin { padding-top: 70px; }
  * サイドバー
  */
 
+/*.sidebar {*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*z-index: 100;*/
+    /*padding: 5px 0 0;*/
+    /*box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);*/
+/*}*/
+
+/*.sidebar-sticky {*/
+    /*position: relative;*/
+    /*top: 0;*/
+    /*overflow-x: hidden;*/
+/*}*/
+
+/*@supports ((position: -webkit-sticky) or (position: sticky)) {*/
+    /*.sidebar-sticky {*/
+        /*position: -webkit-sticky;*/
+        /*position: sticky;*/
+    /*}*/
+/*}*/
+
+/*.sidebar .nav-link {*/
+    /*font-weight: 500;*/
+    /*color: #333;*/
+/*}*/
+
+/*.sidebar .nav-link.active {*/
+    /*color: #007bff;*/
+/*}*/
+
+/*.sidebar .nav-link:hover,*/
+/*.sidebar .nav-link.active {*/
+    /*color: inherit;*/
+/*}*/
+
+/*.sidebar-heading {*/
+    /*font-size: .75rem;*/
+    /*text-transform: uppercase;*/
+/*}*/
+
+/*
+ * Sidebar
+ */
+
 .sidebar {
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 100;
-    padding: 5px 0 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 0;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 
 .sidebar-sticky {
-    position: relative;
-    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 48px; /* Height of navbar */
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
     overflow-x: hidden;
-}
-
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-    .sidebar-sticky {
-        position: -webkit-sticky;
-        position: sticky;
-    }
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
 .sidebar .nav-link {
@@ -200,19 +243,25 @@ body.loggedin { padding-top: 70px; }
     color: #333;
 }
 
+.sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+}
+
 .sidebar .nav-link.active {
     color: #007bff;
 }
 
-.sidebar .nav-link:hover,
-.sidebar .nav-link.active {
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
     color: inherit;
 }
 
 .sidebar-heading {
-    font-size: .75rem;
+    font-size: 1.25rem;
     text-transform: uppercase;
 }
+
 
 /*
  * メインコンテンツ
@@ -236,18 +285,33 @@ body {
             "Segoe UI Symbol",
             "Noto Color Emoji"
             !important;
+    background-color:#f4f4f4 !important;
+}
+
+.card-shadow {
+    box-shadow: 2px 2px 2px;
+}
+
+/*
+ * トップページ
+ */
+.toppage1 {
+    margin-top: 20px;
 }
 
 /*
  * フッター
  */
 footer{
-    margin-left: -15px;
+    /*margin-left: -15px;*/
     height: 30px;
     text-align: center;
     color: #fff;
     display: table-cell;
     vertical-align: middle;
+    bottom: 0;
+    width: 100%;
+    margin-top: 50px;
 }
 
 
