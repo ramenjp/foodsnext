@@ -31,7 +31,7 @@ public class AccountPasswordUpdateService {
      * @return 精査結果
      */
     public boolean validCurrentPassword(int id, String rawCurrentPassword) {
-        Account account = accountRepository.findById(id).orElseThrow(RuntimeException::new);
+        Account account = accountRepository.findById(id).orElseThrow(() -> new RuntimeException("account is not found"));
         return passwordEncoder.matches(rawCurrentPassword, account.getPassword());
     }
 
@@ -42,7 +42,7 @@ public class AccountPasswordUpdateService {
      * @param rawNewPassword 入力された新しいパスワード
      */
     public void updatePassword(int id, String rawNewPassword) {
-        Account account = accountRepository.findById(id).orElseThrow(RuntimeException::new);
+        Account account = accountRepository.findById(id).orElseThrow(() -> new RuntimeException("account is not found"));
         account.setPassword(passwordEncoder.encode(rawNewPassword));
         accountRepository.save(account);
     }
