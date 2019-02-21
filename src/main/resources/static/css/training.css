@@ -55,8 +55,9 @@ body.loggedin { padding-top: 70px; }
 }
 
 /*
-/* トップページTODOリスト
+ * トップページTODOリスト
  */
+
 .todo{
     margin: auto;
 }
@@ -130,8 +131,9 @@ body.loggedin { padding-top: 70px; }
     margin-bottom: 25px;
     vertical-align:top;
 }
+
 /*
-/* アカウント検索
+ * アカウント検索
  */
 
 .img-thumbnail img {
@@ -213,7 +215,7 @@ body.loggedin { padding-top: 70px; }
 }
 
 /*
-/* メインコンテンツ
+ * メインコンテンツ
  */
 .bg-orange1 {
     background-color: orange !important; /* FF3.6-15 */
@@ -236,11 +238,8 @@ body {
             !important;
 }
 
-
-
 /*
- */
-/* フッター
+ * フッター
  */
 footer{
     margin-left: -15px;
