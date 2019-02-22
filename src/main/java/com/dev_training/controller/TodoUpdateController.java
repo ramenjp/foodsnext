@@ -58,7 +58,7 @@ public class TodoUpdateController {
     public String updateInit(@RequestParam String todoId, Model model) {
         // 遷移元から更新対象のTODOIDが正しく渡ってこなければ、エラー表示。
         if (Objects.isNull(todoId) || StringUtils.isEmpty(todoId)) {
-            model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen,transition", null, Locale.JAPAN));
+            model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen.transition", null, Locale.JAPAN));
             return "common/commonError";
         }
 

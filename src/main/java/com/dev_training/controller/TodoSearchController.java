@@ -104,7 +104,7 @@ public class TodoSearchController {
     public String detail(@RequestParam(defaultValue = "") String todoId, Model model) {
         // 遷移元画面からTODOのIDが渡ってこなければ、エラー表示。
         if (StringUtils.isEmpty(todoId)) {
-            model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen,transition", null, Locale.JAPAN));
+            model.addAttribute("errorMsg", messageSource.getMessage("validation.invalid.screen.transition", null, Locale.JAPAN));
             return "common/commonError";
         }
 
