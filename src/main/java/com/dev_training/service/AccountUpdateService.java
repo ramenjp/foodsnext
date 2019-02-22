@@ -32,7 +32,7 @@ public class AccountUpdateService {
     @Transactional(readOnly = true)
     public Account getAccountById(int id) {
         Optional<Account> result = accountRepository.findById(id);
-        return result.orElse(null);
+        return result.orElseThrow(() -> new RuntimeException("account is not found"));
     }
 
     /**

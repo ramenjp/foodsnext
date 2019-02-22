@@ -5,10 +5,13 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 /**
  * アカウントリポジトリ。
  */
 public interface AccountRepository extends JpaRepository<Account, Integer>, JpaSpecificationExecutor<Account> {
+
     /**
      * アカウントIDに紐づくアカウントを検索する。
      *
@@ -26,4 +29,12 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
      */
     @Query(value = "SELECT COUNT(*) FROM accounts WHERE account_id = :accountId AND delete_flag = 0", nativeQuery = true)
     int countByAccountId(@Param("accountId") String accountId);
+
+    /**
+     * 全アカウントを検索する。
+     *
+     * @return 全アカウントのリスト
+     */
+    @Query(value = "SELECT * FROM accounts WHERE delete_flag = 0", nativeQuery = true)
+    List<Account> findAllAccount();
 }

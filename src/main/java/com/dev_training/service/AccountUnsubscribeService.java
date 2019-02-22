@@ -27,6 +27,7 @@ public class AccountUnsubscribeService {
      * @param account 退会対象のアカウント
      */
     public void delete(Account account) {
+        account.setDeleteFlag(true);
         accountRepository.save(account);
     }
 }

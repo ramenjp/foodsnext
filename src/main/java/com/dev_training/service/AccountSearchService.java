@@ -40,7 +40,8 @@ public class AccountSearchService {
                 Specification
                         .where(accountIdContains(form.getAccountId()))
                         .and(nameContains(form.getName()))
-                        .and(emailContains(form.getEmail())));
+                        .and(emailContains(form.getEmail()))
+                        .and(deleteFlag()));
     }
 
     /**
@@ -57,6 +58,7 @@ public class AccountSearchService {
                         .where(accountIdContains(form.getAccountId()))
                         .and(nameContains(form.getName()))
                         .and(emailContains(form.getEmail()))
+                        .and(deleteFlag())
                 , pageable);
     }
 }

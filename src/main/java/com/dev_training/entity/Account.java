@@ -34,7 +34,7 @@ public class Account implements UserDetails {
     private String selfIntroduction;
 
     @Column(name = "delete_flag")
-    private int deleteFlag;
+    private boolean deleteFlag;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -115,7 +115,7 @@ public class Account implements UserDetails {
         this.selfIntroduction = selfIntroduction;
     }
 
-    public int getDeleteFlag() { return deleteFlag; }
+    public boolean getDeleteFlag() { return deleteFlag; }
 
-    public void setDeleteFlag(int deleteFlag) { this.deleteFlag = deleteFlag; }
+    public void setDeleteFlag(boolean deleteFlag) { this.deleteFlag = deleteFlag; }
 }
