@@ -25,7 +25,7 @@ public class CommentDeleteService {
     /**
      * コメント削除処理。
      *
-     * @param commentId 削除対象のコメントID
+     * @param commentId 削除対象コメントのID
      * @param accountId セッションアカウントのID
      */
     public void deleteById(int commentId, int accountId) {
