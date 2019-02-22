@@ -1,6 +1,6 @@
 package com.dev_training.controller;
 
-import com.dev_training.entity.ExtendedComment;
+import com.dev_training.extended_entity.ExtendedComment;
 import com.dev_training.service.CommentSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

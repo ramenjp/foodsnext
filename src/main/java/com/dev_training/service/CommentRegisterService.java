@@ -20,8 +20,8 @@ public class CommentRegisterService {
     }
 
     /**
-     *  コメント登録処理。
-     *  */
+     * コメント登録処理。
+     */
     public void register(Comment comment) {
         commentRepository.save(comment);
     }

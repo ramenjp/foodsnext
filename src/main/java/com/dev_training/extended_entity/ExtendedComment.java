@@ -1,29 +1,24 @@
-package com.dev_training.entity;
+package com.dev_training.extended_entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
- * コメントテーブル結合用エンティティ。
+ * コメント機能用エンティティ。
  */
 @Entity
 public class ExtendedComment implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "account_id", nullable = false, unique = true)
     private int accountId;
 
-    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "comment", nullable = false, length = 200)
     private String comment;
 
-    @Column(name = "created_tms", nullable = false)
     private String createdTms;
 
     public int getId() {

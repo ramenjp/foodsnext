@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <meta name="_csrf" th:content="${_csrf.token}"/>
 <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-<meta name="_account_id" th:content="${session.account.id}"/>
+<meta name="_login_id" th:content="${session.account.id}"/>
 <head th:replace="common/common_header::base_header(~{::title})">
     <title>トップ</title>
 </head>
@@ -189,6 +189,7 @@
                 var name = json[i].name;
                 var comment = json[i].comment;
                 var createdTms = json[i].createdTms;
+                comment = comment.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
 
                 src += '<div class="container">';
                 src += '<div class="row" style="margin-bottom: 10px;">';
@@ -198,7 +199,7 @@
                 src += '<div class="col-10">';
                 src += '<p>' + name + '</p>';
                 src += '<p style="font-size:0.9em;">' + comment + '<small>( ' + createdTms + ')</small>';
-                if(accountId == $("meta[name='_account_id']").attr("content")) {
+                if(accountId == $("meta[name='_login_id']").attr("content")) {
                     src += '<a id="commentDelete" onclick="commentDelete(' + id + ');" href="#">削除</a>';
                 }
                 src += '</p>';

@@ -1,8 +1,11 @@
 package com.dev_training.service;
 
+import com.dev_training.entity.Comment;
 import com.dev_training.entity.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 /**
@@ -22,9 +25,15 @@ public class CommentDeleteService {
     /**
      * コメント削除処理。
      *
-     * @param id　コメントのID
+     * @param commentId 削除対象のコメントID
+     * @param accountId セッションアカウントのID
      */
-    public void deleteById(int id){
-        commentRepository.deleteById(id);
+    public void deleteById(int commentId, int accountId) {
+        Optional<Comment> result = commentRepository.findById(commentId);
+        Comment comment = result.orElseThrow(() -> new RuntimeException("comment is not found"));
+        //セッションのアカウントによって作成されたコメントの場合、削除する
+        if (comment.getAccountId() == accountId) {
+            commentRepository.deleteById(commentId);
+        }
     }
 }

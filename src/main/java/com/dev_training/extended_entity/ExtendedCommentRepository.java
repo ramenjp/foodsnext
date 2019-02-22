@@ -1,4 +1,4 @@
-package com.dev_training.entity;
+package com.dev_training.extended_entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 /**
- * コメントテーブル結合用リポジトリ。
+ * コメント機能用リポジトリ。
  */
 public interface ExtendedCommentRepository extends JpaRepository<ExtendedComment, Integer>, JpaSpecificationExecutor<ExtendedComment> {
 
