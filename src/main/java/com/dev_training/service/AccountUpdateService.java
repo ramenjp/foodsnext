@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import java.util.Optional;
 
 /**
  * アカウント情報更新サービス。
@@ -21,10 +18,6 @@ public class AccountUpdateService {
     /** アカウントリポジトリ */
     private final AccountRepository accountRepository;
 
-    /** エンティティマネージャ */
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Autowired
     public AccountUpdateService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -34,14 +27,12 @@ public class AccountUpdateService {
      * アカウント最新データ取得処理。
      *
      * @param id ID
-     * @return アカウント
+     * @return アカウントエンティティ
      */
     @Transactional(readOnly = true)
     public Account getAccountById(int id) {
-        String jpql = "SELECT a FROM Account a WHERE a.id = :id";
-        TypedQuery<Account> query = entityManager.createQuery(jpql, Account.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+        Optional<Account> result = accountRepository.findById(id);
+        return result.orElseThrow(() -> new RuntimeException("account is not found"));
     }
 
     /**
@@ -76,18 +67,10 @@ public class AccountUpdateService {
      * 更新処理。
      *
      * @param account 更新対象のアカウント
-     * @return 更新件数
      */
     @Transactional
-    public int updateAccountById(Account account) {
-        String jpql = "UPDATE Account a SET a.accountId = :accountId, a.name = :name, a.email = :email, a.selfIntroduction = :selfIntroduction WHERE a.id = :id";
-        Query query = entityManager.createQuery(jpql);
-        query.setParameter("accountId", account.getAccountId());
-        query.setParameter("name", account.getName());
-        query.setParameter("email", account.getEmail());
-        query.setParameter("selfIntroduction", account.getSelfIntroduction());
-        query.setParameter("id", account.getId());
-        return query.executeUpdate();
+    public void updateAccountById(Account account) {
+        accountRepository.save(account);
     }
 
 }

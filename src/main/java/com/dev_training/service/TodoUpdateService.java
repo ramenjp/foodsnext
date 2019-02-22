@@ -86,7 +86,7 @@ public class TodoUpdateService {
      * @return 全アカウントのリスト
      */
     public List<Account> findAllAccount() {
-        return accountRepository.findAll();
+        return accountRepository.findAllAccount();
     }
 
     /**

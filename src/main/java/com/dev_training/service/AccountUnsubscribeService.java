@@ -1,5 +1,6 @@
 package com.dev_training.service;
 
+import com.dev_training.entity.Account;
 import com.dev_training.entity.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,10 @@ public class AccountUnsubscribeService {
     /**
      * 退会処理。
      *
-     * @param id 退会対象のアカウントのID
+     * @param account 退会対象のアカウント
      */
-    public void delete(int id) {
-        accountRepository.deleteById(id);
+    public void delete(Account account) {
+        account.setDeleteFlag(true);
+        accountRepository.save(account);
     }
 }

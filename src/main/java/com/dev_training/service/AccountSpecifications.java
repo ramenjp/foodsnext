@@ -39,4 +39,13 @@ class AccountSpecifications {
             }
         };
     }
+
+    static Specification<Account> deleteFlag() {
+        return new Specification<Account>() {
+            @Override
+            public Predicate toPredicate(Root<Account> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return cb.equal(root.get("deleteFlag"), false);
+            }
+        };
+    }
 }
