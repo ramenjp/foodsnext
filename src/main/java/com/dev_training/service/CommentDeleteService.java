@@ -32,7 +32,7 @@ public class CommentDeleteService {
         Optional<Comment> result = commentRepository.findById(commentId);
         Comment comment = result.orElseThrow(() -> new RuntimeException("comment is not found"));
         //セッションのアカウントによって作成されたコメントの場合、削除する
-        if (comment.getAccountId() == accountId) {
+        if (comment.getLoginId() == accountId) {
             commentRepository.deleteById(commentId);
         }
     }

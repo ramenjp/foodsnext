@@ -13,7 +13,7 @@ public class ExtendedComment implements Serializable {
     @Id
     private int id;
 
-    private int accountId;
+    private int loginId;
 
     private String name;
 
@@ -29,9 +29,9 @@ public class ExtendedComment implements Serializable {
         this.id = id;
     }
 
-    public int getAccountId() { return accountId; }
+    public int getLoginId() { return loginId; }
 
-    public void setAccountId(int accountId) { this.accountId = accountId; }
+    public void setLoginId(int loginId) { this.loginId = loginId; }
 
     public String getName() { return name; }
 
@@ -41,7 +41,10 @@ public class ExtendedComment implements Serializable {
 
     public void setComment(String comment) { this.comment = comment; }
 
-    public String getCreatedTms() { return createdTms; }
+    public String getCreatedTms() {
+        // 作成日を「YYYY/MM/DD」の形式に編集
+        return createdTms = createdTms.substring(0, 4) + '/' + createdTms.substring(5, 7) + '/' + createdTms.substring(8, 16);
+    }
 
     public void setCreatedTms(String createdTms) { this.createdTms = createdTms; }
 }

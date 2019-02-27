@@ -14,8 +14,8 @@ public class Comment {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "account_id", nullable = false, unique = true)
-    private int accountId;
+    @Column(name = "login_id", nullable = false, unique = true)
+    private int loginId;
 
     @Column(name = "comment", nullable = false, length = 255)
     private String comment;
@@ -31,9 +31,9 @@ public class Comment {
         this.id = id;
     }
 
-    public int getAccountId() { return accountId; }
+    public int getLoginId() { return loginId; }
 
-    public void setAccountId(int accountId) { this.accountId = accountId; }
+    public void setLoginId(int loginId) { this.loginId = loginId; }
 
     public String getComment() { return comment; }
 

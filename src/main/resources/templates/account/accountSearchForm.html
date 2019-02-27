@@ -125,7 +125,7 @@
         var accountid = button.data('accountid');
         var selfIntroduction = button.data('intro');
         var email= button.data('email');
-        selfIntroduction = selfIntroduction.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+        selfIntroduction = removeTags(selfIntroduction);
         selfIntroduction = selfIntroduction.replace(/\r?\n/g, '<br>');
         var modal = $(this);//モーダルを取得
         modal.find('.modal-title').text(accountname + ' さんの自己紹介');

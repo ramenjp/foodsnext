@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class CommentSearchService {
 
-    /** コメントテーブル結合用リポジトリ */
+    /** コメント機能用リポジトリ */
     private final ExtendedCommentRepository extendedCommentRepository;
 
     @Autowired
@@ -29,13 +29,7 @@ public class CommentSearchService {
      */
     @Transactional(readOnly = true)
     public List<ExtendedComment> findComment() {
-        List<ExtendedComment> comments = extendedCommentRepository.findComment();
-        for (ExtendedComment comment : comments) {
-            //作成日時を取得し、substringで値を編集し、フォームに格納
-            String createdTms = modifyTms(comment.getCreatedTms());
-            comment.setCreatedTms(createdTms);
-        }
-        return comments;
+        return  extendedCommentRepository.findComment();
     }
 
     /**

@@ -186,21 +186,21 @@
             $('#commentSearchResult').html(src);
             for(var i=0; i<json.length; i++){
                 var id = json[i].id;
-                var accountId = json[i].accountId;
+                var loginId = json[i].loginId;
                 var name = json[i].name;
                 var comment = json[i].comment;
                 var createdTms = json[i].createdTms;
-                comment = comment.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+                comment = removeTags(comment);
 
                 src += '<div class="container">';
                 src += '<div class="row" style="margin-bottom: 10px;">';
                 src += '<div class="col-2">';
-                src += '<img src="/image/profile?id=' + accountId + '" width="90">';
+                src += '<img src="/image/profile?id=' + loginId + '" width="90">';
                 src += '</div>';
                 src += '<div class="col-10">';
                 src += '<p>' + name + '</p>';
                 src += '<p style="font-size:0.9em;">' + comment + '<small>( ' + createdTms + ')</small>';
-                if(accountId == $("meta[name='_login_id']").attr("content")) {
+                if(loginId == $("meta[name='_login_id']").attr("content")) {
                     src += '<a id="commentDelete" onclick="commentDelete(' + id + ');" href="#">削除</a>';
                 }
                 src += '</p>';
