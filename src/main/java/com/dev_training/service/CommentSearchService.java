@@ -31,14 +31,4 @@ public class CommentSearchService {
     public List<ExtendedComment> findComment() {
         return  extendedCommentRepository.findComment();
     }
-
-    /**
-     * 作成日を「YYYY/MM/DD」の形式に編集。
-     *
-     * @param targetTms 作成日時
-     * @return 編集後の作成日時
-     */
-    private String modifyTms(String targetTms) {
-        return targetTms.substring(0, 4) + '/' + targetTms.substring(5, 7) + '/' + targetTms.substring(8, 16);
-    }
 }
