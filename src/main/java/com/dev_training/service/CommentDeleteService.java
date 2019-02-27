@@ -26,13 +26,13 @@ public class CommentDeleteService {
      * コメント削除処理。
      *
      * @param commentId 削除対象コメントのID
-     * @param accountId セッションアカウントのID
+     * @param loginId セッションアカウントのID
      */
-    public void deleteById(int commentId, int accountId) {
+    public void deleteById(int commentId, int loginId) {
         Optional<Comment> result = commentRepository.findById(commentId);
         Comment comment = result.orElseThrow(() -> new RuntimeException("comment is not found"));
         //セッションのアカウントによって作成されたコメントの場合、削除する
-        if (comment.getLoginId() == accountId) {
+        if (comment.getLoginId() == loginId) {
             commentRepository.deleteById(commentId);
         }
     }
