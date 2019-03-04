@@ -30,6 +30,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        // SessionFixation対策
+        http.sessionManagement().sessionFixation().newSession();
+
         http.authorizeRequests()
                 // 認証状態によらず許可するURL
                 .antMatchers("/").permitAll()
