@@ -191,6 +191,7 @@
                 var comment = json[i].comment;
                 var createdTms = json[i].createdTms;
                 comment = removeTags(comment);
+                comment = convertBr(comment);
 
                 src += '<div class="container">';
                 src += '<div class="row" style="margin-bottom: 10px;">';
