@@ -45,6 +45,16 @@ public class TopController {
     }
 
     /**
+     * ログイン成功時処理。
+     *
+     * @return Path
+     */
+    @RequestMapping(value = "loginSuccess")
+    public String loginSuccess() {
+        return "redirect:/top";
+    }
+
+    /**
      * トップ画面表示。
      *
      * @param account 認証されたアカウント
