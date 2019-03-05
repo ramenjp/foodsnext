@@ -55,7 +55,7 @@ public class TodoRegisterService {
      * @return 全アカウントのリスト
      */
     public List<Account> findAllAccount() {
-        return accountRepository.findAll();
+        return accountRepository.findAllAccount();
     }
 
     /**

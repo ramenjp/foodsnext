@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<meta name="_login_id" th:content="${session.account.id}"/>
 <head th:replace="common/common_header::base_header(~{::title})">
     <title>トップ</title>
 </head>
@@ -33,7 +36,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="/account/search/paging/init" class="nav-link" data-toggle="tooltip" title="ページング機能を実装しています。">
-                           ページング検索</small>
+                            ページング検索</small>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -92,26 +95,34 @@
         </nav>
 
         <div class="col-md-10">
-            <!--<div class="card rounded-0" style="margin-bottom: 10px;">-->
-                <!--<div class="card-header bg-orange1 text-white">-->
-                    <!--<h4 class="mb-0">アカウント機能の使い方</h4>-->
-                <!--</div>-->
-                <!--<div class="card-body">-->
-                    <!--<ul>-->
-                        <!--<li>自身のユーザ情報を変更したい場合は、サイドメニューからアカウント情報更新画面に遷移してください。</li>-->
-                        <!--<li>他のユーザ情報を検索したい場合は、サイドメニューからアカウント検索画面に遷移してください。</li>-->
-                        <!--<li>退会したい場合は、メニューから退会画面に遷移してください。</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
+            <div>&nbsp;
+            </div>
+            <div class="card rounded-0">
+                <div class="card-header bg-custom1">
+                    <h3 class="mb-0">つぶやき</h3>
+                </div>
+                <div class="card-body bg-gray1">
+                    <form id="commentForm" method="post">
+                        <fieldset id="comment_field">
+                            <textarea class="form-control" id="comment" rows="3" cols="80" maxlength="255" name="comment" required placeholder="メンバーとお話してみよう"></textarea>
+                        </fieldset>
+                        <div class="col text-right" style="margin-top:10px;">
+                            <input type="submit" value="投稿" class="btn btn-lg bg-info text-white" />
+                        </div>
+                    </form>
+                    <div id="commentSearchResult"></div>
+                </div>
+            </div>
 
-            <!--</div>-->
+            <div>&nbsp;
+            </div>
 
             <!-- TODOリスト -->
             <div class="card rounded-0" th:if="!${#lists.isEmpty(list)}">
-                <div class="card-header bg-orange1 text-white">
+                <div class="card-header bg-custom1">
                     <h4 class="mb-0">現在担当しているTODO</h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body bg-gray1">
                     <div class="todo">
                         <div th:each="todo : ${list}" class="todo-list">
                             <img src="/images/memo.png">
@@ -122,32 +133,134 @@
                                 <p th:text="'優先度:' + ${allPriority.priority.get(todo.priority)}"></p>
                                 <p th:text="'ステータス:' + ${allStatus.status.get(todo.status)}"></p>
                                 <div class="btn">
-                                    <a class="btn btn-warning" th:href="@{/todo/search/detail(todoId=${todo.id})}" target="newtab">詳細を見る</a>
+                                    <a class="btn btn-info" th:href="@{/todo/search/detail(todoId=${todo.id})}" target="newtab">詳細を見る</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
+            <div>&nbsp;
+            </div>
+        </div>
     </div>
-    </div>
-<!-- 天気予報取得処理  -->
-<script>
-    $.getJSON("/weather", function(json){
-        var t_data  = json.forecasts[0];
-        var n_data = json.forecasts[1];
-        var tday_min = $.isEmptyObject(t_data.temperature.min) ? "-" : t_data.temperature.min.celsius;
-        var tday_max = $.isEmptyObject(t_data.temperature.max) ? "-" : t_data.temperature.max.celsius;
-        var nday_min = $.isEmptyObject(n_data.temperature.min) ? "-" : n_data.temperature.min.celsius;
-        var nday_max = $.isEmptyObject(n_data.temperature.max) ? "-" : n_data.temperature.max.celsius;
-        $('.tday-img').append('<img src="' + t_data.image.url + '" >');
-        $('.nday-img').append('<img src="' + n_data.image.url + '" >');
-        $('.tday-text').append(t_data.telop);
-        $('.nday-text').append(n_data.telop);
-        $('.tday-temp').append(tday_max + '/' +  tday_min + '℃');
-        $('.nday-temp').append(nday_max + '/' +  nday_min + '℃');
-    });
-</script>
+    <!-- 天気予報取得処理  -->
+    <script>
+        $.getJSON("/weather", function(json){
+            var t_data  = json.forecasts[0];
+            var n_data = json.forecasts[1];
+            var tday_min = $.isEmptyObject(t_data.temperature.min) ? "-" : t_data.temperature.min.celsius;
+            var tday_max = $.isEmptyObject(t_data.temperature.max) ? "-" : t_data.temperature.max.celsius;
+            var nday_min = $.isEmptyObject(n_data.temperature.min) ? "-" : n_data.temperature.min.celsius;
+            var nday_max = $.isEmptyObject(n_data.temperature.max) ? "-" : n_data.temperature.max.celsius;
+            $('.tday-img').append('<img src="' + t_data.image.url + '" >');
+            $('.nday-img').append('<img src="' + n_data.image.url + '" >');
+            $('.tday-text').append(t_data.telop);
+            $('.nday-text').append(n_data.telop);
+            $('.tday-temp').append(tday_max + '/' +  tday_min + '℃');
+            $('.nday-temp').append(nday_max + '/' +  nday_min + '℃');
+        });
+    </script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            commentGet();
+        };
+
+        $("#commentForm").submit(function(event) {
+            // 要素規定の動作をキャンセルする
+            event.preventDefault();
+            //データをJSONに加工
+            var JSONdata = {
+                "comment": $("#comment").val()
+            };
+
+            // CSRFトークンをリクエストヘッダに付加する
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
+
+            var ajaxUrl = "/comment/register";
+
+            $.ajax({
+                type: 'post',                       // HTTP通信の種類
+                url: ajaxUrl,                       // リクエストを送信する先のURL
+                dataType: 'json',                   // サーバーから返されるデータの型
+                contentType: 'application/json',    // 送信するデータの型
+                data: JSON.stringify(JSONdata)      // 送信するデータ
+                // Ajax通信が成功した時の処理
+            }).done(function(data) {
+                commentGet();
+                //textareaの中身を空にする
+                $("#comment").val("");
+                // Ajax通信が失敗した時の処理
+            }).fail(function(data) {
+                alert("投稿が失敗しました。\n半角スペースのみでの投稿はできません。");
+            });
+        });
+
+        function commentDelete(id){
+            // 要素規定の動作をキャンセルする
+            event.preventDefault();
+            // CSRFトークンをリクエストヘッダに付加する
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
+            //データをJSONに加工
+            var JSONdata = {
+                "id":id
+            };
+            var ajaxUrl = "/comment/delete/"+ id;
+            $.ajax({
+                type: 'delete',                    // HTTP通信の種類
+                url: ajaxUrl,                      // リクエストを送信する先のURL
+                contentType: 'application/json',   // 送信するデータの型
+                data: JSON.stringify(JSONdata)     // 送信するデータ
+                // Ajax通信が成功した時の処理
+            }).done(function(data) {
+                commentGet();
+                // Ajax通信が失敗した時の処理
+            }).fail(function(data) {
+                alert("削除に失敗しました。");
+            });
+
+        }
+
+        function commentGet(){
+            $.getJSON("/comment/search", function(json){
+                var src = "";
+                $('#commentSearchResult').html(src);
+                for(var i=0; i<json.length; i++){
+                    var id = json[i].id;
+                    var loginId = json[i].loginId;
+                    var name = json[i].name;
+                    var comment = json[i].comment;
+                    var createdTms = json[i].createdTms;
+                    comment = removeTags(comment);
+                    comment = convertBr(comment);
+
+                    src += '<div class="row">';
+                    src += '<div class="col-1 col-md-1">';
+                    src += '<img src="/image/profile?id=' + loginId + '" width="120%" class="rounded">';
+                    src += '</div>';
+                    src += '<div class="col-10 col-md-10">';
+                    src += '<b>' + name + '</b>さん';
+                    src += '<p style="font-size:0.9em;">' + comment + '</p>';
+                    src += '<small>(' + createdTms + ')</small>';
+                    if(loginId == $("meta[name='_login_id']").attr("content")) {
+                        src += ' <small><a id="commentDelete" onclick="commentDelete(' + id + ');" href="#">削除</a></small>';
+                    }
+                    src += '</div>';
+                    src += '</div>';
+                    src += '<hr>';
+                }
+                $('#commentSearchResult').append(src);
+            });
+        }
+    </script>
 </body>
 </html>
