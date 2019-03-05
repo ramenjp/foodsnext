@@ -1,10 +1,6 @@
 <head th:fragment="base_header(title)" xmlns:th="http://www.w3.org/1999/xhtml">
     <meta charset="utf-8" />
 
-    <!--独自CSS-->
-    <link href="/static/css/training.css" th:href="@{/css/training.css}" rel="stylesheet"/>
-    <!--独自JS-->
-    <script src="/static/js/training.js" th:src="@{/js/training.js}"></script>
     <!--アイコン-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!--フォント-->
@@ -32,6 +28,10 @@
     <!--SELECT-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+    <!--独自CSS-->
+    <link href="/static/css/training.css" th:href="@{/css/training.css}" rel="stylesheet"/>
+    <!--独自JS-->
+    <script src="/static/js/training.js" th:src="@{/js/training.js}"></script>
 
     <!--タイトル-->
     <title th:replace="${title}">The awesome application</title>
