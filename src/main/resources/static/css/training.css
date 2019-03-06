@@ -168,13 +168,15 @@ body.loggedin { padding-top: 70px; }
 .weather-contents table {
     text-align: center;
 }
+.weather-contents td {
+    padding-left: 20px;
+}
 
 /*
  * サイドバー
  */
 
 .sidebar {
-    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -234,6 +236,26 @@ body.loggedin { padding-top: 70px; }
     height: 100%;
     background: rgba(255,255,255,0.4);
 }
+.bg-blue1 {
+    background-color: #001299 !important;
+}
+
+.bg-gray1 {
+    background-color: #f7f4f4 !important;
+}
+
+.bg-custom1 {
+    background-color: #f4cc70;
+}
+.bg-custom2 {
+    background-color: #de7a22;
+}
+.bg-custom3 {
+    background-color: #20948b;
+}
+.bg-custom4 {
+    background-color: #6AB187;
+}
 
 body {
     font-family:
@@ -272,7 +294,6 @@ footer{
     height: 30px;
     text-align: center;
     color: #fff;
-    display: table-cell;
     vertical-align: middle;
     bottom: 0;
     width: 100%;

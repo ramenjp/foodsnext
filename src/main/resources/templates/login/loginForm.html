@@ -29,7 +29,7 @@
 
         <div class="col-md-6 col-xl-5 mb-4">
             <div class="card rounded">
-                <div class="card-header bg-orange1 text-white">
+                <div class="card-header bg-custom1 text-white">
                     <h3 class="mb-0">Login</h3>
                 </div>
                 <div th:if="${param.error}" class="alert alert-danger">
@@ -48,11 +48,11 @@
                             <div class="invalid-feedback">Enter your password too!</div>
                         </div>
                         <div class="form-group">
-                            <input id="login" type="submit" value="ログイン" class="btn btn-block btn-lg center-block bg-orange1 text-white" />
+                            <input id="login" type="submit" value="ログイン" class="btn btn-block btn-lg center-block bg-custom3 text-white" />
                         </div>
                     </form>
                     <form id="account_form" method="post" th:action="@{'/account/register/init'}">
-                        <input id="accountRegister" type="submit" value="アカウント登録" class="btn btn-block btn-lg bg-orange1 center-block text-white" />
+                        <input id="accountRegister" type="submit" value="アカウント登録" class="btn btn-block btn-lg bg-custom3 center-block text-white" />
                     </form>
                 </div>
             </div>
@@ -75,13 +75,13 @@
                     <p>今日も一日頑張ろう！</p>
                     <p>TODOを登録して、効率的に作業をしましょう！TODOが登録者全員に共有されます。</p>
                     <hr>
-                    <a href="/account/register/init" class="btn btn-md btn-warning bg-orange1">
+                    <a href="/account/register/init" class="btn btn-md bg-custom3 text-white">
                         会員登録
-                        <i class="far fa-image ml-1"></i>
+                        <i class="fas fa-external-link-alt ml-1"></i>
                     </a>
-                    <a href="#" class="btn btn-md btn-warning bg-orange1">
+                    <a href="#" class="btn btn-md bg-custom3 text-white">
                         ログイン
-                        <i class="far fa-image ml-1"></i>
+                        <i class="far fa-hand-point-left ml-1"></i>
                     </a>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                     <i class="fas fa-comments fa-2x blue-text"></i>
                 </div>
                 <div class="col-10">
-                    <h5 class="feature-title">つぶやき機能</h5>
+                    <h5 class="feature-chat">つぶやき機能</h5>
                     <p class="grey-text">会員間で、コミュニケーションツールとして、<strong>つぶやき機能</strong>が使えます。
                     </p>
                 </div>
