@@ -189,8 +189,7 @@ body.loggedin { padding-top: 70px; }
     position: -webkit-sticky;
     position: sticky;
     top: 48px; /* Height of navbar */
-    height: calc(100vh - 48px);
-    padding-top: .5rem;
+    height: calc(200vh - 48px);
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
@@ -244,6 +243,9 @@ body.loggedin { padding-top: 70px; }
     background-color: #f7f4f4 !important;
 }
 
+/*
+ * CSS Pettern1
+ */
 .bg-custom1 {
     background-color: #f4cc70;
 }
