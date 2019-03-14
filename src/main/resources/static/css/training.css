@@ -57,7 +57,6 @@ body.loggedin { padding-top: 70px; }
 /*
  * トップページTODOリスト
  */
-
 .todo{
     margin: auto;
 }
@@ -108,7 +107,6 @@ body.loggedin { padding-top: 70px; }
 
 .todo-list img{
     max-width: 325px;
-    min-width: 100%;
 }
 
 .todo-list div.text{
@@ -126,16 +124,15 @@ body.loggedin { padding-top: 70px; }
     white-space: nowrap;
 }
 
+/*
+ * アカウント検索
+ */
 .account-profile {
     display: inline-block;
     margin-left: -5px;
     margin-bottom: 25px;
     vertical-align:top;
 }
-
-/*
- * アカウント検索
- */
 
 .img-thumbnail img {
     width: 100%;
@@ -162,7 +159,6 @@ body.loggedin { padding-top: 70px; }
 /*
  * 天気予報
  */
-
 .weather-contents {
     padding: 5px;
 }
@@ -176,7 +172,6 @@ body.loggedin { padding-top: 70px; }
 /*
  * サイドバー
  */
-
 .sidebar {
     top: 0;
     bottom: 0;
@@ -237,9 +232,8 @@ body.loggedin { padding-top: 70px; }
 }
 
 /*
- * CSS Pettern1
+ * CSS 共通色調
  */
-
 .bg-custom1 {
     background-color: #f4cc70;
 }
