@@ -127,7 +127,7 @@
                                 <p th:text="'優先度:' + ${allPriority.priority.get(todo.priority)}"></p>
                                 <p th:text="'ステータス:' + ${allStatus.status.get(todo.status)}"></p>
                                 <div class="btn">
-                                    <a class="btn btn-info" th:href="@{/todo/search/detail(todoId=${todo.id})}" target="newtab">詳細を見る</a>
+                                    <a class="btn bg-custom3 text-white" th:href="@{/todo/search/detail(todoId=${todo.id})}" target="newtab">詳細を見る</a>
                                 </div>
                             </div>
                         </div>
