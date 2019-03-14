@@ -26,6 +26,6 @@
 
     <span class="navbar-text pr-3" th:text="'ようこそ ' + ${session.account.name} + ' さん。'"></span>
     <form id="logout" th:action="@{/logout}" method="post" class="form-inline">
-        <input type="submit" class="btn btn-info navbar-btn" value="Sign out"/>
+        <input type="submit" class="btn bg-custom3 text-white btn-lg navbar-btn" value="Sign out"/>
     </form>
 </nav>

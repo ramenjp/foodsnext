@@ -12,10 +12,10 @@
 
 <div class="container-fluid bg-image">
     <div class="row bg-mask">
-        <nav class="col-sm-2 col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
-                    <h4 class="sidebar-heading d-flex align-items-center px-3 mt-4 mb-1 text-muted">
+                    <h4 class="sidebar-heading d-flex align-items-center px-3 mt-3 mb-1 text-muted">
                         <span><i class="far fa-address-card">&nbsp;</i>アカウント機能</span>
                     </h4>
 
@@ -50,7 +50,7 @@
                     </li>
                 </ul>
 
-                <h6 class="sidebar-heading d-flex align-items-center px-3 mt-4 mb-1 text-muted">
+                <h6 class="sidebar-heading d-flex align-items-center px-3 mt-3 mb-1 text-muted">
                     <span><i class="fas fa-tasks"></i>&nbsp;TODO機能</span>
                 </h6>
                 <ul class="nav flex-column mb-2">
@@ -90,14 +90,11 @@
                         </tr>
                     </table>
                 </div>
-
             </div>
-        </nav>
+        </div>
 
-        <div class="col-md-10">
-            <div>&nbsp;
-            </div>
-            <div class="card rounded-0">
+        <div class="col-md-10 col-sm-12">
+            <div class="card rounded-0 mt-3">
                 <div class="card-header bg-custom1">
                     <h3 class="mb-0">つぶやき</h3>
                 </div>
@@ -107,18 +104,15 @@
                             <textarea class="form-control" id="comment" rows="3" cols="80" maxlength="255" name="comment" required placeholder="メンバーとお話してみよう"></textarea>
                         </fieldset>
                         <div class="col text-right" style="margin-top:10px;">
-                            <input type="submit" value="投稿" class="btn btn-lg bg-info text-white" />
+                            <input type="submit" value="投稿" class="btn btn-lg bg-custom3 text-white" />
                         </div>
                     </form>
                     <div id="commentSearchResult"></div>
                 </div>
             </div>
 
-            <div>&nbsp;
-            </div>
-
             <!-- TODOリスト -->
-            <div class="card rounded-0" th:if="!${#lists.isEmpty(list)}">
+            <div class="card rounded-0 mt-3" th:if="!${#lists.isEmpty(list)}">
                 <div class="card-header bg-custom1">
                     <h4 class="mb-0">現在担当しているTODO</h4>
                 </div>

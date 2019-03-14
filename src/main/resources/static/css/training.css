@@ -107,7 +107,8 @@ body.loggedin { padding-top: 70px; }
 }
 
 .todo-list img{
-    width: 325px;
+    max-width: 325px;
+    min-width: 100%;
 }
 
 .todo-list div.text{
@@ -222,10 +223,6 @@ body.loggedin { padding-top: 70px; }
 /*
  * メインコンテンツ
  */
-.bg-orange1 {
-    background-color: orange !important; /* FF3.6-15 */
-}
-
 .bg-image {
     position: relative;
     background: url('../images/jumbo.JPG');
@@ -235,10 +232,6 @@ body.loggedin { padding-top: 70px; }
     height: 100%;
     background: rgba(255,255,255,0.4);
 }
-.bg-blue1 {
-    background-color: #001299 !important;
-}
-
 .bg-gray1 {
     background-color: #f7f4f4 !important;
 }
@@ -246,6 +239,7 @@ body.loggedin { padding-top: 70px; }
 /*
  * CSS Pettern1
  */
+
 .bg-custom1 {
     background-color: #f4cc70;
 }
@@ -279,13 +273,6 @@ body {
 
 .card-shadow {
     box-shadow: 2px 2px 2px;
-}
-
-/*
- * トップページ
- */
-.toppage1 {
-    margin-top: 20px;
 }
 
 /*
