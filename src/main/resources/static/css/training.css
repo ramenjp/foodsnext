@@ -176,7 +176,7 @@ body.loggedin { padding-top: 70px; }
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 100; /* Behind the navbar */
+    z-index: 100;
     padding: 0;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
@@ -184,10 +184,10 @@ body.loggedin { padding-top: 70px; }
 .sidebar-sticky {
     position: -webkit-sticky;
     position: sticky;
-    top: 48px; /* Height of navbar */
+    top: 48px;
     height: calc(200vh - 48px);
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    overflow-y: auto;
 }
 
 .sidebar .nav-link {
