@@ -234,9 +234,11 @@ body.loggedin { padding-top: 70px; }
  * CSS 共通色調
  */
 .bg-custom1 {
+    /* カード用背景色 */
     background-color: #f4cc70;
 }
 .bg-custom2 {
+    /* ヘッダー・フッター背景色 */
     background-color: #de7a22;
 }
 .bg-custom3 {
