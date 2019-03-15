@@ -146,7 +146,6 @@
         window.onload = function () {
             commentGet();
         };
-
         $("#commentForm").submit(function(event) {
             // 要素規定の動作をキャンセルする
             event.preventDefault();
@@ -154,16 +153,13 @@
             var JSONdata = {
                 "comment": $("#comment").val()
             };
-
             // CSRFトークンをリクエストヘッダに付加する
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
             $(document).ajaxSend(function(e, xhr, options) {
                 xhr.setRequestHeader(header, token);
             });
-
             var ajaxUrl = "/comment/register";
-
             $.ajax({
                 type: 'post',                       // HTTP通信の種類
                 url: ajaxUrl,                       // リクエストを送信する先のURL
@@ -221,19 +217,18 @@
                     var createdTms = json[i].createdTms;
                     comment = removeTags(comment);
                     comment = convertBr(comment);
-
                     src += '<div class="row">';
                     src += '<div class="col-1 col-md-1">';
-                    src += '<img src="/image/profile?id=' + loginId + '" width="120%" class="rounded">';
+                    src += '<img src="/image/profile?id=' + loginId + '" width="130%" class="rounded">';
                     src += '</div>';
                     src += '<div class="col-11 col-md-11">';
                     src += '<b>' + name + '</b>さん';
-                    src += '<p>' + comment + '</p>';
+                    src += '<p>' + comment + '&nbsp;';
                     src += '<small>(' + createdTms + ')</small>';
                     if(loginId == $("meta[name='_login_id']").attr("content")) {
                         src += ' <small><a id="commentDelete" onclick="commentDelete(' + id + ');" href="#">削除</a></small>';
                     }
-                    src += '</div>';
+                    src += '</p></div>';
                     src += '</div>';
                     src += '<hr>';
                 }
