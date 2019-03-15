@@ -12,41 +12,30 @@
 
 <div class="container-fluid bg-image">
     <div class="row bg-mask">
+        <!-- 左サイドバー -->
         <div class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <h4 class="sidebar-heading d-flex align-items-center px-3 mt-3 mb-1 text-muted">
                         <span><i class="far fa-address-card">&nbsp;</i>アカウント機能</span>
                     </h4>
-
                     <li class="nav-item">
-                        <a href="/account/update/init" class="nav-link">
-                            アカウント情報更新
-                        </a>
+                        <a href="/account/update/init" class="nav-link">アカウント情報更新</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/account/password/init" class="nav-link">
-                            パスワード更新
-                        </a>
+                        <a href="/account/password/init" class="nav-link">パスワード更新</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/account/search/init" class="nav-link">
-                            アカウント一覧検索
-                        </a>
+                        <a href="/account/search/init" class="nav-link">アカウント一覧検索</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/account/search/paging/init" class="nav-link" data-toggle="tooltip" title="ページング機能を実装しています。">
-                            ページング検索</small>
-                        </a>
+                        <a href="/account/search/paging/init" class="nav-link">ページング検索 </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/account/upload/init" class="nav-link" data-toggle="tooltip" title="プロフィール画像のアップロードはこちら。">
-                            画像アップロード</a>
+                        <a href="/account/upload/init" class="nav-link">画像アップロード</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/account/unsubscribe/init" class="nav-link">
-                            退会
-                        </a>
+                        <a href="/account/unsubscribe/init" class="nav-link">退会</a>
                     </li>
                 </ul>
 
@@ -55,14 +44,10 @@
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a href="/todo/register/init" class="nav-link">
-                            TODO登録
-                        </a>
+                        <a href="/todo/register/init" class="nav-link">TODO登録</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/todo/search/init" class="nav-link">
-                            TODO一覧検索
-                        </a>
+                        <a href="/todo/search/init" class="nav-link">TODO一覧検索 </a>
                     </li>
                 </ul>
 
@@ -93,13 +78,15 @@
             </div>
         </div>
 
+        <!-- メインコンテンツ -->
         <div class="col-md-10 col-sm-12">
+            <!-- つぶやき機能 -->
             <div class="card rounded-0 mt-3">
                 <div class="card-header bg-custom1">
                     <h3 class="mb-0">つぶやき</h3>
                 </div>
                 <div class="card-body bg-gray1">
-                    <form id="commentForm" method="post">
+                    <form id="commentForm">
                         <fieldset id="comment_field">
                             <textarea class="form-control" id="comment" rows="3" cols="80" maxlength="255" name="comment" required placeholder="メンバーとお話してみよう"></textarea>
                         </fieldset>
@@ -133,8 +120,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>&nbsp;
             </div>
         </div>
     </div>
@@ -221,7 +206,6 @@
             }).fail(function(data) {
                 alert("削除に失敗しました。");
             });
-
         }
 
         function commentGet(){
@@ -241,9 +225,9 @@
                     src += '<div class="col-1 col-md-1">';
                     src += '<img src="/image/profile?id=' + loginId + '" width="120%" class="rounded">';
                     src += '</div>';
-                    src += '<div class="col-10 col-md-10">';
+                    src += '<div class="col-11 col-md-11">';
                     src += '<b>' + name + '</b>さん';
-                    src += '<p style="font-size:0.9em;">' + comment + '</p>';
+                    src += '<p>' + comment + '</p>';
                     src += '<small>(' + createdTms + ')</small>';
                     if(loginId == $("meta[name='_login_id']").attr("content")) {
                         src += ' <small><a id="commentDelete" onclick="commentDelete(' + id + ');" href="#">削除</a></small>';
