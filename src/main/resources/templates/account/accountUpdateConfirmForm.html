@@ -13,8 +13,8 @@
             <h2 class="text-center pb-4">アカウント情報更新</h2>
             <div class="row">
                 <div class="col-md-12 mx-auto">
-                    <div class="card rounded-0">
-                        <div class="card-header bg-primary text-white">
+                    <div class="card rounded-0 card-shadow">
+                        <div class="card-header bg-custom1">
                             <h3 class="mb-0">更新内容確認</h3>
                         </div>
                         <div class="card-body">
@@ -42,10 +42,10 @@
                                     <input type="hidden" name="selfIntroduction" id="selfIntroduction" th:value="*{selfIntroduction}"/>
                                     <div class="col text-center">
                                         <div class="btn-group">
-                                            <input type="submit" name="back" value="戻る" class="btn btn-primary btn-lg "/>
+                                            <input type="submit" name="back" value="戻る" class="btn bg-custom3 btn-lg text-white "/>
                                         </div>
                                         <div class="btn-group">
-                                            <input type="submit" name="update" value="更新" class="btn btn-primary btn-lg "/>
+                                            <input type="submit" name="update" value="更新" class="btn bg-custom3 btn-lg text-white "/>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -57,5 +57,6 @@
         </div>
     </div>
 </div>
+<footer th:replace="common/common_footer"></footer>
 </body>
 </html>

@@ -12,7 +12,7 @@
         <div class="col-md-12 mx-auto">
             <h2 class="text-center pb-4">TODO登録</h2>
             <div class="card rounded-0">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-custom1">
                     <h3 class="mb-0">TODO登録完了</h3>
                 </div>
                 <div class="pb-4"></div>
@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <form id="accountForm" th:action="@{/top}" method="get">
                         <div class="text-center">
-                            <input type="submit" value="トップ画面へ" class="btn btn-primary btn-lg"/>
+                            <input type="submit" value="トップ画面へ" class="btn bg-custom3 btn-lg text-white"/>
                         </div>
                     </form>
                 </div>
@@ -30,5 +30,6 @@
         </div>
     </div>
 </div>
+<footer th:replace="common/common_footer"></footer>
 </body>
 </html>

@@ -30,7 +30,7 @@ public class Account implements UserDetails {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "self_introduction", nullable = false, length = 200)
+    @Column(name = "self_introduction", nullable = false, length = 255)
     private String selfIntroduction;
 
     @Column(name = "delete_flag")

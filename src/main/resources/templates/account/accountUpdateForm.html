@@ -13,11 +13,11 @@
             <h2 class="text-center pb-4">アカウント情報更新</h2>
             <div class="row">
                 <div class="col-md-12 mx-auto">
-                    <div class="card rounded-0">
-                        <div class="card-header bg-primary text-white">
+                    <div class="card rounded-0 card-shadow">
+                        <div class="card-header bg-custom1">
                             <h3 class="mb-0">更新内容入力</h3>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body bg-gray1">
                             <form id="accountForm" th:action="@{/account/update/confirm}" th:object="${accountUpdateForm}" method="post">
                                 <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}">
                                     <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">共通エラーメッセージ表示エリア</p>
@@ -44,7 +44,7 @@
                                         <span class="text-danger" th:if="${#fields.hasErrors('selfIntroduction')}" th:errors="*{selfIntroduction}">error!</span>
                                     </div>
                                     <div class="col text-center">
-                                        <input type="submit" value="確認画面へ" class="btn btn-primary btn-lg"/>
+                                        <input type="submit" value="確認画面へ" class="btn btn-info text-white btn-lg"/>
                                     </div>
                                 </fieldset>
                             </form>
@@ -55,5 +55,6 @@
         </div>
     </div>
 </div>
+<footer th:replace="common/common_footer"></footer>
 </body>
 </html>

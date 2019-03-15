@@ -12,8 +12,8 @@
         <div class="col-md-12 mx-auto">
             <h2 class="text-center pb-4">アカウント検索</h2>
             <!--検索条件-->
-            <div class="card rounded-0">
-                <div class="card-header bg-primary text-white">
+            <div class="card rounded-0 card-shadow">
+                <div class="card-header bg-custom1">
                     <h3 class="mb-0">検索条件</h3>
                 </div>
                 <div class="card-body">
@@ -40,10 +40,10 @@
                         </fieldset>
                         <div class="col text-center">
                             <div class="btn-group">
-                                <input type="submit" name="search" value="検索" class="btn btn-primary btn-lg "/>
+                                <input type="submit" name="search" value="検索" class="btn bg-custom3 btn-lg text-white "/>
                             </div>
                             <div class="btn-group">
-                                <input class="btn btn-success btn-lg clearForm" type="button" value="条件クリア">
+                                <input class="btn btn-secondary btn-lg clearForm" type="button" value="条件クリア">
                             </div>
                         </div>
                     </form>
@@ -66,7 +66,7 @@
                             <span class="badge badge-info">E-mail</span>
                             <p th:text="${account.email}"></p>
                             <p>
-                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-selfIntroduction"
+                                <button class="btn bg-custom3 text-white btn-sm" data-toggle="modal" data-target="#modal-selfIntroduction"
                                         th:attr="data-accountid=${account.accountId},data-intro=${account.selfIntroduction},data-name=${account.name},data-id=${account.id},data-email=${account.email}">
                                     Open</button>
                             </p>
@@ -87,10 +87,10 @@
                                     <!-- 5.モーダルのボディ -->
                                     <div class="modal-body" id="modal-body">
                                         <div class="row">
-                                            <div class="col-5">
+                                            <div class="col-xl-5">
                                                 <div id="images" class="img-fluid"></div>
                                             </div>
-                                            <div class="col-7">
+                                            <div class="col-xl-7 col-sm-12">
                                                 <span class="badge badge-info">氏名</span>
                                                 <p class="account-name"></p>
                                                 <span class="badge badge-info">アカウントID</span>
@@ -116,7 +116,7 @@
         </div>
     </div>
 </div>
-
+<footer th:replace="common/common_footer"></footer>
 </body>
 <script type="text/javascript">
     $('#modal-selfIntroduction').on('show.bs.modal', function (event) {
