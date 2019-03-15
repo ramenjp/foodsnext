@@ -217,6 +217,9 @@ body.loggedin { padding-top: 70px; }
 /*
  * メインコンテンツ
  */
+.dropdown-menu a:active {
+    background-color: #4DA9A2;
+}
 .bg-image {
     position: relative;
     background: url('../images/jumbo.JPG');
