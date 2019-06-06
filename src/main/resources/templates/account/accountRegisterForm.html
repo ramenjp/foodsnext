@@ -21,7 +21,8 @@
                             <form id="accountForm" th:action="@{/account/register/confirm}" th:object="${accountRegisterForm}" method="post">
                                 <fieldset id="account_field">
                                     <div class="form-group required" th:classappend="${#fields.hasErrors('accountId')}? 'has-error'">
-                                        <label for="accountId">アカウントID</label><br/>
+                                        <!-- 変更点 -->
+                                        <label for="accountId">ニックネーム</label><br/>
                                         <input class="form-control" id="accountId" type="text" maxlength="15" th:field="*{accountId}" name="accountId" required placeholder="アカウントIDを入力してください"/>
                                         <small id="accountidhelp" class="form-text text-muted">アカウントIDは3文字以上、15文字以下かつ、半角英数字で入力してください。</small>
                                         <span class="text-danger" th:if="${#fields.hasErrors('accountId')}" th:errors="*{accountId}">error!</span>
