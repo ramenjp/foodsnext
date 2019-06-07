@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/common_header::base_header(~{::title})">
+    <meta charset = "UTF-8">
     <title>ログイン</title>
 </head>
 <body style="background-color:#eeeeee;">
@@ -15,7 +16,7 @@
 
         <!--Grid column-->
         <div class="col-md-6 mb-4 text-white text-center text-md-left site-name">
-            <h1 class="display-4 font-weight-bold">Let's Learn JavaApplication made with SpringBoot</h1>
+            <h1 class="display-4 font-weight-bold">楽天食堂.com</h1>
             <hr class="border-white">
             <p>
                 <strong>The web design was created by Bootstrap4</strong>
@@ -30,21 +31,23 @@
         <div class="col-md-6 col-xl-5 mb-4">
             <div class="card rounded">
                 <div class="card-header bg-custom1">
-                    <h3 class="mb-0">Login</h3>
+                    <h3 class="mb-0">ログイン画面</h3>
                 </div>
                 <div th:if="${param.error}" class="alert alert-danger">
-                    アカウントID、またはパスワードが誤っています。
+                    E-mail、またはパスワードが誤っています。
                 </div>
+
                 <div class="card-body">
                     <form id="login_form" method="post" th:action="@{'/login'}">
                         <div class="form-group required">
-                            <label for="login_id">アカウントID</label>
-                            <input type="text" class="form-control  form-control-lg rounded" id="login_id" name="login_id" placeholder="アカウントID" autofocus required/>
+                            <label for="login_id">E-mail</label>
+                            <input type="text" class="form-control  form-control-lg rounded" id="login_id" name="login_id" placeholder="E-mail" autofocus required/>
                             <div class="invalid-feedback">Oops, you missed this one.</div>
                         </div>
                         <div class="form-group required">
                             <label for="login_password">パスワード</label>
                             <input type="password" class="form-control form-control-lg rounded" id="login_password" name="login_password" placeholder="パスワード" required />
+                            <p>パスワードは5文字以上、15文字以下かつ、半角の英小文字、英大文字、数字を1種類ずつ含めて入力してください。</p>
                             <div class="invalid-feedback">Enter your password too!</div>
                         </div>
                         <div class="form-group">
@@ -52,14 +55,19 @@
                         </div>
                     </form>
                     <form id="account_form" method="post" th:action="@{'/account/register/init'}">
-                        <input id="accountRegister" type="submit" value="アカウント登録" class="btn btn-block btn-lg bg-custom3 center-block text-white" />
+                        <input id="accountRegister" type="submit" value="アカウント新規登録" class="btn btn-block btn-lg bg-custom3 center-block text-white" />
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 </div>
+
+
+
+
 <!-- 2列目 -->
 <div class="container">
     <div class="row">
