@@ -25,10 +25,10 @@
 
 
                                         <!-- accountIdになっている点に注意。 -->
-                                        <label for="accountId">ニックネーム</label><br/>
-                                        <input class="form-control" id="accountId" type="text" maxlength="15" th:field="*{accountId}" name="accountId" required placeholder="ニックネームを入力してください"/>
+                                        <label for="nickname">ニックネーム</label><br/>
+                                        <input class="form-control" id="nickname" type="text" maxlength="15" th:field="*{nickname}" name="nickname" required placeholder="ニックネームを入力してください"/>
                                         <small id="accountidhelp" class="form-text text-muted">ニックネームは半角英数字3文字以上15文字以内で入力してください。</small>
-                                        <span class="text-danger" th:if="${#fields.hasErrors('accountId')}" th:errors="*{accountId}">error!</span>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">error!</span>
                                     </div>
 
 
@@ -53,10 +53,10 @@
 
 
                                     <!-- 変更点　変数に注意 -->
-                                    <div class="form-group required" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
-                                        <label for="name">所属部署・役職</label><br/>
-                                        <input class="form-control" id="name" type="text" maxlength="45" th:field="*{name}" name="name" required placeholder="部署・役職を入力してください。"/>
-                                        <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error!</span>
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('cdepartment_position')}? 'has-error'">
+                                        <label for="cdepartment_position">所属部署・役職</label><br/>
+                                        <input class="form-control" id="cdepartment_position" type="text" maxlength="45" th:field="*{cdepartment_position}" name="cdepartment_position" required placeholder="部署・役職を入力してください。"/>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('cdepartment_position')}" th:errors="*{cdepartment_position}">error!</span>
                                     </div>
 
 

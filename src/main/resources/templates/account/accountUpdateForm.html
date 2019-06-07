@@ -16,7 +16,7 @@
                 <div class="col-md-12 mx-auto">
                     <div class="card rounded-0 card-shadow">
                         <div class="card-header bg-custom1">
-                            <h3 class="mb-0">更新内容入力</h3>
+                            <h3 class="mb-0">アカウント情報入力</h3>
                         </div>
                         <div class="card-body bg-gray1">
                             <form id="accountForm" th:action="@{/account/update/confirm}" th:object="${accountUpdateForm}" method="post">
@@ -26,10 +26,10 @@
                                 <fieldset id="account_field">
 
 
-                                    <div class="form-group required" th:classappend="${#fields.hasErrors('accountId')}? 'has-error'">
-                                        <label for="accountId">ニックネーム</label><br/>
-                                        <input class="form-control" id="accountId" type="text" maxlength="15" name="accountId" th:field="*{accountId}" required/>
-                                        <span class="text-danger" th:if="${#fields.hasErrors('accountId')}" th:errors="*{accountId}">error!</span>
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('nickname')}? 'has-error'">
+                                        <label for="nickname">ニックネーム</label><br/>
+                                        <input class="form-control" id="nickname" type="text" maxlength="15" name="nickname" th:field="*{nickname}" required/>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">error!</span>
                                     </div>
 
 
@@ -53,10 +53,10 @@
                                     </div>
 
 
-                                    <div class="form-group required" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
-                                        <label for="name">所属部署・役職</label><br/>
-                                        <input class="form-control" id="name" type="text" maxlength="45" th:field="*{name}" name="name" required placeholder="部署・役職を入力してください。"/>
-                                        <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error!</span>
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('cdepartment_position')}? 'has-error'">
+                                        <label for="cdepartment_position">所属部署・役職</label><br/>
+                                        <input class="form-control" id="cdepartment_position" type="text" maxlength="45" th:field="*{cdepartment_position}" name="cdepartment_position" required placeholder="部署・役職を入力してください。"/>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('cdepartment_position')}" th:errors="*{cdepartment_position}">error!</span>
                                     </div>
 
 
