@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/common_header::base_header(~{::title})">
+    <meta charset="UTF-8">
     <title>アカウント情報更新</title>
 </head>
 <body>
@@ -15,7 +16,7 @@
                 <div class="col-md-12 mx-auto">
                     <div class="card rounded-0 card-shadow">
                         <div class="card-header bg-custom1">
-                            <h3 class="mb-0">更新内容入力</h3>
+                            <h3 class="mb-0">アカウント情報入力</h3>
                         </div>
                         <div class="card-body bg-gray1">
                             <form id="accountForm" th:action="@{/account/update/confirm}" th:object="${accountUpdateForm}" method="post">
@@ -23,26 +24,77 @@
                                     <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">共通エラーメッセージ表示エリア</p>
                                 </div>
                                 <fieldset id="account_field">
-                                    <div class="form-group required" th:classappend="${#fields.hasErrors('accountId')}? 'has-error'">
-                                        <label for="accountId">アカウントID</label><br/>
-                                        <input class="form-control" id="accountId" type="text" maxlength="15" name="accountId" th:field="*{accountId}" required/>
-                                        <span class="text-danger" th:if="${#fields.hasErrors('accountId')}" th:errors="*{accountId}">error!</span>
+
+
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('nickname')}? 'has-error'">
+                                        <label for="nickname">ニックネーム</label><br/>
+                                        <input class="form-control" id="nickname" type="text" maxlength="15" name="nickname" th:field="*{nickname}" required/>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">error!</span>
                                     </div>
-                                    <div class="form-group required" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
-                                        <label for="name">氏名</label><br/>
-                                        <input class="form-control" id="name" type="text" maxlength="45" name="name" th:field="*{name}" required/>
-                                        <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error!</span>
-                                    </div>
+
+
                                     <div class="form-group required" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
                                         <label for="email">E-mail</label><br/>
                                         <input class="form-control" id="email" type="text" maxlength="50" name="email" th:field="*{email}" required/>
                                         <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>
                                     </div>
+
+
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('password')||#fields.hasErrors('passwordValid')}? 'has-error'">
+                                        <label for="password">パスワード</label><br/>
+                                        <input class="form-control" id="password" type="password" maxlength="50" th:field="*{password}" name="password" required placeholder="パスワードを入力してください"/>
+                                        <small id="passwordhelp" class="form-text text-muted">パスワードは5文字以上、15文字以下かつ、半角の英小文字、英大文字、数字を1種類ずつ含めて入力してください。</small>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error!</span>
+                                        <p class="text-danger" th:if="${#fields.hasErrors('passwordValid')}" th:errors="*{passwordValid}">error!</p>
+                                    </div>
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('passwordValid')}? 'has-error'">
+                                        <label for="confirmPassword">パスワード（確認）</label><br/>
+                                        <input class="form-control" id="confirmPassword" type="password" maxlength="50" th:field="*{confirmPassword}" name="confirmPassword" required placeholder="確認のため、もう一度パスワードを入力してください"/>
+                                    </div>
+
+
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('cdepartment_position')}? 'has-error'">
+                                        <label for="cdepartment_position">所属部署・役職</label><br/>
+                                        <input class="form-control" id="cdepartment_position" type="text" maxlength="45" th:field="*{cdepartment_position}" name="cdepartment_position" required placeholder="部署・役職を入力してください。"/>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('cdepartment_position')}" th:errors="*{cdepartment_position}">error!</span>
+                                    </div>
+
+
                                     <div class="form-group required" th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
                                         <label for="selfIntroduction">自己紹介</label><br/>
                                         <textarea class="form-control selfIntroduction" id="selfIntroduction" rows="3" cols="80" maxlength="255" name="selfIntroduction" th:field="*{selfIntroduction}" required></textarea>
                                         <span class="text-danger" th:if="${#fields.hasErrors('selfIntroduction')}" th:errors="*{selfIntroduction}">error!</span>
                                     </div>
+
+
+                                    <label for="selfIntroduction">プロフィール画像</label><br/>
+                                    <div class="row">
+                                        <div class="col-md-6 mx-auto">
+                                            <span>現在のプロフィール画像</span><br>
+                                            <div id="nowImage"></div>
+                                        </div>
+                                        <div class="col-md-6 mx-auto">
+                                            <span>更新後のプロフィール画像</span><br>
+                                            <div id="imagePreview" class="imagePreview"></div>
+                                        </div>
+                                    </div>
+                                    <span>ファイルのサイズは1Mバイト以下にしてください。</span><br>
+
+                                    <div class="form-group">
+                                        <label>
+                                        <span class="btn btn-info">
+                                            ファイル選択
+                                            <input type="file" id="upload_file" name="upload_file" style="display:none" required="" />
+                                        </span>
+                                        </label>
+                                        <input type="text" class="form-control" readonly="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input id="data_upload_button" type="submit" class="btn btn-info" value="アップロード" disabled/>
+                                    </div>
+
+
                                     <div class="col text-center">
                                         <input type="submit" value="確認画面へ" class="btn btn-info text-white btn-lg"/>
                                     </div>
@@ -56,5 +108,105 @@
     </div>
 </div>
 <footer th:replace="common/common_footer"></footer>
+</body>
+</html>
+
+
+
+
+
+<script type="text/javascript">
+
+    window.onload = function () {
+        $("#nowImage").empty();
+        var url = "/image/myprofile";
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = "arraybuffer";
+        xhr.open("GET", url, true);
+        xhr.onload = function () {
+            var data = new Uint8Array(this.response);
+            var oURL = URL.createObjectURL(
+                new Blob([data], {type: "image/png"})
+            );
+            var image = new Image();
+            image.onload = function () {
+                URL.revokeObjectURL(oURL);
+                $("#nowImage").append(image);
+                $("#nowImage > img").css('width', 'auto').css('height', '200px');
+            };
+            image.src = oURL;
+        };
+        xhr.send(null);
+    };
+
+    $(function(){
+
+        // アップロードボタンを押下した
+        $("#data_upload_form").submit(function(event){
+            // 要素規定の動作をキャンセルする
+            event.preventDefault();
+
+         // CSRFトークンをリクエストヘッダに付加する
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
+
+            var ajaxUrl = "/account/upload/upload";
+
+            if(window.FormData){
+                var formData = new FormData($(this)[0]);
+
+                $.ajax({
+                    type : "POST",                  // HTTP通信の種類
+                    url  : ajaxUrl,                 // リクエストを送信する先のURL
+                    dataType : "text",              // サーバーから返されるデータの型
+                    data : formData,                // サーバーに送信するデータ
+                    processData : false,
+                    contentType: false,
+                }).done(function(data) {            // Ajax通信が成功した時の処理
+                    alert("アップロードが完了しました。");
+                }).fail(function(XMLHttpRequest, textStatus, errorThrown) { // Ajax通信が失敗した時の処理
+                    alert("アップロードが失敗しました。");
+                });
+            }else{
+                alert("アップロードに対応できていないブラウザです。");
+            }
+        });
+    });
+    $(document).on('change', ':file', function() {
+        var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.parent().parent().next(':text').val(label);
+
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+        if (/^image/.test( files[0].type)){ // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+            if(files[0].size < 1024000){
+                reader.onloadend = function(){ // set image data as background of div
+                    $("#imagePreview").css("background-image", "url("+this.result+")");
+                    $("#data_upload_button").attr('disabled', false);
+                }
+            }else{
+                $("#data_upload_button").attr('disabled', true);
+                $("#imagePreview").css("background-image", "");
+                var errMsg ="1MB以下のファイルを選択してください。";
+                alert(errMsg);
+                input.parent().parent().next(':text').val(errMsg);
+            }
+        }else{
+            $("#data_upload_button").attr('disabled', true);
+            $("#imagePreview").css("background-image", "");
+            var errMsg ="画像ファイル以外が選択されました。";
+            alert(errMsg);
+            input.parent().parent().next(':text').val(errMsg);
+        }
+    });
+</script>
+
 </body>
 </html>
