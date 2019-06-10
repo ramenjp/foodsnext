@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <title>アカウント登録確認</title>
 <head>
     <meta charset="utf-8"/>
@@ -21,7 +21,7 @@
                             <h3 class="mb-0">アカウント入力確認</h3>
                         </div>
                         <div class="card-body">
-                            <form id="accountForm" method="post">
+                            <form id="accountForm" th:action="@{/account/complete}" method="post">
                                 <fieldset id="account_field">
                                     <div class="form-group">
                                         <label>ニックネーム</label><br/>
@@ -47,7 +47,8 @@
                                     <input type="hidden" name="department_position" id="department_position"/>
                                     <input type="hidden" name="self_introduction" id="self_introduction"/>
 
-                                    //画像挿入できるようにする
+
+
                                     <div class="col text-center">
                                         <div class="btn-group">
                                             <input type="button" name="registerBack" value="戻る" class="btn bg-custom3 btn-lg text-white "/>
