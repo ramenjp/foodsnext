@@ -75,6 +75,7 @@ public class AccountRegisterController {
      * @param bindingResult       精査結果
      * @return Path
      */
+
     /*doからcompleteに編集*/
     @RequestMapping(value = "/complete", params = "register", method = RequestMethod.POST)
     String registerComplete(@ModelAttribute @Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
