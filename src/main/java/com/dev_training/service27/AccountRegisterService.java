@@ -28,4 +28,14 @@ public class AccountRegisterService {
         Account account = new Account();
         accountRepository.save(account);
     }
+    /**
+     * アカウントID重複精査
+     * @param accountId
+     */
+    @Transactional(readOnly = true)
+    public boolean isExistsAccountId(String accountId){
+        int result = accountRepository.countByAccountId(accountId);
+        return result !=0;
+    }
+
 }
