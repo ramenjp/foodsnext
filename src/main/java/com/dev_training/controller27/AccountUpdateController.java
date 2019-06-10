@@ -1,7 +1,6 @@
 package com.dev_training.controller27;
 
-
-import com.dev_training.entity27.Account;
+import com.dev_training.entity.Account;
 import com.dev_training.form.AccountUpdateForm;
 import com.dev_training.service.AccountUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +34,6 @@ public class AccountUpdateController {
         this.session = session;
     }
 
-
-
     /**
      * アカウント情報更新-初期表示。
      *
@@ -52,8 +49,6 @@ public class AccountUpdateController {
         return "account/accountUpdateForm";
     }
 
-
-
     /**
      * アカウント情報更新-確認画面表示。
      *
@@ -62,7 +57,7 @@ public class AccountUpdateController {
      * @param model             モデル
      * @return Path
      */
-    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
+    @RequestMapping(value = "/top/setting/confirm", method = RequestMethod.POST)
     public String confirm(@ModelAttribute @Validated AccountUpdateForm accountUpdateForm, BindingResult bindingResult, Model model) {
         // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
@@ -84,39 +79,8 @@ public class AccountUpdateController {
                 return "account/accountUpdateForm";
             }
         }
-
-        // 更新用アカウントの作成
-        targetAccount.setAccountId(accountUpdateForm.getAccountId());
-        targetAccount.setName(accountUpdateForm.getName());
-        targetAccount.setEmail(accountUpdateForm.getEmail());
-        targetAccount.setSelfIntroduction(accountUpdateForm.getSelfIntroduction());
-        // 更新処理
-        service.updateAccountById(targetAccount);
-        // セッション情報の更新
-        Account sessionAccount = service.getAccountById(targetAccount.getId());
-        session.setAttribute(SESSION_FORM_ID, sessionAccount);
-
-        return "account/accountUpdateCompleteForm";
-
-        /**
-         * アカウント情報更新-入力画面に戻る。
-         *
-         * @param accountUpdateForm フォーム。
-         * @return Path
-         */
-        @RequestMapping(value = "/setting/complete", params = "back", method = RequestMethod.POST)
-        public String back(@ModelAttribute AccountUpdateForm accountUpdateForm) {
-            return "account/accountUpdateForm";
-        }
-
+        return "account/accountUpdateConfirmForm";
     }
-
-
-
-
-
-
-
 
 
 
@@ -127,9 +91,7 @@ public class AccountUpdateController {
      * @param bindingResult     精査結果
      * @return Path
      */
-
-    /*
-    @RequestMapping(value = "/do", params = "update", method = RequestMethod.POST)
+    @RequestMapping(value = "/top/setting/complete", params = "update", method = RequestMethod.POST)
     public String doUpdate(@ModelAttribute @Validated AccountUpdateForm accountUpdateForm, BindingResult bindingResult) {
         // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
@@ -171,10 +133,9 @@ public class AccountUpdateController {
      * @param accountUpdateForm フォーム。
      * @return Path
      */
-    @RequestMapping(value = "/setting/complete", params = "back", method = RequestMethod.POST)
+    @RequestMapping(value = "/top/setting/complete", params = "back", method = RequestMethod.POST)
     public String back(@ModelAttribute AccountUpdateForm accountUpdateForm) {
         return "account/accountUpdateForm";
     }
 
 }
-*/

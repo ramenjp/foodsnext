@@ -101,7 +101,7 @@ public class AccountRegisterController {
      */
     @RequestMapping(value = "/complete", params = "registerBack", method = RequestMethod.POST)
     String registerBack(@ModelAttribute AccountRegisterForm accountRegisterForm) {
-        return "account/accountRegisterForm";
+        return "login/loginForm";
     }
 
 }
