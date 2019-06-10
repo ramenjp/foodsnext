@@ -19,10 +19,14 @@ public class AccountUpdateService {
     public AccountUpdateService(AccountRepository accountRepository){this.accountRepository = accountRepository;}
 
     /**
-     * アカウント最新データ取得処理
-     * 必要であれば
+     * アカウントIDの重複精査
      *
      */
+    @Transactional(readOnly = true)
+    public boolean isExistsAccountId(String accountId) {
+        // アカウントIDの重複精査
+        int result = accountRepository.countByAccountId(accountId);
+        return result != 0;
 
     /**
      * 更新処理
