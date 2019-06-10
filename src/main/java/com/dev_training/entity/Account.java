@@ -15,7 +15,7 @@ public class Account implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "account_id")
     private int id;
 
     @Column(name = "account_id", nullable = false, unique = true)
