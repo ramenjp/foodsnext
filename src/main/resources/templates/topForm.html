@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <link href="../static/css/bootstrap.css" rel="stylesheet"/>
 <link href="../static//css/training.css" rel="stylesheet"/>
@@ -12,9 +12,18 @@
         <div class="col-3"></div>
         <div class="col-6">
             <h2>トップ画面</h2>
-            <input type="button" class="btn btn-primary" value="マッチ開始">
-            <input type="button" class="btn btn-primary" value="履歴確認">
-            <input type="button" class="btn btn-primary" value="プロフィール更新">
+            <form id="matchStart" method="post" th:action="@{/top/matching1}" th:object="${}">
+                <input type="submit" class="btn btn-primary" value="マッチ開始">
+            </form>
+            <form id="historyCheck" method="post" th:action="@{/top/history}" th:object="${}">
+                <input type="submit" class="btn btn-primary" value="履歴確認">
+            </form>
+            <form id="accountUpdate" method="post" th:action="@{/top/setting}" th:object="${}">
+                <input type="submit" class="btn btn-primary" value="プロフィール更新">
+            </form>
+
+
+
         </div>
         <div class="col-3"></div>
     </div>
