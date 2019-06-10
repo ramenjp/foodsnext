@@ -1,6 +1,8 @@
 package com.dev_training.service27;
 
+import com.dev_training.entity27.Account;
 import com.dev_training.entity27.AccountRepository;
+import com.dev_training.form27.AccountRegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +36,7 @@ public class AccountRegisterService {
      */
     @Transactional(readOnly = true)
     public boolean isExistsAccountId(String accountId){
-        int result = accountRepository.countByAccountId(accountId);
+        int result = accountRepository.countByAccount(accountId);
         return result !=0;
     }
 
