@@ -1,31 +1,62 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common/common_header::base_header(~{::title})">
-    <title>ユーザー登録完了</title>
+
+<title>アカウント登録確認</title>
+<head>
+    <meta charset="utf-8"/>
+    <link href="./css/bootstrap.css" rel="stylesheet"/>
+    <link href="./css/training.css" rel="stylesheet"/>
 </head>
 <body>
 
-<nav th:replace="common/noLoginNav"></nav>
+
 
 <div class="container py-3">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="text-center pb-4">アカウント登録</h2>
+            <h2 class="text-center pb-4">アカウント入力確認</h2>
             <div class="row">
                 <div class="col-md-12 mx-auto">
                     <div class="card rounded-0 card-shadow">
                         <div class="card-header bg-custom1">
-                            <h3 class="mb-0">アカウント登録完了</h3>
-                        </div>
-                        <div class="pb-4"></div>
-                        <div class="h3 text-center">
-                            ユーザー登録が完了しました。
+                            <h3 class="mb-0">アカウント入力確認</h3>
                         </div>
                         <div class="card-body">
-                            <form id="accountForm" th:action="@{/login}" method="get">
-                                <div class="text-center">
-                                    <input type="submit" value="ログイン画面へ" class="btn bg-custom3 btn-lg text-white"/>
-                                </div>
+                            <form id="accountForm" method="post">
+                                <fieldset id="account_field">
+                                    <div class="form-group">
+                                        <label>ニックネーム</label><br/>
+                                        <span class="form-control-static"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>E-mail</label><br/>
+                                        <span class="form-control-static"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>所属部署・役職</label><br/>
+                                        <span class="form-control-static"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>自己紹介</label><br/>
+                                        <span class="form-control-static" id="selfIntroductionPreview"></span>
+                                    </div>
+
+                                    <input type="hidden" name="nickname" id="nickname"/>
+                                    <input type="hidden" name="email" id="email"/>
+                                    <input type="hidden" name="password" id="password"/>
+                                    <input type="hidden" name="confirmPassword" id="confirmPassword"/>
+                                    <input type="hidden" name="department_position" id="department_position"/>
+                                    <input type="hidden" name="self_introduction" id="self_introduction"/>
+
+                                    //画像挿入できるようにする
+                                    <div class="col text-center">
+                                        <div class="btn-group">
+                                            <input type="button" name="registerBack" value="戻る" class="btn bg-custom3 btn-lg text-white "/>
+                                        </div>
+                                        <div class="btn-group">
+                                            <input type="button" name="register" value="登録" class="btn bg-custom3 btn-lg text-white "/>
+                                        </div>
+                                    </div>
+                                </fieldset>
                             </form>
                         </div>
                     </div>
@@ -34,5 +65,14 @@
         </div>
     </div>
 </div>
-<footer th:replace="common/common_footer"></footer>
+
+
+<script type="text/javascript">
+    $(function () {
+        var selfIntroductionPreview = $('#selfIntroductionPreview').text();
+        $('#selfIntroductionPreview').html(selfIntroductionPreview.replace(/[\n\r]/g, '<br>'));
+    });
+</script>
+
 </body>
+</html>
