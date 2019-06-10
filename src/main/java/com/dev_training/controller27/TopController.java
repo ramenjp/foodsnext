@@ -24,6 +24,7 @@ public class TopController {
     public String historyCheck(){ return "historyCheck";}
 
     @RequestMapping(value = "/setting", params = "accountUpdate", method = RequestMethod.POST)
-    public String accountUpdate(){ return "accountUpdate";}
+    public String accountUpdate(){ return "accountUpdateForm";}
+
 
 }
