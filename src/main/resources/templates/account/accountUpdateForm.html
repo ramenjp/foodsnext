@@ -19,7 +19,7 @@
                             <h3 class="mb-0">アカウント情報入力</h3>
                         </div>
                         <div class="card-body bg-gray1">
-                            <form id="accountForm" th:action="@{/account/update/confirm}" th:object="${accountUpdateForm}" method="post">
+                            <form id="accountForm" th:action="@{/top/setting/confirm}" th:object="${accountUpdateForm}" method="post">
                                 <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}">
                                     <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">共通エラーメッセージ表示エリア</p>
                                 </div>
