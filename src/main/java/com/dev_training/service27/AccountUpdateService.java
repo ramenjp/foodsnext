@@ -33,7 +33,7 @@ public class AccountUpdateService {
     @Transactional(readOnly = true)
     public boolean isExistsEmail(String email) {
         // アカウントIDの重複精査
-        int result = accountRepository.countByAccount(accountId);
+        int result = accountRepository.countByEmail(email);
         return result != 0;
     }
     /**
