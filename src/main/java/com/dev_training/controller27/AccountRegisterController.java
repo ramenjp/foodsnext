@@ -58,7 +58,6 @@ public class AccountRegisterController {
         }
         // アカウントIDの重複精査
 
-
         if (service.isExistsAccountId(accountRegisterForm.getEmail())) {
             bindingResult.rejectValue("accountId", "validation.duplicate", new String[]{"アカウントID"}, "default message");
             return "account/accountRegisterForm";
@@ -86,11 +85,13 @@ public class AccountRegisterController {
         // 登録するアカウントの作成
         Account account = new Account();
 
+
         account.setNickname(accountRegisterForm.getNickname());
         account.setPassword(accountRegisterForm.getPassword());
         account.setEmail(accountRegisterForm.getEmail());
         account.setDepartmentPosition(accountRegisterForm.getDepartment_position());
         account.setSelfIntroduction(accountRegisterForm.getSelfIntroduction());
+
 
         // アカウントの登録
         service.register(account);
