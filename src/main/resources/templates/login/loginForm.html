@@ -23,7 +23,7 @@
                     <h3 class="mb-0">Login</h3>
                 </div>
                 <div th:if="${param.error}" class="alert alert-danger">
-                    アカウントID、またはパスワードが誤っています。
+                    E-mail、またはパスワードが誤っています。
                 </div>
                 <div class="card-body">
                     <form id="login_form" method="post" th:action="@{'/login'}">
