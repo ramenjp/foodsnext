@@ -1,6 +1,8 @@
 package com.dev_training.service27;
 
+import com.dev_training.entity27.Account;
 import com.dev_training.entity27.AccountRepository;
+import com.dev_training.form27.AccountRegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,21 +22,20 @@ public class AccountRegisterService {
     /**
      * 登録処理
      *
-     * @param form フォーム
+     * @param account アカウントデータ
      */
 
     @Transactional
-    public void register(AccountResisterForm form){
-        Account account = new Account();
+    public void register(Account account){
         accountRepository.save(account);
     }
     /**
      * アカウントID重複精査
-     * @param accountId
+     * @param email
      */
     @Transactional(readOnly = true)
-    public boolean isExistsAccountId(String accountId){
-        int result = accountRepository.countByAccountId(accountId);
+    public boolean isExistsAccountId(String email){
+        int result = accountRepository.countByEmail(email);
         return result !=0;
     }
 
