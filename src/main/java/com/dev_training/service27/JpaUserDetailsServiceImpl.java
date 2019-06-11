@@ -15,7 +15,9 @@ import java.util.Objects;
 @Transactional
 public class JpaUserDetailsServiceImpl implements UserDetailsService {
 
-    /** アカウントリポジトリ */
+    /**
+     * アカウントリポジトリ
+     */
     private final AccountRepository accountRepository;
 
     @Autowired

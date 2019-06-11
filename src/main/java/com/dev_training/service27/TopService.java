@@ -18,17 +18,18 @@ public class TopService {
 
     @Autowired
     public TopService(AccountRepository accountRepository) {
+
         this.accountRepository = accountRepository;
     }
 
     /**
      * アカウント最新データ取得処理。
      *
-     * @param accountId アカウントの主キー
+     * @param id アカウントの主キー
      * @return アカウント
      */
-    public Account getAccountById(int accountId) {
+    public Account getAccountById(int id) {
         // 取れないことは考慮しない。
-        return accountRepository.findById(accountId).get();
+        return accountRepository.findById(id).get();
     }
 }
