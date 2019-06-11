@@ -22,21 +22,20 @@ public class AccountRegisterService {
     /**
      * 登録処理
      *
-     * @param form フォーム
+     * @param account アカウントデータ
      */
 
     @Transactional
-    public void register(AccountRegisterForm form){
-        Account account = new Account();
+    public void register(Account account){
         accountRepository.save(account);
     }
     /**
      * アカウントID重複精査
-     * @param accountId
+     * @param email
      */
     @Transactional(readOnly = true)
-    public boolean isExistsAccountId(String accountId){
-        int result = accountRepository.countByAccount(accountId);
+    public boolean isExistsAccountId(String email){
+        int result = accountRepository.countByEmail(email);
         return result !=0;
     }
 
