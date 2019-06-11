@@ -1,6 +1,6 @@
-package com.dev_training.controller;
+package com.dev_training.controller27;
 
-import com.dev_training.entity.Account;
+import com.dev_training.entity27.Account;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -60,7 +60,7 @@ public class ImageController {
     @RequestMapping(value = "/image/myprofile", method = {RequestMethod.GET })
     public HttpEntity<byte[]> getMyImage() throws IOException {
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
-        return getHttpEntity(String.valueOf(account.getId()));
+        return getHttpEntity(String.valueOf(account.getAccountId()));
     }
 
     /**

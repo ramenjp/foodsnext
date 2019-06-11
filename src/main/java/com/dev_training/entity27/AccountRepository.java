@@ -21,7 +21,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
      * @return アカウント
      */
     @Query(value = "SELECT * FROM accounts WHERE email = :email AND delete_flag = 0", nativeQuery = true)
-    com.dev_training.entity27.Account findByAccountId(@Param("email") String email);
+    com.dev_training.entity27.Account findByEmail(@Param("email") String email);
 
     /**
      * EmailIDに紐づくアカウントの件数を取得する。
@@ -30,7 +30,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
      * @return 件数
      */
     @Query(value = "SELECT COUNT(*) FROM accounts WHERE email = :email AND delete_flag = 0", nativeQuery = true)
-    int countByAccount(@Param("email") String email);
+    int countByEmail(@Param("email") String email);
 
     /**
      * 全アカウントを検索する。
