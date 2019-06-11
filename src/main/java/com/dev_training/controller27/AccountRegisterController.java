@@ -85,7 +85,7 @@ public class AccountRegisterController {
         // 登録するアカウントの作成
         Account account = new Account();
         account.setAccountId(accountRegisterForm.getAccountId());
-        account.setName(accountRegisterForm.getName());
+        account.setNickname(accountRegisterForm.getNickname());
         account.setSelfIntroduction(accountRegisterForm.getSelfIntroduction());
         account.setEmail(accountRegisterForm.getEmail());
         // アカウントの登録

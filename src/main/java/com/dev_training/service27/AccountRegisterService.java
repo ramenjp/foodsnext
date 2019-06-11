@@ -24,7 +24,7 @@ public class AccountRegisterService {
      */
 
     @Transactional
-    public void register(AccountRegisterForm form){
+    public void register(AccountResisterForm form){
         Account account = new Account();
         accountRepository.save(account);
     }
