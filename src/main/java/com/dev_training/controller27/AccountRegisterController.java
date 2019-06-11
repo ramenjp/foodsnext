@@ -16,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * アカウント登録コントローラ。
  */
+
 @Controller
 @RequestMapping(value = "/account/register")
-
 public class AccountRegisterController {
-
     /** アカウント登録サービス */
     private final AccountRegisterService service;
 
@@ -38,11 +37,9 @@ public class AccountRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/init")
-    String registerInit(@ModelAttribute AccountRegisterForm accountRegisterForm) {
+    public String registerInit(@ModelAttribute AccountRegisterForm accountRegisterForm) {
         return "account/accountRegisterForm";
     }
-
-
 
     /**
      * アカウント登録-確認画面表示。
@@ -53,19 +50,19 @@ public class AccountRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
-    String registerConfirm(@ModelAttribute @Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult, Model model) {
+    public String registerConfirm(@ModelAttribute @Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult, Model model) {
         // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return "account/accountRegisterForm";
         }
         // アカウントIDの重複精査
-        if (service.isExistsAccountId(accountRegisterForm.getAccountId())) {
+
+        if (service.isExistsAccountId(accountRegisterForm.getEmail())) {
             bindingResult.rejectValue("accountId", "validation.duplicate", new String[]{"アカウントID"}, "default message");
             return "account/accountRegisterForm";
         }
         return "account/accountRegisterConfirmForm";
     }
-
 
 
     /**
@@ -75,21 +72,27 @@ public class AccountRegisterController {
      * @param bindingResult       精査結果
      * @return Path
      */
+
     /*doからcompleteに編集*/
     @RequestMapping(value = "/complete", params = "register", method = RequestMethod.POST)
-    String registerComplete(@ModelAttribute @Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
+    public String registerComplete(@ModelAttribute @Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult) {
         // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return "account/accountRegisterForm";
         }
         // 登録するアカウントの作成
         Account account = new Account();
-        account.setAccountId(accountRegisterForm.getAccountId());
-        account.setName(accountRegisterForm.getName());
-        account.setSelfIntroduction(accountRegisterForm.getSelfIntroduction());
+
+
+        account.setNickname(accountRegisterForm.getNickname());
+        account.setPassword(accountRegisterForm.getPassword());
         account.setEmail(accountRegisterForm.getEmail());
+        account.setDepartmentPosition(accountRegisterForm.getDepartment_position());
+        account.setSelfIntroduction(accountRegisterForm.getSelfIntroduction());
+
+
         // アカウントの登録
-        service.register(account, accountRegisterForm.getPassword());
+        service.register(account);
         return "account/accountRegisterCompleteForm";
     }
 
@@ -100,8 +103,7 @@ public class AccountRegisterController {
      * @return Path
      */
     @RequestMapping(value = "/complete", params = "registerBack", method = RequestMethod.POST)
-    String registerBack(@ModelAttribute AccountRegisterForm accountRegisterForm)
-    {
+    public String registerBack(@ModelAttribute AccountRegisterForm accountRegisterForm) {
         return "login/loginForm";
     }
 
