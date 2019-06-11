@@ -35,7 +35,7 @@
 
                                     <div class="form-group required" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
                                         <label for="email">E-mail</label><br/>
-                                        <input class="form-control" id="email" type="text" maxlength="50" name="email" th:field="*{email}" required/>
+                                        <input class="form-control" id="email" type="text" maxlength="255" name="email" th:field="*{email}" required/>
                                         <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>
                                     </div>
 
@@ -53,10 +53,10 @@
                                     </div>
 
 
-                                    <div class="form-group required" th:classappend="${#fields.hasErrors('cdepartment_position')}? 'has-error'">
-                                        <label for="cdepartment_position">所属部署・役職</label><br/>
-                                        <input class="form-control" id="cdepartment_position" type="text" maxlength="45" th:field="*{cdepartment_position}" name="cdepartment_position" required placeholder="部署・役職を入力してください。"/>
-                                        <span class="text-danger" th:if="${#fields.hasErrors('cdepartment_position')}" th:errors="*{cdepartment_position}">error!</span>
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('department_position')}? 'has-error'">
+                                        <label for="department_position">所属部署・役職</label><br/>
+                                        <input class="form-control" id="department_position" type="text" maxlength="45" th:field="*{department_position}" name="department_position" required placeholder="部署・役職を入力してください。"/>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('department_position')}" th:errors="*{department_position}">error!</span>
                                     </div>
 
 
@@ -113,100 +113,3 @@
 
 
 
-
-
-<script type="text/javascript">
-
-    window.onload = function () {
-        $("#nowImage").empty();
-        var url = "/image/myprofile";
-        var xhr = new XMLHttpRequest();
-        xhr.responseType = "arraybuffer";
-        xhr.open("GET", url, true);
-        xhr.onload = function () {
-            var data = new Uint8Array(this.response);
-            var oURL = URL.createObjectURL(
-                new Blob([data], {type: "image/png"})
-            );
-            var image = new Image();
-            image.onload = function () {
-                URL.revokeObjectURL(oURL);
-                $("#nowImage").append(image);
-                $("#nowImage > img").css('width', 'auto').css('height', '200px');
-            };
-            image.src = oURL;
-        };
-        xhr.send(null);
-    };
-
-    $(function(){
-
-        // アップロードボタンを押下した
-        $("#data_upload_form").submit(function(event){
-            // 要素規定の動作をキャンセルする
-            event.preventDefault();
-
-         // CSRFトークンをリクエストヘッダに付加する
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
-            $(document).ajaxSend(function(e, xhr, options) {
-                xhr.setRequestHeader(header, token);
-            });
-
-            var ajaxUrl = "/account/upload/upload";
-
-            if(window.FormData){
-                var formData = new FormData($(this)[0]);
-
-                $.ajax({
-                    type : "POST",                  // HTTP通信の種類
-                    url  : ajaxUrl,                 // リクエストを送信する先のURL
-                    dataType : "text",              // サーバーから返されるデータの型
-                    data : formData,                // サーバーに送信するデータ
-                    processData : false,
-                    contentType: false,
-                }).done(function(data) {            // Ajax通信が成功した時の処理
-                    alert("アップロードが完了しました。");
-                }).fail(function(XMLHttpRequest, textStatus, errorThrown) { // Ajax通信が失敗した時の処理
-                    alert("アップロードが失敗しました。");
-                });
-            }else{
-                alert("アップロードに対応できていないブラウザです。");
-            }
-        });
-    });
-    $(document).on('change', ':file', function() {
-        var input = $(this),
-        numFiles = input.get(0).files ? input.get(0).files.length : 1,
-        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-        input.parent().parent().next(':text').val(label);
-
-        var files = !!this.files ? this.files : [];
-        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
-        if (/^image/.test( files[0].type)){ // only image file
-            var reader = new FileReader(); // instance of the FileReader
-            reader.readAsDataURL(files[0]); // read the local file
-            if(files[0].size < 1024000){
-                reader.onloadend = function(){ // set image data as background of div
-                    $("#imagePreview").css("background-image", "url("+this.result+")");
-                    $("#data_upload_button").attr('disabled', false);
-                }
-            }else{
-                $("#data_upload_button").attr('disabled', true);
-                $("#imagePreview").css("background-image", "");
-                var errMsg ="1MB以下のファイルを選択してください。";
-                alert(errMsg);
-                input.parent().parent().next(':text').val(errMsg);
-            }
-        }else{
-            $("#data_upload_button").attr('disabled', true);
-            $("#imagePreview").css("background-image", "");
-            var errMsg ="画像ファイル以外が選択されました。";
-            alert(errMsg);
-            input.parent().parent().next(':text').val(errMsg);
-        }
-    });
-</script>
-
-</body>
-</html>

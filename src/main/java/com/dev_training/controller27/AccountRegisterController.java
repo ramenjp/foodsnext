@@ -52,18 +52,15 @@ public class AccountRegisterController {
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public String registerConfirm(@ModelAttribute @Validated AccountRegisterForm accountRegisterForm, BindingResult bindingResult, Model model) {
         // BeanValidationのエラー確認
-        /*
         if (bindingResult.hasErrors()) {
             return "account/accountRegisterForm";
         }
         // アカウントIDの重複精査
 
-
         if (service.isExistsAccountId(accountRegisterForm.getEmail())) {
-            bindingResult.rejectValue("accountId", "validation.duplicate", new String[]{"アカウントID"}, "default message");
+            bindingResult.rejectValue("email", "validation.duplicate", new String[]{"メール"}, "default message");
             return "account/accountRegisterForm";
         }
-        */
         return "account/accountRegisterConfirmForm";
     }
 
@@ -86,11 +83,13 @@ public class AccountRegisterController {
         // 登録するアカウントの作成
         Account account = new Account();
 
+
         account.setNickname(accountRegisterForm.getNickname());
         account.setPassword(accountRegisterForm.getPassword());
         account.setEmail(accountRegisterForm.getEmail());
         account.setDepartmentPosition(accountRegisterForm.getDepartment_position());
         account.setSelfIntroduction(accountRegisterForm.getSelfIntroduction());
+
 
         // アカウントの登録
         service.register(account);

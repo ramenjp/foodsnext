@@ -36,22 +36,20 @@ public class AccountUpdateService {
         int result = accountRepository.countByEmail(email);
         return result != 0;
     }
-
     /**
      * 更新処理
      *
      * @param account 更新対象のアカウント
      */
 
+    /**
+     * 更新処理。
+     *
+     * @param account 更新対象のアカウント
+     */
     @Transactional
-    public void updateAccount(Account account) {
+    public void updateAccountById(Account account) {
         accountRepository.save(account);
     }
-
-    @Transactional(readOnly = true)
-    public Account getAccountById(int accountId) {
-        Optional<Account> result = accountRepository.findById(accountId);
-        return result.orElseThrow(() -> new RuntimeException("account is not found"));
-    }
-
 }
+
