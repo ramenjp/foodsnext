@@ -1,6 +1,4 @@
 package com.dev_training.controller27;
-
-
 import com.dev_training.common.CodeValue;
 import com.dev_training.entity27.Account;
 import com.dev_training.service27.TopService;
@@ -52,7 +50,7 @@ public class TopController {
      *
      * @return Path
      */
-    @RequestMapping(value = "loginSuccess")
+    @RequestMapping(value = "/loginSuccess")
     public String loginSuccess() {
         return "redirect:/top";
     }
@@ -88,6 +86,4 @@ public class TopController {
     public String accountUpdate() {
         return "accountUpdateForm";
     }
-
-
 }

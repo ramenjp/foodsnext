@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login/?error") // ログイン処理失敗時の遷移先
                 .successForwardUrl("/top/loginSuccess") // ログイン成功時の繊維先
                 .usernameParameter("email")// メール
-                .passwordParameter("login_password").permitAll(); // パスワード
+                .passwordParameter("password").permitAll(); // パスワード
 
         http.logout()
                 .logoutUrl("/logout") // ログアウト処理を起動させるパス
