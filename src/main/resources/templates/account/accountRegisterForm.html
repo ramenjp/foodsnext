@@ -53,10 +53,10 @@
 
 
                                     <!-- 変更点　変数に注意 -->
-                                    <div class="form-group required" th:classappend="${#fields.hasErrors('cdepartment_position')}? 'has-error'">
-                                        <label for="cdepartment_position">所属部署・役職</label><br/>
-                                        <input class="form-control" id="cdepartment_position" type="text" maxlength="45" th:field="*{cdepartment_position}" name="cdepartment_position" required placeholder="部署・役職を入力してください。"/>
-                                        <span class="text-danger" th:if="${#fields.hasErrors('cdepartment_position')}" th:errors="*{cdepartment_position}">error!</span>
+                                    <div class="form-group required" th:classappend="${#fields.hasErrors('department_position')}? 'has-error'">
+                                        <label for="department_position">所属部署・役職</label><br/>
+                                        <input class="form-control" id="department_position" type="text" maxlength="45" th:field="*{department_position}" name="department_position" required placeholder="部署・役職を入力してください。"/>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('department_position')}" th:errors="*{department_position}">error!</span>
                                     </div>
 
 
