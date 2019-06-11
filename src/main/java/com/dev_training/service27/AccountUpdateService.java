@@ -1,11 +1,14 @@
 package com.dev_training.service27;
 
 
-import com.dev_training.entity.Account;
+import com.dev_training.entity27.Account;
 import com.dev_training.entity27.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.validation.constraints.Email;
+import java.util.Optional;
 
 /**
  * アカウント情報更新サービス
@@ -26,10 +29,11 @@ public class AccountUpdateService {
     /**
      * アカウントIDの重複精査
      */
+
     @Transactional(readOnly = true)
-    public boolean isExistsAccountId(String accountId) {
+    public boolean isExistsEmail(String email) {
         // アカウントIDの重複精査
-        int result = accountRepository.countByAccount(accountId);
+        int result = accountRepository.countByEmail(email);
         return result != 0;
     }
     /**
@@ -47,7 +51,5 @@ public class AccountUpdateService {
     public void updateAccountById(Account account) {
         accountRepository.save(account);
     }
-
-
 }
 

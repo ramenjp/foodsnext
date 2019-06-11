@@ -1,7 +1,7 @@
-package com.dev_training.service;
+package com.dev_training.service27;
 
-import com.dev_training.entity.Account;
-import com.dev_training.entity.AccountRepository;
+import com.dev_training.entity27.Account;
+import com.dev_training.entity27.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,8 +24,8 @@ public class JpaUserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String accountId) throws UsernameNotFoundException {
-        Account account = accountRepository.findByAccountId(accountId);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Account account = accountRepository.findByEmail(email);
         if (Objects.isNull(account)) {
             return new Account();
         }
