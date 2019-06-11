@@ -68,7 +68,7 @@ public class TopController {
     public String init(@AuthenticationPrincipal Account account, Model model) {
         // 初回のアクセスなら、アカウントを検索してセッションに格納する
         if (Objects.isNull(session.getAttribute(SESSION_FORM_ID))) {
-            Account sessionAccount = service.getAccountById(account.getEmail());
+            Account sessionAccount = service.getAccountById(account.getAccountId());
             session.setAttribute(SESSION_FORM_ID, sessionAccount);
         }
         return "top/topForm";

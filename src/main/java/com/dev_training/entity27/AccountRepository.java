@@ -6,13 +6,17 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.validation.constraints.Email;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
  * アカウントリポジトリ。
  */
 public interface AccountRepository extends JpaRepository<Account, Integer>, JpaSpecificationExecutor<Account> {
+
+
 
     /**
      * emailに紐づくアカウントを検索する。
@@ -21,7 +25,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
      * @return アカウント
      */
     @Query(value = "SELECT * FROM accounts WHERE email = :email AND delete_flag = 0", nativeQuery = true)
-    com.dev_training.entity27.Account findByEmail(@Param("email") String email);
+    Account findByEmail(@Param("email") String email);
 
     /**
      * EmailIDに紐づくアカウントの件数を取得する。
