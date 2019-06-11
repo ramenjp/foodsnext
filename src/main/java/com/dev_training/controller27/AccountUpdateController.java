@@ -1,8 +1,8 @@
 package com.dev_training.controller27;
 
-import com.dev_training.entity.Account;
-import com.dev_training.form.AccountUpdateForm;
-import com.dev_training.service.AccountUpdateService;
+import com.dev_training.entity27.Account;
+import com.dev_training.form27.AccountUpdateForm;
+import com.dev_training.service27.AccountUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,14 +40,18 @@ public class AccountUpdateController {
      * @param model モデル
      * @return Path
      */
+
+    /*
     @RequestMapping(value = "/init")
     public String updateInit(Model model) {
         // セッションに格納されているアカウントをもとに、DBから最新のアカウントを取得してModelに格納する。
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
-        Account targetAccount = service.getAccountById(account.getId());
+        Account targetAccount = service.getAccountById(account.getAccountId());
         model.addAttribute("accountUpdateForm", targetAccount);
         return "account/accountUpdateForm";
     }
+
+*/
 
     /**
      * アカウント情報更新-確認画面表示。
@@ -57,6 +61,8 @@ public class AccountUpdateController {
      * @param model             モデル
      * @return Path
      */
+
+    /*
     @RequestMapping(value = "/top/setting/confirm", method = RequestMethod.POST)
     public String confirm(@ModelAttribute @Validated AccountUpdateForm accountUpdateForm, BindingResult bindingResult, Model model) {
         // BeanValidationのエラー確認
@@ -82,7 +88,7 @@ public class AccountUpdateController {
         return "account/accountUpdateConfirmForm";
     }
 
-
+*/
 
     /**
      * アカウント情報更新-完了画面表示。
@@ -91,6 +97,7 @@ public class AccountUpdateController {
      * @param bindingResult     精査結果
      * @return Path
      */
+    /*
     @RequestMapping(value = "/top/setting/complete", params = "update", method = RequestMethod.POST)
     public String doUpdate(@ModelAttribute @Validated AccountUpdateForm accountUpdateForm, BindingResult bindingResult) {
         // BeanValidationのエラー確認
@@ -127,6 +134,10 @@ public class AccountUpdateController {
         return "account/accountUpdateCompleteForm";
     }
 
+/*
+
+
+     */
     /**
      * アカウント情報更新-入力画面に戻る。
      *

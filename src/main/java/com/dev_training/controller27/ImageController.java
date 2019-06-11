@@ -9,16 +9,18 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * イメージコントローラ。
+ */
+@RestController
 public class ImageController {
+
     /** リソースローダー */
     private final ResourceLoader resourceLoader;
     /** アプリケーション環境設定 */
@@ -36,16 +38,16 @@ public class ImageController {
     }
 
     /**
-     * アカウントのemailに紐づくプロフィール画像を取得し、バイナリで返却する。
+     * アカウントのIDに紐づくプロフィール画像を取得し、バイナリで返却する。
      *
-     * @param email email
+     * @param id id
      * @return プロフィール画像のバイナリ
      * @throws IOException 入出力例外
      */
     @ResponseBody
     @RequestMapping(value = "/image/profile", method = {RequestMethod.GET })
-    public HttpEntity<byte[]> getImage(@RequestParam("email") String email) throws IOException {
-        return getHttpEntity(email);
+    public HttpEntity<byte[]> getImage(@RequestParam("id") String id) throws IOException {
+        return getHttpEntity(id);
     }
 
     /**
@@ -58,20 +60,20 @@ public class ImageController {
     @RequestMapping(value = "/image/myprofile", method = {RequestMethod.GET })
     public HttpEntity<byte[]> getMyImage() throws IOException {
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
-        return getHttpEntity(String.valueOf(account.getEmail()));
+        return getHttpEntity(String.valueOf(account.getAccountId()));
     }
 
     /**
-     * アカウントのEmailに紐づくプロフィール画像を取得し、バイナリで返却する。
+     * アカウントのIDに紐づくプロフィール画像を取得し、バイナリで返却する。
      *
-     * @param email email
+     * @param id id
      * @return プロフィール画像のバイナリ
      * @throws IOException 入出力例外
      */
-    private HttpEntity<byte[]> getHttpEntity(String email) throws IOException {
+    private HttpEntity<byte[]> getHttpEntity(String id) throws IOException {
         // リソースファイルを読み込み
         String dirPath = environment.getProperty("upload.dir.path");
-        Resource resource = resourceLoader.getResource("file:" + dirPath + "/" + email + "_profile");
+        Resource resource = resourceLoader.getResource("file:" + dirPath + "/" + id + "_profile");
         // 存在しなければ、noimageを格納する
         if (!resource.exists()) {
             resource = resourceLoader.getResource("classpath:" + "/static/images/noimage");
