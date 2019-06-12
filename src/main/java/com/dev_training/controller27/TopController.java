@@ -67,7 +67,6 @@ public class TopController {
         }
         return "top/topForm";
     }
-
     @RequestMapping(value = "/matching1", params = "match", method = RequestMethod.POST)
     public String match() {
         return "matching_count";
