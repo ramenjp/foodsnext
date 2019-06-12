@@ -75,12 +75,12 @@ public class TopController {
 
     @RequestMapping(value = "/history", params = "historyCheck", method = RequestMethod.POST)
     public String historyCheck() {
-        return "historyCheck";
+        return "history/historyCheck";
     }
 
-    @RequestMapping(value = "/setting", params = "accountUpdate", method = RequestMethod.POST)
+   /* @RequestMapping(value = "/setting", params = "accountUpdate", method = RequestMethod.POST)
     public String accountUpdate() {
-        return "accountUpdateForm";
-    }
+        return "account/accountUpdateForm";
+    }*/
 
 }
