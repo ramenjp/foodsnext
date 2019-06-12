@@ -66,7 +66,7 @@ public class Account implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public int getAccountId() {

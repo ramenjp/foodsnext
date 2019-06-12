@@ -67,7 +67,6 @@ public class TopController {
         }
         return "top/topForm";
     }
-
     @RequestMapping(value = "/matching1", params = "match", method = RequestMethod.POST)
     public String match() {
         return "matching_count";
@@ -75,12 +74,12 @@ public class TopController {
 
     @RequestMapping(value = "/history", params = "historyCheck", method = RequestMethod.POST)
     public String historyCheck() {
-        return "historyCheck";
+        return "history/historyCheck";
     }
 
-    @RequestMapping(value = "/setting", params = "accountUpdate", method = RequestMethod.POST)
+   /* @RequestMapping(value = "/setting", params = "accountUpdate", method = RequestMethod.POST)
     public String accountUpdate() {
-        return "accountUpdateForm";
-    }
+        return "account/accountUpdateForm";
+    }*/
 
 }
