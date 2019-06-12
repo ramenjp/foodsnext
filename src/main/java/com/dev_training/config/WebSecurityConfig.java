@@ -44,16 +44,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login") // ログインページのパス
                 .loginProcessingUrl("/login") // 認証処理を起動させるパス
                 .failureUrl("/login/?error") // ログイン処理失敗時の遷移先
-                .successForwardUrl("/top/loginSuccess") // ログイン成功時の繊維先
-                .usernameParameter("email")// メール
-                .passwordParameter("password").permitAll(); // パスワード
+                .successForwardUrl("/account/register/init") // ログイン成功時の繊維先
+                .usernameParameter("login_email")// メール
+                .passwordParameter("login_password").permitAll(); // パスワード
 
         http.logout()
                 .logoutUrl("/logout") // ログアウト処理を起動させるパス
                 .logoutSuccessUrl("/login") // ログアウト完了時のパス
                 .deleteCookies("JSESSIONID", "SESSION")
                 .invalidateHttpSession(true).permitAll();
-
     }
 
     @Configuration
