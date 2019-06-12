@@ -7,12 +7,13 @@ import com.dev_training.service27.TopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
+
 
 /**
  * トップコントローラ。
@@ -55,11 +56,11 @@ public class TopController {
      * トップ画面表示。
      *
      * @param account 認証されたアカウント
-     * @param model   モデル
+
      * @return Path
      */
     @RequestMapping(value = "")
-    public String init(@AuthenticationPrincipal Account account, Model model) {
+    public String init(@AuthenticationPrincipal Account account) {
         // 初回のアクセスなら、アカウントを検索してセッションに格納する
         if (Objects.isNull(session.getAttribute(SESSION_FORM_ID))) {
             Account sessionAccount = service.getAccountById(account.getAccountId());
@@ -67,19 +68,32 @@ public class TopController {
         }
         return "top/topForm";
     }
+
+    //マッチング
     @RequestMapping(value = "/matching1", params = "match", method = RequestMethod.POST)
     public String match() {
         return "matching_count";
     }
 
+
+    //履歴
     @RequestMapping(value = "/history", params = "historyCheck", method = RequestMethod.POST)
     public String historyCheck() {
         return "history/historyCheck";
     }
 
-   /* @RequestMapping(value = "/setting", params = "accountUpdate", method = RequestMethod.POST)
+
+    //アップデート
+    @RequestMapping(value = "/setting", params = "accountUpdate", method = RequestMethod.POST)
     public String accountUpdate() {
         return "account/accountUpdateForm";
-    }*/
+    }
+
+
+    //プロフィール画像登録
+    @RequestMapping(value="/upload", params="upload", method=RequestMethod.POST)
+    public String imageUpload(){
+        return "account/accountProfileImageUploadForm";
+    }
 
 }
