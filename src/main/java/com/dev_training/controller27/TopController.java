@@ -72,7 +72,7 @@ public class TopController {
     //マッチング
     @RequestMapping(value = "/matching1", params = "match", method = RequestMethod.POST)
     public String match() {
-        return "matching_count";
+        return "matching/matching_count";
     }
 
 
