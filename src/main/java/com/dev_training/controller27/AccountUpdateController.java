@@ -101,6 +101,11 @@ public class AccountUpdateController {
             return "account/accountUpdateForm";
         }
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
+        boolean isValid = service.validCurrentPassword(account.getAccountId(), accountUpdateForm.getCurrentPassword());
+        if (!isValid) {
+            bindingResult.reject("validation.current.password", "default message");
+            return "account/accountPasswordUpdateForm";
+        }
         Account targetAccount = service.getAccountByEmail(account.getEmail());
 
         // 更新有無チェック。何も更新されていなければエラーとする。
@@ -121,11 +126,13 @@ public class AccountUpdateController {
     // 更新用アカウントの作成
         targetAccount.setNickname(accountUpdateForm.getNickname());
         targetAccount.setEmail(accountUpdateForm.getEmail());
-        targetAccount.setPassword(accountUpdateForm.getPassword());
+        targetAccount.setPassword(accountUpdateForm.getNewpassword());
         targetAccount.setDepartmentPosition(accountUpdateForm.getDepartment_position());
         targetAccount.setSelfIntroduction(accountUpdateForm.getSelfIntroduction());
     // 更新処理
-        service.updateAccountById(targetAccount);
+        service.updatePassword(account.getAccountId(), accountUpdateForm.getNewpassword());
+        service.updateAccountById(account);
+
     // セッション情報の更新
     Account sessionAccount = service.getAccountByEmail(targetAccount.getEmail());
         session.setAttribute(SESSION_FORM_ID,sessionAccount);
@@ -138,7 +145,7 @@ public class AccountUpdateController {
      * @param accountUpdateForm フォーム。
      * @return Path
      */
-    @RequestMapping(value = "/do", params = "back", method = RequestMethod.POST)
+    @RequestMapping(value = "/complete", params = "back", method = RequestMethod.POST)
     public String back(@ModelAttribute AccountUpdateForm accountUpdateForm) {
         return "account/accountUpdateForm";
     }

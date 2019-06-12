@@ -19,10 +19,15 @@ public class AccountUpdateService {
 
     /** アカウントレポジトリ*/
     private final AccountRepository accountRepository;
+    /** パスワードエンコーダー */
+    private final PasswordEncoder passwordEncoder;
+
 
     @Autowired
-    public AccountUpdateService(AccountRepository accountRepository) {
+    public AccountUpdateService(AccountRepository accountRepository, PasswordEncoder passwordEncoder)
+    {
         this.accountRepository = accountRepository;
+        this.passwordEncoder= passwordEncoder;
     }
 
     /**
@@ -47,7 +52,7 @@ public class AccountUpdateService {
     public boolean isNoChange(AccountUpdateForm accountUpdateForm, Account targetAccount) {
         return accountUpdateForm.getNickname().equals(targetAccount.getNickname())
                 && accountUpdateForm.getEmail().equals(targetAccount.getEmail())
-                && accountUpdateForm.getPassword().equals(targetAccount.getPassword())
+                && accountUpdateForm.getNewpassword().equals(targetAccount.getPassword())
                 && accountUpdateForm.getDepartment_position().equals(targetAccount.getDepartmentPosition())
                 && accountUpdateForm.getSelfIntroduction().equals(targetAccount.getSelfIntroduction());
     }
@@ -62,6 +67,30 @@ public class AccountUpdateService {
         return result != 0;
     }
 
+    /**
+     * 現在のパスワード一致精査。
+     *
+     * @param id                 アカウントの主キー
+     * @param rawCurrentPassword 入力された現在のパスワード
+     * @return 精査結果
+     */
+    public boolean validCurrentPassword(int id, String rawCurrentPassword) {
+        Account account = accountRepository.findById(id).orElseThrow(() -> new RuntimeException("account is not found"));
+        return passwordEncoder.matches(rawCurrentPassword, account.getPassword());
+    }
+
+
+    /**
+     * パスワード更新処理。
+     *
+     * @param id             アカウントの主キー
+     * @param rawNewPassword 入力された新しいパスワード
+     */
+    public void updatePassword(int id, String rawNewPassword) {
+        Account account = accountRepository.findById(id).orElseThrow(() -> new RuntimeException("account is not found"));
+        account.setPassword(passwordEncoder.encode(rawNewPassword));
+        accountRepository.save(account);
+    }
     /**
      * 更新処理。
      *
