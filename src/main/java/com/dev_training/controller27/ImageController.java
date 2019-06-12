@@ -40,13 +40,13 @@ public class ImageController {
     /**
      * アカウントのIDに紐づくプロフィール画像を取得し、バイナリで返却する。
      *
-     * @param id id
+     * @param account_id account_id
      * @return プロフィール画像のバイナリ
      * @throws IOException 入出力例外
      */
     @ResponseBody
     @RequestMapping(value = "/image/profile", method = {RequestMethod.GET })
-    public HttpEntity<byte[]> getImage(@RequestParam("id") String id) throws IOException {
+    public HttpEntity<byte[]> getImage(@RequestParam("account_id") String id) throws IOException {
         return getHttpEntity(id);
     }
 

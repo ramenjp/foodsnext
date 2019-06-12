@@ -68,7 +68,6 @@ public class TopController {
         }
         return "top/topForm";
     }
-
     @RequestMapping(value = "/matching1", params = "match", method = RequestMethod.POST)
     public String match() {
         return "matching_count";
@@ -79,9 +78,14 @@ public class TopController {
         return "history/historyCheck";
     }
 
-   /* @RequestMapping(value = "/setting", params = "accountUpdate", method = RequestMethod.POST)
+    @RequestMapping(value = "/setting", params = "accountUpdate", method = RequestMethod.POST)
     public String accountUpdate() {
         return "account/accountUpdateForm";
-    }*/
+    }
+
+    @RequestMapping(value="/upload", params="upload", method=RequestMethod.POST)
+    public String imageUpload(){
+        return "account/accountProfileImageUploadForm";
+    }
 
 }
