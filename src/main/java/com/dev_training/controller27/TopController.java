@@ -21,17 +21,11 @@ import java.util.Objects;
 @RequestMapping("/top")
 public class TopController {
 
-    /**
-     * トップサービス
-     */
+    /**トップサービス*/
     private final TopService service;
-    /**
-     * HTTPセッション
-     */
+    /**HTTPセッション*/
     private final HttpSession session;
-    /**
-     * セッションキー(ログインユーザのアカウント)
-     */
+    /**セッションキー(ログインユーザのアカウント)*/
     private static final String SESSION_FORM_ID = "account";
 
 
@@ -88,6 +82,5 @@ public class TopController {
     public String accountUpdate() {
         return "accountUpdateForm";
     }
-
 
 }
