@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<meta name="_csrf" th:content="${_csrf.token}"/>
-<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-<meta name="_login_id" th:content="${session.accounts.accountId}"/>
-<head th:replace="common/common_header::base_header(~{::title})"><link href="../static/css/bootstrap.css" rel="stylesheet"/>
+<!--<meta name="_csrf" th:content="${_csrf.token}"/>-->
+<!--<meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+<!--<meta name="_login_id" th:content="${session.accounts.accountId}"/>-->
+<head th:replace="common/common_header::base_header(~{::title})">
+    <link href="../static/css/bootstrap.css" rel="stylesheet"/>
     <link href="../static//css/training.css" rel="stylesheet"/>
     <meta charset="UTF-8">
 
@@ -12,21 +13,17 @@
 </head>
 
 <body>
+<nav th:replace="common/loggedinNav::navi(${accountId})"></nav>
 <div class="container">
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
             <h2>トップ画面</h2>
-            <!--<form id="matchStart" method="post" th:action="@{/top/matching1}" th:object="${}">
-                <input type="submit" class="btn btn-primary" value="マッチ開始">
-            </form>
-            <form id="historyCheck" method="post" th:action="@{/top/history}" th:object="${}">
-                <input type="submit" class="btn btn-primary" value="履歴確認">
-            </form>
-            <form id="accountUpdate" method="post" th:action="@{/top/setting}" th:object="${}">
-                <input type="submit" class="btn btn-primary" value="プロフィール更新">
-            </form>
--->
+            <span><i class="far fa-address-card">&nbsp;</i>アカウント機能</span>
+
+            <li class="nav-item">
+                <a href="/top/matching1" class="nav-link">マッチ開始</a>
+            </li>
 
 
         </div>
