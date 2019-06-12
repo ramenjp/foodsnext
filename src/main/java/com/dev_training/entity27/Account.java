@@ -11,7 +11,6 @@ import java.util.Collection;
  * アカウントエンティティ。
  */
 @Entity
-
 @Table(name = "accounts")
 public class Account implements UserDetails {
 
@@ -45,36 +44,29 @@ public class Account implements UserDetails {
         return null;
     }
 
-
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
     @Override
     public String getUsername() {
-        return null;
+        return this.email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public int getAccountId() {
@@ -83,6 +75,11 @@ public class Account implements UserDetails {
 
     public String getNickname() {
         return nickname;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     public String getEmail() {

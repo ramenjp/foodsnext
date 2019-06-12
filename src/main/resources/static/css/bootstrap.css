@@ -7704,23 +7704,24 @@ button.bg-dark:focus {
 
 .pt-5,
 .py-5 {
-  padding-top: 15rem !important;
+  padding-top: 10rem !important;
 }
 
 .pr-5,
 .px-5 {
-  padding-right: 10rem !important;
+  padding-right: 3rem !important;
 }
 
 .pb-5,
 .py-5 {
-  padding-bottom: 0;
+  padding-bottom: 3rem !important;
 }
 
 .pl-5,
 .px-5 {
-  padding-left: 0;
+  padding-left: 25rem !important;
 }
+
 
 .m-auto {
   margin: auto !important;
@@ -8997,7 +8998,9 @@ a.text-dark:hover, a.text-dark:focus {
     min-width: 992px !important;
   }
   .container {
-    min-width: 992px !important;
+
+
+    width: 992px !important;
   }
   .navbar {
     display: none;

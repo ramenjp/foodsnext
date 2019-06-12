@@ -83,16 +83,14 @@ public class AccountRegisterController {
         // 登録するアカウントの作成
         Account account = new Account();
 
-
         account.setNickname(accountRegisterForm.getNickname());
-        account.setPassword(accountRegisterForm.getPassword());
         account.setEmail(accountRegisterForm.getEmail());
         account.setDepartmentPosition(accountRegisterForm.getDepartment_position());
         account.setSelfIntroduction(accountRegisterForm.getSelfIntroduction());
 
 
         // アカウントの登録
-        service.register(account);
+        service.register(account,accountRegisterForm.getPassword());
         return "account/accountRegisterCompleteForm";
     }
 
