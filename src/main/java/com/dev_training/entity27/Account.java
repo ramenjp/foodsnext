@@ -94,7 +94,7 @@ public class Account implements UserDetails {
         return selfIntroduction;
     }
 
-    public boolean isDeleteFlag() {
+    public boolean getDeleteFlag() {
         return deleteFlag;
     }
 
