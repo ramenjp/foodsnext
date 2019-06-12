@@ -19,7 +19,7 @@
                             <h3 class="mb-0">アカウント情報入力</h3>
                         </div>
                         <div class="card-body">
-                            <form id="accountForm" th:action="@{/top/setting/confirm}" th:object="${accountUpdateForm}" method="post">
+                            <form id="accountForm" th:action="@{/account/register/confirm}" th:object="${accountRegisterForm}" method="post">
                                 <fieldset id="account_field">
                                     <div class="form-group required" th:classappend="${#fields.hasErrors('nickname')}? 'has-error'">
 
@@ -38,7 +38,7 @@
                                     <div class="form-group required" th:classappend="${#fields.hasErrors('password')||#fields.hasErrors('passwordValid')}? 'has-error'">
                                         <label for="password">パスワード</label><br/>
                                         <input class="form-control" id="password" type="password" maxlength="50" th:field="*{password}" name="password" required placeholder="パスワードを入力してください"/>
-                                        <small id="passwordHelp" class="form-text text-muted">パスワードは5文字以上、15文字以下かつ、半角の英小文字、英大文字、数字を1種類ずつ含めて入力してください。</small>
+                                        <small id="passwordhelp" class="form-text text-muted">パスワードは5文字以上、15文字以下かつ、半角の英小文字、英大文字、数字を1種類ずつ含めて入力してください。</small>
                                         <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error!</span>
                                         <p class="text-danger" th:if="${#fields.hasErrors('passwordValid')}" th:errors="*{passwordValid}">error!</p>
                                     </div>

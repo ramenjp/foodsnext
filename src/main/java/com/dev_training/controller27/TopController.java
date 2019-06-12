@@ -69,31 +69,5 @@ public class TopController {
         return "top/topForm";
     }
 
-    //マッチング
-    @RequestMapping(value = "/matching1", params = "match", method = RequestMethod.POST)
-    public String match() {
-        return "matching/matching_count";
-    }
-
-
-    //履歴
-    @RequestMapping(value = "/history", params = "historyCheck", method = RequestMethod.POST)
-    public String historyCheck() {
-        return "history/historyCheck";
-    }
-
-
-    //アップデート
-    @RequestMapping(value = "/setting", params = "accountUpdate", method = RequestMethod.POST)
-    public String accountUpdate() {
-        return "account/accountUpdateForm";
-    }
-
-
-    //プロフィール画像登録
-    @RequestMapping(value="/upload", params="upload", method=RequestMethod.POST)
-    public String imageUpload(){
-        return "account/accountProfileImageUploadForm";
-    }
 
 }

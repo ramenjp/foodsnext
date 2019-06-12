@@ -5,6 +5,7 @@ import com.dev_training.entity27.Account;
 import com.dev_training.entity27.AccountRepository;
 import com.dev_training.form27.AccountUpdateForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +17,7 @@ import java.util.Optional;
 @Service
 public class AccountUpdateService {
 
-    /**
-     * アカウントレポジトリ
-     */
+    /** アカウントレポジトリ*/
     private final AccountRepository accountRepository;
 
     @Autowired
@@ -58,7 +57,7 @@ public class AccountUpdateService {
 
     @Transactional(readOnly = true)
     public boolean isExistsEmail(String email) {
-        // アカウントIDの重複精査
+        // アカウントの重複精査
         int result = accountRepository.countByEmail(email);
         return result != 0;
     }

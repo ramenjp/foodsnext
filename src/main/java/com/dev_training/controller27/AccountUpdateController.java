@@ -28,6 +28,7 @@ public class AccountUpdateController {
     /** セッションキー(ログインユーザのアカウント) */
     private static final String SESSION_FORM_ID = "account";
 
+
     @Autowired
     public AccountUpdateController(AccountUpdateService accountUpdateService, HttpSession session) {
         this.service = accountUpdateService;
@@ -41,17 +42,15 @@ public class AccountUpdateController {
      * @return Path
      */
 
-    /*
     @RequestMapping(value = "/init")
     public String updateInit(Model model) {
         // セッションに格納されているアカウントをもとに、DBから最新のアカウントを取得してModelに格納する。
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
-        Account targetAccount = service.getAccountById(account.getAccountId());
+        Account targetAccount = service.getAccountByEmail(account.getEmail());
         model.addAttribute("accountUpdateForm", targetAccount);
         return "account/accountUpdateForm";
     }
 
-*/
 
     /**
      * アカウント情報更新-確認画面表示。
@@ -62,15 +61,15 @@ public class AccountUpdateController {
      * @return Path
      */
 
-    /*
-    @RequestMapping(value = "/top/setting/confirm", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public String confirm(@ModelAttribute @Validated AccountUpdateForm accountUpdateForm, BindingResult bindingResult, Model model) {
         // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return "account/accountUpdateForm";
         }
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
-        Account targetAccount = service.getAccountById(account.getId());
+        Account targetAccount = service.getAccountByEmail(account.getEmail());
 
         // 更新有無チェック。何も更新されていなければエラーとする。
         if (service.isNoChange(accountUpdateForm, targetAccount)) {
@@ -78,17 +77,15 @@ public class AccountUpdateController {
             return "account/accountUpdateForm";
         }
         // アカウントIDの重複精査
-        String accountId = accountUpdateForm.getAccountId();
-        if (!accountId.equals(targetAccount.getAccountId())) {
-            if (service.isExistsAccountId(accountId)) {
-                bindingResult.rejectValue("accountId", "validation.duplicate", new String[]{"アカウントID"}, "default message");
+        String accountEmail = accountUpdateForm.getEmail();
+        if (!accountEmail.equals(targetAccount.getEmail())) {
+            if (service.isExistsEmail(accountEmail)) {
+                bindingResult.rejectValue("email", "validation.duplicate", new String[]{"メールアドレス"}, "default message");
                 return "account/accountUpdateForm";
             }
         }
         return "account/accountUpdateConfirmForm";
     }
-
-*/
 
     /**
      * アカウント情報更新-完了画面表示。
@@ -97,15 +94,14 @@ public class AccountUpdateController {
      * @param bindingResult     精査結果
      * @return Path
      */
-    /*
-    @RequestMapping(value = "/top/setting/complete", params = "update", method = RequestMethod.POST)
+    @RequestMapping(value = "/complete", params = "update", method = RequestMethod.POST)
     public String doUpdate(@ModelAttribute @Validated AccountUpdateForm accountUpdateForm, BindingResult bindingResult) {
         // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return "account/accountUpdateForm";
         }
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
-        Account targetAccount = service.getAccountById(account.getId());
+        Account targetAccount = service.getAccountByEmail(account.getEmail());
 
         // 更新有無チェック。何も更新されていなければエラーとする。
         if (service.isNoChange(accountUpdateForm, targetAccount)) {
@@ -113,38 +109,36 @@ public class AccountUpdateController {
             return "account/accountUpdateForm";
         }
         // アカウントIDの重複精査
-        String accountId = accountUpdateForm.getAccountId();
-        if (!accountId.equals(targetAccount.getAccountId())) {
-            if (service.isExistsAccountId(accountId)) {
-                bindingResult.rejectValue("accountId", "validation.duplicate", new String[]{"アカウントID"}, "default message");
+        String accountEmail = accountUpdateForm.getEmail();
+        if (!accountEmail.equals(targetAccount.getEmail())) {
+            if (service.isExistsEmail(accountEmail)) {
+                bindingResult.rejectValue("email", "validation.duplicate", new String[]{"メールアドレス"}, "default message");
                 return "account/accountUpdateForm";
             }
         }
 
-        // 更新用アカウントの作成
-        targetAccount.setAccountId(accountUpdateForm.getAccountId());
-        targetAccount.setName(accountUpdateForm.getName());
+
+    // 更新用アカウントの作成
+        targetAccount.setNickname(accountUpdateForm.getNickname());
         targetAccount.setEmail(accountUpdateForm.getEmail());
+        targetAccount.setPassword(accountUpdateForm.getPassword());
+        targetAccount.setDepartmentPosition(accountUpdateForm.getDepartment_position());
         targetAccount.setSelfIntroduction(accountUpdateForm.getSelfIntroduction());
-        // 更新処理
+    // 更新処理
         service.updateAccountById(targetAccount);
-        // セッション情報の更新
-        Account sessionAccount = service.getAccountById(targetAccount.getId());
-        session.setAttribute(SESSION_FORM_ID, sessionAccount);
-        return "account/accountUpdateCompleteForm";
-    }
+    // セッション情報の更新
+    Account sessionAccount = service.getAccountByEmail(targetAccount.getEmail());
+        session.setAttribute(SESSION_FORM_ID,sessionAccount);
+        return"account/accountUpdateCompleteForm";
+}
 
-/*
-
-
-     */
     /**
      * アカウント情報更新-入力画面に戻る。
      *
      * @param accountUpdateForm フォーム。
      * @return Path
      */
-    @RequestMapping(value = "/top/setting/complete", params = "back", method = RequestMethod.POST)
+    @RequestMapping(value = "/do", params = "back", method = RequestMethod.POST)
     public String back(@ModelAttribute AccountUpdateForm accountUpdateForm) {
         return "account/accountUpdateForm";
     }

@@ -1,8 +1,6 @@
 package com.dev_training.form27;
 
-import com.dev_training.validator.HalfAlphameric;
 import com.dev_training.validator.Password;
-
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -11,9 +9,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * アカウント更新フォーム。
+ * アカウント登録フォーム。
  */
-
 public class AccountUpdateForm implements Serializable {
 
     @NotBlank
@@ -24,7 +21,6 @@ public class AccountUpdateForm implements Serializable {
     @Size(max = 255, message = "{error.size.max}")
     @Email
     private String email;
-
 
     @NotBlank
     @Password
@@ -45,7 +41,6 @@ public class AccountUpdateForm implements Serializable {
     public boolean isPasswordValid() {
         return Objects.nonNull(password) && password.equals(confirmPassword);
     }
-
 
     public String getNickname() {
         return nickname;
@@ -70,6 +65,7 @@ public class AccountUpdateForm implements Serializable {
     public String getSelfIntroduction() {
         return selfIntroduction;
     }
+
 
     public void setNickname(String nickname) {
         this.nickname = nickname;

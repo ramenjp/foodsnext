@@ -23,7 +23,6 @@ public class AccountRegisterForm implements Serializable {
 
     @NotBlank
     @Size(max = 255, message = "{error.size.max}")
-
     @Email
     private String email;
 
