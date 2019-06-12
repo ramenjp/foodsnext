@@ -19,9 +19,9 @@ body.loggedin { padding-top: 70px; }
 
 .jumbotron-extend {
     position: relative;
-    height: 90vh;
+    height: 120vh;
     min-height: 600px;
-    background: url('../images/jumbo.JPG');
+    background: url('../images/background-image.JPG'); !important;
     background-size: cover;
 }
 
@@ -222,8 +222,9 @@ body.loggedin { padding-top: 70px; }
 }
 .bg-image {
     position: relative;
-    background: url('../images/jumbo.JPG');
+    background: url('../images/background-image.JPG');
     background-size: cover;
+
 }
 .bg-mask {
     height: 100%;
@@ -242,15 +243,16 @@ body.loggedin { padding-top: 70px; }
 }
 .bg-custom2 {
     /* ヘッダー・フッター背景色 */
-    background-color: #de7a22;
+    background-color: #ffffff;
+
 }
 .bg-custom3 {
     /* メインボタンの色 */
-    background-color: #20948B;
+    background-color: #808080;
 }
 .bg-custom3:hover {
     /* メインボタンの色（hover) */
-    background-color: #4DA9A2;
+    background-color: #c0c0c0;
 }
 .bg-custom4 {
     background-color: #6AB187;
@@ -285,11 +287,11 @@ footer{
     /*margin-left: -15px;*/
     height: 30px;
     text-align: center;
-    color: #fff;
     vertical-align: middle;
     bottom: 0;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 0px;
+    color : black;
 }
 
 
