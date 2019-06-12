@@ -59,7 +59,7 @@ public class TopController {
      * @return Path
      */
     @RequestMapping(value = "")
-    public String init(@AuthenticationPrincipal Account account, Model model) {
+    public String init(@AuthenticationPrincipal Account account) {
         // 初回のアクセスなら、アカウントを検索してセッションに格納する
         if (Objects.isNull(session.getAttribute(SESSION_FORM_ID))) {
             Account sessionAccount = service.getAccountById(account.getAccountId());
