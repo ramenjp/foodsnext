@@ -1,6 +1,7 @@
 package com.dev_training.form27;
 
 
+import com.dev_training.entity27.Account;
 import com.dev_training.validator.HalfAlphameric;
 import com.dev_training.validator.Password;
 
@@ -22,6 +23,7 @@ public class AccountRegisterForm implements Serializable {
 
     @NotBlank
     @Size(max = 255, message = "{error.size.max}")
+    @HalfAlphameric
     @Email
     private String email;
 
@@ -44,7 +46,6 @@ public class AccountRegisterForm implements Serializable {
     public boolean isPasswordValid() {
         return Objects.nonNull(password) && password.equals(confirmPassword);
     }
-
 
     public String getNickname() {
         return nickname;
@@ -69,6 +70,7 @@ public class AccountRegisterForm implements Serializable {
     public String getSelfIntroduction() {
         return selfIntroduction;
     }
+
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
