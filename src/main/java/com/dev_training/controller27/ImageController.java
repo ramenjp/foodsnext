@@ -45,9 +45,9 @@ public class ImageController {
      * @throws IOException 入出力例外
      */
     @ResponseBody
-    @RequestMapping(value = "/image/profile", method = {RequestMethod.GET })
-    public HttpEntity<byte[]> getImage(@RequestParam("account_id") String id) throws IOException {
-        return getHttpEntity(id);
+    @RequestMapping(value = "/upload/image", method = {RequestMethod.GET })
+    public HttpEntity<byte[]> getImage(@RequestParam("account_id") String account_id) throws IOException {
+        return getHttpEntity(account_id);
     }
 
     /**
@@ -57,7 +57,7 @@ public class ImageController {
      * @throws IOException 入出力例外
      */
     @ResponseBody
-    @RequestMapping(value = "/image/myprofile", method = {RequestMethod.GET })
+    @RequestMapping(value = "/upload/myimage", method = {RequestMethod.GET })
     public HttpEntity<byte[]> getMyImage() throws IOException {
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
         return getHttpEntity(String.valueOf(account.getAccountId()));

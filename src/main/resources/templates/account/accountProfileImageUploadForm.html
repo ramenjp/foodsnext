@@ -1,62 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<meta name="_csrf" th:content="${_csrf.token}"/>
+<!--<meta name="_csrf" th:content="${_csrf.token}"/>
 <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-<head th:replace="common/common_header::base_header(~{::title})">
+<head th:replace="common/common_header::base_header(~{::title})">-->
+    <meta charset="UTF-8">
     <title>プロフィール画像アップロード</title>
 </head>
 <body>
+<code>accept="image/*"</code>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    <p><input type="file" name="upfile" id="upfile" accept="image/*" /></p>
+    <p><input type="submit" name="save" value="保存" /></p>
+</form>
 
-<nav th:replace="common/loggedinNav::navi(${accountName})"></nav>
+<!--<nav th:replace="common/loggedinNav::navi(${accountName})"></nav>-->
 
-<div class="container py-3">
-    <div class="row">
-        <div class="col-md-12 mx-auto">
-            <h2 class="text-center pb-4">プロフィール画像アップロード</h2>
-            <div class="row">
-                <div class="col-md-12 mx-auto">
+<!--<div class="container py-3">-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-12 mx-auto">-->
+<!--            <h2 class="text-center pb-4">プロフィール画像アップロード</h2>-->
+<!--            <div class="row">-->
+<!--                <div class="col-md-12 mx-auto">-->
 
-                    <div class="card rounded-0 card-shadow">
-                        <div class="card-header bg-custom1">
-                            <h3 class="mb-0">プロフィール画像アップロード</h3>
-                        </div>
-                        <div class="card-body">
-                            <form id="data_upload_form" name="data_upload_form" enctype="multipart/form-data" method="post">
-                                <span>ファイルのサイズは1Mバイト以下にしてください。</span><br>
-                                <div class="row">
-                                    <div class="col-md-6 mx-auto">
-                                        <span>現在のプロフィール画像</span><br>
-                                        <div id="nowImage"></div>
-                                    </div>
-                                    <div class="col-md-6 mx-auto">
-                                        <span>更新後のプロフィール画像</span><br>
-                                        <div id="imagePreview" class="imagePreview"></div>
-                                    </div>
-                                </div>
+<!--                    <div class="card rounded-0 card-shadow">-->
+<!--                        <div class="card-header bg-custom1">-->
+<!--                            <h3 class="mb-0">プロフィール画像アップロード</h3>-->
+<!--                        </div>-->
+<!--                        <div class="card-body">-->
+<!--                            <form id="data_upload_form" name="data_upload_form" enctype="multipart/form-data" method="post">-->
+<!--                                <span>ファイルのサイズは1Mバイト以下にしてください。</span><br>-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-md-6 mx-auto">-->
+<!--                                        <span>現在のプロフィール画像</span><br>-->
+<!--                                        <div id="nowImage"></div>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-6 mx-auto">-->
+<!--                                        <span>更新後のプロフィール画像</span><br>-->
+<!--                                        <div id="imagePreview" class="imagePreview"></div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
-                                <div class="form-group">
-                                    <label>
-                                        <span class="btn btn-info">
-                                            ファイル選択
-                                            <input type="file" id="upload_file" name="upload_file" style="display:none" required="" />
-                                        </span>
-                                    </label>
-                                    <input type="text" class="form-control" readonly="">
-                                </div>
+<!--                                <div class="form-group">-->
+<!--                                    <label>-->
+<!--                                        <span class="btn btn-info">-->
+<!--                                            ファイル選択-->
+<!--&lt;!&ndash;                                            <input type="file" id="upload_file" name="upload_file" style="display:none" required="" />&ndash;&gt;-->
+<!--                                        </span>-->
+<!--                                    </label>-->
+<!--                                    <input type="text" class="form-control" readonly="">-->
+<!--                                </div>-->
 
-                                <div class="form-group">
-                                    <input id="data_upload_button" type="submit" class="btn btn-info" value="アップロード" disabled/>
-                                </div>
+<!--                                <div class="form-group">-->
+<!--                                    <input id="data_upload_button" type="submit" class="btn btn-info" value="アップロード" disabled/>-->
+<!--                                </div>-->
 
-                            </form>
-                        </div>
-                    </div>
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <footer th:replace="common/common_footer"></footer>
 
 <script type="text/javascript">
