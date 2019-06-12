@@ -4,13 +4,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * ログインコントローラ。
+ * ログインコントローラ
  */
 @Controller
 @RequestMapping("/login")
 public class LoginController {
 
-    @RequestMapping(value="")
+    @RequestMapping(value = "")
     public String login() {
         return "login/loginForm";
     }

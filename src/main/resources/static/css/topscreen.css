@@ -1,19 +1,5 @@
-body {
-  font-family : Rakuten Global B;
-}
+//C:\Users\ryosuke.ogata\Pictures/images/background-image.jpg
 
-header {
-  height : 50px;
-}
-
-.header-icon {
-  font-size : 40px;
-  padding : 10px 20px;
-  float : left;
-}
-
-.header-list {
-  font-size : 18px
-  padding : 10px 20px;
-  float : left;
+p {
+font-size : 100px;
 }

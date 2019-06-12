@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-
-<title>アカウント登録確認</title>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-    <link href="./css/bootstrap.css" rel="stylesheet"/>
-    <link href="./css/training.css" rel="stylesheet"/>
+    <link href="../static/css/bootstrap.css" rel="stylesheet"/>
+    <link href="../static/css/training.css" rel="stylesheet"/>
+    <title>アカウント登録確認</title>
 </head>
 <body>
-
-
-
 <div class="container py-3">
     <div class="row">
         <div class="col-md-12">
@@ -21,39 +18,41 @@
                             <h3 class="mb-0">アカウント入力確認</h3>
                         </div>
                         <div class="card-body">
-                            <form id="accountForm" method="post">
+                            <form id="accountForm" th:action="@{/account/register/complete}" th:object="${accountRegisterForm}" method="post">
                                 <fieldset id="account_field">
                                     <div class="form-group">
                                         <label>ニックネーム</label><br/>
-                                        <span class="form-control-static"></span>
+                                        <span class="form-control-static" th:text="*{nickname}"></span>
                                     </div>
+
                                     <div class="form-group">
                                         <label>E-mail</label><br/>
-                                        <span class="form-control-static"></span>
+                                        <span class="form-control-static" th:text="*{email}"></span>
                                     </div>
+
                                     <div class="form-group">
                                         <label>所属部署・役職</label><br/>
-                                        <span class="form-control-static"></span>
+                                        <span class="form-control-static" th:text="*{department_position}"></span>
                                     </div>
+
                                     <div class="form-group">
                                         <label>自己紹介</label><br/>
-                                        <span class="form-control-static" id="selfIntroductionPreview"></span>
+                                        <span class="form-control-static" id="selfIntroductionPreview" th:text="*{selfIntroduction}"></span>
                                     </div>
 
-                                    <input type="hidden" name="nickname" id="nickname"/>
-                                    <input type="hidden" name="email" id="email"/>
-                                    <input type="hidden" name="password" id="password"/>
-                                    <input type="hidden" name="confirmPassword" id="confirmPassword"/>
-                                    <input type="hidden" name="department_position" id="department_position"/>
-                                    <input type="hidden" name="self_introduction" id="self_introduction"/>
+                                    <input type="hidden" name="nickname" id="nickname" th:value="*{nickname}"/>
+                                    <input type="hidden" name="email" id="email" th:value="*{email}"/>
+                                    <input type="hidden" name="password" id="password" th:value="*{password}"/>
+                                    <input type="hidden" name="confirmPassword" id="confirmPassword" th:value="*{confirmPassword}"/>
+                                    <input type="hidden" name="department_position" id="department_position" th:value="*{department_position}"/>
+                                    <input type="hidden" name="selfIntroduction" id="selfIntroduction" th:value="*{selfIntroduction}"/>
 
-                                    //画像挿入できるようにする
                                     <div class="col text-center">
                                         <div class="btn-group">
-                                            <input type="button" name="registerBack" value="戻る" class="btn bg-custom3 btn-lg text-white "/>
+                                            <input type="submit" name="registerBack" value="戻る" class="btn bg-custom3 btn-lg text-white "/>
                                         </div>
                                         <div class="btn-group">
-                                            <input type="button" name="register" value="登録" class="btn bg-custom3 btn-lg text-white "/>
+                                            <input type="submit" name="register" value="登録" class="btn bg-custom3 btn-lg text-white "/>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -65,14 +64,5 @@
         </div>
     </div>
 </div>
-
-
-<script type="text/javascript">
-    $(function () {
-        var selfIntroductionPreview = $('#selfIntroductionPreview').text();
-        $('#selfIntroductionPreview').html(selfIntroductionPreview.replace(/[\n\r]/g, '<br>'));
-    });
-</script>
-
 </body>
 </html>

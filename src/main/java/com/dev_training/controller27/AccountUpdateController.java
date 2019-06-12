@@ -1,8 +1,8 @@
-package com.dev_training.controller;
+package com.dev_training.controller27;
 
-import com.dev_training.entity.Account;
-import com.dev_training.form.AccountUpdateForm;
-import com.dev_training.service.AccountUpdateService;
+import com.dev_training.entity27.Account;
+import com.dev_training.form27.AccountUpdateForm;
+import com.dev_training.service27.AccountUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * アカウント情報更新コントローラ。
  */
 @Controller
-@RequestMapping(value = "/account/update")
+@RequestMapping(value = "/top/setting")
 public class AccountUpdateController {
 
     /** アカウント情報更新サービス */
@@ -40,14 +40,18 @@ public class AccountUpdateController {
      * @param model モデル
      * @return Path
      */
+
+    /*
     @RequestMapping(value = "/init")
     public String updateInit(Model model) {
         // セッションに格納されているアカウントをもとに、DBから最新のアカウントを取得してModelに格納する。
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
-        Account targetAccount = service.getAccountById(account.getId());
+        Account targetAccount = service.getAccountById(account.getAccountId());
         model.addAttribute("accountUpdateForm", targetAccount);
         return "account/accountUpdateForm";
     }
+
+*/
 
     /**
      * アカウント情報更新-確認画面表示。
@@ -57,7 +61,9 @@ public class AccountUpdateController {
      * @param model             モデル
      * @return Path
      */
-    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
+
+    /*
+    @RequestMapping(value = "/top/setting/confirm", method = RequestMethod.POST)
     public String confirm(@ModelAttribute @Validated AccountUpdateForm accountUpdateForm, BindingResult bindingResult, Model model) {
         // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
@@ -72,7 +78,7 @@ public class AccountUpdateController {
             return "account/accountUpdateForm";
         }
         // アカウントIDの重複精査
-       String accountId = accountUpdateForm.getAccountId();
+        String accountId = accountUpdateForm.getAccountId();
         if (!accountId.equals(targetAccount.getAccountId())) {
             if (service.isExistsAccountId(accountId)) {
                 bindingResult.rejectValue("accountId", "validation.duplicate", new String[]{"アカウントID"}, "default message");
@@ -82,6 +88,8 @@ public class AccountUpdateController {
         return "account/accountUpdateConfirmForm";
     }
 
+*/
+
     /**
      * アカウント情報更新-完了画面表示。
      *
@@ -89,7 +97,8 @@ public class AccountUpdateController {
      * @param bindingResult     精査結果
      * @return Path
      */
-    @RequestMapping(value = "/do", params = "update", method = RequestMethod.POST)
+    /*
+    @RequestMapping(value = "/top/setting/complete", params = "update", method = RequestMethod.POST)
     public String doUpdate(@ModelAttribute @Validated AccountUpdateForm accountUpdateForm, BindingResult bindingResult) {
         // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
@@ -125,13 +134,17 @@ public class AccountUpdateController {
         return "account/accountUpdateCompleteForm";
     }
 
+/*
+
+
+     */
     /**
      * アカウント情報更新-入力画面に戻る。
      *
      * @param accountUpdateForm フォーム。
      * @return Path
      */
-    @RequestMapping(value = "/do", params = "back", method = RequestMethod.POST)
+    @RequestMapping(value = "/top/setting/complete", params = "back", method = RequestMethod.POST)
     public String back(@ModelAttribute AccountUpdateForm accountUpdateForm) {
         return "account/accountUpdateForm";
     }
