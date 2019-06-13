@@ -5,12 +5,14 @@ import com.dev_training.validator.Password;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * パスワード更新フォーム。
  */
-public class AccountPasswordUpdateForm {
+public class AccountPasswordUpdateForm implements Serializable {
+
     @NotBlank
     private String currentPassword;
 
@@ -54,5 +56,5 @@ public class AccountPasswordUpdateForm {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
-
 }
+
