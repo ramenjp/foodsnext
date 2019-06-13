@@ -9,7 +9,6 @@ import javax.validation.constraints.Email;
 import java.util.List;
 import java.util.Optional;
 
-
 /**
  * アカウントリポジトリ。
  */
@@ -20,9 +19,12 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
     /**
      * emailに紐づくアカウントを検索する。
      *
-     * @param email
+     * @param accountId
      * @return アカウント
      */
+    @Query(value = "SELECT * FROM accounts WHERE account_id = :accountId AND delete_flag = 0", nativeQuery = true)
+    Account findByAccountId(@Param("accountId") int accountId);
+
     @Query(value = "SELECT * FROM accounts WHERE email = :email AND delete_flag = 0", nativeQuery = true)
     Account findByEmail(@Param("email") String email);
 
@@ -42,4 +44,14 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
      */
     @Query(value = "SELECT * FROM accounts WHERE delete_flag = 0", nativeQuery = true)
     List<Account> findAllAccount();
+
+    /**
+     * emailを使ってaccount_Idを検索する。
+     *
+     * @return accountId
+     */
+    @Query(value = "SELECT account_id FROM accounts WHERE email = :email AND delete_flag = 0", nativeQuery = true)
+    Account findAccountIdByEmail(@Param("email") String email);
+
+
 }
