@@ -66,7 +66,7 @@ public class Account implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public int getAccountId() {
@@ -94,7 +94,7 @@ public class Account implements UserDetails {
         return selfIntroduction;
     }
 
-    public boolean isDeleteFlag() {
+    public boolean getDeleteFlag() {
         return deleteFlag;
     }
     public void setAccountId(int accountId) {
