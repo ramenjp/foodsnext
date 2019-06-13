@@ -144,8 +144,9 @@ public class AccountUpdateController {
      * @param accountUpdateForm フォーム。
      * @return Path
      */
-    @RequestMapping(value = "/complete", params = "back", method = RequestMethod.POST)
+    @RequestMapping(value = "/do", params = "back", method = RequestMethod.POST)
     public String back(@ModelAttribute AccountUpdateForm accountUpdateForm) {
+
         return "account/accountUpdateForm";
     }
 
