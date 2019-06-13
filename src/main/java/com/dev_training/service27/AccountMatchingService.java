@@ -56,7 +56,7 @@ public class AccountMatchingService {
     //マッチングナンバーを割り当てる処理
     @Transactional
     public void setMatchingNo(int matchingNo){
-        if(matchingNo%2==0) {
+        if(matchingNo % 2==0) {
             matchingNo-=1;
             matchingRepository.insertMatchingNo(matchingNo);
         }

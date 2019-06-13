@@ -14,7 +14,7 @@ import java.util.List;
 
 //マッチngテーブルから２人ずつのペアを作る
 @RestController
-@RequestMapping("/matching2")
+@RequestMapping(value="/matching2")
 public class restController {
     public final AccountMatchingService accountMatchingService;
 
@@ -23,7 +23,7 @@ public class restController {
         this.accountMatchingService = accountMatchingService;
     }
 
-
+    @RequestMapping("")
     public void batch(){
         //今日のマッチアカウントを全件取得
         List<Matching> matchingAccounts= accountMatchingService.getMatchingAccounts();
@@ -31,14 +31,11 @@ public class restController {
         //matchingNo付与して再度DB格納
         //リスト長分for回す→マッチングNoつけていく
 
-        for(int i=0;i<matchingAccounts.size();i++){
+        for(int i=1;i<matchingAccounts.size();i++){
             //matchingNo付与
             accountMatchingService.setMatchingNo(i);
             //再度matchingテーブルに保存
             accountMatchingService.register(matchingAccounts.get(i));
         }
-
-
-
     }
 }

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 
 @Controller
-@RequestMapping(value = "/matching1")
+@RequestMapping(value = "/top/matching1")
 public class AccountMatchingController {
 
     /** アカウントマッチングサービス */
@@ -48,24 +48,33 @@ public class AccountMatchingController {
         //ランダム関数
         Random rnd = new Random();
         int RandomValue = rnd.nextInt();
-        //日付関数
+        if(RandomValue < 0){
+            RandomValue = RandomValue * (-1);
+        }
+
+        //日付関連
         Date date=new Date();
+        Calendar cl = Calendar.getInstance();
+
         //例外処理
         ParsePosition pos = new ParsePosition(0);
 
         String currentDate = date.toString();
         SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
         //StringをDate型に
-        Date formattedDate = df.parse(currentDate,pos);
+        String formattedDate = df.format(cl.getTime());
+
+        Date nowDate = df.parse(formattedDate,pos);
+        //Date formattedDate2 = df.parse(formattedDate);
 
         //マッチング用のアカウントインスタンス生成
         Matching matchingAccount = new Matching();
-
         matchingAccount.setAccountId(accountId);
+        matchingAccount.setMatchingNo(999999);
         matchingAccount.setShuffleNo(RandomValue);
-        matchingAccount.setMatchingDate(formattedDate);
+        matchingAccount.setMatchingDate(nowDate);
 
         accountMatchingService.register(matchingAccount);
-        return "matching_count";
+        return "matching/matching_count";
     }
 }
