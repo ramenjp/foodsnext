@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common_header::base_header(~{::title})">
+    <meta charset="UTF-8">
+    <link href="../static/css/bootstrap.css" rel="stylesheet"/>
+    <link href="../static/css/training.css" rel="stylesheet"/>
+    <title>アカウント登録画面</title>
+</head>
+
+<body>
+<p th:text="${account.nickname}"></p>
+<p th:text="${patner.nickname}"></p>
+
+</body>
+</html>

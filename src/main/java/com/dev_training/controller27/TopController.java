@@ -1,4 +1,6 @@
 package com.dev_training.controller27;
+
+
 import com.dev_training.common.CodeValue;
 import com.dev_training.entity27.Account;
 import com.dev_training.service27.TopService;
@@ -19,17 +21,11 @@ import java.util.Objects;
 @RequestMapping("/top")
 public class TopController {
 
-    /**
-     * トップサービス
-     */
+    /**トップサービス*/
     private final TopService service;
-    /**
-     * HTTPセッション
-     */
+    /**HTTPセッション*/
     private final HttpSession session;
-    /**
-     * セッションキー(ログインユーザのアカウント)
-     */
+    /**セッションキー(ログインユーザのアカウント)*/
     private static final String SESSION_FORM_ID = "account";
 
 
@@ -50,7 +46,7 @@ public class TopController {
      *
      * @return Path
      */
-    @RequestMapping(value = "/loginSuccess")
+    @RequestMapping(value = "loginSuccess")
     public String loginSuccess() {
         return "redirect:/top";
     }
@@ -86,4 +82,5 @@ public class TopController {
     public String accountUpdate() {
         return "accountUpdateForm";
     }
+
 }
