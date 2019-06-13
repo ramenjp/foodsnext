@@ -67,6 +67,6 @@ public class AccountMatchingController {
         matchingAccount.setMatchingDate(formattedDate);
 
         accountMatchingService.register(matchingAccount);
-        return "matching_count";
+        return "matching/matching_count";
     }
 }
