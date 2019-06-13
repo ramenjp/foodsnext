@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!--<meta name="_csrf" th:content="${_csrf.token}"/>
-<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-<head th:replace="common/common_header::base_header(~{::title})">-->
-    <meta charset="UTF-8">
-    <title>プロフィール画像アップロード</title>
+<!--<meta name="_csrf" th:content="${_csrf.token}"/>-->
+<!--<meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+<head th:replace="common/common_header::base_header(~{::title})">
+
+<meta charset="UTF-8">
+
+
+<title>プロフィール画像アップロード</title>
 </head>
 <body>
-<code></code>
-<form action="upload.php" method="post" enctype="multipart/form-data">
-    <p><input type="file" name="upfile" id="upfile" accept="image/*" /></p>
-    <img id="u">
-    <p><input type="submit" name="save" value="保存" /></p>
-</form>
 
-<nav th:replace="common/loggedinNav::navi(${accountName})"></nav>
+<!--<nav th:replace="common/loggedinNav::navi(${accountName})"></nav>-->
 
 <div class="container py-3">
     <div class="row">
@@ -28,7 +25,8 @@
                             <h3 class="mb-0">プロフィール画像アップロード</h3>
                         </div>
                         <div class="card-body">
-                            <form id="data_upload_form" name="data_upload_form" enctype="multipart/form-data" method="post">
+                            <form id="data_upload_form" name="data_upload_form" enctype="multipart/form-data"
+                                  th:action="@{/top}" method="post">
                                 <span>ファイルのサイズは1Mバイト以下にしてください。</span><br>
                                 <div class="row">
                                     <div class="col-md-6 mx-auto">
@@ -41,18 +39,17 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>
-                                        <span class="btn btn-info">
-                                            ファイル選択
-<!--                                            <input type="file" id="upload_file" name="upload_file" style="display:none" required="" />-->
-                                        </span>
-                                    </label>
-                                    <input type="text" class="form-control" readonly="">
-                                </div>
+
+                                <label>
+                                    <span class="btn btn-primary">ファイル選択</span>
+                                    <input type="file" id="upload_file" name="upload_file" style="display:none"
+                                           required="" accept="image/*" class="btn btn-primary"/>
+                                </label>
+
 
                                 <div class="form-group">
-                                    <input id="data_upload_button" type="submit" class="btn btn-info" value="アップロード" disabled/>
+                                    <input type="submit" id="data_upload_button" class="btn btn-info" value="アップロード" name="upload"
+                                           disabled/>
                                 </div>
 
                             </form>
@@ -104,7 +101,7 @@
                 xhr.setRequestHeader(header, token);
             });
 
-            var ajaxUrl = "/account/upload/upload";
+            var ajaxUrl = "/top/upload/upload";
 
             if(window.FormData){
                 var formData = new FormData($(this)[0]);
@@ -157,6 +154,7 @@
             input.parent().parent().next(':text').val(errMsg);
         }
     });
+
 </script>
 
 </body>

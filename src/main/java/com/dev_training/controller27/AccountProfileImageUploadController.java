@@ -19,7 +19,7 @@ import java.io.FileOutputStream;
  * アカウントプロフィール画像アップロードコントローラ。
  */
 @Controller
-@RequestMapping(value = "/account/upload")
+@RequestMapping(value = "/top/upload")
 public class AccountProfileImageUploadController {
 
     /**
