@@ -45,7 +45,7 @@ public class ImageController {
      * @throws IOException 入出力例外
      */
     @ResponseBody
-    @RequestMapping(value = "/upload/image", method = {RequestMethod.GET })
+    @RequestMapping(value = "/upload/profile", method = {RequestMethod.GET })
     public HttpEntity<byte[]> getImage(@RequestParam("account_id") String account_id) throws IOException {
         return getHttpEntity(account_id);
     }
@@ -57,7 +57,7 @@ public class ImageController {
      * @throws IOException 入出力例外
      */
     @ResponseBody
-    @RequestMapping(value = "/upload/myimage", method = {RequestMethod.GET })
+    @RequestMapping(value = "/upload/myprofile", method = {RequestMethod.GET })
     public HttpEntity<byte[]> getMyImage() throws IOException {
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
         return getHttpEntity(String.valueOf(account.getAccountId()));
@@ -66,14 +66,14 @@ public class ImageController {
     /**
      * アカウントのIDに紐づくプロフィール画像を取得し、バイナリで返却する。
      *
-     * @param id id
+     * @param account_id id
      * @return プロフィール画像のバイナリ
      * @throws IOException 入出力例外
      */
-    private HttpEntity<byte[]> getHttpEntity(String id) throws IOException {
+    private HttpEntity<byte[]> getHttpEntity(String account_id) throws IOException {
         // リソースファイルを読み込み
         String dirPath = environment.getProperty("upload.dir.path");
-        Resource resource = resourceLoader.getResource("file:" + dirPath + "/" + id + "_profile");
+        Resource resource = resourceLoader.getResource("file:" + dirPath + "/" + account_id + "_profile");
         // 存在しなければ、noimageを格納する
         if (!resource.exists()) {
             resource = resourceLoader.getResource("classpath:" + "/static/images/noimage");
