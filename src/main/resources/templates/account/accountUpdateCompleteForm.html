@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="common/common_header::base_header(~{::title})">
     <meta charset="utf-8"/>
     <link href="./css/bootstrap.css" rel="stylesheet"/>
     <link href="./css/training.css" rel="stylesheet"/>
@@ -25,9 +25,9 @@
                             ユーザーの登録が完了しました。
                         </div>
                         <div class="card-body">
-                            <form id="accountForm" th:action="@{/top}">
+                            <form id="accountForm" th:action="@{/login}" method="get">
                                 <div class="text-center">
-                                    <input type="submit" value="トップ画面へ" class="btn bg-custom3 btn-lg text-white"/>
+                                    <input type="button" value="ログイン画面へ" class="btn bg-custom3 btn-lg text-white"/>
                                 </div>
                             </form>
                         </div>
@@ -37,7 +37,6 @@
         </div>
     </div>
 </div>
-
 <footer th:replace="common/common_footer"></footer>
 </body>
 </html>
