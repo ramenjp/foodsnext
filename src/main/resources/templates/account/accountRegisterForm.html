@@ -22,7 +22,7 @@
                             <form id="accountForm" th:action="@{/account/register/confirm}" th:object="${accountRegisterForm}" method="post">
                                 <fieldset id="account_field">
                                     <div class="form-group required" th:classappend="${#fields.hasErrors('nickname')}? 'has-error'">
-                                        <!-- accountIdになっている点に注意。 -->
+
                                         <label for="nickname">ニックネーム</label><br/>
                                         <input class="form-control" id="nickname" type="text" maxlength="15" th:field="*{nickname}" name="nickname" required placeholder="ニックネームを入力してください"/>
                                         <small id="accountidhelp" class="form-text text-muted">ニックネームは半角英数字3文字以上15文字以内で入力してください。</small>
