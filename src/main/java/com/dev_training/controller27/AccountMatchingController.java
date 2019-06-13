@@ -42,7 +42,7 @@ public class AccountMatchingController {
     @RequestMapping(value = "")
     public String matchingAccountRegister(Model model){
 
-        //自分のEmailを使ってaccountsテーブルからaccount_idを取得
+        //accountsテーブルからaccount_idを取得
         Account account = (Account)session.getAttribute(SESSION_FORM_ID);
         int accountId = account.getAccountId();
 
@@ -59,17 +59,14 @@ public class AccountMatchingController {
         //StringをDate型に
         Date formattedDate = df.parse(currentDate,pos);
 
-
         //マッチング用のアカウントインスタンス生成
         Matching matchingAccount = new Matching();
 
         matchingAccount.setAccountId(accountId);
-        matchingAccount.setMatchingNo(/*ペアを決める数(とりあえず1) */1);
         matchingAccount.setShuffleNo(RandomValue);
         matchingAccount.setMatchingDate(formattedDate);
 
         accountMatchingService.register(matchingAccount);
         return "matching_count";
     }
-
 }

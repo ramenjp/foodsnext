@@ -47,7 +47,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
      * @return accountId
      */
     @Query(value = "SELECT account_id FROM accounts WHERE email = :email AND delete_flag = 0", nativeQuery = true)
-    int findAccountIdByEmail(@Param("email") String email);
+    Account findAccountIdByEmail(@Param("email") String email);
 
 
 }

@@ -17,16 +17,16 @@ public interface MatchingRepository extends JpaRepository<Matching, Integer>, Jp
     void findMatchingAccount();
 
     //日付が今日のアカウントをリストで取り出す
-    @Query(value = "SELECT * FROM matching WHERE date = :date", nativeQuery = true)
+    @Query(value = "SELECT * FROM matching WHERE matching_date = :date", nativeQuery = true)
     List<Matching> findTodayAccount();
 
-    @Query(value = "INSERT INTO matching (matching_no) VALUES (matchingNo)", nativeQuery = true)
-    void insertMatchingNo(@Param("matchingNo")int matchingNo);
+    @Query(value = "INSERT INTO matching (matching_no) VALUES (:matching_no)", nativeQuery = true)
+    void insertMatchingNo(@Param("matching_no")int matching_no);
 
-    @Query(value = "SELECT mutching_no FROM matching WHERE account_id=:accountId AND date = :date", nativeQuery = true)
-    int findMyMatchingNo(@Param("accountId,date") int accountId,Date date);
+    @Query(value = "SELECT matching_no FROM matching WHERE account_id=:account_id AND matching_date = :matching_date", nativeQuery = true)
+    Matching findMyMatchingNo(@Param("account_id") int account_id, @Param("matching_date") Date matching_date);
 
-    @Query(value = "SELECT account_id FROM matching WHERE account_id != :accountId AND matching_no = :matchingNo", nativeQuery = true)
-    int findMyMatchingParnerNo(@Param("accountId,matchingNo")int accountId,int matchingNo);
+    @Query(value = "SELECT account_id FROM matching WHERE account_id != :account_id AND matching_no = :matching_no", nativeQuery = true)
+    Matching findMyMatchingPartnerNo(@Param("account_id")int account_id,@Param("matching_no") int matching_no);
 
 }

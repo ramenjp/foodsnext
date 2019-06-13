@@ -14,12 +14,12 @@ import java.util.List;
 
 //マッチngテーブルから２人ずつのペアを作る
 @RestController
-@RequestMapping("matching2")
+@RequestMapping("/matching2")
 public class restController {
     public final AccountMatchingService accountMatchingService;
 
     @Autowired
-    public restController(AccountMatchingService accountMatchingService, HttpSession session) {
+    public restController(AccountMatchingService accountMatchingService) {
         this.accountMatchingService = accountMatchingService;
     }
 

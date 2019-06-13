@@ -30,7 +30,8 @@ public class AccountMatchingService {
      * */
     @Transactional
     public int getAccountIdByEmail(String email){
-        int targetId = accountRepository.findAccountIdByEmail(email);
+        Account accountIdByEmail= accountRepository.findAccountIdByEmail(email);
+        int targetId =accountIdByEmail.getAccountId();
         return targetId;
     }
 
@@ -64,17 +65,19 @@ public class AccountMatchingService {
         }
     }
 
-
     /*     ここからAccountMatchingResultControllerが使うメソッド     */
     @Transactional
     public int getMatchingNo(int accountId, Date formattedDate) {
-        int myMatchingNo = matchingRepository.findMyMatchingNo(accountId,formattedDate);
+
+        Matching myAccount =matchingRepository.findMyMatchingNo(accountId,formattedDate);
+        int myMatchingNo = myAccount.getMatchingNo();
         return myMatchingNo;
     }
 
     @Transactional
     public int getMatchingPartnerId(int accountId,int matchingNo) {
-        int matchingPartnerId =matchingRepository.findMyMatchingParnerNo(accountId,matchingNo);
+        Matching partner = matchingRepository.findMyMatchingPartnerNo(accountId,matchingNo);
+        int matchingPartnerId=partner.getAccountId();
         return matchingPartnerId;
     }
 
