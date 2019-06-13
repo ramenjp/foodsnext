@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg rounded sticky-top navbar-light bg-custom2" th:fragment="navi(accountName)" xmlns:th="">
     <ul class="navbar-nav mr-auto">
-        <a class="navbar-brand h2" href="#">Team27 Mrs.AnotherSky</a>
+        <a class="navbar-brand h2" href="#">AA</a>
         <li class="nav-item">
             <a class="nav-link active" href="/top">トップ画面</a>
         </li>
@@ -24,7 +24,7 @@
         </li>
     </ul>
 
-    <span class="navbar-text pr-3" th:text="'ようこそ ' + ${session.account.name} + ' さん。'"></span>
+    <span class="navbar-text pr-3" th:text="'ようこそ ' + ${session.account.nickname} + ' さん。'"></span>
     <form id="logout" th:action="@{/logout}" method="post" class="form-inline">
         <input type="submit" class="btn bg-custom3 text-white btn-lg navbar-btn" value="Sign out"/>
     </form>
