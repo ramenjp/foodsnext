@@ -60,7 +60,6 @@ public class AccountUpdateController {
 
     /**
      * アカウント情報更新-確認画面表示。
-     *
      * @param accountUpdateForm 精査済みフォーム
      * @param bindingResult     精査結果
      * @param model             モデル
