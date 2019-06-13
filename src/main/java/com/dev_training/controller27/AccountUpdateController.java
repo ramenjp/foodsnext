@@ -21,11 +21,17 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/top/setting")
 public class AccountUpdateController {
 
-    /** アカウント情報更新サービス */
+    /**
+     * アカウント情報更新サービス
+     */
     private final AccountUpdateService service;
-    /** HTTPセッション */
+    /**
+     * HTTPセッション
+     */
     private final HttpSession session;
-    /** セッションキー(ログインユーザのアカウント) */
+    /**
+     * セッションキー(ログインユーザのアカウント)
+     */
     private static final String SESSION_FORM_ID = "account";
 
 
@@ -43,7 +49,7 @@ public class AccountUpdateController {
      */
 
     @RequestMapping(value = "/init")
-    public String updateInit(Model model) {
+    public String updateInit(@ModelAttribute AccountUpdateForm accountUpdateForm, Model model) {
         // セッションに格納されているアカウントをもとに、DBから最新のアカウントを取得してModelに格納する。
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
         Account targetAccount = service.getAccountByEmail(account.getEmail());
@@ -94,18 +100,13 @@ public class AccountUpdateController {
      * @param bindingResult     精査結果
      * @return Path
      */
-    @RequestMapping(value = "/complete", params = "update", method = RequestMethod.POST)
+    @RequestMapping(value = "/do", params = "update", method = RequestMethod.POST)
     public String doUpdate(@ModelAttribute @Validated AccountUpdateForm accountUpdateForm, BindingResult bindingResult) {
         // BeanValidationのエラー確認
         if (bindingResult.hasErrors()) {
             return "account/accountUpdateForm";
         }
         Account account = (Account) session.getAttribute(SESSION_FORM_ID);
-        boolean isValid = service.validCurrentPassword(account.getAccountId(), accountUpdateForm.getCurrentPassword());
-        if (!isValid) {
-            bindingResult.reject("validation.current.password", "default message");
-            return "account/accountPasswordUpdateForm";
-        }
         Account targetAccount = service.getAccountByEmail(account.getEmail());
 
         // 更新有無チェック。何も更新されていなければエラーとする。
@@ -123,21 +124,19 @@ public class AccountUpdateController {
         }
 
 
-    // 更新用アカウントの作成
+        // 更新用アカウントの作成
         targetAccount.setNickname(accountUpdateForm.getNickname());
         targetAccount.setEmail(accountUpdateForm.getEmail());
-        targetAccount.setPassword(accountUpdateForm.getNewpassword());
-        targetAccount.setDepartmentPosition(accountUpdateForm.getDepartment_position());
+        targetAccount.setDepartmentPosition(accountUpdateForm.getDepartmentPosition());
         targetAccount.setSelfIntroduction(accountUpdateForm.getSelfIntroduction());
-    // 更新処理
-        service.updatePassword(account.getAccountId(), accountUpdateForm.getNewpassword());
-        service.updateAccountById(account);
+        // 更新処理
+        service.updateAccountById(targetAccount);
 
-    // セッション情報の更新
-    Account sessionAccount = service.getAccountByEmail(targetAccount.getEmail());
-        session.setAttribute(SESSION_FORM_ID,sessionAccount);
-        return"account/accountUpdateCompleteForm";
-}
+        // セッション情報の更新
+        Account sessionAccount = service.getAccountByEmail(targetAccount.getEmail());
+        session.setAttribute(SESSION_FORM_ID, sessionAccount);
+        return "account/accountUpdateCompleteForm";
+    }
 
     /**
      * アカウント情報更新-入力画面に戻る。

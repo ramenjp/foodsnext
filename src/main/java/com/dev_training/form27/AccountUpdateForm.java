@@ -24,32 +24,13 @@ public class AccountUpdateForm implements Serializable {
 
     @NotBlank
     @Size(max = 100, message = "{error.size.max}")
-    private String department_position;
+    private String departmentPosition;
 
     @NotBlank
     @Size(max = 255, message = "{error.size.max}")
     private String selfIntroduction;
 
 
-    @NotBlank
-    private String currentPassword;
-
-    @NotBlank
-    @Password
-    private String newPassword;
-
-    @NotBlank
-    private String confirmPassword;
-
-    @AssertTrue(message = "パスワードが一致しません。")
-    public boolean isPasswordValid() {
-        return Objects.nonNull(newPassword) && newPassword.equals(confirmPassword);
-    }
-
-    @AssertTrue(message = "パスワードが変更されていません。")
-    public boolean isNewPasswordValid() {
-        return Objects.nonNull(currentPassword) && !currentPassword.equals(newPassword);
-    }
 
     public String getNickname() {
         return nickname;
@@ -59,8 +40,8 @@ public class AccountUpdateForm implements Serializable {
         return email;
     }
 
-    public String getDepartment_position() {
-        return department_position;
+    public String getDepartmentPosition() {
+        return departmentPosition;
     }
 
     public String getSelfIntroduction() {
@@ -75,35 +56,12 @@ public class AccountUpdateForm implements Serializable {
         this.email = email;
     }
 
-    public void setDepartment_position(String department_position) {
-        this.department_position = department_position;
+    public void setDepartmentPosition(String departmentPosition) {
+        this.departmentPosition = departmentPosition;
     }
 
     public void setSelfIntroduction(String selfIntroduction) {
         this.selfIntroduction = selfIntroduction;
     }
 
-    public String getCurrentPassword() {
-        return currentPassword;
-    }
-
-    public String getNewpassword() {
-        return newPassword;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setCurrentPassword(String currentPassword) {
-        this.currentPassword = currentPassword;
-    }
-
-    public void setNewpassword(String newpassword) {
-        this.newPassword = newpassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
 }

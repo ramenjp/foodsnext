@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="common/common_header::base_header(~{::title})">
     <title>アカウント情報更新確認</title>
 </head>
 <body>
-
 
 <div class="container py-3">
     <div class="row">
@@ -17,26 +16,23 @@
                             <h3 class="mb-0">更新内容確認</h3>
                         </div>
                         <div class="card-body">
-                            <form id="accountForm" th:action="@{/top/setting/complete}" th:object="${accountUpdateForm}"
+                            <form id="accountForm" th:action="@{/top/setting/do}" th:object="${accountUpdateForm}"
                                   method="post">
+
                                 <fieldset id="account_field">
+
                                     <div class="form-group">
                                         <label>ニックネーム</label><br/>
-                                        <span class="form-control-static" th:text="*{nickName}"></span>
+                                        <span class="form-control-static" th:text="*{nickname}"></span>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
                                         <label>E-mail</label><br/>
                                         <span class="form-control-static" th:text="*{email}"></span>
                                     </div>
                                     <div class="form-group"
-                                         th:classappend="${#fields.hasErrors('password')}? 'has-error'">
-                                        <label>Password</label><br/>
-                                        <span class="form-control-static" th:text="*{password}"></span>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>部署・役職</label><br/>
-                                        <span class="form-control-static" th:text="*{department_position}"></span>
+                                         th:classappend="${#fields.hasErrors('departmentPosition')}? 'has-error'">
+                                        <label>部署・配属</label><br/>
+                                        <span class="form-control-static" th:text="*{departmentPosition}"></span>
                                     </div>
                                     <div class="form-group"
                                          th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
@@ -44,12 +40,11 @@
                                         <span class="form-control-static"
                                               th:utext="*{selfIntroduction} ? ${#strings.replace(#strings.escapeXml(accountUpdateForm.selfIntroduction), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')} : ''"></span>
                                     </div>
-                                    <input type="hidden" name="nickname" id="nickname"/>
-                                    <input type="hidden" name="email" id="email"/>
-                                    <input type="hidden" name="password" id="password"/>
-                                    <input type="hidden" name="confirmPassword" id="confirmPassword"/>
-                                    <input type="hidden" name="department_position" id="department_position"/>
-                                    <input type="hidden" name="self_introduction" id="self_introduction"/>
+                                    <input type="hidden" name="nickname" id="nickname" th:value="*{nickname}"/>
+                                    <input type="hidden" name="email" id="email" th:value="*{email}"/>
+                                    <input type="hidden" name="departmentPosition" id="departmentPosition" th:value="*{departmentPosition}"/>
+                                    <input type="hidden" name="selfIntroduction" id="selfIntroduction"
+                                           th:value="*{selfIntroduction}"/>
                                     <div class="col text-center">
                                         <div class="btn-group">
                                             <input type="submit" name="back" value="戻る"
@@ -69,6 +64,6 @@
         </div>
     </div>
 </div>
-
+<footer th:replace="common/common_footer"></footer>
 </body>
 </html>
