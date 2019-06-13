@@ -22,13 +22,13 @@ public class AccountRegisterService {
     @Autowired
     public AccountRegisterService(AccountRepository accountRepository, PasswordEncoder passwordEncoder){
         this.accountRepository = accountRepository;
-
         this.passwordEncoder = passwordEncoder;}
 
     /**
      * 登録処理
      *
      * @param account アカウントデータ
+     * @param rawPassword 暗号化前のパスワード
      */
 
     @Transactional

@@ -5,12 +5,16 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.validation.constraints.Email;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * アカウントリポジトリ。
  */
 public interface AccountRepository extends JpaRepository<Account, Integer>, JpaSpecificationExecutor<Account> {
+
+
 
     /**
      * emailに紐づくアカウントを検索する。
