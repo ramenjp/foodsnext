@@ -10,15 +10,12 @@ import java.util.List;
 
 public interface MatchingRepository extends JpaRepository<Matching, Integer>, JpaSpecificationExecutor<Matching> {
 
-    @Query(value="SELECT random_no FROM matching ORDER BY matching_no ASC", nativeQuery = true)
-    void SortAscendingOrder();
-
     @Query(value="SELECT * FROM matching WHERE ", nativeQuery = true)
     void findMatchingAccount();
 
     //日付が今日のアカウントをリストで取り出す
-    @Query(value = "SELECT * FROM matching WHERE matching_date = :date", nativeQuery = true)
-    List<Matching> findTodayAccount();
+    @Query(value = "SELECT * FROM matching WHERE matching_date = :matching_date ORDER BY matching_no ASC", nativeQuery = true)
+    List<Matching> findTodayAccount(@Param("matching_date")String nowDate);
 
     @Query(value = "INSERT INTO matching (matching_no) VALUES (:matching_no)", nativeQuery = true)
     void insertMatchingNo(@Param("matching_no")int matching_no);
