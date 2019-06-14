@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/common_header::base_header(~{::title})">
 <title>トップ</title>
 </head>
 <body>
@@ -11,37 +13,16 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <h4 class="sidebar-heading d-flex align-items-center px-3 mt-3 mb-1 text-muted">
-                        <span><i class="far fa-address-card">&nbsp;</i>アカウント機能</span>
+                        <span><i class="far fa-address-card">&nbsp;</i>Top page</span>
                     </h4>
                     <li class="nav-item">
-                        <a href="/account/update/init" class="nav-link">アカウント情報更新</a>
+                        <a href="/top/setting/init" class="nav-link">Account Update</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/account/password/init" class="nav-link">パスワード更新</a>
+                        <a href="/top/password/init" class="nav-link">Password</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/account/search/init" class="nav-link">アカウント一覧検索</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/account/search/paging/init" class="nav-link">ページング検索 </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/account/upload/init" class="nav-link">画像アップロード</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/account/unsubscribe/init" class="nav-link">退会</a>
-                    </li>
-                </ul>
-
-                <h6 class="sidebar-heading d-flex align-items-center px-3 mt-3 mb-1 text-muted">
-                    <span><i class="fas fa-tasks"></i>&nbsp;TODO機能</span>
-                </h6>
-                <ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-                        <a href="/todo/register/init" class="nav-link">TODO登録</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/todo/search/init" class="nav-link">TODO一覧検索 </a>
+                        <a href="/top/upload/init" class="nav-link">画像アップロード</a>
                     </li>
                 </ul>
 

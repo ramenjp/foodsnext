@@ -3992,6 +3992,7 @@ input[type="button"].btn-block {
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
+  color :black;
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
@@ -4880,8 +4881,10 @@ input[type="button"].btn-block {
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background-color: #e9ecef;
+  background-color: #fff;
   border-radius: 0.3rem;
+
+
 }
 
 @media (min-width: 576px) {
@@ -7701,7 +7704,7 @@ button.bg-dark:focus {
 
 .pt-5,
 .py-5 {
-  padding-top: 3rem !important;
+  padding-top: 10rem !important;
 }
 
 .pr-5,
@@ -7716,8 +7719,9 @@ button.bg-dark:focus {
 
 .pl-5,
 .px-5 {
-  padding-left: 3rem !important;
+  padding-left: 25rem !important;
 }
+
 
 .m-auto {
   margin: auto !important;
@@ -8994,7 +8998,9 @@ a.text-dark:hover, a.text-dark:focus {
     min-width: 992px !important;
   }
   .container {
-    min-width: 992px !important;
+
+
+    width: 992px !important;
   }
   .navbar {
     display: none;

@@ -1,8 +1,6 @@
 package com.dev_training.form27;
 
-import com.dev_training.validator.HalfAlphameric;
 import com.dev_training.validator.Password;
-
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -11,9 +9,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * アカウント更新フォーム。
+ * アカウント登録フォーム。
  */
-
 public class AccountUpdateForm implements Serializable {
 
     @NotBlank
@@ -25,26 +22,14 @@ public class AccountUpdateForm implements Serializable {
     @Email
     private String email;
 
-
-    @NotBlank
-    @Password
-    private String password;
-
-    @NotBlank
-    private String confirmPassword;
-
     @NotBlank
     @Size(max = 100, message = "{error.size.max}")
-    private String department_position;
+    private String departmentPosition;
 
     @NotBlank
     @Size(max = 255, message = "{error.size.max}")
     private String selfIntroduction;
 
-    @AssertTrue(message = "パスワードが一致しません。")
-    public boolean isPasswordValid() {
-        return Objects.nonNull(password) && password.equals(confirmPassword);
-    }
 
 
     public String getNickname() {
@@ -55,16 +40,8 @@ public class AccountUpdateForm implements Serializable {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public String getDepartment_position() {
-        return department_position;
+    public String getDepartmentPosition() {
+        return departmentPosition;
     }
 
     public String getSelfIntroduction() {
@@ -79,19 +56,12 @@ public class AccountUpdateForm implements Serializable {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
-    public void setDepartment_position(String department_position) {
-        this.department_position = department_position;
+    public void setDepartmentPosition(String departmentPosition) {
+        this.departmentPosition = departmentPosition;
     }
 
     public void setSelfIntroduction(String selfIntroduction) {
         this.selfIntroduction = selfIntroduction;
     }
+
 }

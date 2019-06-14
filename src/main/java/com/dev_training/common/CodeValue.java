@@ -7,19 +7,6 @@ import org.springframework.stereotype.Component;
  * コード管理クラス。
  */
 
-    //
-
-
-
-    //git練習
-
-
-
-    //
-
-
-
-
 @Component
 public class CodeValue {
 

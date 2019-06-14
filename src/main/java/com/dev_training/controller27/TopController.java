@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.Objects;
 
 
@@ -69,31 +71,5 @@ public class TopController {
         return "top/topForm";
     }
 
-    //マッチング
-    @RequestMapping(value = "/matching1", params = "match", method = RequestMethod.POST)
-    public String match() {
-        return "matching_count";
-    }
-
-
-    //履歴
-    @RequestMapping(value = "/history", params = "historyCheck", method = RequestMethod.POST)
-    public String historyCheck() {
-        return "history/historyCheck";
-    }
-
-
-    //アップデート
-    @RequestMapping(value = "/setting", params = "accountUpdate", method = RequestMethod.POST)
-    public String accountUpdate() {
-        return "account/accountUpdateForm";
-    }
-
-
-    //プロフィール画像登録
-    @RequestMapping(value="/upload", params="upload", method=RequestMethod.POST)
-    public String imageUpload(){
-        return "account/accountProfileImageUploadForm";
-    }
 
 }
