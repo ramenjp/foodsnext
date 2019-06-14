@@ -59,18 +59,16 @@ public class AccountMatchingController {
         //例外処理
         ParsePosition pos = new ParsePosition(0);
 
-        String currentDate = date.toString();
         SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
         //StringをDate型に
         String formattedDate = df.format(cl.getTime());
 
         Date nowDate = df.parse(formattedDate,pos);
-        //Date formattedDate2 = df.parse(formattedDate);
 
         //マッチング用のアカウントインスタンス生成
         Matching matchingAccount = new Matching();
         matchingAccount.setAccountId(accountId);
-        matchingAccount.setMatchingNo(999999);
+        matchingAccount.setMatchingNo(0);
         matchingAccount.setShuffleNo(RandomValue);
         matchingAccount.setMatchingDate(nowDate);
 
