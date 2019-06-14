@@ -125,4 +125,5 @@ public class Account implements UserDetails {
     public void setDeleteFlag(boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
+
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!--<meta name="_csrf" th:content="${_csrf.token}"/>-->
-<!--<meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 <head th:replace="common/common_header::base_header(~{::title})">
 
 <meta charset="UTF-8">
@@ -25,8 +25,7 @@
                             <h3 class="mb-0">プロフィール画像アップロード</h3>
                         </div>
                         <div class="card-body">
-                            <form id="data_upload_form" name="data_upload_form" enctype="multipart/form-data"
-                                  th:action="@{/top}" method="post">
+                            <form id="data_upload_form" name="data_upload_form" enctype="multipart/form-data" method="post">
                                 <span>ファイルのサイズは1Mバイト以下にしてください。</span><br>
                                 <div class="row">
                                     <div class="col-md-6 mx-auto">
@@ -39,17 +38,18 @@
                                     </div>
                                 </div>
 
-
-                                <label>
-                                    <span class="btn btn-primary">ファイル選択</span>
-                                    <input type="file" id="upload_file" name="upload_file" style="display:none"
-                                           required="" accept="image/*" class="btn btn-primary"/>
-                                </label>
-
+                                <div class="form-group">
+                                    <label>
+                                        <span class="btn btn-info">
+                                            ファイル選択
+                                            <input type="file" id="upload_file" name="upload_file" style="display:none" required="" />
+                                        </span>
+                                    </label>
+                                    <input type="text" class="form-control" readonly="">
+                                </div>
 
                                 <div class="form-group">
-                                    <input type="submit" id="data_upload_button" class="btn btn-info" value="アップロード" name="upload"
-                                           disabled/>
+                                    <input id="data_upload_button" type="submit" class="btn btn-info" value="アップロード" disabled/>
                                 </div>
 
                             </form>
@@ -67,7 +67,7 @@
 
     window.onload = function () {
         $("#nowImage").empty();
-        var url = "/image/myprofile";
+        var url = "/upload/myprofile";
         var xhr = new XMLHttpRequest();
         xhr.responseType = "arraybuffer";
         xhr.open("GET", url, true);

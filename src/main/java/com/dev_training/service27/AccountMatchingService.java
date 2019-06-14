@@ -46,10 +46,9 @@ public class AccountMatchingService {
     //自分と同じグループNo.のアカウントを取り出す
     //マッチした相手のアカウント情報をから取得
     @Transactional
-    public List<Matching> getMatchingAccounts(){
+    public List<Matching> getMatchingAccounts(String nowDate){
         //ランダム数を昇順に並び替え
-        matchingRepository.SortAscendingOrder();
-        List<Matching> matchingAccounts = matchingRepository.findTodayAccount();
+        List<Matching> matchingAccounts = matchingRepository.findTodayAccount(nowDate);
         return matchingAccounts;
     }
 
@@ -57,7 +56,7 @@ public class AccountMatchingService {
     @Transactional
     public void setMatchingNo(int matchingNo){
         if(matchingNo % 2==0) {
-            matchingNo-=1;
+            matchingNo+=1;
             matchingRepository.insertMatchingNo(matchingNo);
         }
         else{
