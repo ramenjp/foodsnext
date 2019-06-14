@@ -1,6 +1,7 @@
 package com.dev_training.controller27;
 
 import com.dev_training.entity27.Account;
+import com.dev_training.entity27.History;
 import com.dev_training.service27.AccountMatchingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,6 +72,15 @@ public class AccountMatchingResultController {
 
         model.addAttribute("account",account);
         model.addAttribute("partner",partner);
+
+
+
+
+        //History用のアカウントインスタンス生成
+        History historyAccount =new History();
+        historyAccount.setAccountId(account.getAccountId());
+        historyAccount.setHistoryPartnerId(partner.getAccountId());
+        accountMatchingService.registerHistory(historyAccount);
 
         return "matching/testForm";
     }
