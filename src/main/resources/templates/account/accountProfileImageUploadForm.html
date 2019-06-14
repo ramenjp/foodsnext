@@ -53,6 +53,11 @@
                                 </div>
 
                             </form>
+                            <form id="accountForm" th:action="@{/top}">
+                                <div class="text-center">
+                                    <input type="submit" value="トップへ" class="btn bg-custom3 btn-lg text-white"/>
+                                </div>
+                            </form>
                         </div>
                     </div>
 
@@ -67,7 +72,7 @@
 
     window.onload = function () {
         $("#nowImage").empty();
-        var url = "/image/myprofile";
+        var url = "/upload/myprofile";
         var xhr = new XMLHttpRequest();
         xhr.responseType = "arraybuffer";
         xhr.open("GET", url, true);
