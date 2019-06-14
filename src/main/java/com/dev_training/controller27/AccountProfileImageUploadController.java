@@ -87,7 +87,7 @@ public class AccountProfileImageUploadController {
             throw new RuntimeException(e);
         }
 
-        return "top/topForm";
+        return "account/accountProfileImageUploadForm";
     }
 
     /**
