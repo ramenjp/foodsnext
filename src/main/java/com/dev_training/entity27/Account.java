@@ -35,9 +35,9 @@ public class Account implements UserDetails {
     @Column(name = "self_introduction", nullable = false, length = 255)
     private String selfIntroduction;
 
+
     @Column(name = "delete_flag")
     private boolean deleteFlag;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -94,10 +94,9 @@ public class Account implements UserDetails {
         return selfIntroduction;
     }
 
-    public boolean isDeleteFlag() {
+    public boolean getDeleteFlag() {
         return deleteFlag;
     }
-
     public void setAccountId(int accountId) {
         this.accountId = accountId;
     }
@@ -122,7 +121,9 @@ public class Account implements UserDetails {
         this.selfIntroduction = selfIntroduction;
     }
 
+
     public void setDeleteFlag(boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
+
 }
