@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/common_header::base_header(~{::title})">
+<meta charset="UTF-8"/>
+    <title>履歴</title>
+</head>
+<body>
+
+<!--<nav th:replace="common/loggedinNav::navi(${accountName})"></nav> -->
+
+<div class="container py-3">
+    <div class="row bg-mask">
+        <!-- 左サイドバー -->
+        <div class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <h4 class="sidebar-heading d-flex align-items-center px-3 mt-3 mb-1 text-muted">
+                        <span><i class="far fa-address-card">&nbsp;</i>アカウント機能</span>
+                    </h4>
+                    <li class="nav-item">
+                        <a href="/top/setting/init" class="nav-link">アカウント情報更新</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/top/password/init" class="nav-link">パスワード更新</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/top/upload/init" class="nav-link">画像アップロード</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/top/matching1" class="nav-link">マッチング</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row py-3">
+        <div class="col-md-8 mx-auto">
+            <!--結果の表示-->
+            <div th:if="!${#lists.isEmpty(list)}">
+                <table class="table table-striped table-lg table-bordered" style="table-layout:fixed;">
+                    <thead>
+                    <tr>
+                        <th width=10%>ニックネーム</th>
+                        <th width=10%>部署・役職</th>
+                        <th class="text-center" width=10%>自己紹介</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="account : ${list}">
+                        <td class="overflow-wrap-break width=10%" th:text="${account.nickname}"></td>
+
+                        <td class="overflow-wrap-break width=80%" th:text="${account.departmentPosition}"></td>
+                        <td>
+                            <div class="text-center">
+                                <button class="btn bg-custom3 text-white btn-sm" data-toggle="modal"
+                                        data-target="#modal-selfIntroduction"
+                                        th:attr="data-intro=${account.selfIntroduction}, data-name=${account.nickname}, data-departmentPosition=${account.departmentPosition}">
+                                    Open
+                                </button>
+                            </div>
+                        </td>
+
+                        <div class="modal fade" id="modal-selfIntroduction" role="dialog" tabindex="-1"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <!-- 3.モーダルのコンテンツ -->
+                                <div class="modal-content">
+                                    <!-- 4.モーダルのヘッダ -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-label">埋め込み</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!-- 5.モーダルのボディ -->
+                                    <div class="modal-body" id="modal-body">
+                                        <div class="row">
+                                            <div class="col-xl-5">
+                                                <div id="images" class="img-fluid"></div>
+                                            </div>
+                                            <div class="col-xl-7 col-sm-12 ">
+                                                <span class="badge badge-info">ニックネーム</span>
+                                                <p class="account-name"></p>
+                                                <span class="badge badge-info">部署・役職</span>
+                                                <p class="account-departmentPosition"></p>
+                                                <span class="badge badge-info">自己紹介</span>
+                                                <pre class="selfIntroduction"></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 6.モーダルのフッタ -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+                <!--ページングバー-->
+                <div th:with="s = ${(page.number + 3 > page.totalPages - 1) ? (page.totalPages - 1 - 6) : (page.number - 3)}">
+                    <ul class="pagination pagination-lg justify-content-center">
+                        <li th:class="|page-item ${page.first ? 'disabled' : ''}|">
+                            <a class="page-link" aria-label="Previous"
+                               th:href="@{'pagenation'(page=${page.number - 1})}">
+                                <span>&laquo;</span>
+                            </a>
+                        </li>
+
+                        <li th:each='i : ${#numbers.sequence((s < 0 ? 0 : s), ((s < 0 ? 0 : s) + 6) > (page.totalPages - 1) ? (page.totalPages - 1) : ((s < 0 ? 0 : s) + 6))}'
+                            th:class="|page-item ${(page.number == i) ? 'active' : ''}|">
+                            <a class="page-link" th:href="@{'pagenation'(page=${i})}">
+                                <span th:text='${i + 1}'>1</span>
+                            </a>
+                        </li>
+                        <li th:class="|page-item ${page.last ? 'disabled' : ''}|">
+                            <a class="page-link" aria-label="Next"
+                               th:href="@{'pagenation'(page=${page.number + 1})}">
+                                <span>&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="common/common_footer"></footer>
+
+</body>
+<script type="text/javascript">
+    $('#modal-selfIntroduction').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var accountname = button.data('name');
+        var departmentPosition = button.data('departmentPosition');
+        var selfIntroduction = button.data('intro');
+        var email= button.data('email');
+        selfIntroduction = removeTags(selfIntroduction);
+        selfIntroduction = selfIntroduction.replace(/\r?\n/g, '<br>');
+        var modal = $(this);//モーダルを取得
+        modal.find('.modal-title').text(accountname + ' さんの自己紹介');
+        modal.find('.selfIntroduction').html(selfIntroduction);
+        modal.find('.departmentPosition').text(departmentPosition);
+        modal.find('.account-name').text(accountname);
+        modal.find('.account-email').text(email);
+
+        $("#images").empty();
+        var id = button.data('account_id');
+        var url = "/upload/myprofile?id=" + id;
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = "arraybuffer";
+        xhr.open("GET", url, true);
+        xhr.onload = function () {
+            var data = new Uint8Array(this.response);
+            var oURL = URL.createObjectURL(
+                new Blob([data], {type: "image/png"})
+            );
+            var image = new Image();
+            image.onload = function () {
+                URL.revokeObjectURL(oURL);
+                $("#images").append(image);
+                $("#images > img").css('max-width', '240px','max-height','240px','object-fit','contain');
+                $("#images").addClass("image-responsive");
+
+            };
+            image.src = oURL;
+        };
+        xhr.send(null);
+    });
+    $(".clearForm").bind("click", function(){
+        $(this.form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
+    });
+
+</script>
+</html>

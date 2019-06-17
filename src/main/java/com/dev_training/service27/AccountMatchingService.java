@@ -1,9 +1,6 @@
 package com.dev_training.service27;
 
-import com.dev_training.entity27.Account;
-import com.dev_training.entity27.AccountRepository;
-import com.dev_training.entity27.Matching;
-import com.dev_training.entity27.MatchingRepository;
+import com.dev_training.entity27.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +15,17 @@ public class AccountMatchingService {
     private final AccountRepository accountRepository;
     private final MatchingRepository matchingRepository;
 
+    private final HistoryRepository historyRepository;
+
+
+
     @Autowired
-    public AccountMatchingService(AccountRepository accountRepository,MatchingRepository matchingRepository){
+    public AccountMatchingService(AccountRepository accountRepository,MatchingRepository matchingRepository, HistoryRepository historyRepository){
         this.accountRepository = accountRepository;
         this.matchingRepository = matchingRepository;
+        this.historyRepository =historyRepository;
+
+
     }
 
     //アカウント
@@ -85,4 +89,13 @@ public class AccountMatchingService {
         Account partnerAccount = accountRepository.findByAccountId(matchingPartnerId);
         return partnerAccount;
     }
+
+
+    //DBにHistoryアカウントを登録する処理
+    @Transactional
+    public void registerHistory(History historyAccount){
+        historyRepository.save(historyAccount);
+    }
+
+
 }
