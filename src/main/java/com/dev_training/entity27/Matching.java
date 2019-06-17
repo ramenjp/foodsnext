@@ -24,7 +24,7 @@ public class Matching{
     private int matchingNo;
 
     @Column(name = "matching_date", nullable = false)
-    private Date matchingDate;
+    private String matchingDate;
 
     @Column(name = "shuffle_no", nullable = false)
     private int shuffleNo;
@@ -51,11 +51,11 @@ public class Matching{
         this.matchingNo = matchingNo;
     }
 
-    public Date getMatchingDate() {
+    public String getMatchingDate() {
         return matchingDate;
     }
 
-    public void setMatchingDate(Date matchingDate) {
+    public void setMatchingDate(String matchingDate) {
         this.matchingDate = matchingDate;
     }
 

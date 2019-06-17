@@ -14,16 +14,20 @@ public interface MatchingRepository extends JpaRepository<Matching, Integer>, Jp
     void findMatchingAccount();
 
     //日付が今日のアカウントをリストで取り出す
-    @Query(value = "SELECT * FROM matching WHERE matching_date = :matching_date ORDER BY matching_no ASC", nativeQuery = true)
+    @Query(value = "SELECT * FROM matching WHERE matching_date = :matching_date ORDER BY shuffle_no ASC", nativeQuery = true)
     List<Matching> findTodayAccount(@Param("matching_date")String nowDate);
 
-    @Query(value = "INSERT INTO matching (matching_no) VALUES (:matching_no)", nativeQuery = true)
+    @Query(value = "UPDATE matching SET matching_no = :matching_no", nativeQuery = true)
     void insertMatchingNo(@Param("matching_no")int matching_no);
 
-    @Query(value = "SELECT matching_no FROM matching WHERE account_id=:account_id AND matching_date = :matching_date", nativeQuery = true)
-    Matching findMyMatchingNo(@Param("account_id") int account_id, @Param("matching_date") Date matching_date);
+    //日付が今日の自分のアカウントを取り出す
+    @Query(value = "SELECT * FROM matching WHERE account_id=:account_id AND matching_date = :matching_date", nativeQuery = true)
+    Matching findMyMatchingNo(@Param("account_id") int account_id, @Param("matching_date") String matching_date);
 
-    @Query(value = "SELECT account_id FROM matching WHERE account_id != :account_id AND matching_no = :matching_no", nativeQuery = true)
-    Matching findMyMatchingPartnerNo(@Param("account_id")int account_id,@Param("matching_no") int matching_no);
+    @Query(value = "SELECT * FROM matching WHERE account_id != :account_id AND matching_no = :matching_no AND matching_date = :matching_date", nativeQuery = true)
+    Matching findMyMatchingPartnerNo(@Param("account_id")int account_id,@Param("matching_no") int matching_no,@Param("matching_date") String matching_date);
+    //日付が違うものという条件を付ける
 
+    @Query(value = "SELECT * FROM matching WHERE account_id=:account_id AND matching_date = :matching_date", nativeQuery = true)
+    Matching findMatchingAccount(@Param("account_id") int account_id, @Param("matching_date") String matching_date);
 }

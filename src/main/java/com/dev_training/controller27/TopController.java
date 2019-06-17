@@ -58,7 +58,6 @@ public class TopController {
      * トップ画面表示。
      *
      * @param account 認証されたアカウント
-
      * @return Path
      */
     @RequestMapping(value = "")
