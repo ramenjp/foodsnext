@@ -68,16 +68,68 @@
                     <div class="col-md-12 col-md-offset-0 text-center menu-1">
                         <ul>
                             <li class="active"><a href="/top">Home</a></li>
-                            <li><a href="/top/matching1">マッチング</a></li>
+                            <li><a href="/top/matching1" >マッチング</a></li>
 
-                            <li class="has-dropdown">
+                            <li class="has-dropdown"　>
                                 <a>設定</a>
                                 <ul class="dropdown">
                                     <li><a href="/top/setting/init">アカウント情報更新</a></li>
                                     <li><a href="/top/password/init">パスワード更新</a></li>
                                     <li><a href="/top/upload/init">画像アップロード</a></li>
+
                                 </ul>
                             </li>
+
+                            <li><a href="/top/paging/do" >履歴
+                                <script type="text/javascript">
+    $('#modal-selfIntroduction').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var accountname = button.data('name');
+        var departmentPosition = button.data('departmentPosition');
+        var selfIntroduction = button.data('intro');
+        var email= button.data('email');
+        selfIntroduction = removeTags(selfIntroduction);
+        selfIntroduction = selfIntroduction.replace(/\r?\n/g, '<br>');
+        var modal = $(this);//モーダルを取得
+        modal.find('.modal-title').text(accountname + ' さんの自己紹介');
+        modal.find('.selfIntroduction').html(selfIntroduction);
+        modal.find('.account-departmentPosition').text(departmentPosition);
+        modal.find('.account-name').text(accountname);
+        modal.find('.account-email').text(email);
+
+        $("#images").empty();
+        var id = button.data('account_id');
+        var url = "/image/profile?id=" + id;
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = "arraybuffer";
+        xhr.open("GET", url, true);
+        xhr.onload = function () {
+            var data = new Uint8Array(this.response);
+            var oURL = URL.createObjectURL(
+                new Blob([data], {type: "image/png"})
+            );
+            var image = new Image();
+            image.onload = function () {
+                URL.revokeObjectURL(oURL);
+                $("#images").append(image);
+                $("#images > img").css('max-width', '240px','max-height','240px','object-fit','contain');
+                $("#images").addClass("image-responsive");
+
+            };
+            image.src = oURL;
+        };
+        xhr.send(null);
+    });
+    $(".clearForm").bind("click", function(){
+        $(this.form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
+    });
+
+
+
+
+
+</script>
+                            </a></li>
                         </ul>
                     </div>
                 </div>
