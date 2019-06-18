@@ -24,55 +24,68 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/top/matching1")
 public class AccountMatchingController {
 
-    /** アカウントマッチングサービス */
+    /**
+     * アカウントマッチングサービス
+     */
     public final AccountMatchingService accountMatchingService;
-    /** HTTPセッション */
+    /**
+     * HTTPセッション
+     */
     private final HttpSession session;
-    /** セッションキー(ログインユーザのアカウント) */
+    /**
+     * セッションキー(ログインユーザのアカウント)
+     */
     private static final String SESSION_FORM_ID = "account";
 
     @Autowired
-    public AccountMatchingController(AccountMatchingService accountMatchingService,HttpSession session) {
+    public AccountMatchingController(AccountMatchingService accountMatchingService, HttpSession session) {
         this.accountMatchingService = accountMatchingService;
         this.session = session;
     }
 
     //マッチングテーブルにアカウントを登録
     @RequestMapping(value = "")
-    public String matchingAccountRegister(Model model){
+    public String matchingAccountRegister(Model model) {
+
 
         //accountsテーブルからaccount_idを取得
-        Account account = (Account)session.getAttribute(SESSION_FORM_ID);
+        Account account = (Account) session.getAttribute(SESSION_FORM_ID);
         int accountId = account.getAccountId();
 
         //ランダム関数
         Random rnd = new Random();
         int RandomValue = rnd.nextInt();
-        if(RandomValue < 0){
+        if (RandomValue < 0) {
             RandomValue = RandomValue * (-1);
         }
 
         //日付関連
-        Date date=new Date();
+        Date date = new Date();
         Calendar cl = Calendar.getInstance();
 
         //例外処理
         ParsePosition pos = new ParsePosition(0);
 
-        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
-        //StringをDate型に
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = df.format(cl.getTime());
 
-        Date nowDate = df.parse(formattedDate,pos);
+        //自分のマッチングアカウントを検索
+        Matching myMatchingAccount = accountMatchingService.getMatchingAccount(accountId, formattedDate);
 
-        //マッチング用のアカウントインスタンス生成
-        Matching matchingAccount = new Matching();
-        matchingAccount.setAccountId(accountId);
-        matchingAccount.setMatchingNo(0);
-        matchingAccount.setShuffleNo(RandomValue);
-        matchingAccount.setMatchingDate(nowDate);
 
-        accountMatchingService.register(matchingAccount);
+        if (Objects.isNull(myMatchingAccount) == false && myMatchingAccount.getMatchingNo() != 0) {
+            return "redirect:/top/matching/complete";
+        }
+
+        if (Objects.isNull(myMatchingAccount)) {
+            //マッチング用のアカウントインスタンス生成
+            Matching matchingAccount = new Matching();
+            matchingAccount.setAccountId(accountId);
+            matchingAccount.setMatchingNo(0);
+            matchingAccount.setShuffleNo(RandomValue);
+            matchingAccount.setMatchingDate(formattedDate);
+            accountMatchingService.register(matchingAccount);
+        }
         return "matching/matching_count";
     }
 }

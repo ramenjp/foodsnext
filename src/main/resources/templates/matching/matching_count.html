@@ -1,3 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static//css/bootstrap.css" rel="stylesheet"/>
+    <link href="../static//css/training.css" rel="stylesheet"/>
+    <title>マッチング待機</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <div class='timer' data-minutes-left="3"></div>
+                <h2 class="card-title">マッチング待機画面</h2>
+                <h4 class="card-text">3:00</h4>
+                <li class="nav-item">
+                    <a href="/top/matching/complete" class="nav-link">結果表示</a>
+                </li>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script src="../../static/js/jquery.simple.timer.js" th:src="@{/js/jquery.simple.timer.js}"></script>
+
+<script>
+$(function(){
+	$('.timer').startTimer({
+		onComplete: function(element){
+			location.href="http://localhost:8080/top/matching/complete";
+		}
+	});
+});
+  var complete = function(msg1){
+    location.href="http://localhost:8080/top/matching/complete";
+  };
+  setTimeout(complete, 60000)
+</script>
+</body>
+=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,4 +68,5 @@
 
 </div>
 </body>
+
 </html>

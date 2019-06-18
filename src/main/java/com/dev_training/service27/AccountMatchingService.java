@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AccountMatchingService {
@@ -57,29 +58,40 @@ public class AccountMatchingService {
     }
 
     //マッチングナンバーを割り当てる処理
-    @Transactional
-    public void setMatchingNo(int matchingNo){
-        if(matchingNo % 2==0) {
-            matchingNo+=1;
-            matchingRepository.insertMatchingNo(matchingNo);
-        }
-        else{
-            matchingRepository.insertMatchingNo(matchingNo);
+    public int createMatchingNo(int i) {
+        if (i % 2 == 0) {
+            return i - 1;
+        } else {
+            return i;
         }
     }
+
+        @Transactional
+        public void updateMatchingNo(Matching matching){
+           matchingRepository.save(matching);
+        }
+
 
     /*     ここからAccountMatchingResultControllerが使うメソッド     */
     @Transactional
-    public int getMatchingNo(int accountId, Date formattedDate) {
+    public Matching getMatchingAccount(int accountId, String formattedDate) {
 
         Matching myAccount =matchingRepository.findMyMatchingNo(accountId,formattedDate);
-        int myMatchingNo = myAccount.getMatchingNo();
-        return myMatchingNo;
+//        if (Objects.isNull(myAccount)) {
+//        int myMatchingNo = myAccount.getMatchingNo();
+//        return myMatchingNo;
+        return myAccount;
     }
 
     @Transactional
-    public int getMatchingPartnerId(int accountId,int matchingNo) {
-        Matching partner = matchingRepository.findMyMatchingPartnerNo(accountId,matchingNo);
+    public Matching getMatchingNo(int accountId, String formattedDate) {
+        Matching myAccount =matchingRepository.findMyMatchingNo(accountId,formattedDate);
+        return myAccount;
+    }
+
+    @Transactional
+        public int getMatchingPartnerId(int accountId,int matchingNo,String formattedDate) {
+        Matching partner = matchingRepository.findMyMatchingPartnerNo(accountId,matchingNo,formattedDate);
         int matchingPartnerId=partner.getAccountId();
         return matchingPartnerId;
     }

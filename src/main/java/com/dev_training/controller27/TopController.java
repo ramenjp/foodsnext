@@ -3,6 +3,7 @@ package com.dev_training.controller27;
 
 import com.dev_training.common.CodeValue;
 import com.dev_training.entity27.Account;
+import com.dev_training.entity27.History;
 import com.dev_training.form27.HistoryForm;
 import com.dev_training.service27.HistoryService;
 import com.dev_training.service27.TopService;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -78,7 +80,6 @@ public class TopController {
      * トップ画面表示。
      *
      * @param account 認証されたアカウント
-
      * @return Path
      */
     @RequestMapping(value = "")
@@ -148,15 +149,21 @@ public class TopController {
         }
 
         // 検索条件からアカウントを検索する
-        Page<Account> page = historyService.findHistory(historyForm, pageable);
-        List<Account> list = page.getContent();
+//        Page<Account> page = historyService.findHistory(historyForm, pageable);
+        int accountId = ((Account)session.getAttribute(SESSION_FORM_ID)).getAccountId();
+        List<History> historys = historyService.findHistoryByAccountId(accountId);
+
+        List<Account> list = new ArrayList<>();
+        for (History history : historys) {
+            list.add(historyService.findByAccountId(history.getAccountId()));
+        }
         if (Objects.isNull(list) || list.isEmpty()) {
             // 検索結果が０件ならエラー表示
             bindingResult.reject("validation.noSearchResult", "default message");
             return "top/history";
         }
         // 検索結果、ページング情報を格納する
-        model.addAttribute("page", page);
+//        model.addAttribute("page", page);
         model.addAttribute("list", list);
         model.addAttribute("url", "/account/find");
         return "top/history";
