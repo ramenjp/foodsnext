@@ -82,6 +82,7 @@ public class AccountMatchingResultController {
         historyAccount.setHistoryPartnerId(partner.getAccountId());
         accountMatchingService.registerHistory(historyAccount);
 
+
         return "matching/testForm";
     }
 }
