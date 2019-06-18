@@ -135,7 +135,7 @@
         modal.find('.account-email').text(email);
 
         $("#images").empty();
-        var id = button.data('id');
+        var id = button.data('account_id');
         var url = "/image/profile?id=" + id;
         var xhr = new XMLHttpRequest();
         xhr.responseType = "arraybuffer";

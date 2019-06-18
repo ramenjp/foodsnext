@@ -8,7 +8,6 @@ import com.dev_training.service27.AccountMatchingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpSession;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -40,21 +39,22 @@ public class restController {
         //StringをDate型に
         String formattedDate = df.format(cl.getTime());
 
-        Date nowDate = df.parse(formattedDate,pos);
-
-
-
         //今日のマッチアカウントを全件取得
-        List<Matching> matchingAccounts= accountMatchingService.getMatchingAccounts(nowDate.toString());
+        List<Matching> matchingList= accountMatchingService.getMatchingAccounts(formattedDate);
+        int listSize = matchingList.size();
 
         //matchingNo付与して再度DB格納
         //リスト長分for回す→マッチングNoつけていく
 
-        for(int i=0;i<matchingAccounts.size();i++){
+        int i=0;
+        for(Matching matching:matchingList){
             //matchingNo付与
-            accountMatchingService.setMatchingNo(i);
-            //再度matchingテーブルに保存
-            accountMatchingService.register(matchingAccounts.get(i));
+            i++;
+            if(i == listSize && listSize % 2 == 1) {
+                break;
+            }
+            matching.setMatchingNo(accountMatchingService.createMatchingNo(i));
+            accountMatchingService.updateMatchingNo(matching);
         }
     }
 }

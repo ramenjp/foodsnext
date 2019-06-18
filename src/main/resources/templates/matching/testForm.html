@@ -8,8 +8,39 @@
 </head>
 
 <body>
-<p th:text="${account.nickname}"></p>
-<p th:text="${patner.nickname}"></p>
+    <div class="container">
+        <div class=" text-center center-block">
+            <h1>★結果表示★</h1>
+            <div id="images" class="img-fluid"></div>
+                <p th:text="${partnername}"></p>
+                <p th:text="${partnerDepartmentPosition}"></p>
+                <p th:text="${partnerSelfIntroduction}"></p>
+        </div>
+    </div>
 
+    <script>
+    $("#images").empty();
+    var id = button.data('accountId');
+    var url = "/image/profile?id=" + id;
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = "arraybuffer";
+    xhr.open("GET", url, true);
+    xhr.onload = function () {
+    var data = new Uint8Array(this.response);
+    var oURL = URL.createObjectURL(
+    new Blob([data], {type: "image/png"})
+    );
+    var image = new Image();
+    image.onload = function () {
+    URL.revokeObjectURL(oURL);
+    $("#images").append(image);
+    $("#images > img").css('max-width', '240px','max-height','240px','object-fit','contain');
+
+    };
+    image.src = oURL;
+    };
+    xhr.send(null);
+    });
+    </script>
 </body>
 </html>
