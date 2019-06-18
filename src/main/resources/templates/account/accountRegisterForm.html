@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-md-12 col-offset-0 text-center">
 
-                        <div id="fh5co-logo"><a><image src ="images/logo.gif" width="20%" height="20%"></image><br></a></div>
+                        <div id="fh5co-logo"><a><image src ="/images/logo.gif" width="20%" height="20%"></image><br></a></div>
                     </div>
 <!--                    <div class="col-md-12 col-md-offset-0 text-center menu-1">-->
 <!--                        <ul>-->
@@ -71,8 +71,11 @@
 <!--                <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">-->
 
 
-                    <h2 class="testdesu">Account Regisration</h2>
-                    <div class="card-body">
+                <div class="col-md-12 col-md-offset-3 text-center fh5co-heading">
+                    <h2>Account Regisration</h2>
+                </div>
+                <h2 class="text-center"></h2>
+                    <div class="card-body col-md-12">
                         <form id="accountForm" th:action="@{/account/register/confirm}"
                               th:object="${accountRegisterForm}" method="post">
                             <fieldset id="account_field">
@@ -82,7 +85,7 @@
                                     <label for="nickname">Nickname</label><br/>
                                     <input class="form-control" id="nickname" type="text" maxlength="15"
                                            th:field="*{nickname}" name="nickname" required
-                                           placeholder="ニックネームを入力してください"/>
+                                           placeholder="Type your nickname"/>
                                     <small id="accountidhelp" class="form-text text-muted">Nickname must be between 3 to
                                         15 characters
                                     </small>
@@ -94,7 +97,7 @@
                                      th:classappend="${#fields.hasErrors('email')}? 'has-error'">
                                     <label for="email">E-mail</label><br/>
                                     <input class="form-control" id="email" type="text" maxlength="50"
-                                           th:field="*{email}" name="email" required placeholder="メールアドレスを入力してください"/>
+                                           th:field="*{email}" name="email" required placeholder="Type your e-mail"/>
                                     <span class="text-danger" th:if="${#fields.hasErrors('email')}"
                                           th:errors="*{email}">error!</span>
                                 </div>
@@ -104,7 +107,7 @@
                                     <label for="password">Password</label><br/>
                                     <input class="form-control" id="password" type="password" maxlength="50"
                                            th:field="*{password}" name="password" required
-                                           placeholder="パスワードを入力してください"/>
+                                           placeholder="Type a new password"/>
                                     <small id="passwordhelp" class="form-text text-muted">Password must between 5 to 15
                                         letters and must include at least one lowercase, uppercase, and numeric
                                         charcters
@@ -119,7 +122,7 @@
                                     <label for="confirmPassword">Confirmation Password</label><br/>
                                     <input class="form-control" id="confirmPassword" type="password" maxlength="50"
                                            th:field="*{confirmPassword}" name="confirmPassword" required
-                                           placeholder="確認のため、もう一度パスワードを入力してください"/>
+                                           placeholder="Retype the password"/>
                                 </div>
 
                                 <!-- 変更点　変数に注意 -->
@@ -128,7 +131,7 @@
                                     <label for="department_position">Department&Position</label><br/>
                                     <input class="form-control" id="department_position" type="text" maxlength="45"
                                            th:field="*{department_position}" name="department_position" required
-                                           placeholder="部署・役職を入力してください。"/>
+                                           placeholder="Type your department"/>
                                     <span class="text-danger" th:if="${#fields.hasErrors('department_position')}"
                                           th:errors="*{department_position}">error!</span>
                                 </div>
@@ -138,7 +141,7 @@
                                     <label for="selfIntroduction">Self-Introduction</label><br/>
                                     <textarea class="form-control selfIntroduction" id="selfIntroduction" rows="3"
                                               cols="80" maxlength="255" th:field="*{selfIntroduction}"
-                                              name="selfIntroduction" required placeholder="自己紹介を入力してください"></textarea>
+                                              name="selfIntroduction" required placeholder="Type self-introduction"></textarea>
                                     <span class="text-danger" th:if="${#fields.hasErrors('selfIntroduction')}"
                                           th:errors="*{selfIntroduction}">error!</span>
                                 </div>
@@ -153,8 +156,8 @@
                     </div>
 
 
-                    <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident.
-                        Odit ab aliquam dolor eius.</p>
+<!--                    <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident.-->
+<!--                        Odit ab aliquam dolor eius.</p>-->
 <!--                </div>-->
             </div>
 
@@ -165,10 +168,10 @@
     <div class="container-wrap">
         <footer id="fh5co-footer" role="contentinfo">
             <div class="col-md-4 text-center">
-                <h3>198 West 21th Street, Suite 721 New York NY 10016</h3>
+                <!--                    <h3>198 West 21th Street, Suite 721 New York NY 10016</h3>-->
             </div>
-            <div class="col-md-4 text-center">
-                <h2><a href="#">Church</a></h2>
+            <div class="col-md-20 text-center">
+                <h2><a href="#">楽天食卓</a></h2>
             </div>
             <div class="col-md-4 text-center">
                 <p>
@@ -182,9 +185,11 @@
             <div class="row copyright">
                 <div class="col-md-12 text-center">
                     <p>
-                        <small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
-                        <small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a>
-                            Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
+                        <small class="block">&copy; 2019 楽天食卓 Food's Next All Rights Reserved.</small>
+                        <small class="block">Designed by <a href=""
+                                                            target="_blank">Mrs.Another Sky</a>
+                            <!--                                Demo Images: <a-->
+                            <!--                                    href="http://unsplash.co/" target="_blank">Unsplash</a></small>-->
                     </p>
                 </div>
             </div>
