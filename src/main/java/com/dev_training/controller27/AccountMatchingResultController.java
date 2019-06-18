@@ -1,6 +1,12 @@
+
 package com.dev_training.controller27;
 
 import com.dev_training.entity27.Account;
+
+import com.dev_training.entity27.Matching;
+
+import com.dev_training.entity27.History;
+
 import com.dev_training.service27.AccountMatchingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /***
@@ -17,7 +24,7 @@ import java.util.Date;
 */
 
 @Controller
-@RequestMapping(value = "/matching2")
+@RequestMapping(value = "/top/matching/complete")
 public class AccountMatchingResultController {
 
     /**
@@ -43,28 +50,46 @@ public class AccountMatchingResultController {
     @RequestMapping(value = "")
     public String matchingAccountRegister(Model model) {
         Date date=new Date();
+        Calendar cl = Calendar.getInstance();
+
+        //例外処理
         ParsePosition pos = new ParsePosition(0);
-        String currentDate = date.toString();
+
         SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
         //StringをDate型に
-        Date formattedDate = df.parse(currentDate,pos);
+        String formattedDate = df.format(cl.getTime());
+        Date nowDate = df.parse(formattedDate,pos);
+
 
         //自分のアカウントIDを取得
         Account account = (Account)session.getAttribute(SESSION_FORM_ID);
         int accountId = account.getAccountId();
+
         //取得した自分のアカウントIDを使ってmatchingNoを取得
-        int myMatchingNo = accountMatchingService.getMatchingNo(accountId,formattedDate);
+        int myMatchingNo = accountMatchingService.getMatchingNo(accountId,formattedDate).getMatchingNo();
 
         //matchingNoが同じアカウントのアカウントIDを検索,取得
-        int matchingPartnerId = accountMatchingService.getMatchingPartnerId(accountId,myMatchingNo);
+        int matchingPartnerId = accountMatchingService.getMatchingPartnerId(accountId,myMatchingNo,formattedDate);
 
         //パートナーのアカウントIdを使ってaccountsテーブルにアカウント情報を取得しにいく
         Account partner = accountMatchingService.findPartnerAccount(matchingPartnerId);
         //自分のアカウントIdを使ってaccountsテーブルにアカウント情報を取得しにいく
 
-        model.addAttribute("account",account);
-        model.addAttribute("partner",partner);
+        model.addAttribute("partnername",partner.getNickname());
+        model.addAttribute("partnerDepartmentPosition",partner.getDepartmentPosition());
+        model.addAttribute("partnerSelfIntroduction",partner.getSelfIntroduction());
+
+
+
+
+        //History用のアカウントインスタンス生成
+        History historyAccount =new History();
+        historyAccount.setAccountId(account.getAccountId());
+        historyAccount.setHistoryPartnerId(partner.getAccountId());
+        accountMatchingService.registerHistory(historyAccount);
+
 
         return "matching/testForm";
     }
 }
+

@@ -1,15 +1,13 @@
 package com.dev_training.service27;
 
-import com.dev_training.entity27.Account;
-import com.dev_training.entity27.AccountRepository;
-import com.dev_training.entity27.Matching;
-import com.dev_training.entity27.MatchingRepository;
+import com.dev_training.entity27.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AccountMatchingService {
@@ -18,10 +16,17 @@ public class AccountMatchingService {
     private final AccountRepository accountRepository;
     private final MatchingRepository matchingRepository;
 
+    private final HistoryRepository historyRepository;
+
+
+
     @Autowired
-    public AccountMatchingService(AccountRepository accountRepository,MatchingRepository matchingRepository){
+    public AccountMatchingService(AccountRepository accountRepository,MatchingRepository matchingRepository, HistoryRepository historyRepository){
         this.accountRepository = accountRepository;
         this.matchingRepository = matchingRepository;
+        this.historyRepository =historyRepository;
+
+
     }
 
     //アカウント
@@ -46,37 +51,47 @@ public class AccountMatchingService {
     //自分と同じグループNo.のアカウントを取り出す
     //マッチした相手のアカウント情報をから取得
     @Transactional
-    public List<Matching> getMatchingAccounts(){
+    public List<Matching> getMatchingAccounts(String nowDate){
         //ランダム数を昇順に並び替え
-        matchingRepository.SortAscendingOrder();
-        List<Matching> matchingAccounts = matchingRepository.findTodayAccount();
+        List<Matching> matchingAccounts = matchingRepository.findTodayAccount(nowDate);
         return matchingAccounts;
     }
 
     //マッチングナンバーを割り当てる処理
-    @Transactional
-    public void setMatchingNo(int matchingNo){
-        if(matchingNo%2==0) {
-            matchingNo-=1;
-            matchingRepository.insertMatchingNo(matchingNo);
-        }
-        else{
-            matchingRepository.insertMatchingNo(matchingNo);
+    public int createMatchingNo(int i) {
+        if (i % 2 == 0) {
+            return i - 1;
+        } else {
+            return i;
         }
     }
+
+        @Transactional
+        public void updateMatchingNo(Matching matching){
+           matchingRepository.save(matching);
+        }
+
 
     /*     ここからAccountMatchingResultControllerが使うメソッド     */
     @Transactional
-    public int getMatchingNo(int accountId, Date formattedDate) {
+    public Matching getMatchingAccount(int accountId, String formattedDate) {
 
         Matching myAccount =matchingRepository.findMyMatchingNo(accountId,formattedDate);
-        int myMatchingNo = myAccount.getMatchingNo();
-        return myMatchingNo;
+//        if (Objects.isNull(myAccount)) {
+//        int myMatchingNo = myAccount.getMatchingNo();
+//        return myMatchingNo;
+        return myAccount;
     }
 
     @Transactional
-    public int getMatchingPartnerId(int accountId,int matchingNo) {
-        Matching partner = matchingRepository.findMyMatchingPartnerNo(accountId,matchingNo);
+    public Matching getMatchingNo(int accountId, String formattedDate) {
+        Matching myAccount =matchingRepository.findMyMatchingNo(accountId,formattedDate);
+        return myAccount;
+    }
+
+    @Transactional
+        public int getMatchingPartnerId(int accountId,int matchingNo,String formattedDate) {
+        Matching partner = matchingRepository.findMyMatchingPartnerNo(accountId,matchingNo,formattedDate);
         int matchingPartnerId=partner.getAccountId();
         return matchingPartnerId;
     }
@@ -86,4 +101,13 @@ public class AccountMatchingService {
         Account partnerAccount = accountRepository.findByAccountId(matchingPartnerId);
         return partnerAccount;
     }
+
+
+    //DBにHistoryアカウントを登録する処理
+    @Transactional
+    public void registerHistory(History historyAccount){
+        historyRepository.save(historyAccount);
+    }
+
+
 }

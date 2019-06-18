@@ -14,7 +14,6 @@ import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 import javax.servlet.http.HttpSession;
 
 /**
@@ -22,51 +21,71 @@ import javax.servlet.http.HttpSession;
  */
 
 @Controller
-@RequestMapping(value = "/matching1")
+@RequestMapping(value = "/top/matching1")
 public class AccountMatchingController {
 
-    /** アカウントマッチングサービス */
+    /**
+     * アカウントマッチングサービス
+     */
     public final AccountMatchingService accountMatchingService;
-    /** HTTPセッション */
+    /**
+     * HTTPセッション
+     */
     private final HttpSession session;
-    /** セッションキー(ログインユーザのアカウント) */
+    /**
+     * セッションキー(ログインユーザのアカウント)
+     */
     private static final String SESSION_FORM_ID = "account";
 
     @Autowired
-    public AccountMatchingController(AccountMatchingService accountMatchingService,HttpSession session) {
+    public AccountMatchingController(AccountMatchingService accountMatchingService, HttpSession session) {
         this.accountMatchingService = accountMatchingService;
         this.session = session;
     }
 
     //マッチングテーブルにアカウントを登録
     @RequestMapping(value = "")
-    public String matchingAccountRegister(Model model){
+    public String matchingAccountRegister(Model model) {
+
 
         //accountsテーブルからaccount_idを取得
-        Account account = (Account)session.getAttribute(SESSION_FORM_ID);
+        Account account = (Account) session.getAttribute(SESSION_FORM_ID);
         int accountId = account.getAccountId();
 
         //ランダム関数
         Random rnd = new Random();
         int RandomValue = rnd.nextInt();
-        //日付関数
-        Date date=new Date();
+        if (RandomValue < 0) {
+            RandomValue = RandomValue * (-1);
+        }
+
+        //日付関連
+        Date date = new Date();
+        Calendar cl = Calendar.getInstance();
+
         //例外処理
         ParsePosition pos = new ParsePosition(0);
 
-        String currentDate = date.toString();
-        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
-        //StringをDate型に
-        Date formattedDate = df.parse(currentDate,pos);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = df.format(cl.getTime());
 
-        //マッチング用のアカウントインスタンス生成
-        Matching matchingAccount = new Matching();
+        //自分のマッチングアカウントを検索
+        Matching myMatchingAccount = accountMatchingService.getMatchingAccount(accountId, formattedDate);
 
-        matchingAccount.setAccountId(accountId);
-        matchingAccount.setShuffleNo(RandomValue);
-        matchingAccount.setMatchingDate(formattedDate);
 
-        accountMatchingService.register(matchingAccount);
-        return "matching_count";
+        if (Objects.isNull(myMatchingAccount) == false && myMatchingAccount.getMatchingNo() != 0) {
+            return "redirect:/top/matching/complete";
+        }
+
+        if (Objects.isNull(myMatchingAccount)) {
+            //マッチング用のアカウントインスタンス生成
+            Matching matchingAccount = new Matching();
+            matchingAccount.setAccountId(accountId);
+            matchingAccount.setMatchingNo(0);
+            matchingAccount.setShuffleNo(RandomValue);
+            matchingAccount.setMatchingDate(formattedDate);
+            accountMatchingService.register(matchingAccount);
+        }
+        return "matching/matching_count";
     }
 }
