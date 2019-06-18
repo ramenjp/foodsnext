@@ -1330,3 +1330,21 @@ input[type="text"] {
   opacity: 0;
 }
 
+.imagePreview {
+    width: 200px;
+    height: 200px;
+    background: no-repeat;
+    background-size: contain;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;
+
+}
+.account-list th {
+    white-space: nowrap;
+    text-align: center;
+}
+.profile-image {
+    text-align: center;
+    margin: 0 auto;
+}
+
