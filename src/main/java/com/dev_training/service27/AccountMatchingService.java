@@ -85,7 +85,6 @@ public class AccountMatchingService {
         return myAccount;
     }
 
-
     @Transactional
         public int getMatchingPartnerId(int accountId,int matchingNo,String formattedDate) {
         Matching partner = matchingRepository.findMyMatchingPartnerNo(accountId,matchingNo,formattedDate);
