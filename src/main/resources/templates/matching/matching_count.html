@@ -64,21 +64,45 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-md-offset-0 text-center menu-1">
-                        <ul>
-                            <li class="active"><a href="/top">Home</a></li>
-                        </ul>
+
                     </div>
                 </div>
             </div>
         </div>
     </nav>
-    <div class="text-center">
 
-        <h2>マッチング相手を探しています...</h2>
-        <p id="RealtimeClockArea2"></p>
+    <!--編集中-->
+    <div class="container-wrap">
 
-        <h2>CountDown</h2>
-        <p id="RealtimeClockArea3"></p>
+        <div id="fh5co-sermon">
+            <div class="row animate-box">
+
+
+                <div class="col-md-12 col-md-offset-3 text-center fh5co-heading">
+                    <div class="text-center">
+
+                        <h2>Looking for matching partner...</h2>
+                        <p id="RealtimeClockArea2"></p>
+
+                        <h2>CountDown</h2>
+                       <h2> <p id="RealtimeClockArea3"></p></h2>
+
+                    </div>
+
+                    <br>
+                    <br>
+                    <form id="searchForm" th:action="@{/top}" th:object="${historyForm}"
+                          method="post">
+                        <div class="col text-center">
+                            <div class="btn-group">
+                                <input type="submit" name="search" value="Home"
+                                       class="btn bg-custom3 btn-lg text-white"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -105,24 +129,6 @@
 <!--    <script src="../../static/js/jquery.simple.timer.js" th:src="@{/js/jquery.simple.timer.js}"></script>-->
 
 
-    <div class="container py-3">
-        <div class="row">
-            <div class="col-md-12 mx-auto">
-
-                <div class="card-body">
-                    <form id="searchForm" th:action="@{/top}" th:object="${historyForm}"
-                          method="post">
-                        <div class="col text-center">
-                            <div class="btn-group">
-                                <input type="submit" name="search" value="ホームに戻る"
-                                       class="btn bg-custom3 btn-lg text-white"/>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 
