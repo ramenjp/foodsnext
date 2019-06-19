@@ -91,22 +91,22 @@
             <div class="row animate-box">
                 <div class="col-md-12 col-md-offset-3 text-center fh5co-heading">
                     <div class="container py-3">
-                        <div class="row ">
+                        <div class="row">
 
                             <!--my profileの表示-->
 
-                            <h1><span class="navbar-text pr-3 text-center"
+                            <span class="navbar-text pr-3 text-center font-weight-bold"
                                       th:text="'Welcome  back ' + ${session.account.nickname} + '! '"></span>
-                            </h1>
+
                         </div>
                         <div class="row">
-                            <div class="col-md-6" align="right">
+                            <div class="col-md-6" align="right" >
                                 <div id="nowImage"></div>
                             </div>
                             <div class="col-md-6" align="left">
                                 <h2><span class="navbar-text pr-3"
                                           th:text="'所属部署 : '+${session.account.departmentPosition} "></span></h2>
-                                <h2><span class="navbar-text pr-3"
+                                <h2><span class="navbar-text pr-3 text-break"
                                           th:text="'自己紹介 : '+${session.account.selfIntroduction} "></span></h2>
                             </div>
                         </div>
@@ -142,7 +142,11 @@ window.onload = function () {
 
             </script>
 
+
+
             <div class="row py-3">
+                <div class="col-md-12">
+                <h3 class="text-center">Meshitomo History</h3></div>
                 <div class="col-md-12 mx-auto">
                     <!--結果の表示-->
                     <div th:if="!${#lists.isEmpty(list)}">
