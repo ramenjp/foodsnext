@@ -65,23 +65,25 @@
                             Food's Next</a>
                         </div>
                         <h5><span class="navbar-text pr-3"
-                                  th:text="'ようこそ ' + ${session.account.nickname} + ' さん。'"></span></h5>
+                                  th:text="' welcome ' + ${session.account.nickname} + ' ! '"></span></h5>
                     </div>
                     <div class="col-md-12 col-md-offset-0 text-center menu-1">
                         <ul>
                             <li class="active"><a href="/top">Home</a></li>
-                            <li><a href="/top/matching1">マッチング</a></li>
+                            <li><a href="/top/matching1">Matching</a></li>
 
                             <li class="has-dropdown" 　>
-                                <a>設定</a>
+                                <a>Setting</a>
                                 <ul class="dropdown">
-                                    <li><a href="/top/setting/init">アカウント情報更新</a></li>
-                                    <li><a href="/top/password/init">パスワード更新</a></li>
-                                    <li><a href="/top/upload/init">画像アップロード</a></li>
+                                    <li><a href="/top/setting/init">Update Account</a></li>
+                                    <li><a href="/top/password/init">Update Password</a></li>
+                                    <li><a href="/top/upload/init">Upload Image</a></li>
                                 </ul>
                             </li>
 
-                            <li><a href="/top/paging/do">プロフィール</a></li>
+
+                            <li><a href="/top/paging/do">Profile</a></li>
+
 
                         </ul>
                     </div>

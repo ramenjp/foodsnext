@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/common_header::base_header(~{::title})">
 
-    <title>トップ</title>
+    <title>Top</title>
     <title>Church &mdash; Free Website Template, Free HTML5 Template by freehtml5.co</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +46,7 @@
 
     =======
     <meta charset="UTF-8"/>
-    <title>トップ</title>
+    <title>Top</title>
 
 </head>
 <body>
@@ -71,6 +71,10 @@
         </div>
     </nav>
 
+
+        <h2>searching...</h2>
+        <p id="RealtimeClockArea2"></p>
+=======
     <!--編集中-->
     <div class="container-wrap">
 
@@ -83,6 +87,7 @@
 
                         <h2>Looking for matching partner...</h2>
                         <p id="RealtimeClockArea2"></p>
+
 
                         <h2>CountDown</h2>
                        <h2> <p id="RealtimeClockArea3"></p></h2>
@@ -128,6 +133,27 @@
 <!--    <script src="../../static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>-->
 <!--    <script src="../../static/js/jquery.simple.timer.js" th:src="@{/js/jquery.simple.timer.js}"></script>-->
 
+
+
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+
+                <div class="card-body">
+                    <form id="searchForm" th:action="@{/top}" th:object="${historyForm}"
+                          method="post">
+                        <div class="col text-center">
+                            <div class="btn-group">
+                                <input type="submit" name="search" value="Go to Top"
+                                       class="btn bg-custom3 btn-lg text-white"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+=======
 
 </div>
 

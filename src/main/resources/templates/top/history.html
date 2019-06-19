@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/common_header::base_header(~{::title})">
     <meta charset="UTF-8"/>
-    <title>履歴</title>
+    <title>Profile</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content="Free HTML5 Website Template by freehtml5.co"/>
@@ -62,6 +62,7 @@
                         <ul>
 
                             <li class="active"><a href="/top">Home</a></li>
+
                             <li><a href="/top/matching1">マッチング</a></li>
 
                             <li class="has-dropdown" 　>
@@ -75,6 +76,7 @@
                             </li>
 
                             <li><a href="/top/paging/do">プロフィール
+
 
                             </a></li>
 
@@ -90,33 +92,51 @@
         <div id="fh5co-sermon">
             <div class="row animate-box">
                 <div class="col-md-12 col-md-offset-3 text-center fh5co-heading">
-                    <div class="container py-3">
-                        <div class="row">
+                    <br class="container py-3">
+                    <div class="row">
 
-                            <!--my profileの表示-->
+                        <!--my profileの表示-->
 
-                            <span class="navbar-text pr-3 text-center font-weight-bold"
-                                      th:text="'Welcome  back ' + ${session.account.nickname} + '! '"></span>
+                        <span class="navbar-text pr-3 text-center font-weight-bold"></span>
+                    </div>
+                    </br>
 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <br>
+                            <h3>
+                                <div class="text-center">
+                                    Your Profile
+                                </div>
+                            </h3>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6" align="right" >
-                                <div id="nowImage"></div>
-                            </div>
-                            <div class="col-md-6" align="left">
-                                <h2><span class="navbar-text pr-3"
-                                          th:text="'所属部署 : '+${session.account.departmentPosition} "></span></h2>
-                                <h2><span class="navbar-text pr-3 text-break"
-                                          th:text="'自己紹介 : '+${session.account.selfIntroduction} "></span></h2>
-                            </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6" align="right">
+                            <div id="nowImage"></div>
+                        </div>
+                        <div class="col-md-6" align="left">
+
+                            <h2><span class="navbar-text pr-3 text-break"
+                                      th:text="'Nickname : '+${session.account.nickname} "></span></h2>
+                            <h2><span class="navbar-text pr-3"
+                                      th:text="'Department : '+${session.account.departmentPosition} "></span></h2>
+                            <h2><span class="navbar-text pr-3 text-break"
+                                      th:text="'email : '+${session.account.email} "></span></h2>
+                            <h2><span class="navbar-text pr-3 text-break"
+                                      th:text="'introduction : '+${session.account.selfIntroduction} "></span></h2>
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
 
-            <!--                            画像表示-->
-            <script type="text/javascript">
+        <!--                            画像表示-->
+        <script type="text/javascript">
 window.onload = function () {
         $("#nowImage").empty();
         var url = "/upload/myprofile";
@@ -140,28 +160,24 @@ window.onload = function () {
     };
 
 
-            </script>
-
-
-
-            <div class="row py-3">
-                <div class="col-md-12">
+        </script>
+        <div class="row py-3">
+            <div class="col-md-12">
                 <h3 class="text-center">Meshitomo History</h3></div>
-                <div class="col-md-12 mx-auto">
-                    <!--結果の表示-->
-                    <div th:if="!${#lists.isEmpty(list)}">
-                        <div class="col-xs-6 col-md-3 account-profile" th:each="account : ${list}">
-                            <div class="img-thumbnail">
-                                <img th:src="@{/upload/profile(id=${account.accountId})}">
-                                <div class="figure-caption">
-                                    <span class="badge badge-info">Nickname</span>
-                                    <h4 th:text="${account.nickname}"></h4>
-                                    <span class="badge badge-info">Department Position</span>
-                                    <p th:text="${account.departmentPosition}"></p>
-                                    <span class="badge badge-info">Self Introduction</span>
-                                    <p th:text="${account.selfIntroduction}"></p>
+            <div class="col-md-12 mx-auto">
+                <!--結果の表示-->
+                <div th:if="!${#lists.isEmpty(list)}">
+                    <div class="col-xs-6 col-md-3 account-profile" th:each="account : ${list}">
+                        <div class="img-thumbnail">
+                            <img th:src="@{/upload/profile(id=${account.accountId})}">
+                            <div class="figure-caption">
+                                <span class="badge badge-info">Nickname</span>
+                                <h4 th:text="${account.nickname}"></h4>
+                                <span class="badge badge-info">Department Position</span>
+                                <p th:text="${account.departmentPosition}"></p>
+                                <span class="badge badge-info">Self Introduction</span>
+                                <p th:text="${account.selfIntroduction}"></p>
 
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -169,6 +185,7 @@ window.onload = function () {
             </div>
         </div>
     </div>
+</div>
 
 </div>
 
@@ -206,7 +223,6 @@ window.onload = function () {
 <div class="gototop js-top">
     <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 </div>
-
 
 
 <footer th:replace="common/common_footer"></footer>

@@ -50,7 +50,7 @@
     <!--[if lt IE 9]>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-    <title>プロフィール画像アップロード</title>
+    <title>Upload Profile image</title>
 </head>
 <body>
 
@@ -68,19 +68,19 @@
                     <div class="col-md-12 col-md-offset-0 text-center menu-1">
                         <ul>
                             <li class="active"><a href="/top">Home</a></li>
-                            <li><a href="/top/matching1" >マッチング</a></li>
+                            <li><a href="/top/matching1" >Matching</a></li>
 
                             <li class="has-dropdown"　>
-                                <a>設定</a>
+                                <a>Setting</a>
                                 <ul class="dropdown">
-                                    <li><a href="/top/setting/init">アカウント情報更新</a></li>
-                                    <li><a href="/top/password/init">パスワード更新</a></li>
-                                    <li><a href="/top/upload/init">画像アップロード</a></li>
+                                    <li><a href="/top/setting/init">Update Account</a></li>
+                                    <li><a href="/top/password/init">Update Password</a></li>
+                                    <li><a href="/top/upload/init">Upload Image</a></li>
 
                                 </ul>
                             </li>
 
-                            <li><a href="/top/paging/do" >履歴
+                            <li><a href="/top/paging/do" >Profile
                                 <script type="text/javascript">
     $('#modal-selfIntroduction').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
@@ -141,25 +141,25 @@
         <div class="container py-3">
             <div class="row">
                 <div class="col-md-12 mx-auto">
-                    <h2 class="text-center pb-4">プロフィール画像アップロード</h2>
+                    <h2 class="text-center pb-4">Update profile image</h2>
                     <div class="row">
                         <div class="col-md-12 mx-auto">
 
                             <div class="card rounded-0 card-shadow">
                                 <div class="card-header bg-custom1">
-                                    <h3 class="mb-0">プロフィール画像アップロード</h3>
+                                    <h3 class="mb-0">Upload profile image</h3>
                                 </div>
                                 <div class="card-body">
                                     <form id="data_upload_form" name="data_upload_form" enctype="multipart/form-data"
                                           method="post">
-                                        <span>ファイルのサイズは1Mバイト以下にしてください。</span><br>
+                                        <span>File size must be less than 1M byte.</span><br>
                                         <div class="row">
                                             <div class="col-md-6 mx-auto">
-                                                <span>現在のプロフィール画像</span><br>
+                                                <span>current profile image</span><br>
                                                 <div id="nowImage"></div>
                                             </div>
                                             <div class="col-md-6 mx-auto">
-                                                <span>更新後のプロフィール画像</span><br>
+                                                <span>updated profile image</span><br>
                                                 <div id="imagePreview" class="imagePreview"></div>
                                             </div>
                                         </div>
@@ -167,7 +167,7 @@
                                         <div class="form-group">
                                             <label>
                                         <span class="btn btn-info">
-                                            ファイル選択
+                                            choose file
                                             <input type="file" id="upload_file" name="upload_file" style="display:none"
                                                    required=""/>
                                         </span>
@@ -177,13 +177,13 @@
 
                                         <div class="form-group">
                                             <input id="data_upload_button" type="submit" class="btn btn-info"
-                                                   value="アップロード" disabled/>
+                                                   value="upload" disabled/>
                                         </div>
 
                                     </form>
                                     <form id="accountForm" th:action="@{/top}">
                                         <div class="text-center">
-                                            <input type="submit" value="トップへ" class="btn bg-custom3 btn-lg text-white"/>
+                                            <input type="submit" value="Go to Top" class="btn bg-custom3 btn-lg text-white"/>
                                         </div>
                                     </form>
                                 </div>
