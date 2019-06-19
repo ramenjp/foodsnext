@@ -1156,11 +1156,12 @@ input[type="text"] {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   -ms-border-radius: 0px;
-  border-radius: 0px;
+  border-radius: 1.25px;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
   padding: 8px 20px;
+  box-shadow 2px 2px 4px gray;
 }
 .btn.btn-md {
   padding: 8px 20px !important;
@@ -1171,6 +1172,7 @@ input[type="text"] {
 .btn:hover, .btn:active, .btn:focus {
   box-shadow: none !important;
   outline: none !important;
+  background-color:silver;
 }
 
 .btn-primary {
