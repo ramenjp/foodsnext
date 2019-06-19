@@ -91,6 +91,44 @@
                 <div class="col-md-12 col-md-offset-3 text-center fh5co-heading">
                     <div class="container py-3">
                         <div class="row">
+                            <!--プロフィール画像表示-->
+                            <div class="row animate-box">
+                                <div class="col-md-6 col-md-offset-0 text-center">
+                                    <div id="nowImage"></div>
+                                </div>
+                                <div class="col-md-6 col-md-offset-0 text-center">
+
+                                </div>
+                            </div>
+
+                            <!--画像表示-->
+                            <script type="text/javascript">
+window.onload = function () {
+        $("#nowImage").empty();
+        var url = "/upload/myprofile";
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = "arraybuffer";
+        xhr.open("GET", url, true);
+        xhr.onload = function () {
+            var data = new Uint8Array(this.response);
+            var oURL = URL.createObjectURL(
+                new Blob([data], {type: "image/png"})
+            );
+            var image = new Image();
+            image.onload = function () {
+                URL.revokeObjectURL(oURL);
+                $("#nowImage").append(image);
+                $("#nowImage > img").css('width', 'auto').css('height', '200px');
+            };
+            image.src = oURL;
+        };
+        xhr.send(null);
+    };
+        </script>
+
+
+
+
                             <div class="col-md-12">
                                 <div class="row py-3">
                                     <div class="col-md-8 mx-auto">
@@ -263,6 +301,10 @@
 <footer th:replace="common/common_footer"></footer>
 
 
+
+
+
+<!--モーダル-->
 <script type="text/javascript">
     $('#modal-selfIntroduction').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);

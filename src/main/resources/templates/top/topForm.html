@@ -52,35 +52,6 @@
 <body>
 
 
-<!--<div class="container-fluid bg-image">-->
-<!--    <div class="row bg-mask">-->
-<!--        &lt;!&ndash; 左サイドバー &ndash;&gt;-->
-<!--        <div class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">-->
-<!--            <div class="sidebar-sticky">-->
-<!--                <ul class="nav flex-column">-->
-<!--                    <h4 class="sidebar-heading d-flex align-items-center px-3 mt-3 mb-1 text-muted">-->
-<!--                        <span><i class="far fa-address-card">&nbsp;</i>アカウント機能</span>-->
-<!--                    </h4>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a href="/top/setting/init" class="nav-link">アカウント情報更新</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a href="/top/password/init" class="nav-link">パスワード更新</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a href="/top/upload/init" class="nav-link">画像アップロード</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a href="/top/matching1" class="nav-link">マッチング</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-
 <div id="page">
     <nav class="fh5co-nav" role="navigation">
         <div class="container-wrap">
@@ -97,19 +68,6 @@
                     </div>
                     <div class="col-md-12 col-md-offset-0 text-center menu-1">
                         <ul>
-                            <!--                            <li class="active"><a href="/top">Home</a></li>-->
-                            <!--                            <li><a href="/top/setting/init" >アカウント情報更新</a></li>-->
-                            <!--                            <li class="has-dropdown">-->
-                            <!--                                <a href="/top/password/init" >パスワード更新</a>-->
-                            <!--                                <ul class="dropdown">-->
-                            <!--                                    <li><a href="#">Ministry</a></li>-->
-                            <!--                                    <li><a href="#">Medical Missionary</a></li>-->
-                            <!--                                    <li><a href="#">Country Living</a></li>-->
-                            <!--                                    <li><a href="#">Gospel Workers</a></li>-->
-                            <!--                                </ul>-->
-                            <!--                            </li>-->
-                            <!--                            <li><a href="/top/upload/init" >画像アップロード</a></li>-->
-                            <!--                            <li><a href="/top/matching1" >マッチング</a></li>-->
                             <li class="active"><a href="/top">Home</a></li>
                             <li><a href="/top/matching1">マッチング</a></li>
 
@@ -124,51 +82,7 @@
                             </li>
 
                             <li><a href="/top/paging/do">履歴
-                                <script type="text/javascript">
-    $('#modal-selfIntroduction').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var accountname = button.data('name');
-        var departmentPosition = button.data('departmentPosition');
-        var selfIntroduction = button.data('intro');
-        var email= button.data('email');
-        selfIntroduction = removeTags(selfIntroduction);
-        selfIntroduction = selfIntroduction.replace(/\r?\n/g, '<br>');
-        var modal = $(this);//モーダルを取得
-        modal.find('.modal-title').text(accountname + ' さんの自己紹介');
-        modal.find('.selfIntroduction').html(selfIntroduction);
-        modal.find('.account-departmentPosition').text(departmentPosition);
-        modal.find('.account-name').text(accountname);
-        modal.find('.account-email').text(email);
 
-        $("#images").empty();
-        var id = button.data('account_id');
-        var url = "/image/profile?id=" + id;
-        var xhr = new XMLHttpRequest();
-        xhr.responseType = "arraybuffer";
-        xhr.open("GET", url, true);
-        xhr.onload = function () {
-            var data = new Uint8Array(this.response);
-            var oURL = URL.createObjectURL(
-                new Blob([data], {type: "image/png"})
-            );
-            var image = new Image();
-            image.onload = function () {
-                URL.revokeObjectURL(oURL);
-                $("#images").append(image);
-                $("#images > img").css('max-width', '240px','max-height','240px','object-fit','contain');
-                $("#images").addClass("image-responsive");
-
-            };
-            image.src = oURL;
-        };
-        xhr.send(null);
-    });
-    $(".clearForm").bind("click", function(){
-        $(this.form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
-    });
-
-
-                                </script>
                             </a></li>
 
                         </ul>
@@ -196,16 +110,6 @@
             </div>
         </aside>
         <div id="fh5co-intro">
-
-            <!--プロフィール画像表示-->
-            <div class="row animate-box">
-                <div class="col-md-6 col-md-offset-0 text-center">
-                    <div id="nowImage"></div>
-                </div>
-                <div class="col-md-6 col-md-offset-0 text-center">
-
-                </div>
-            </div>
 
             <hr>
             <div id="fh5co-counter" class="fh5co-counters">
@@ -312,24 +216,6 @@
             <script src="js/main.js"></script>
 
 
-            <div class="container py-3">
-                <div class="row">
-                    <div class="col-md-12 mx-auto">
-
-                        <div class="card-body">
-                            <form id="searchForm" th:action="@{/top/paging/do}" th:object="${historyForm}"
-                                  method="post">
-
-                                <div class="col text-center">
-
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
         </div>
 
 
