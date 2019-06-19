@@ -46,7 +46,7 @@ public class ImageController {
      */
     @ResponseBody
     @RequestMapping(value = "/upload/profile", method = {RequestMethod.GET })
-    public HttpEntity<byte[]> getImage(@RequestParam("account_id") String account_id) throws IOException {
+    public HttpEntity<byte[]> getImage(@RequestParam("id") String account_id) throws IOException {
         return getHttpEntity(account_id);
     }
 
