@@ -80,8 +80,6 @@ public class AccountMatchingResultController {
         model.addAttribute("partnerSelfIntroduction",partner.getSelfIntroduction());
 
 
-
-
         //History用のアカウントインスタンス生成
         History historyAccount =new History();
         historyAccount.setAccountId(account.getAccountId());

@@ -155,7 +155,7 @@ public class TopController {
 
         List<Account> list = new ArrayList<>();
         for (History history : historys) {
-            list.add(historyService.findByAccountId(history.getAccountId()));
+            list.add(historyService.findByAccountId(history.getHistoryPartnerId()));
         }
         if (Objects.isNull(list) || list.isEmpty()) {
             // 検索結果が０件ならエラー表示

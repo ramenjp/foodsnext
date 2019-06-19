@@ -1,11 +1,22 @@
+/*body {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.7;
+  color: gray;
+  background-image: url('/images/wagara.jpg') !important repeat fixed ;
+   background-size: auto;
+}*/
 body {
   font-family: "Source Sans Pro", sans-serif;
   font-weight: normal;
   font-size: 14px;
   line-height: 1.7;
   color: gray;
-  background: url(wagara.jpg) repeat fixed;
-}
+  background-image: url('/images/Background-image.png') ! important;
+  background-repeat: repeat;
+  background-size: auto;
+  background-position: center;}
 
 #page {
   position: relative;
@@ -33,6 +44,10 @@ body {
   background: rgba(0, 0, 0, 0.7);
   content: "";
 }
+
+.bg-custom3 {
+    /* メインボタンの色 */
+    background-color: #808080;}
 
 a {
   color: #658361;
@@ -1328,5 +1343,23 @@ input[type="text"] {
 
 .js .animate-box {
   opacity: 0;
+}
+
+.imagePreview {
+    width: 200px;
+    height: 200px;
+    background: no-repeat;
+    background-size: contain;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;
+
+}
+.account-list th {
+    white-space: nowrap;
+    text-align: center;
+}
+.profile-image {
+    text-align: center;
+    margin: 0 auto;
 }
 
