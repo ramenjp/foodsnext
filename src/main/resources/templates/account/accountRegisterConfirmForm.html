@@ -71,33 +71,33 @@
 
 <div id="page">
     <nav class="fh5co-nav" role="navigation">
-        <div class="container-wrap">
-            <div class="top-menu">
-                <div class="row">
-                    <div class="col-md-12 col-offset-0 text-center">
-                        <div id="fh5co-logo"><a href="topForm.html">Church</a></div>
-                    </div>
-                    <div class="col-md-12 col-md-offset-0 text-center menu-1">
-                        <ul>
-                            <li class="active"><a href="topForm.html">Home</a></li>
-                            <li><a href="accountUpdateForm.html">Update</a></li>
-                            <li class="has-dropdown">
-                                <a href="accountPasswordUpdateForm.html">Password</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Ministry</a></li>
-                                    <li><a href="#">Medical Missionary</a></li>
-                                    <li><a href="#">Country Living</a></li>
-                                    <li><a href="#">Gospel Workers</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="accountProfileImageUploadForm.html">Profile Image</a></li>
-                            <li><a href="matching_button.html">Matching</a></li>
-                        </ul>
-                    </div>
-                </div>
+<!--        <div class="container-wrap">-->
+<!--            <div class="top-menu">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-12 col-offset-0 text-center">-->
+<!--                        <div id="fh5co-logo"><a href="topForm.html">Church</a></div>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-12 col-md-offset-0 text-center menu-1">-->
+<!--                        <ul>-->
+<!--                            <li class="active"><a href="topForm.html">Home</a></li>-->
+<!--                            <li><a href="accountUpdateForm.html">Update</a></li>-->
+<!--                            <li class="has-dropdown">-->
+<!--                                <a href="accountPasswordUpdateForm.html">Password</a>-->
+<!--                                <ul class="dropdown">-->
+<!--                                    <li><a href="#">Ministry</a></li>-->
+<!--                                    <li><a href="#">Medical Missionary</a></li>-->
+<!--                                    <li><a href="#">Country Living</a></li>-->
+<!--                                    <li><a href="#">Gospel Workers</a></li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+<!--                            <li><a href="accountProfileImageUploadForm.html">Profile Image</a></li>-->
+<!--                            <li><a href="matching_button.html">Matching</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-            </div>
-        </div>
+<!--            </div>-->
+<!--        </div>-->
     </nav>
     <div class="container-wrap">
         <!--        <aside id="fh5co-hero">-->
@@ -121,7 +121,7 @@
         <!--        </aside>-->
         <div id="fh5co-sermon">
             <div class="row animate-box">
-                <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+                <div class="col-md-12 col-md-offset-3 text-center fh5co-heading">
 
 
                     <h2 class="text-center pb-4">Register Confirmation</h2>
@@ -129,7 +129,7 @@
                         <div class="col-md-12 mx-auto">
                             <div class="card rounded-0 card-shadow">
                                 <div class="card-header bg-custom1">
-                                    <h3 class="mb-0">アカウント入力確認</h3>
+                                    <h3 class="mb-0">Check the details</h3>
                                 </div>
                                 <div class="card-body">
                                     <form id="accountForm" th:action="@{/account/register/complete}" th:object="${accountRegisterForm}" method="post">
@@ -177,7 +177,7 @@
                     </div>
 
 
-                    <p>注釈</p>
+
                 </div>
             </div>
 
@@ -188,19 +188,28 @@
     <div class="container-wrap">
         <footer id="fh5co-footer" role="contentinfo">
             <div class="col-md-4 text-center">
-                <h3>198 West 21th Street, Suite 721 New York NY 10016</h3>
+                <!--                    <h3>198 West 21th Street, Suite 721 New York NY 10016</h3>-->
+            </div>
+            <div class="col-md-20 text-center">
+                <h2><a href="#">楽天食卓</a></h2>
             </div>
             <div class="col-md-4 text-center">
-                <h2><a href="#">Church</a></h2>
-            </div>
-            <div class="col-md-4 text-center">
-
+                <p>
+                <ul class="fh5co-social-icons">
+                    <li><a href="#"><i class="icon-twitter2"></i></a></li>
+                    <li><a href="#"><i class="icon-facebook2"></i></a></li>
+                    <li><a href="#"><i class="icon-dribbble2"></i></a></li>
+                </ul>
+                </p>
             </div>
             <div class="row copyright">
                 <div class="col-md-12 text-center">
                     <p>
-                        <small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
-                        <small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
+                        <small class="block">&copy; 2019 楽天食卓 Food's Next All Rights Reserved.</small>
+                        <small class="block">Designed by <a href=""
+                                                            target="_blank">Mrs.Another Sky</a>
+                            <!--                                Demo Images: <a-->
+                            <!--                                    href="http://unsplash.co/" target="_blank">Unsplash</a></small>-->
                     </p>
                 </div>
             </div>

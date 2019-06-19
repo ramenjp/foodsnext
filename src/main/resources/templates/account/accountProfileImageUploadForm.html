@@ -68,16 +68,68 @@
                     <div class="col-md-12 col-md-offset-0 text-center menu-1">
                         <ul>
                             <li class="active"><a href="/top">Home</a></li>
-                            <li><a href="/top/matching1">マッチング</a></li>
+                            <li><a href="/top/matching1" >マッチング</a></li>
 
-                            <li class="has-dropdown">
+                            <li class="has-dropdown"　>
                                 <a>設定</a>
                                 <ul class="dropdown">
                                     <li><a href="/top/setting/init">アカウント情報更新</a></li>
                                     <li><a href="/top/password/init">パスワード更新</a></li>
                                     <li><a href="/top/upload/init">画像アップロード</a></li>
+
                                 </ul>
                             </li>
+
+                            <li><a href="/top/paging/do" >履歴
+                                <script type="text/javascript">
+    $('#modal-selfIntroduction').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var accountname = button.data('name');
+        var departmentPosition = button.data('departmentPosition');
+        var selfIntroduction = button.data('intro');
+        var email= button.data('email');
+        selfIntroduction = removeTags(selfIntroduction);
+        selfIntroduction = selfIntroduction.replace(/\r?\n/g, '<br>');
+        var modal = $(this);//モーダルを取得
+        modal.find('.modal-title').text(accountname + ' さんの自己紹介');
+        modal.find('.selfIntroduction').html(selfIntroduction);
+        modal.find('.account-departmentPosition').text(departmentPosition);
+        modal.find('.account-name').text(accountname);
+        modal.find('.account-email').text(email);
+
+        $("#images").empty();
+        var id = button.data('account_id');
+        var url = "/image/profile?id=" + id;
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = "arraybuffer";
+        xhr.open("GET", url, true);
+        xhr.onload = function () {
+            var data = new Uint8Array(this.response);
+            var oURL = URL.createObjectURL(
+                new Blob([data], {type: "image/png"})
+            );
+            var image = new Image();
+            image.onload = function () {
+                URL.revokeObjectURL(oURL);
+                $("#images").append(image);
+                $("#images > img").css('max-width', '240px','max-height','240px','object-fit','contain');
+                $("#images").addClass("image-responsive");
+
+            };
+            image.src = oURL;
+        };
+        xhr.send(null);
+    });
+    $(".clearForm").bind("click", function(){
+        $(this.form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
+    });
+
+
+
+
+
+</script>
+                            </a></li>
                         </ul>
                     </div>
                 </div>
@@ -146,23 +198,31 @@
 
 </div>
 
-
 <div class="container-wrap">
     <footer id="fh5co-footer" role="contentinfo">
         <div class="col-md-4 text-center">
-            <h3>198 West 21th Street, Suite 721 New York NY 10016</h3>
+            <!--                    <h3>198 West 21th Street, Suite 721 New York NY 10016</h3>-->
         </div>
         <div class="col-md-20 text-center">
-            <h2><a href="#">Church</a></h2>
+            <h2><a href="#">楽天食卓</a></h2>
         </div>
-
-
+        <div class="col-md-4 text-center">
+            <p>
+            <ul class="fh5co-social-icons">
+                <li><a href="#"><i class="icon-twitter2"></i></a></li>
+                <li><a href="#"><i class="icon-facebook2"></i></a></li>
+                <li><a href="#"><i class="icon-dribbble2"></i></a></li>
+            </ul>
+            </p>
+        </div>
         <div class="row copyright">
             <div class="col-md-12 text-center">
                 <p>
-                    <small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
-                    <small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a>
-                        Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
+                    <small class="block">&copy; 2019 楽天食卓 Food's Next All Rights Reserved.</small>
+                    <small class="block">Designed by <a href=""
+                                                        target="_blank">Mrs.Another Sky</a>
+                        <!--                                Demo Images: <a-->
+                        <!--                                    href="http://unsplash.co/" target="_blank">Unsplash</a></small>-->
                 </p>
             </div>
         </div>
