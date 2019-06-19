@@ -3,54 +3,55 @@
 <head th:replace="common/common_header::base_header(~{::title})">
     <title>Update Account</title>
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
-        <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-        <meta name="author" content="freehtml5.co" />
-        <meta property="og:title" content=""/>
-        <meta property="og:image" content=""/>
-        <meta property="og:url" content=""/>
-        <meta property="og:site_name" content=""/>
-        <meta property="og:description" content=""/>
-        <meta name="twitter:title" content="" />
-        <meta name="twitter:image" content="" />
-        <meta name="twitter:url" content="" />
-        <meta name="twitter:card" content="" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Website Template by freehtml5.co"/>
+    <meta name="keywords"
+          content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive"/>
+    <meta name="author" content="freehtml5.co"/>
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+    <meta name="twitter:title" content=""/>
+    <meta name="twitter:image" content=""/>
+    <meta name="twitter:url" content=""/>
+    <meta name="twitter:card" content=""/>
 
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet"
-        >
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet"
+    >
 
-        <!-- Animate.css -->
-        <link rel="stylesheet" href="css/animate.css">
-        <!-- Icomoon Icon Fonts-->
-        <link rel="stylesheet" href="css/icomoon.css">
-        <!-- Bootstrap  -->
-        <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="css/bootstrap.css">
 
-        <!-- Magnific Popup -->
-        <link rel="stylesheet" href="css/magnific-popup.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="css/magnific-popup.css">
 
-        <!-- Flexslider  -->
-        <link rel="stylesheet" href="css/flexslider.css">
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="css/flexslider.css">
 
-        <!-- Owl Carousel  -->
-        <link rel="stylesheet" href="css/owl.carousel.min.css">
-        <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
 
-        <!-- Theme style  -->
-        <link rel="stylesheet" href="css/style.css">
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="css/style.css">
 
-        <!-- Modernizr JS -->
-        <script src="js/modernizr-2.6.2.min.js"></script>
-        <!-- FOR IE9 below -->
-        <!--[if lt IE 9]>
-        <script src="js/respond.min.js"></script>
-        <![endif]-->
+    <!-- Modernizr JS -->
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
 
-    </head>
+</head>
 <body>
 
 <div id="page">
@@ -59,14 +60,14 @@
             <div class="top-menu">
                 <div class="row">
                     <div class="col-md-12 col-offset-0 text-center">
-<!--                        <div id="fh5co-logo"><a href="index.html">Church</a></div>-->
+                        <!--                        <div id="fh5co-logo"><a href="index.html">Church</a></div>-->
                     </div>
                     <div class="col-md-12 col-md-offset-0 text-center menu-1">
                         <ul>
                             <li class="active"><a href="/top">Home</a></li>
-                            <li><a href="/top/matching1" >Matching</a></li>
+                            <li><a href="/top/matching1">Matching</a></li>
 
-                            <li class="has-dropdown"　>
+                            <li class="has-dropdown" 　>
                                 <a>Setting</a>
                                 <ul class="dropdown">
                                     <li><a href="/top/setting/init">Update Account</a></li>
@@ -77,7 +78,7 @@
                             </li>
 
 
-                            <li><a href="/top/paging/do" >Profile
+                            <li><a href="/top/paging/do">Profile
 
                                 <script type="text/javascript">
     $('#modal-selfIntroduction').on('show.bs.modal', function (event) {
@@ -126,7 +127,8 @@
 
 
 
-</script>
+
+                                </script>
                             </a></li>
                         </ul>
                     </div>
@@ -155,120 +157,138 @@
         <!--			  	</ul>-->
         <!--		  	</div>-->
         <!--		</aside>-->
-<!--        <div id="fh5co-sermon">-->
-<!--            <div class="row animate-box">-->
-<!--                <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">-->
-<!--                    <h2>アカウント情報入力</h2>-->
-<!--                    <div class="card-body">-->
-<!--                        <form id="accountForm" th:action="@{/account/register/confirm}" th:object="${accountRegisterForm}" method="post">-->
-<!--                            <fieldset id="account_field">-->
-<!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('nickname')}? 'has-error'">-->
-<!--                                    &lt;!&ndash; accountIdになっている点に注意。 &ndash;&gt;-->
-<!--                                    <label for="nickname">ニックネーム</label><br/>-->
-<!--                                    <input class="form-control" id="nickname" type="text" maxlength="15" th:field="*{nickname}" name="nickname" required placeholder="ニックネームを入力してください"/>-->
-<!--                                    <small id="accountidhelp" class="form-text text-muted">ニックネームは半角英数字3文字以上15文字以内で入力してください。</small>-->
-<!--                                    <span class="text-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">error!</span>-->
-<!--                                </div>-->
+        <!--        <div id="fh5co-sermon">-->
+        <!--            <div class="row animate-box">-->
+        <!--                <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">-->
+        <!--                    <h2>アカウント情報入力</h2>-->
+        <!--                    <div class="card-body">-->
+        <!--                        <form id="accountForm" th:action="@{/account/register/confirm}" th:object="${accountRegisterForm}" method="post">-->
+        <!--                            <fieldset id="account_field">-->
+        <!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('nickname')}? 'has-error'">-->
+        <!--                                    &lt;!&ndash; accountIdになっている点に注意。 &ndash;&gt;-->
+        <!--                                    <label for="nickname">ニックネーム</label><br/>-->
+        <!--                                    <input class="form-control" id="nickname" type="text" maxlength="15" th:field="*{nickname}" name="nickname" required placeholder="ニックネームを入力してください"/>-->
+        <!--                                    <small id="accountidhelp" class="form-text text-muted">ニックネームは半角英数字3文字以上15文字以内で入力してください。</small>-->
+        <!--                                    <span class="text-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">error!</span>-->
+        <!--                                </div>-->
 
-<!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('email')}? 'has-error'">-->
-<!--                                    <label for="email">E-mail</label><br/>-->
-<!--                                    <input class="form-control" id="email" type="text" maxlength="50" th:field="*{email}" name="email" required placeholder="メールアドレスを入力してください"/>-->
-<!--                                    <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>-->
-<!--                                </div>-->
+        <!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('email')}? 'has-error'">-->
+        <!--                                    <label for="email">E-mail</label><br/>-->
+        <!--                                    <input class="form-control" id="email" type="text" maxlength="50" th:field="*{email}" name="email" required placeholder="メールアドレスを入力してください"/>-->
+        <!--                                    <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>-->
+        <!--                                </div>-->
 
-<!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('password')||#fields.hasErrors('passwordValid')}? 'has-error'">-->
-<!--                                    <label for="password">パスワード</label><br/>-->
-<!--                                    <input class="form-control" id="password" type="password" maxlength="50" th:field="*{password}" name="password" required placeholder="パスワードを入力してください"/>-->
-<!--                                    <small id="passwordhelp" class="form-text text-muted">パスワードは5文字以上、15文字以下かつ、半角の英小文字、英大文字、数字を1種類ずつ含めて入力してください。</small>-->
-<!--                                    <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error!</span>-->
-<!--                                    <p class="text-danger" th:if="${#fields.hasErrors('passwordValid')}" th:errors="*{passwordValid}">error!</p>-->
-<!--                                </div>-->
-<!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('passwordValid')}? 'has-error'">-->
-<!--                                    <label for="confirmPassword">パスワード（確認）</label><br/>-->
-<!--                                    <input class="form-control" id="confirmPassword" type="password" maxlength="50" th:field="*{confirmPassword}" name="confirmPassword" required placeholder="確認のため、もう一度パスワードを入力してください"/>-->
-<!--                                </div>-->
+        <!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('password')||#fields.hasErrors('passwordValid')}? 'has-error'">-->
+        <!--                                    <label for="password">パスワード</label><br/>-->
+        <!--                                    <input class="form-control" id="password" type="password" maxlength="50" th:field="*{password}" name="password" required placeholder="パスワードを入力してください"/>-->
+        <!--                                    <small id="passwordhelp" class="form-text text-muted">パスワードは5文字以上、15文字以下かつ、半角の英小文字、英大文字、数字を1種類ずつ含めて入力してください。</small>-->
+        <!--                                    <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error!</span>-->
+        <!--                                    <p class="text-danger" th:if="${#fields.hasErrors('passwordValid')}" th:errors="*{passwordValid}">error!</p>-->
+        <!--                                </div>-->
+        <!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('passwordValid')}? 'has-error'">-->
+        <!--                                    <label for="confirmPassword">パスワード（確認）</label><br/>-->
+        <!--                                    <input class="form-control" id="confirmPassword" type="password" maxlength="50" th:field="*{confirmPassword}" name="confirmPassword" required placeholder="確認のため、もう一度パスワードを入力してください"/>-->
+        <!--                                </div>-->
 
-<!--                                &lt;!&ndash; 変更点　変数に注意 &ndash;&gt;-->
-<!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('department_position')}? 'has-error'">-->
-<!--                                    <label for="department_position">所属部署・役職</label><br/>-->
-<!--                                    <input class="form-control" id="department_position" type="text" maxlength="45" th:field="*{department_position}" name="department_position" required placeholder="部署・役職を入力してください。"/>-->
-<!--                                    <span class="text-danger" th:if="${#fields.hasErrors('department_position')}" th:errors="*{department_position}">error!</span>-->
-<!--                                </div>-->
+        <!--                                &lt;!&ndash; 変更点　変数に注意 &ndash;&gt;-->
+        <!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('department_position')}? 'has-error'">-->
+        <!--                                    <label for="department_position">所属部署・役職</label><br/>-->
+        <!--                                    <input class="form-control" id="department_position" type="text" maxlength="45" th:field="*{department_position}" name="department_position" required placeholder="部署・役職を入力してください。"/>-->
+        <!--                                    <span class="text-danger" th:if="${#fields.hasErrors('department_position')}" th:errors="*{department_position}">error!</span>-->
+        <!--                                </div>-->
 
-<!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">-->
-<!--                                    <label for="selfIntroduction">自己紹介</label><br/>-->
-<!--                                    <textarea class="form-control selfIntroduction" id="selfIntroduction" rows="3" cols="80" maxlength="255" th:field="*{selfIntroduction}" name="selfIntroduction" required placeholder="自己紹介を入力してください"></textarea>-->
-<!--                                    <span class="text-danger" th:if="${#fields.hasErrors('selfIntroduction')}" th:errors="*{selfIntroduction}">error!</span>-->
-<!--                                </div>-->
+        <!--                                <div class="form-group required" th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">-->
+        <!--                                    <label for="selfIntroduction">自己紹介</label><br/>-->
+        <!--                                    <textarea class="form-control selfIntroduction" id="selfIntroduction" rows="3" cols="80" maxlength="255" th:field="*{selfIntroduction}" name="selfIntroduction" required placeholder="自己紹介を入力してください"></textarea>-->
+        <!--                                    <span class="text-danger" th:if="${#fields.hasErrors('selfIntroduction')}" th:errors="*{selfIntroduction}">error!</span>-->
+        <!--                                </div>-->
 
-<!--                                <div class="col text-center">-->
-<!--                                    <input type="submit" value="確認画面へ" class="btn bg-custom3 btn-lg text-white" />-->
-<!--                                </div>-->
-<!--                            </fieldset>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                    <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>-->
-<!--                </div>-->
-<!--            </div>-->
+        <!--                                <div class="col text-center">-->
+        <!--                                    <input type="submit" value="確認画面へ" class="btn bg-custom3 btn-lg text-white" />-->
+        <!--                                </div>-->
+        <!--                            </fieldset>-->
+        <!--                        </form>-->
+        <!--                    </div>-->
+        <!--                    <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>-->
+        <!--                </div>-->
+        <!--            </div>-->
 
-<!--        </div>-->
+        <!--        </div>-->
 
-<!--    </div>&lt;!&ndash; END container-wrap &ndash;&gt;-->
+        <!--    </div>&lt;!&ndash; END container-wrap &ndash;&gt;-->
         <div class="container py-3">
             <div class="row">
                 <div class="col-md-12 mx-auto">
                     <p></p>
                     <h2 class="text-center pb-0">Update Account</h2>
                     <div class="row">
-<!--                        <div class="col-md-10 mx-auto bg-light">-->
-<!--                            入力の幅を変えるところ-->
-<!--                            <div class="card rounded-0 ">-->
-<!--                                bg-custom1 カード背景色　trainingに格納-->
-<!--                                <div class="card-header bg-light ">-->
-<!--                                <div class="card-header bg-custom1">-->
-                                    <h3 class="mb-2 ml-4">Type Update Detail</h3>
-                                </div>
-<!--                                <div class="card-body" bg-light >-->
-<!--                                   bg-gray1 カード背景色　trainingに格納-->
-<!--                                    <div class="card-body bg-gray1" col-md-auto>-->
-                                    <form id="accountForm" th:action="@{/top/setting/confirm}" th:object="${accountUpdateForm}" method="post">
-                                        <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}">
-                                            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">共通エラーメッセージ表示エリア</p>
-                                        </div>
+                        <!--                        <div class="col-md-10 mx-auto bg-light">-->
+                        <!--                            入力の幅を変えるところ-->
+                        <!--                            <div class="card rounded-0 ">-->
+                        <!--                                bg-custom1 カード背景色　trainingに格納-->
+                        <!--                                <div class="card-header bg-light ">-->
+                        <!--                                <div class="card-header bg-custom1">-->
 
-                                        <fieldset id="account_field">
-
-                                            <div class="form-group required" th:classappend="${#fields.hasErrors('nickname')}? 'has-error'">
-                                                <label for="nickname">Nickname</label>
-                                                    <span class="text-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">  error!</span>
-                                                <input class="form-control" id="nickname" type="text" maxlength="45" name="nickname" th:field="*{nickname}" required/>
-<!--                                                <span class="text-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">error!</span>-->
-                                            </div>
-                                            <div class="form-group required" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
-                                                <label for="email">E-mail</label><span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>
-                                                <input class="form-control" id="email" type="text" maxlength="50" name="email" th:field="*{email}" required/>
-<!--                                                <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>-->
-                                            </div>
-                                            <div class="form-group required" th:classappend="${#fields.hasErrors('departmentPosition')}? 'has-error'">
-                                                <label for="departmentPosition">Department and Position</label><span class="text-danger" th:if="${#fields.hasErrors('departmentPosition')}" th:errors="*{departmentPosition}">error!</span>
-                                                <input class="form-control" id="departmentPosition" type="text" maxlength="15" name="departmentPosition" th:field="*{departmentPosition}" required/>
-<!--                                                <span class="text-danger" th:if="${#fields.hasErrors('departmentPosition')}" th:errors="*{departmentPosition}">error!</span>-->
-                                            </div>
-                                            <div class="form-group required" th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
-                                                <label for="selfIntroduction">Self-introduction</label> <span class="text-danger" th:if="${#fields.hasErrors('selfIntroduction')}" th:errors="*{selfIntroduction}">error!</span>
-                                                <textarea class="form-control selfIntroduction" id="selfIntroduction" rows="3" cols="80" maxlength="255" name="selfIntroduction" th:field="*{selfIntroduction}" required></textarea>
-<!--                                                <span class="text-danger" th:if="${#fields.hasErrors('selfIntroduction')}" th:errors="*{selfIntroduction}">error!</span>-->
-                                            </div>
-                                            <div class="col text-center">
-                                                <input type="submit" value="Confirmation" class="btn btn-info text-white btn-lg mb-md-3"/>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
                     </div>
+                    <!--                                <div class="card-body" bg-light >-->
+                    <!--                                   bg-gray1 カード背景色　trainingに格納-->
+                    <!--                                    <div class="card-body bg-gray1" col-md-auto>-->
+                    <form id="accountForm" th:action="@{/top/setting/confirm}" th:object="${accountUpdateForm}"
+                          method="post">
+                        <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}">
+                            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">共通エラーメッセージ表示エリア</p>
+                        </div>
+
+                        <fieldset id="account_field">
+
+                            <div class="form-group required"
+                                 th:classappend="${#fields.hasErrors('nickname')}? 'has-error'">
+                                <label for="nickname">Nickname</label>
+                                <span class="text-danger" th:if="${#fields.hasErrors('nickname')}"
+                                      th:errors="*{nickname}">  error!</span>
+                                <input class="form-control" id="nickname" type="text" maxlength="45" name="nickname"
+                                       th:field="*{nickname}" required/>
+                                <!--                                                <span class="text-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">error!</span>-->
+                            </div>
+                            <div class="form-group required"
+                                 th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+                                <label for="email">E-mail</label><span class="text-danger"
+                                                                       th:if="${#fields.hasErrors('email')}"
+                                                                       th:errors="*{email}">error!</span>
+                                <input class="form-control" id="email" type="text" maxlength="50" name="email"
+                                       th:field="*{email}" required/>
+                                <!--                                                <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>-->
+                            </div>
+                            <div class="form-group required"
+                                 th:classappend="${#fields.hasErrors('departmentPosition')}? 'has-error'">
+                                <label for="departmentPosition">Department and Position</label><span class="text-danger"
+                                                                                                     th:if="${#fields.hasErrors('departmentPosition')}"
+                                                                                                     th:errors="*{departmentPosition}">error!</span>
+                                <input class="form-control" id="departmentPosition" type="text" maxlength="15"
+                                       name="departmentPosition" th:field="*{departmentPosition}" required/>
+                                <!--                                                <span class="text-danger" th:if="${#fields.hasErrors('departmentPosition')}" th:errors="*{departmentPosition}">error!</span>-->
+                            </div>
+                            <div class="form-group required"
+                                 th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
+                                <label for="selfIntroduction">Self-introduction</label> <span class="text-danger"
+                                                                                              th:if="${#fields.hasErrors('selfIntroduction')}"
+                                                                                              th:errors="*{selfIntroduction}">error!</span>
+                                <textarea class="form-control selfIntroduction" id="selfIntroduction" rows="3" cols="80"
+                                          maxlength="255" name="selfIntroduction" th:field="*{selfIntroduction}"
+                                          required></textarea>
+                                <!--                                                <span class="text-danger" th:if="${#fields.hasErrors('selfIntroduction')}" th:errors="*{selfIntroduction}">error!</span>-->
+                            </div>
+                            <div class="col text-center">
+                                <input type="submit" value="Confirmation"
+                                       class="btn btn-info text-white btn-lg mb-md-3"/>
+                            </div>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
 
 <div class="container-wrap">
