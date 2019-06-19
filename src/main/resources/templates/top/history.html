@@ -45,6 +45,7 @@
 
 <!--<div class="fh5co-loader"></div>-->
 
+
 <div id="page">
     <nav class="fh5co-nav" role="navigation">
         <div class="container-wrap">
@@ -91,6 +92,46 @@
                 <div class="col-md-12 col-md-offset-3 text-center fh5co-heading">
                     <div class="container py-3">
                         <div class="row">
+
+                            <!--my profileの表示-->
+                            <div class="col-md-6" align="right">
+                                <div id="nowImage"></div>
+                            </div>
+                            <div class="col-md-6" align="left">
+                                <h3><span class="navbar-text pr-3"
+                                          th:text="'Welcome  back ' + ${session.account.nickname} + '! '"></span></h3>
+                                <h2><span class="navbar-text pr-3"
+                                          th:text="'所属部署 : '+${session.account.departmentPosition} "></span></h2>
+                                <h2><span class="navbar-text pr-3"
+                                          th:text="'自己紹介 : '+${session.account.selfIntroduction} "></span></h2>
+                            </div>
+                            <script type="text/javascript">
+window.onload = function () {
+        $("#nowImage").empty();
+        var url = "/upload/myprofile";
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = "arraybuffer";
+        xhr.open("GET", url, true);
+        xhr.onload = function () {
+            var data = new Uint8Array(this.response);
+            var oURL = URL.createObjectURL(
+                new Blob([data], {type: "image/png"})
+            );
+            var image = new Image();
+            image.onload = function () {
+                URL.revokeObjectURL(oURL);
+                $("#nowImage").append(image);
+                $("#nowImage > img").css('width', 'auto').css('height', '200px');
+            };
+            image.src = oURL;
+        };
+        xhr.send(null);
+    };
+
+
+
+                            </script>
+
                             <div class="col-md-12">
                                 <div class="row py-3">
                                     <div class="col-md-8 mx-auto">
@@ -305,6 +346,9 @@
     $(".clearForm").bind("click", function(){
         $(this.form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
     });
+
+
+
 
 </script>
 
