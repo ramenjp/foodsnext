@@ -9,6 +9,8 @@ import com.dev_training.entity27.History;
 
 import com.dev_training.service27.AccountMatchingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,11 +41,13 @@ public class AccountMatchingResultController {
      * セッションキー(ログインユーザのアカウント)
      */
     private static final String SESSION_FORM_ID = "account";
+    private MailSender mailSender;
 
     @Autowired
-    public AccountMatchingResultController(AccountMatchingService accountMatchingService, HttpSession session) {
+    public AccountMatchingResultController(AccountMatchingService accountMatchingService, HttpSession session,MailSender mailSender) {
         this.accountMatchingService = accountMatchingService;
         this.session = session;
+        this.mailSender = mailSender;
     }
 
     //グループ分けされた結果をmatchingDBに見に行く処理
@@ -67,6 +71,10 @@ public class AccountMatchingResultController {
 
         //取得した自分のアカウントIDを使ってmatchingNoを取得
         int myMatchingNo = accountMatchingService.getMatchingNo(accountId,formattedDate).getMatchingNo();
+
+        if(myMatchingNo == 0){
+            return "matching/matchingFailedForm";
+        }
 
         //matchingNoが同じアカウントのアカウントIDを検索,取得
         int matchingPartnerId = accountMatchingService.getMatchingPartnerId(accountId,myMatchingNo,formattedDate);
