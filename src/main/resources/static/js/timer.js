@@ -93,18 +93,16 @@ function showCountdown() {
    var inputHour  = nowDate.getHours();
 
    var inputMin = 0;
-   if(nowDate.getMinutes() < 1){
+   if(nowDate.getMinutes() < 15){
         inputMin = 15;
    }else if(nowDate.getMinutes() < 30){
         inputMin = 30;
-
    }else if(nowDate.getMinutes() < 45){
         inputMin = 45;
    }else if(nowDate.getMinutes()< 59 && nowDate.getSeconds()< 59){
          inputMin = 00;
    }
 
-   //var inputMin   = 28;
    var inputSec   = 00;
 
    var targetDate = new Date(

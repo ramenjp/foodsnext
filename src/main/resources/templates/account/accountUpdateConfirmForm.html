@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>アカウント情報更新確認</title>
+        <title>Account Update Confirmation</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
         <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -125,7 +125,7 @@
             <div class="row animate-box">
 <!--                <div class="col-md-12 col-md-offset-3 text-center fh5co-heading">-->
                     <div class="col-md-12 col-md-offset-3 text-center">
-                    <h2>アカウント情報更新</h2>
+                    <h2>Update Account</h2>
                     <div class="container py-3">
                         <div class="row">
                             <div class="col-md-12 mx-auto">
@@ -134,7 +134,7 @@
                                     <div class="col-md-12 mx-auto">
                                         <div class="card rounded-0 card-shadow">
                                             <div class="card-header bg-custom1">
-                                                <h3 class="mb-0">更新内容確認</h3>
+                                                <h3 class="mb-0">Update Detail Confirmation</h3>
                                             </div>
                                             <div class="card-body">
                                                 <form id="accountForm" th:action="@{/top/setting/do}" th:object="${accountUpdateForm}"
@@ -143,7 +143,7 @@
                                                     <fieldset id="account_field">
 
                                                         <div class="form-group">
-                                                            <label>ニックネーム</label><br/>
+                                                            <label>Nickname</label><br/>
                                                             <span class="form-control-static" th:text="*{nickname}"></span>
                                                         </div>
                                                         <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
@@ -152,12 +152,12 @@
                                                         </div>
                                                         <div class="form-group"
                                                              th:classappend="${#fields.hasErrors('departmentPosition')}? 'has-error'">
-                                                            <label>部署・配属</label><br/>
+                                                            <label>Department and Position</label><br/>
                                                             <span class="form-control-static" th:text="*{departmentPosition}"></span>
                                                         </div>
                                                         <div class="form-group"
                                                              th:classappend="${#fields.hasErrors('selfIntroduction')}? 'has-error'">
-                                                            <label>自己紹介</label><br/>
+                                                            <label>Self-introduction</label><br/>
                                                             <span class="form-control-static"
                                                                   th:utext="*{selfIntroduction} ? ${#strings.replace(#strings.escapeXml(accountUpdateForm.selfIntroduction), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')} : ''"></span>
                                                         </div>
@@ -168,11 +168,11 @@
                                                                th:value="*{selfIntroduction}"/>
                                                         <div class="col text-center">
                                                             <div class="btn-group">
-                                                                <input type="submit" name="back" value="戻る"
+                                                                <input type="submit" name="back" value="Back"
                                                                        class="btn bg-custom3 btn-lg text-white "/>
                                                             </div>
                                                             <div class="btn-group">
-                                                                <input type="submit" name="update" value="更新"
+                                                                <input type="submit" name="update" value="Update"
                                                                        class="btn bg-custom3 btn-lg text-white "/>
                                                             </div>
                                                         </div>
@@ -190,28 +190,33 @@
         </div>
     </div><!-- END container-wrap -->
 
-    <div class="container-wrap">
-        <footer id="fh5co-footer" role="contentinfo">
-            <div class="col-md-4 text-center">
-                <h3>198 West 21th Street, Suite 721 New York NY 10016</h3>
-            </div>
-            <div class="col-md-4 text-center">
-                <h2><a href="#">Church</a></h2>
-            </div>
-            <div class="col-md-4 text-center">
-
-            </div>
-            <div class="row copyright">
-                <div class="col-md-12 text-center">
+        <div class="container-wrap">
+            <footer id="fh5co-footer" role="contentinfo">
+                <div class="col-md-4 text-center">
+                </div>
+                <div class="col-md-20 text-center">
+                    <h2><a href="#">楽天食卓</a></h2>
+                </div>
+                <div class="col-md-4 text-center">
                     <p>
-                        <small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
-                        <small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
+                    <ul class="fh5co-social-icons">
+                        <li><a href="#"><i class="icon-twitter2"></i></a></li>
+                        <li><a href="#"><i class="icon-facebook2"></i></a></li>
+                        <li><a href="#"><i class="icon-dribbble2"></i></a></li>
+                    </ul>
                     </p>
                 </div>
-            </div>
-
-        </footer>
-    </div><!-- END container-wrap -->
+                <div class="row copyright">
+                    <div class="col-md-12 text-center">
+                        <p>
+                            <small class="block">&copy; 2019 楽天食卓 Food's Next All Rights Reserved.</small>
+                            <small class="block">Designed by <a href=""
+                                                                target="_blank">Mrs.Another Sky</a></small>
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </div><!-- END container-wrap -->
 </div>
 </div>
 
