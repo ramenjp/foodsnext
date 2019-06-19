@@ -1363,3 +1363,14 @@ input[type="text"] {
     margin: 0 auto;
 }
 
+
+.overflow-wrap-break {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.form-group.required label:after {
+    content:"*";
+    color:red;
+}
