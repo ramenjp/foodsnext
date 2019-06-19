@@ -74,9 +74,37 @@
             </div>
         </div>
     </nav>
-    <div class="text-center">
 
-        <h2>マッチング相手が見つかりませんでした...</h2>
+
+
+    <div class="container-wrap">
+
+        <div id="fh5co-sermon">
+            <div class="row animate-box">
+
+
+                <div class="col-md-12 col-md-offset-3 text-center fh5co-heading">
+                    <div class="text-center">
+
+                        <h2>Sorry we could not find...Please try again</h2>
+
+                    </div>
+
+
+                    <br>
+                    <br>
+                    <form id="searchForm" th:action="@{/top}" th:object="${historyForm}"
+                          method="post">
+                        <div class="col text-center">
+                            <div class="btn-group">
+                                <input type="submit" name="search" value="Home"
+                                       class="btn bg-custom3 btn-lg text-white"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -111,10 +139,7 @@
                     <form id="searchForm" th:action="@{/top}" th:object="${historyForm}"
                           method="post">
                         <div class="col text-center">
-                            <div class="btn-group">
-                                <input type="submit" name="search" value="ホームに戻る"
-                                       class="btn bg-custom3 btn-lg text-white"/>
-                            </div>
+
                         </div>
                     </form>
                 </div>
