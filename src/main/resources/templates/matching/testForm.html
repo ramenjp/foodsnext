@@ -160,15 +160,33 @@
                     <h2 class="text-center pb-0"></h2>
                     <div class="row">
                         <div class="container">
-                            <div class=" text-center center-block width">
-                                <h1>Matched Meshitomo</h1>
-<!--                                <div id="images" class="img-fluid"></div>-->
-                               <h2>Name : <p th:text="${partnername}"></p></h2>
-                                <h2>Department :<p th:text="${partnerDepartmentPosition}"></p></h2>
-                                <h2>Self-introduction :<p th:text="${partnerSelfIntroduction}"></p></h2>
-                                <p><a class="btn btn-primary btn-demo popup-vimeo" href="/top">
-                                    <i class="icon-play4"></i> Top</a>
-                                </p>
+                            <div class=" text-center center-block">
+                                <h1>Today's　飯伴</h1>
+
+
+                                <h2>Name: <p th:text="${partnername}"></p></h2>
+                                <h2>Department:<p th:text="${partnerDepartmentPosition}"></p></h2>
+                                <h2>Self Intro<p th:text="${partnerSelfIntroduction}"></p></h2>
+
+                                <!--                                ランダムで9Fか22Fを出力-->
+                                <h2>
+                                <script type="text/javascript">
+                                rand = Math.floor(Math.random()*2);
+                                if (rand == 0) msg = "9F";
+                                if (rand == 1) msg = "22F";
+                                document.write(msg);
+                                </script>
+                                <br>
+                                <script type="text/javascript">
+                                rand = Math.floor(Math.random()*6);
+                                if (rand == 0) msg = "11:00";
+                                if (rand == 1) msg = "11:30";
+                                if (rand == 2) msg = "12:00";
+                                if (rand == 3) msg = "12:30";
+                                if (rand == 4) msg = "13:00";
+                                if (rand == 5) msg = "13:30";
+                                document.write(msg);
+                                </script></h2>
 
                             </div>
                         </div>
