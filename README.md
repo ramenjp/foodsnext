@@ -4,14 +4,21 @@
 このプロダクトは研修教材をベースに書き加えているため会社から提供されたファイルをアップしておりません。
 よってクローンしてもシステムは動かせませんがREADMEを代わりとさせていただきます。
 
-#アーキテクチャ
+# アーキテクチャ
 entity
+
+DBのカラムとJava側の変数とを紐づけるファイル
 
 repository
 
+DBを操作するクエリを格納するファイル
+
 service
 
+controllerから指示を受けてDB操作等を行う
+
 controller
+URLパターンに応じてserviceやrepositoryに指示を出し、対応するHTMLファイルを画面に表示させる
 
 # 機能一覧
 - ログイン
@@ -21,12 +28,11 @@ controller
 - プロフィール更新
 
 # 使用技術
-Java
-Springboot
-Thymeleaf
-バッチ処理
-carl
-
+- Java
+- Springboot
+- Thymeleaf
+- バッチ処理
+- carl
 
 # ロジック
 
