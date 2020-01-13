@@ -34,7 +34,7 @@ URLパターンに応じてserviceやrepositoryに指示を出し、対応する
 - Springboot
 - Thymeleaf
 - バッチ処理
-- carl
+- curl
 
 # DB
 ![プレゼンテーション1](https://user-images.githubusercontent.com/49260657/72248455-8ecca200-363a-11ea-8170-9e84a90125fe.jpg)
