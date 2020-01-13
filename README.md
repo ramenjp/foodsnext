@@ -38,7 +38,7 @@ URLパターンに応じてserviceやrepositoryに指示を出し、対応する
 ![プレゼンテーション1](https://user-images.githubusercontent.com/49260657/72248455-8ecca200-363a-11ea-8170-9e84a90125fe.jpg)
 
 
-# ロジック
+# マッチング機能ロジック
 
 
 # 画面
