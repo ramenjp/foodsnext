@@ -7,19 +7,19 @@
 よってファイルが不十分なためクローンしてもアプリとして起動できませんがロジックやイメージ図をアップロードしておりますのでご覧ください。
 
 # アーキテクチャ
-**entity
+**entity**
 
 DBのカラムとJava側の変数とを紐づけるファイル
 
-**repository
+**repository**
 
 DBを操作するクエリを格納するファイル
 
-**service
+**service**
 
 controllerから指示を受けてDB操作等を行う
 
-**controller
+**controller**
 URLパターンに応じてserviceやrepositoryに指示を出し、対応するHTMLファイルを画面に表示させる
 
 # 機能一覧
