@@ -20,6 +20,7 @@ DBを操作するクエリを格納するファイル
 controllerから指示を受けてDB操作等を行う
 
 **controller**
+
 URLパターンに応じてserviceやrepositoryに指示を出し、対応するHTMLファイルを画面に表示させる
 
 # 機能一覧
