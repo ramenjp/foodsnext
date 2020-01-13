@@ -1,0 +1,29 @@
+body{
+background-color:#FCE598;
+}
+
+.logo img{
+width:30%;
+height:auto;
+}
+
+.my-big{
+font-size:22em
+}
+
+.conceptText{
+margin-top:260px;
+}
+
+.fa-weixin {
+        width: 350px;
+	display: block;
+	transition: 0.5s;
+}
+.fa-weixin:hover {
+	transform: scale(1.2, 1.2);
+}
+
+a:link{
+color : #000000;
+}

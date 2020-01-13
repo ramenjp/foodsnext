@@ -87,23 +87,26 @@ function showCountdown() {
    var inputYear  = nowDate.getFullYear();
    var inputMonth = nowDate.getMonth();
    var inputDate  = nowDate.getDate();
-
-   console.log(inputYear);
-
    var inputHour  = nowDate.getHours();
+
 
    var inputMin = 0;
    if(nowDate.getMinutes() < 15){
         inputMin = 15;
    }else if(nowDate.getMinutes() < 30){
         inputMin = 30;
-   }else if(nowDate.getMinutes() < 45){
-        inputMin = 45;
+   }else if(nowDate.getMinutes() < 35){
+        inputMin = 35;
    }else if(nowDate.getMinutes()< 59 && nowDate.getSeconds()< 59){
          inputMin = 00;
    }
+   var inputSec = 00;
 
-   var inputSec   = 00;
+   console.log(inputYear);
+   console.log(inputDate);
+   console.log(inputHour);
+   console.log(inputMin);
+  console.log(nowDate.getMinutes());
 
    var targetDate = new Date(
             isNumOrZero(inputYear),
@@ -113,8 +116,10 @@ function showCountdown() {
             isNumOrZero(inputMin),
             isNumOrZero(inputSec)
             );
-   var dnumTarget = targetDate.getTime();
+   var dnumTarget = targetDate;
 
+work
+//console.log(targetDate.getTime());
    // 表示を準備
    var dlYear  = targetDate.getFullYear();
    var dlMonth = targetDate.getMonth() + 1;

@@ -15,7 +15,6 @@ public class AccountMatchingService {
     /** マッチングレポジトリ　*/
     private final AccountRepository accountRepository;
     private final MatchingRepository matchingRepository;
-
     private final HistoryRepository historyRepository;
 
 
