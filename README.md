@@ -42,6 +42,4 @@ URLパターンに応じてserviceやrepositoryに指示を出し、対応する
 ![プレゼンテーション1](https://user-images.githubusercontent.com/49260657/72248455-8ecca200-363a-11ea-8170-9e84a90125fe.jpg)
 
 # マッチング機能ロジック
-![Food'sNextロジック](https://user-images.githubusercontent.com/49260657/72262923-38bc2680-365b-11ea-8b33-73e1b73f32a0.jpg)
-
-# 画面
+![logic](https://user-images.githubusercontent.com/49260657/76384106-5975d380-63a1-11ea-8b43-4197d1344d05.jpg)
